@@ -1,3 +1,3 @@
 # Magot
 
-A cool UI framework of customizable themes and React-based.
+A cool and easy UI framework of customizable themes and React-based.

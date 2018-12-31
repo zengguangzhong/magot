@@ -1,0 +1,82 @@
+{
+  "name": "@billjs/magot",
+  "version": "1.0.0",
+  "description": "A cool and easy UI framework of customizable themes and React-based.",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "release"
+  ],
+  "scripts": {
+    "prepublish": "npm run lint & npm run build",
+    "start": "tsc -w",
+    "build": "rm -rf lib && tsc",
+    "prettier": "prettier --list-different \"**/*.{ts,tsx,js,jsx,less,json,yml,yaml,md}\"",
+    "lint:ts": "tslint -p ./tsconfig.json --type-check",
+    "lint:js": "eslint --ext .js,.jsx ./ --cache --quiet",
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less",
+    "lint": "npm run prettier && npm run lint:ts && npm run lint:js && npm run lint:style",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billjs/magot.git"
+  },
+  "keywords": [
+    "Magot",
+    "UI",
+    "React",
+    "Theme"
+  ],
+  "contributors": [
+    "billjs"
+  ],
+  "author": "billjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/billjs/magot/issues"
+  },
+  "homepage": "https://billjs.github.io/magot/",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-1": "^7.0.0",
+    "@types/classnames": "^2.2.6",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.11.1",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.0",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "stylelint": "^9.9.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.2.0",
+    "classnames": "^2.2.6"
+  },
+  "peerDependencies": {
+    "react": ">=16.7.0",
+    "react-dom": ">=16.7.0"
+  }
+}
