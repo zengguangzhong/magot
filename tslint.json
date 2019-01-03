@@ -6,6 +6,8 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "prettier": true
+    "prettier": true,
+    "no-unused-expression": false,
+    "no-trailing-whitespace": true
   }
 }
