@@ -1,10 +1,13 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "es6": true,
     "jest": true
   },
-  "globals": {},
+  "globals": {
+    "__DEV__": true
+  },
   "plugins": ["prettier", "react"],
   "extends": [
     "eslint:recommended",
