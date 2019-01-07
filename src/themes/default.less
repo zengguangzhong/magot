@@ -1,0 +1,84 @@
+// Color variables
+@normal-color: #bfbfbf; // grey
+@primary-color: #1890ff; // blue
+@info-color: #2f54eb; // geek blue
+@success-color: #52c41a; // green
+@warning-color: #fadb14; // yellow
+@error-color: #f5222d; // red
+@light-color: #f8f9fa; // lightness white
+@dark-color: #343a40; // darken black
+@white-color: #fff; // white
+@black-color: #000; // black
+
+// Background variables
+@background-color-base: @white-color; // #fff
+@background-color-disabled: darken(@background-color-base, 4%); // #f5f5f5
+
+// Border variables
+@border-color-base: @normal-color; // #bfbfbf
+@border-color-disabled: lighten(@normal-color, 10%); // #d9d9d9
+@border-width-base: 1px;
+@border-style-base: solid;
+@border-radius-base: 4px;
+@border-radius-sm: @border-radius-base - 2px;
+@border-radius-lg: @border-radius-base + 2px;
+
+// Outline variables
+@outline-color: @primary-color; // #1890ff
+@outline-width: 2px;
+@outline-blur: 0;
+
+// Text variables
+@text-color-dark-base: @black-color; // #000
+@text-color-light-base: @white-color; // #fff
+@text-color-dark-primary: fade(@text-color-dark-base, 85%);
+@text-color-dark-secondary: fade(@text-color-dark-base, 65%);
+@text-color-dark-tertiary: fade(@text-color-dark-base, 45%);
+@text-color-dark-disabled: fade(@text-color-dark-base, 25%);
+@text-color-light-primary: fade(@text-color-light-base, 100%);
+@text-color-light-secondary: fade(@text-color-light-base, 85%);
+@text-color-light-tertiary: fade(@text-color-light-base, 65%);
+@text-color-light-disabled: fade(@text-color-light-base, 45%);
+
+// Font variables
+@font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica,
+  Arial, sans-serif;
+@font-size-base: 14px;
+@font-size-sm: @font-size-base - 2px; // 12px
+@font-size-lg: @font-size-base + 2px; // 16px
+@font-size-h1: @font-size-lg * 2.5; // 40px
+@font-size-h2: @font-size-lg * 2; // 32px
+@font-size-h3: @font-size-lg * 1.75; // 28px
+@font-size-h4: @font-size-lg * 1.5; // 24px
+@font-size-h5: @font-size-lg * 1.25; // 20px
+@font-size-h6: @font-size-lg; // 16px
+
+// LineHeight variables
+@line-height-base: 1.5;
+
+// Shadow variables
+@box-shadow: 0 8px 16px rgba(@black-color, 0.15);
+
+// Link variables
+@link-color: @primary-color; // #1890ff
+@link-color-hover: lighten(@link-color, 8%); // #41a4ff
+@link-color-active: darken(@link-color, 3%); // #0989ff
+@link-decoration: none;
+@link-decoration-hover: none;
+
+// ZIndex variables, z-index order list
+@zindex-modal: 1000;
+@zindex-modal-mask: @zindex-modal - 1;
+@zindex-toast: @zindex-modal + 10;
+@zindex-notification: @zindex-toast + 10;
+@zindex-popover: @zindex-notification + 10;
+@zindex-dropdown: @zindex-popover + 10;
+@zindex-picker: @zindex-dropdown + 10;
+@zindex-tooltip: @zindex-picker + 10;
+
+// Layout variables
+
+// Button component variables
+
+// Input component variables
+@input-placeholder-color: #999;
