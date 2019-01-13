@@ -1,5 +1,7 @@
 import path from 'path';
+import webpack from 'webpack';
 import webpackMerge from 'webpack-merge';
+// import HtmlWebpackPlugin from 'html-webpack-plugin';
 import baseConfig from './base';
 
 const cwd = process.cwd();
@@ -18,5 +20,11 @@ export default webpackMerge(baseConfig, {
     port: 36500,
     contentBase: dev,
   },
-  plugins: [],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   template: path.resolve(cwd, 'src/counter.html'),
+    //   filename: path.join(dev, 'index.html'),
+    // }),
+  ],
 });

@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-import babelrc from './babelrc';
+// import babelrc from './babelrc';
 
 const cwd = process.cwd();
 const source = path.resolve(cwd, 'src');
@@ -17,7 +17,7 @@ const config = {
   },
   resolve: {
     modules: ['node_modules', source],
-    extensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       // '@': source,
     },
@@ -30,13 +30,13 @@ const config = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: __DEV__,
-              ...babelrc,
-            },
-          },
+          // {
+          //   loader: 'babel-loader',
+          //   options: {
+          //     cacheDirectory: __DEV__,
+          //     ...babelrc,
+          //   },
+          // },
           {
             loader: 'ts-loader',
           },
@@ -53,6 +53,28 @@ const config = {
           },
           {
             loader: 'less-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash:10].[ext]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash:10].[ext]',
+            },
           },
         ],
       },

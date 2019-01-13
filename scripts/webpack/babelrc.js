@@ -11,7 +11,6 @@ export default {
         debug: process.env.NODE_ENV === 'development',
       },
     ],
-    ['@babel/preset-react'],
   ],
   plugins: [
     [
@@ -23,7 +22,14 @@ export default {
   ],
   env: {
     production: {
-      plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
+      plugins: [
+        [
+          'transform-react-remove-prop-types',
+          {
+            removeImport: true,
+          },
+        ],
+      ],
     },
   },
 };
