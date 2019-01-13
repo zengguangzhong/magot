@@ -1,0 +1,96 @@
+---
+name: FileButton 文件按钮
+route: /components/file-button
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import FileButton from './file-button';
+
+# FileButton 文件按钮
+
+文件按钮组件，用于响应用户选择文件的交互行为，一般用在上传文件的业务场景下。
+
+## Usage
+
+### 基础用法
+
+<Playground>
+  <FileButton
+    type="primary"
+    icon="file"
+    onChange={file => {
+      const dom = document.getElementById('demo-filename');
+      if (dom) dom.innerHTML = file.name;
+    }}>
+    选择文件
+  </FileButton>
+  <FileButton icon="file" disabled={true}>
+    选择文件
+  </FileButton>
+  <FileButton
+    type="link"
+    icon="file"
+    onChange={file => {
+      const dom = document.getElementById('demo-filename');
+      if (dom) dom.innerHTML = file.name;
+    }}>
+    选择文件
+  </FileButton>
+  <div id="demo-filename" className="demo-container" />
+</Playground>
+
+### 多选文件
+
+<Playground>
+  <FileButton
+    type="primary"
+    multiple={true}
+    maxCount={5}
+    onChange={files => {
+      const dom = document.getElementById('demo-filenames');
+      if (dom) {
+        const filenames = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = files.item(i);
+          filenames.push(file.name);
+        }
+        dom.innerHTML = filenames.join(',');
+      }
+    }}
+    onError={err => alert(err.message)}>
+    批量选择文件(最多5个)
+  </FileButton>
+  <div id="demo-filenames" className="demo-container" />
+</Playground>
+
+### 文件类型
+
+<Playground>
+  <FileButton
+    type="primary"
+    icon="image"
+    filters={['image/jpg', 'image/jpeg', 'image/png', 'image/gif']}
+    filterError="只能选择图片"
+    onError={err => alert(err.message)}>
+    选择图片
+  </FileButton>
+  <span className="demo-tip">选择非图片的文件，将会弹出错误提示信息</span>
+</Playground>
+
+### 文件大小
+
+<Playground>
+  <FileButton
+    type="primary"
+    maxSize={200}
+    sizeError="文件大小超限"
+    onError={err => alert(err.message)}>
+    选择文件(小于200k)
+  </FileButton>
+  <span className="demo-tip">选择大于200k的文件，将会弹出错误提示信息</span>
+</Playground>
+
+## Props
+
+<PropsTable of={FileButton} />

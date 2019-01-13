@@ -1,0 +1,23 @@
+@import '../../variable.less';
+@import '../../iconfont/iconfont.less';
+
+.mgt-icon {
+  display: inline-block;
+  vertical-align: middle;
+  font-style: normal;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+
+  &.spin {
+    animation: mgt-icon-spin 1s infinite linear;
+  }
+}
+
+@keyframes mgt-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,26 @@
+---
+name: Icon 图标
+route: /components/icon
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import Icon from './icon';
+
+# Icon 图标
+
+矢量图标组件，用于标记带有特定含义的图标描述场景。
+
+## Usage
+
+<Playground>
+  <Icon name="scan" />
+  <Icon name="search" />
+  <Icon name="download" />
+  <Icon name="loading" spin={true} />
+  <Icon name="chat" style={{ color: '#1890ff', fontSize: 32 }} />
+</Playground>
+
+## Props
+
+<PropsTable of={Icon} />

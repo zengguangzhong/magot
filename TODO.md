@@ -5,8 +5,8 @@
 - [ ] Badge
 - [ ] Breadcrumb
 - [ ] BreadcrumbItem
-- [ ] Button
-- [ ] ButtonGroup
+- [x] Button
+- [x] ButtonGroup
 - [ ] Calendar
 - [ ] Card
 - [ ] Carousel
@@ -21,10 +21,11 @@
 - [ ] Drawer
 - [ ] Dropdown
 - [ ] Empty
+- [x] FileButton
 - [ ] FormItem
 - [ ] Form
 - [ ] Gallery
-- [ ] Icon
+- [x] Icon
 - [ ] Image
 - [ ] Input
 - [ ] InputNumber

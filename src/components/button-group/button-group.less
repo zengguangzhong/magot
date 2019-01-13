@@ -1,0 +1,45 @@
+@import '../../variable.less';
+
+.mgt-btn-group {
+  position: relative;
+  display: inline-block;
+
+  & > .mgt-btn {
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+  }
+
+  & > .mgt-btn-primary {
+    .group-btn-divider(@btn-primary-border-color);
+  }
+  & > .mgt-btn-success {
+    .group-btn-divider(@btn-success-border-color);
+  }
+  & > .mgt-btn-warning {
+    .group-btn-divider(@btn-warning-border-color);
+  }
+  & > .mgt-btn-danger {
+    .group-btn-divider(@btn-danger-border-color);
+  }
+}
+
+.group-btn-divider(@border) {
+  &:not(:first-child) {
+    border-left-color: lighten(@border, 12%);
+  }
+}

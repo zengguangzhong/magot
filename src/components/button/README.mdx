@@ -1,0 +1,468 @@
+---
+name: Button 按钮
+route: /components/button
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import Button from './button';
+
+# Button 按钮
+
+按钮组件，用于响应用户的点击交互行为，触发特定的业务逻辑。
+
+## Usage
+
+### 按钮类型
+
+<Playground>
+  <Button>Default</Button>
+  <Button type="primary">Primary</Button>
+  <Button type="success">Success</Button>
+  <Button type="warning">Warning</Button>
+  <Button type="danger">Danger</Button>
+  <Button type="text">Text</Button>
+  <Button type="link">Link</Button>
+</Playground>
+
+### 按钮尺寸
+
+<Playground>
+  <div className="demo-group">
+    <Button size="small">Small</Button>
+    <Button>Normal</Button>
+    <Button size="large">Large</Button>
+  </div>
+  <div className="demo-group">
+    <Button type="primary" size="small">
+      Small
+    </Button>
+    <Button type="primary">Normal</Button>
+    <Button type="primary" size="large">
+      Large
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="success" size="small">
+      Small
+    </Button>
+    <Button type="success">Normal</Button>
+    <Button type="success" size="large">
+      Large
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="warning" size="small">
+      Small
+    </Button>
+    <Button type="warning">Normal</Button>
+    <Button type="warning" size="large">
+      Large
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="danger" size="small">
+      Small
+    </Button>
+    <Button type="danger">Normal</Button>
+    <Button type="danger" size="large">
+      Large
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="text" size="small">
+      Small
+    </Button>
+    <Button type="text">Normal</Button>
+    <Button type="text" size="large">
+      Large
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="link" size="small">
+      Small
+    </Button>
+    <Button type="link">Normal</Button>
+    <Button type="link" size="large">
+      Large
+    </Button>
+  </div>
+</Playground>
+
+### 不可用状态
+
+<Playground>
+  <div className="demo-group">
+    <Button>Default</Button>
+    <Button disabled={true}>Default(disabled)</Button>
+  </div>
+  <div className="demo-group">
+    <Button type="primary">Primary</Button>
+    <Button type="primary" disabled={true}>
+      Primary(disabled)
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="success">Success</Button>
+    <Button type="success" disabled={true}>
+      Success(disabled)
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="warning">Warning</Button>
+    <Button type="warning" disabled={true}>
+      Warning(disabled)
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="danger">Danger</Button>
+    <Button type="danger" disabled={true}>
+      Danger(disabled)
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="text">Text</Button>
+    <Button type="text" disabled={true}>
+      Text(disabled)
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button type="link" href="https://github.com/billjs/magot" target="_blank">
+      Link
+    </Button>
+    <Button
+      type="link"
+      href="https://github.com/billjs/magot"
+      target="_blank"
+      disabled={true}>
+      Link(disabled)
+    </Button>
+  </div>
+</Playground>
+
+### 图标按钮
+
+<Playground>
+  <div className="demo-group">
+    <Button size="small" icon="download">
+      Default
+    </Button>
+    <Button type="primary" size="small" icon="download">
+      Primary
+    </Button>
+    <Button type="success" size="small" icon="smile">
+      Success
+    </Button>
+    <Button type="warning" size="small" icon="return">
+      Warning
+    </Button>
+    <Button type="danger" size="small" icon="delete">
+      Danger
+    </Button>
+    <Button type="text" size="small" icon="comment">
+      Text
+    </Button>
+    <Button type="link" size="small" icon="message">
+      Link
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button icon="download">Default</Button>
+    <Button type="primary" icon="download">
+      Primary
+    </Button>
+    <Button type="success" icon="smile">
+      Success
+    </Button>
+    <Button type="warning" icon="return">
+      Warning
+    </Button>
+    <Button type="danger" icon="delete">
+      Danger
+    </Button>
+    <Button type="text" icon="comment">
+      Text
+    </Button>
+    <Button type="link" icon="message">
+      Link
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button icon="download" size="large">
+      Default
+    </Button>
+    <Button type="primary" size="large" icon="download">
+      Primary
+    </Button>
+    <Button type="success" size="large" icon="smile">
+      Success
+    </Button>
+    <Button type="warning" size="large" icon="return">
+      Warning
+    </Button>
+    <Button type="danger" size="large" icon="delete">
+      Danger
+    </Button>
+    <Button type="text" size="large" icon="comment">
+      Text
+    </Button>
+    <Button type="link" size="large" icon="message">
+      Link
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button disabled={true} icon="download">
+      Default
+    </Button>
+    <Button type="primary" disabled={true} icon="download">
+      Primary
+    </Button>
+    <Button type="success" disabled={true} icon="smile">
+      Success
+    </Button>
+    <Button type="warning" disabled={true} icon="return">
+      Warning
+    </Button>
+    <Button type="danger" disabled={true} icon="delete">
+      Danger
+    </Button>
+    <Button type="text" disabled={true} icon="comment">
+      Text
+    </Button>
+    <Button type="link" disabled={true} icon="message">
+      Link
+    </Button>
+  </div>
+</Playground>
+
+#### 图标在右侧
+
+<Playground>
+  <Button iconPosition="right" icon="download">
+    Default
+  </Button>
+  <Button type="primary" iconPosition="right" icon="download">
+    Primary
+  </Button>
+  <Button type="success" iconPosition="right" icon="smile">
+    Success
+  </Button>
+  <Button type="warning" iconPosition="right" icon="return">
+    Warning
+  </Button>
+  <Button type="danger" iconPosition="right" icon="delete">
+    Danger
+  </Button>
+  <Button type="text" iconPosition="right" icon="comment">
+    Text
+  </Button>
+  <Button type="link" iconPosition="right" icon="message">
+    Link
+  </Button>
+</Playground>
+
+#### 纯图标按钮
+
+<Playground>
+  <Button icon="download" />
+  <Button type="primary" icon="download" />
+  <Button type="success" icon="smile" />
+  <Button type="warning" icon="return" />
+  <Button type="danger" icon="delete" />
+  <Button type="text" icon="comment" />
+  <Button type="link" icon="message" />
+</Playground>
+
+#### 圆角纯图标按钮
+
+<Playground>
+  <Button icon="scan" circular={true} size="small" />
+  <Button icon="scan" circular={true} />
+  <Button icon="scan" circular={true} size="large" />
+  <Button type="primary" icon="download" circular={true} size="small" />
+  <Button type="primary" icon="download" circular={true} />
+  <Button type="primary" icon="download" circular={true} size="large" />
+  <Button type="danger" icon="delete" circular={true} size="small" />
+  <Button type="danger" icon="delete" circular={true} />
+  <Button type="danger" icon="delete" circular={true} size="large" />
+</Playground>
+
+#### 方形纯图标按钮
+
+<Playground>
+  <Button icon="scan" square={true} size="small" />
+  <Button icon="scan" square={true} />
+  <Button icon="scan" square={true} size="large" />
+  <Button type="primary" icon="download" square={true} size="small" />
+  <Button type="primary" icon="download" square={true} />
+  <Button type="primary" icon="download" square={true} size="large" />
+  <Button type="danger" icon="delete" square={true} size="small" />
+  <Button type="danger" icon="delete" square={true} />
+  <Button type="danger" icon="delete" square={true} size="large" />
+</Playground>
+
+#### 加载中按钮
+
+<Playground>
+  <div className="demo-group">
+    <Button loading={true}>Loading</Button>
+    <Button type="primary" loading={true}>
+      Loading
+    </Button>
+    <Button type="text" loading={true}>
+      Loading
+    </Button>
+  </div>
+  <div className="demo-group">
+    <Button loading={true} circular={true} />
+    <Button type="primary" loading={true} circular={true} />
+  </div>
+</Playground>
+
+<!-- #### 倒计时按钮
+
+<Playground>
+  <Button countdown={5}>timer</Button>
+  <Button type="primary" countdown={5}>
+    timer
+  </Button>
+  <Button type="text" countdown={5}>
+    timer
+  </Button>
+</Playground> -->
+
+### Block 按钮
+
+<Playground>
+  <Button block={true}>Default</Button>
+  <Button type="primary" block={true}>
+    Primary
+  </Button>
+  <Button type="success" block={true}>
+    Success
+  </Button>
+  <Button type="warning" block={true}>
+    Warning
+  </Button>
+  <Button type="danger" block={true}>
+    Danger
+  </Button>
+  <Button type="text" block={true}>
+    Text
+  </Button>
+  <Button type="link" block={true}>
+    Link
+  </Button>
+</Playground>
+
+### 按钮点击交互
+
+<Playground>
+  <Button onClick={() => alert('You clicked the Button')}>Click me</Button>
+  <Button type="primary" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+  <Button type="success" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+  <Button type="warning" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+  <Button type="danger" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+  <Button type="text" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+  <Button type="link" onClick={() => alert('You clicked the Button')}>
+    Click me
+  </Button>
+</Playground>
+
+### Link 按钮
+
+<Playground>
+  <Button href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="primary" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="success" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="warning" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="danger" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="text" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+  <Button type="link" href="https://github.com/billjs/magot" target="_blank">
+    Link me
+  </Button>
+</Playground>
+
+### 自定义样式按钮
+
+<Playground>
+  <Button
+    style={{
+      color: '#52c41a',
+      backgroundColor: '#343a40',
+      borderColor: '#343a40',
+    }}>
+    My Button
+  </Button>
+  <Button
+    style={{
+      color: '#fff',
+      backgroundColor: '#f5222d',
+      borderColor: '#f5222d',
+      borderRadius: 0,
+    }}>
+    My Button
+  </Button>
+</Playground>
+
+### 按钮组合
+
+文档详见：[按钮组合](/components/button-group)。
+
+<Playground>
+  <Button.Group>
+    <Button>L</Button>
+    <Button>M</Button>
+    <Button>R</Button>
+  </Button.Group>
+  <Button.Group>
+    <Button type="primary" icon="arrow-left">
+      Go Back
+    </Button>
+    <Button type="primary" icon="arrow-right" iconPosition="right">
+      Go Forward
+    </Button>
+  </Button.Group>
+  <Button.Group>
+    <Button type="primary" icon="download" square={true} />
+    <Button type="primary" icon="upload" square={true} />
+  </Button.Group>
+  <Button.Group>
+    <Button type="success" icon="smile" square={true} />
+    <Button type="success" icon="view" square={true} />
+  </Button.Group>
+  <Button.Group>
+    <Button type="warning" icon="alipay" square={true} />
+    <Button type="warning" icon="wxpay" square={true} />
+  </Button.Group>
+  <Button.Group>
+    <Button type="danger" icon="delete" square={true} />
+    <Button type="danger" icon="close" square={true} />
+  </Button.Group>
+</Playground>
+
+## Props
+
+<PropsTable of={Button} />
