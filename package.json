@@ -23,7 +23,7 @@
     "lint:js": "eslint --ext .js,.jsx ./ --cache --quiet",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "npm run prettier && npm run lint:ts && npm run lint:js && npm run lint:style || exit 1",
-    "docz:dev": "docz dev",
+    "docz:dev": "cross-env DEBUG=true docz dev",
     "docz:build": "docz build",
     "test": "jest"
   },
