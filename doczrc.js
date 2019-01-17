@@ -8,6 +8,7 @@ export default {
   description: pkg.description,
   indexHtml: './docs/docz.html',
   typescript: true,
+  codeSandbox: false,
   themeConfig: {
     // mode: 'dark',
     styles: getThemeStyles(),
