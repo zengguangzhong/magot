@@ -36,12 +36,6 @@ export interface ButtonProps
   circular?: boolean;
 
   /**
-   * 设置倒计时秒数，当此值>0s，即是有倒计时功能的按钮。
-   * 当倒计时结束，则触发`onCountdownEnd`回调函数
-   */
-  // countdown?: number;
-
-  /**
    * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
    * @default button
    */
@@ -64,6 +58,11 @@ export interface ButtonProps
   iconPosition?: ButtonIconPosition;
 
   /**
+   * 图标大小，即`Icon`组件的`fontSize`属性
+   */
+  iconSize?: number;
+
+  /**
    * 是否是加载中状态
    * @default false
    */
@@ -84,11 +83,6 @@ export interface ButtonProps
    * 相当于`<a>`链接的`target`属性，仅在指定`href`属性后生效
    */
   target?: string;
-
-  /**
-   * 倒计时结束后，将会触发的回调函数
-   */
-  // onCountdownEnd?: () => void;
 }
 
 const defaultProps: Partial<ButtonProps> = {
@@ -103,24 +97,8 @@ const defaultProps: Partial<ButtonProps> = {
 };
 
 function Button(props: ButtonProps) {
-  // const countdown = useCountdown(props.countdown || 0);
-  // console.log(countdown);
   return props.href ? renderLink(props) : renderButton(props);
 }
-
-// function useCountdown(initialValue: number) {
-//   const [countdown, setCountdown] = useState(initialValue);
-//   function decreament(d: number) {
-//     setCountdown(d - 1);
-//   }
-//   useEffect(() => {
-//     let timer = countdown > 0 ? window.setTimeout(decreament, 1000) : -1;
-//     return () => {
-//       window.clearTimeout(timer);
-//     };
-//   });
-//   return countdown;
-// }
 
 function getClasses(props: ButtonProps) {
   const prefix = component.getComponentPrefix(COMPONENT_TYPE.BUTTON);
@@ -159,15 +137,16 @@ function renderLink(props: ButtonProps) {
 }
 
 function renderChildren(props: ButtonProps) {
-  // const cd = props.countdown ? `${props.countdown}s ` : '';
-  const text = props.children ? (
-    <span>
-      {/* {cd} */}
-      {props.children}
-    </span>
+  const text = props.children ? <span>{props.children}</span> : null;
+
+  let icon = props.icon ? (
+    <Icon name={props.icon} fontSize={props.iconSize} />
   ) : null;
-  let icon = props.icon ? <Icon name={props.icon} /> : null;
-  if (props.loading) icon = <Icon name="loading" spin={true} />;
+
+  if (props.loading) {
+    icon = <Icon name="loading" spin={true} fontSize={props.iconSize} />;
+  }
+
   if (props.iconPosition === 'right') {
     return (
       <>
@@ -176,6 +155,7 @@ function renderChildren(props: ButtonProps) {
       </>
     );
   }
+
   return (
     <>
       {icon}
