@@ -16,6 +16,11 @@ export interface IconProps extends component.ComponentBase {
    * @default false
    */
   spin?: boolean;
+
+  /**
+   * 图标大小，即iconfont的font-size值
+   */
+  fontSize?: number;
 }
 
 const defaultProps: Partial<IconProps> = {
@@ -32,7 +37,9 @@ function Icon(props: IconProps) {
       spin: !!props.spin,
     }
   );
-  return <i className={cls} style={props.style} />;
+  return (
+    <i className={cls} style={{ ...props.style, fontSize: props.fontSize }} />
+  );
 }
 
 Icon.defaultProps = defaultProps;
