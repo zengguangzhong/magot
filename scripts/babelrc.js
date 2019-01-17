@@ -3,9 +3,6 @@ export default {
     [
       '@babel/preset-env',
       {
-        targets: {
-          browsers: ['ie >= 9', '> 0.25%'],
-        },
         modules: false,
         useBuiltIns: 'usage',
         debug: process.env.NODE_ENV === 'development',

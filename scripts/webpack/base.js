@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-// import babelrc from './babelrc';
+// import babelrc from '../babelrc';
 
 const cwd = process.cwd();
 const source = path.resolve(cwd, 'src');
@@ -39,6 +39,12 @@ const config = {
           // },
           {
             loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                module: 'esnext',
+                esModuleInterop: false,
+              },
+            },
           },
         ],
       },
@@ -50,6 +56,9 @@ const config = {
           },
           {
             loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
           },
           {
             loader: 'less-loader',
