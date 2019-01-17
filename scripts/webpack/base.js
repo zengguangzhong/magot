@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-// import babelrc from '../babelrc';
+import babelrc from '../babelrc';
 
 const cwd = process.cwd();
 const source = path.resolve(cwd, 'src');
@@ -27,16 +27,22 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: __DEV__,
+              ...babelrc,
+            },
+          },
+        ],
+      },
+      {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
-          // {
-          //   loader: 'babel-loader',
-          //   options: {
-          //     cacheDirectory: __DEV__,
-          //     ...babelrc,
-          //   },
-          // },
           {
             loader: 'ts-loader',
             options: {

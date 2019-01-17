@@ -8,6 +8,7 @@ export default {
         debug: process.env.NODE_ENV === 'development',
       },
     ],
+    ['@babel/preset-react'],
   ],
   plugins: [
     [
