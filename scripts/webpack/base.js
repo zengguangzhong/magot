@@ -95,7 +95,11 @@ const config = {
       },
     ],
   },
-  plugins: [new webpack.DefinePlugin({ __DEV__ })],
+  plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(__DEV__),
+    }),
+  ],
 };
 
 export default config;
