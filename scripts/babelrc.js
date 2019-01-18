@@ -17,6 +17,7 @@ export default {
         corejs: 2,
       },
     ],
+    ['@babel/plugin-syntax-dynamic-import'],
   ],
   env: {
     production: {
