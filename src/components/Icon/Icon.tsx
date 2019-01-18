@@ -3,7 +3,6 @@ import React from 'react';
 import './Icon.less';
 
 import * as component from '../component';
-import COMPONENT_TYPE from '../../constants/component-type';
 
 export interface IconProps extends component.ComponentBase {
   /**
@@ -28,9 +27,10 @@ const defaultProps: Partial<IconProps> = {
 };
 
 function Icon(props: IconProps) {
-  const prefix = component.getComponentPrefix(COMPONENT_TYPE.ICON);
+  const type = 'icon';
+  const prefix = component.getComponentPrefix(type);
   const cls = component.getComponentClasses(
-    COMPONENT_TYPE.ICON,
+    type,
     props,
     `${prefix}-${props.name}`,
     {

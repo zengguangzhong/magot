@@ -5,7 +5,6 @@ import './FileButton.less';
 import Button, { ButtonProps } from '../Button';
 import * as component from '../component';
 import * as fileChecker from '../../utils/check-file';
-import COMPONENT_TYPE from '../../constants/component-type';
 
 type PickButtonProps = Pick<
   ButtonProps,
@@ -111,7 +110,7 @@ function FileButton(props: FileButtonProps) {
     onError,
     ...btnProps
   } = props;
-  const cls = component.getComponentClasses(COMPONENT_TYPE.FILE_BUTTON, {
+  const cls = component.getComponentClasses('file-button', {
     className,
   });
   const _onChange = function(evt: React.ChangeEvent<HTMLInputElement>) {

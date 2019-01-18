@@ -1,10 +1,10 @@
 @import '../../variable.less';
 
-.mgt-btn-group {
+.mgt-button-group {
   position: relative;
   display: inline-block;
 
-  & > .mgt-btn {
+  & > .mgt-button {
     &:not(:first-child) {
       margin-left: -1px;
     }
@@ -24,16 +24,16 @@
     }
   }
 
-  & > .mgt-btn-primary {
+  & > .mgt-button-primary {
     .group-btn-divider(@btn-primary-border-color);
   }
-  & > .mgt-btn-success {
+  & > .mgt-button-success {
     .group-btn-divider(@btn-success-border-color);
   }
-  & > .mgt-btn-warning {
+  & > .mgt-button-warning {
     .group-btn-divider(@btn-warning-border-color);
   }
-  & > .mgt-btn-danger {
+  & > .mgt-button-danger {
     .group-btn-divider(@btn-danger-border-color);
   }
 }

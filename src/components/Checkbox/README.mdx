@@ -1,0 +1,41 @@
+---
+name: Checkbox 复选按钮
+route: /components/Checkbox
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import Checkbox from './Checkbox';
+
+# Checkbox 复选按钮
+
+## Usage
+
+### 基本用法
+
+<Playground>
+  <Checkbox>Checkbox</Checkbox>
+  <Checkbox defaultChecked={true}>Checkbox</Checkbox>
+</Playground>
+
+### 禁用状态
+
+<Playground>
+  <Checkbox disabled={true}>Checkbox</Checkbox>
+  <Checkbox defaultChecked={true} disabled={true}>
+    Checkbox
+  </Checkbox>
+</Playground>
+
+### 受控 Checkbox
+
+关于非受控组件的相关介绍，请参考 React 官方文档 [Uncontrolled Components](https://reactjs.org/docs/uncontrolled-components.html)。
+
+<Playground>
+  <Checkbox>Checkbox</Checkbox>
+  <Checkbox checked={true}>Checkbox</Checkbox>
+</Playground>
+
+## props
+
+<PropsTable of={Checkbox} />

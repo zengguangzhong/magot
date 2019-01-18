@@ -5,7 +5,6 @@ import './Button.less';
 import Icon from '../Icon';
 import ButtonGroup from '../ButtonGroup';
 import * as component from '../component';
-import COMPONENT_TYPE from '../../constants/component-type';
 
 export type ButtonType =
   | 'primary'
@@ -101,8 +100,9 @@ function Button(props: ButtonProps) {
 }
 
 function getClasses(props: ButtonProps) {
-  const prefix = component.getComponentPrefix(COMPONENT_TYPE.BUTTON);
-  return component.getComponentClasses(COMPONENT_TYPE.BUTTON, props, {
+  const type = 'button';
+  const prefix = component.getComponentPrefix(type);
+  return component.getComponentClasses(type, props, {
     [`${prefix}-${props.type}`]: !!props.type,
     [`${prefix}-block`]: !!props.block,
     [`${prefix}-circular`]: !!props.circular,

@@ -3,7 +3,6 @@ import React from 'react';
 import './ButtonGroup.less';
 
 import * as component from '../component';
-import COMPONENT_TYPE from '../../constants/component-type';
 import { ButtonProps } from '../Button/Button';
 
 export interface ButtonGroupProps
@@ -20,7 +19,7 @@ const defaultProps: Partial<ButtonGroupProps> = {
 };
 
 function ButtonGroup(props: ButtonGroupProps) {
-  const cls = component.getComponentClasses(COMPONENT_TYPE.BUTTON_GROUP, props);
+  const cls = component.getComponentClasses('button-group', props);
   const btns = props.children.map((child, index) => {
     return React.cloneElement(child, {
       disabled: props.disabled,
