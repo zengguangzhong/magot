@@ -25,6 +25,7 @@
     "lint": "npm run prettier && npm run lint:ts && npm run lint:js && npm run lint:style || exit 1",
     "docz:dev": "cross-env DEBUG=true docz dev",
     "docz:build": "docz build",
+    "create:component": "node -r @babel/register scripts/creator/component/index.js",
     "test": "jest"
   },
   "repository": {
