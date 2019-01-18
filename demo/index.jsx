@@ -4,29 +4,29 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import './index.less';
 
-import ButtonDemo from '../src/components/button/demo';
-import ButtonGroupDemo from '../src/components/button-group/demo';
-import FileButtonDemo from '../src/components/file-button/demo';
-import IconDemo from '../src/components/icon/demo';
-import CheckboxDemo from '../src/components/checkbox/demo';
+import ButtonDemo from '../src/components/Button/demo';
+import ButtonGroupDemo from '../src/components/ButtonGroup/demo';
+import FileButtonDemo from '../src/components/FileButton/demo';
+import IconDemo from '../src/components/Icon/demo';
+import CheckboxDemo from '../src/components/Checkbox/demo';
 
 function Home() {
   return (
     <ul>
       <li>
-        <Link to="/button">Buttton 按钮</Link>
+        <Link to="/Button">Buttton 按钮</Link>
       </li>
       <li>
-        <Link to="/button-group">ButttonGroup 按钮组</Link>
+        <Link to="/ButtonGroup">ButttonGroup 按钮组</Link>
       </li>
       <li>
-        <Link to="/file-button">FileButton 文件按钮</Link>
+        <Link to="/FileButton">FileButton 文件按钮</Link>
       </li>
       <li>
-        <Link to="/icon">Icon 图标</Link>
+        <Link to="/Icon">Icon 图标</Link>
       </li>
       <li>
-        <Link to="/checkbox">Checkbox 复选按钮</Link>
+        <Link to="/Checkbox">Checkbox 复选按钮</Link>
       </li>
     </ul>
   );
@@ -37,11 +37,11 @@ function DemoApp() {
     <Router>
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/button" component={ButtonDemo} />
-        <Route path="/button-group" component={ButtonGroupDemo} />
-        <Route path="/file-button" component={FileButtonDemo} />
-        <Route path="/icon" component={IconDemo} />
-        <Route path="/checkbox" component={CheckboxDemo} />
+        <Route path="/Button" component={ButtonDemo} />
+        <Route path="/ButtonGroup" component={ButtonGroupDemo} />
+        <Route path="/FileButton" component={FileButtonDemo} />
+        <Route path="/Icon" component={IconDemo} />
+        <Route path="/Checkbox" component={CheckboxDemo} />
       </Switch>
     </Router>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './icon.less';
+import './Icon.less';
 
 import * as component from '../component';
 import COMPONENT_TYPE from '../../constants/component-type';

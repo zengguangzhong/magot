@@ -4,4 +4,4 @@ export {
   ButtonType,
   ButtonHTMLType,
   ButtonIconPosition,
-} from './button';
+} from './Button';

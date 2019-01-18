@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FileButton from './file-button';
+import FileButton from './FileButton';
 import { Link } from 'react-router-dom';
 
 function FileButtonDemo() {

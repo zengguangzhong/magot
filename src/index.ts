@@ -1,4 +1,5 @@
-export { default as Button } from './components/button';
-export { default as ButtonGroup } from './components/button-group';
-export { default as FileButton } from './components/file-button';
-export { default as Icon } from './components/icon';
+export { default as Button } from './components/Button';
+export { default as ButtonGroup } from './components/ButtonGroup';
+export { default as FileButton } from './components/FileButton';
+export { default as Icon } from './components/Icon';
+export { default as Checkbox } from './components/Checkbox';

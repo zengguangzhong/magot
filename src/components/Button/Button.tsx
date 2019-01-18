@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './button.less';
+import './Button.less';
 
-import Icon from '../icon';
-import ButtonGroup from '../button-group';
+import Icon from '../Icon';
+import ButtonGroup from '../ButtonGroup';
 import * as component from '../component';
 import COMPONENT_TYPE from '../../constants/component-type';
 

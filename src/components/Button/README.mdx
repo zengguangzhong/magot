@@ -1,11 +1,11 @@
 ---
 name: Button 按钮
-route: /components/button
+route: /components/Button
 menu: Components
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Button from './button';
+import Button from './Button';
 
 # Button 按钮
 
@@ -312,24 +312,10 @@ import Button from './button';
     <Button type="text" loading={true}>
       Loading
     </Button>
-  </div>
-  <div className="demo-group">
     <Button loading={true} circular={true} />
     <Button type="primary" loading={true} circular={true} />
   </div>
 </Playground>
-
-<!-- #### 倒计时按钮
-
-<Playground>
-  <Button countdown={5}>timer</Button>
-  <Button type="primary" countdown={5}>
-    timer
-  </Button>
-  <Button type="text" countdown={5}>
-    timer
-  </Button>
-</Playground> -->
 
 ### Block 按钮
 
@@ -429,7 +415,7 @@ import Button from './button';
 
 ### 按钮组合
 
-文档详见：[按钮组合](/components/button-group)。
+文档详见：[按钮组合](/components/ButtonGroup)。
 
 <Playground>
   <Button.Group>

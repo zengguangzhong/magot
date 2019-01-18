@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './file-button.less';
+import './FileButton.less';
 
-import Button, { ButtonProps } from '../button';
+import Button, { ButtonProps } from '../Button';
 import * as component from '../component';
 import * as fileChecker from '../../utils/check-file';
 import COMPONENT_TYPE from '../../constants/component-type';
