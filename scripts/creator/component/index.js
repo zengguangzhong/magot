@@ -33,7 +33,7 @@ const expCode = `export { default as ${name} } from './components/${name}';\n`;
 fs.appendFileSync(exp, expCode, 'utf8');
 
 function createFile(file, code) {
-  const compileData = { name };
+  const compileData = { name, type: toKebabCase(name) };
   const p = path.join(dest, render(file, compileData));
   const data = render(code, compileData);
   fs.writeFileSync(p, data, 'utf8');
@@ -58,4 +58,13 @@ function render(tpl, data) {
     tpl = tpl.replace(v.group, data[v.variable]);
   }
   return tpl;
+}
+
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+function toKebabCase(str) {
+  const lower = m => m.toLowerCase();
+  return str.replace(/^[A-Z]/, lower).replace(/[A-Z]/g, m => '-' + lower(m));
 }

@@ -11,8 +11,8 @@ export interface \${name}Props extends component.ComponentBase {}
 const defaultProps: Partial<\${name}Props> = {};
 
 function \${name}(props: \${name}Props) {
-  console.log(props);
-  return <div />;
+  const cls = component.getComponentClasses('\${type}', props);
+  return <div className={cls} />;
 }
 
 \${name}.defaultProps = defaultProps;
