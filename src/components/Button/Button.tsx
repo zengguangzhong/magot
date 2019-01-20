@@ -16,12 +16,11 @@ export type ButtonType =
 export type ButtonHTMLType = 'button' | 'submit' | 'reset';
 export type ButtonIconPosition = 'left' | 'right';
 
-export interface ButtonProps
+interface BaseButtonProps
   extends component.ComponentBase,
     component.DisableComponent,
     component.SizedComponent,
-    component.NestedComponent,
-    component.ClickableComponent<HTMLButtonElement | HTMLAnchorElement> {
+    component.NestedComponent {
   /**
    * 是否是全宽按钮，按钮的宽度将被渲染为父组件的宽度
    * @default false
@@ -33,17 +32,6 @@ export interface ButtonProps
    * @default false
    */
   circular?: boolean;
-
-  /**
-   * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
-   * @default button
-   */
-  htmlType?: ButtonHTMLType;
-
-  /**
-   * 点击按钮跳转的链接，指定此属性后的行为将和`<a>`链接一致
-   */
-  href?: string;
 
   /**
    * 按钮图标
@@ -77,6 +65,25 @@ export interface ButtonProps
    * 按钮类型，可选值有: `primary`, `success`, `warning`, `danger`, `text`, `link`。
    */
   type?: ButtonType;
+}
+
+interface NativeButtonProps
+  extends BaseButtonProps,
+    component.ClickableComponent<HTMLButtonElement> {
+  /**
+   * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
+   * @default button
+   */
+  htmlType?: ButtonHTMLType;
+}
+
+interface LinkButtonProps
+  extends BaseButtonProps,
+    component.ClickableComponent<HTMLAnchorElement> {
+  /**
+   * 点击按钮跳转的链接，指定此属性后的行为将和`<a>`链接一致
+   */
+  href?: string;
 
   /**
    * 相当于`<a>`链接的`target`属性，仅在指定`href`属性后生效
@@ -84,22 +91,19 @@ export interface ButtonProps
   target?: string;
 }
 
+export type ButtonProps = NativeButtonProps | LinkButtonProps;
+
 const defaultProps: Partial<ButtonProps> = {
   ...component.getDefaultDisabledProps(),
   ...component.getDefaultSizedProps(),
   block: false,
   circular: false,
-  htmlType: 'button',
   iconPosition: 'left',
   loading: false,
   square: false,
 };
 
-function Button(props: ButtonProps) {
-  return props.href ? renderLink(props) : renderButton(props);
-}
-
-function getClasses(props: ButtonProps) {
+function getClasses(props: BaseButtonProps) {
   const type = 'button';
   const prefix = component.getComponentPrefix(type);
   return component.getComponentClasses(type, props, {
@@ -110,20 +114,28 @@ function getClasses(props: ButtonProps) {
   });
 }
 
-function renderButton(props: ButtonProps) {
+function Button(props: ButtonProps) {
+  if ('href' in props) {
+    return <LinkButton {...props}>{props.children}</LinkButton>;
+  }
+  const nativeBtnProps = props as NativeButtonProps;
+  return <NativeButton {...nativeBtnProps}>{props.children}</NativeButton>;
+}
+
+function NativeButton(props: NativeButtonProps) {
   return (
     <button
       className={getClasses(props)}
-      type={props.htmlType}
+      type={props.htmlType || 'button'}
       disabled={!!props.disabled}
       style={props.style}
       onClick={props.onClick}>
-      {renderChildren(props)}
+      <ButtonContent {...props}>{props.children}</ButtonContent>
     </button>
   );
 }
 
-function renderLink(props: ButtonProps) {
+function LinkButton(props: LinkButtonProps) {
   return (
     <a
       className={getClasses(props)}
@@ -131,12 +143,12 @@ function renderLink(props: ButtonProps) {
       target={props.target}
       style={props.style}
       onClick={props.onClick}>
-      {renderChildren(props)}
+      <ButtonContent {...props}>{props.children}</ButtonContent>
     </a>
   );
 }
 
-function renderChildren(props: ButtonProps) {
+function ButtonContent(props: BaseButtonProps) {
   const text = props.children ? <span>{props.children}</span> : null;
 
   let icon = props.icon ? (
