@@ -35,6 +35,7 @@
 - [ ] LayoutSider
 - [ ] List
 - [ ] ListItem
+- [ ] Loader
 - [ ] Loading
 - [ ] Menu
 - [ ] MenuItem
