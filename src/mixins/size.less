@@ -6,3 +6,14 @@
 .square(@size) {
   .size(@size; @size);
 }
+
+.fullsize() {
+  .square(100%);
+}
+
+.overlay() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  .fullsize();
+}
