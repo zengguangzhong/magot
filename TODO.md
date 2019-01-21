@@ -36,7 +36,7 @@
 - [ ] List
 - [ ] ListItem
 - [ ] Loader
-- [ ] Loading
+- [x] Loading
 - [ ] Menu
 - [ ] MenuItem
 - [ ] Modal
