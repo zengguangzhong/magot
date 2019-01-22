@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
 import './Button.less';
 
@@ -69,7 +69,8 @@ interface BaseButtonProps
 
 interface NativeButtonProps
   extends BaseButtonProps,
-    component.ClickableComponent<HTMLButtonElement> {
+    component.ClickableComponent<HTMLButtonElement>,
+    HTMLAttributes<HTMLButtonElement> {
   /**
    * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
    * @default button
@@ -79,7 +80,8 @@ interface NativeButtonProps
 
 interface LinkButtonProps
   extends BaseButtonProps,
-    component.ClickableComponent<HTMLAnchorElement> {
+    component.ClickableComponent<HTMLAnchorElement>,
+    HTMLAttributes<HTMLAnchorElement> {
   /**
    * 点击按钮跳转的链接，指定此属性后的行为将和`<a>`链接一致
    */
@@ -92,6 +94,21 @@ interface LinkButtonProps
 }
 
 export type ButtonProps = NativeButtonProps | LinkButtonProps;
+
+const componentProps = [
+  'block',
+  'children',
+  'className',
+  'circular',
+  'icon',
+  'iconPosition',
+  'iconSize',
+  'loading',
+  'size',
+  'square',
+  'type',
+  'htmlType',
+];
 
 const defaultProps: Partial<ButtonProps> = {
   ...component.getDefaultDisabledProps(),
@@ -123,26 +140,27 @@ function Button(props: ButtonProps) {
 }
 
 function NativeButton(props: NativeButtonProps) {
+  const nativeProps = component.getNativeProps<
+    NativeButtonProps,
+    HTMLAttributes<HTMLButtonElement>
+  >(props, componentProps);
   return (
     <button
       className={getClasses(props)}
       type={props.htmlType || 'button'}
-      disabled={!!props.disabled}
-      style={props.style}
-      onClick={props.onClick}>
+      {...nativeProps}>
       <ButtonContent {...props}>{props.children}</ButtonContent>
     </button>
   );
 }
 
 function LinkButton(props: LinkButtonProps) {
+  const nativeProps = component.getNativeProps<
+    LinkButtonProps,
+    HTMLAttributes<HTMLAnchorElement>
+  >(props, componentProps);
   return (
-    <a
-      className={getClasses(props)}
-      href={props.href}
-      target={props.target}
-      style={props.style}
-      onClick={props.onClick}>
+    <a className={getClasses(props)} {...nativeProps}>
       <ButtonContent {...props}>{props.children}</ButtonContent>
     </a>
   );

@@ -102,3 +102,23 @@ export function getDefaultSizedProps() {
 export function getDefaultDisabledProps() {
   return { disabled: false };
 }
+
+/**
+ *
+ *
+ * @export
+ * @template P
+ * @template N
+ * @param {P} props
+ * @param {string[]} excludeProps
+ * @returns {N}
+ */
+export function getNativeProps<P, N>(props: P, excludeProps: string[]) {
+  const nativeProps: Record<string, any> = {};
+  for (const key in props) {
+    if (excludeProps.indexOf(key) === -1) {
+      nativeProps[key] = props[key];
+    }
+  }
+  return nativeProps as N;
+}
