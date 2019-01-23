@@ -16,7 +16,7 @@ function IconDemo() {
             <Icon
               key={icon}
               name={icon}
-              fontSize={32}
+              size={32}
               style={{
                 color: '#bfbfbf',
                 marginRight: 30,

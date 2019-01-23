@@ -19,7 +19,7 @@ export interface IconProps extends component.ComponentBase {
   /**
    * 图标大小，即iconfont的font-size值
    */
-  fontSize?: number;
+  size?: number;
 }
 
 const defaultProps: Partial<IconProps> = {
@@ -31,15 +31,13 @@ function Icon(props: IconProps) {
   const prefix = component.getComponentPrefix(type);
   const cls = component.getComponentClasses(
     type,
-    props,
+    { ...props, size: 'normal' },
     `${prefix}-${props.name}`,
     {
       spin: !!props.spin,
     }
   );
-  return (
-    <i className={cls} style={{ ...props.style, fontSize: props.fontSize }} />
-  );
+  return <i className={cls} style={{ ...props.style, fontSize: props.size }} />;
 }
 
 Icon.defaultProps = defaultProps;
