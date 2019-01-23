@@ -59,7 +59,7 @@
 - [ ] TabPane
 - [ ] TimePicker
 - [ ] Toast
-- [ ] Tooltip
+- [x] Tooltip
 - [ ] Tree
 - [ ] Uploader
 - [ ] VideoPlayer
