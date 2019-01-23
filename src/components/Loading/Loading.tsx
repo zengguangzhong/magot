@@ -62,7 +62,7 @@ function CommonLoading(props: LoadingProps) {
     [`${prefix}-row`]: props.direction === 'row',
   });
   return (
-    <div className={cls}>
+    <div className={cls} style={props.style}>
       <Icon name="loading" spin={true} />
       {props.tip && <p className="tip">{props.tip}</p>}
     </div>

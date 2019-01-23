@@ -73,7 +73,7 @@ function Toast(props: ToastProps) {
   const onClose = () => setClosed(true);
 
   return ReactDOM.createPortal(
-    <div className={cls}>
+    <div className={cls} style={props.style}>
       <span className="icon">
         <Icon name={icons[props.type || 'info']} />
       </span>

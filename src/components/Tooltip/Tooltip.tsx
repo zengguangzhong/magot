@@ -130,7 +130,7 @@ function Overlay(props: OverlayProps) {
     show: visibility && !props.hidden,
   });
   return ReactDOM.createPortal(
-    <div ref={overlayRef} className={cls} style={{ ...pos }}>
+    <div ref={overlayRef} className={cls} style={{ ...pos, ...props.style }}>
       {props.title}
     </div>,
     document.body
