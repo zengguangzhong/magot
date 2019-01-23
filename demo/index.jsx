@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Loading from '../src/components/Loading';
 
 import './index.less';
 
@@ -34,7 +35,7 @@ function DemoApp() {
   }
   return (
     <Router>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<Loading tip="LOADING..." />}>
         <Switch>
           <Route path="/" exact={true} component={Home} />
           {routes}
