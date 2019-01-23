@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import Tooltip from '../Tooltip';
 import { Link } from 'react-router-dom';
 
 function onClick() {
@@ -270,14 +271,16 @@ function ButtonDemo() {
         </Button>
         <Button loading={true} circular={true} />
         <Button type="primary" loading={true} circular={true} />
-        <Button
-          type="primary"
-          loading={loading}
-          disabled={loading}
-          // tslint:disable
-          onClick={() => setLoading(true)}>
-          {loading ? 'Submitting' : 'Submit'}
-        </Button>
+        <Tooltip title="Click me to show loading">
+          <Button
+            type="primary"
+            loading={loading}
+            disabled={loading}
+            // tslint:disable
+            onClick={() => setLoading(true)}>
+            {loading ? 'Submitting' : 'Submit'}
+          </Button>
+        </Tooltip>
       </div>
       <div className="demo-box">
         <Button block={true}>Default</Button>
