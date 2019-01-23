@@ -2,8 +2,8 @@ import React, { HTMLAttributes } from 'react';
 
 import './Button.less';
 
-import Icon from '../Icon';
 import ButtonGroup from '../ButtonGroup';
+import Iconable, { IconPosition } from '../Icon/Iconable';
 import * as component from '../component';
 
 export type ButtonType =
@@ -14,7 +14,6 @@ export type ButtonType =
   | 'text'
   | 'link';
 export type ButtonHTMLType = 'button' | 'submit' | 'reset';
-export type ButtonIconPosition = 'left' | 'right';
 
 interface BaseButtonProps
   extends component.ComponentBase,
@@ -42,7 +41,7 @@ interface BaseButtonProps
    * 按钮图标位置，可选值有：`left`, `right`，默认`left`。
    * @default left
    */
-  iconPosition?: ButtonIconPosition;
+  iconPosition?: IconPosition;
 
   /**
    * 图标大小，即`Icon`组件的`fontSize`属性
@@ -115,7 +114,6 @@ const defaultProps: Partial<ButtonProps> = {
   ...component.getDefaultSizedProps(),
   block: false,
   circular: false,
-  iconPosition: 'left',
   loading: false,
   square: false,
 };
@@ -168,29 +166,14 @@ function LinkButton(props: LinkButtonProps) {
 
 function ButtonContent(props: BaseButtonProps) {
   const text = props.children ? <span>{props.children}</span> : null;
-
-  let icon = props.icon ? (
-    <Icon name={props.icon} fontSize={props.iconSize} />
-  ) : null;
-
-  if (props.loading) {
-    icon = <Icon name="loading" spin={true} fontSize={props.iconSize} />;
-  }
-
-  if (props.iconPosition === 'right') {
-    return (
-      <>
-        {text}
-        {icon}
-      </>
-    );
-  }
-
   return (
-    <>
-      {icon}
+    <Iconable
+      name={props.loading ? 'loading' : props.icon}
+      spin={props.loading}
+      position={props.iconPosition}
+      size={props.iconSize}>
       {text}
-    </>
+    </Iconable>
   );
 }
 

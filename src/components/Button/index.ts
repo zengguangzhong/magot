@@ -1,7 +1,1 @@
-export {
-  default,
-  ButtonProps,
-  ButtonType,
-  ButtonHTMLType,
-  ButtonIconPosition,
-} from './Button';
+export { default, ButtonProps, ButtonType, ButtonHTMLType } from './Button';
