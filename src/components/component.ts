@@ -43,6 +43,19 @@ export interface ClickableComponent<T extends HTMLElement> {
    * 点击组件时的回调函数
    */
   onClick?: (e: React.MouseEvent<T>) => void;
+
+  /**
+   * 双击组件时的回调函数
+   */
+  onDoubleClick?: (e: React.MouseEvent<T>) => void;
+}
+
+export interface MouseMovableComponent<T extends HTMLElement> {
+  onMouseEnter?: (e: React.MouseEvent<T>) => void;
+  onMouseLeave?: (e: React.MouseEvent<T>) => void;
+  onMouseMove?: (e: React.MouseEvent<T>) => void;
+  onMouseOver?: (e: React.MouseEvent<T>) => void;
+  onMouseOut?: (e: React.MouseEvent<T>) => void;
 }
 
 export interface IconableComponent {
