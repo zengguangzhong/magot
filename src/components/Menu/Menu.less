@@ -1,5 +1,20 @@
 @import '../../variable.less';
 
 .mgt-menu {
+  .box();
+  .box-sizing();
+
   position: relative;
+  display: inline-block;
+  list-style: none;
+  padding: @menu-padding;
+  background-color: @menu-background-color;
+  border: 1px solid @menu-border-color;
+  border-radius: @menu-border-radius;
+  box-shadow: @menu-box-shadow;
+
+  &.no-border {
+    border: 0;
+    box-shadow: none;
+  }
 }

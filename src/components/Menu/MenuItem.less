@@ -1,0 +1,31 @@
+@import '../../variable.less';
+
+.mgt-menu-item {
+  .box();
+  .text-overflow();
+
+  position: relative;
+  padding: @menu-item-padding;
+  height: @menu-item-height;
+  line-height: @menu-item-height;
+  color: @menu-item-color;
+  font-size: @menu-item-font-size;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &:hover,
+  &.selected {
+    color: @menu-item-active-color;
+    background-color: @menu-item-active-background-color;
+  }
+
+  & > .mgt-icon + span,
+  & > span + .mgt-icon {
+    margin-left: @menu-icon-space;
+  }
+}
+
+.mgt-menu-item-disabled {
+  color: @menu-item-disabled-color;
+  pointer-events: none;
+}

@@ -37,8 +37,7 @@
 - [ ] ListItem
 - [ ] Loader
 - [x] Loading
-- [ ] Menu
-- [ ] MenuItem
+- [x] Menu
 - [ ] Modal
 - [ ] Notification
 - [ ] Pagination

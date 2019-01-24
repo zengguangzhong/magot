@@ -1,0 +1,31 @@
+@import '../../variable.less';
+
+.mgt-menu-item-group {
+  & > .title {
+    padding: @menu-group-padding;
+    color: @menu-group-color;
+    font-size: @menu-group-font-size;
+    .text-overflow();
+    & > .mgt-icon + span,
+    & > span + .mgt-icon {
+      margin-left: @menu-icon-space;
+    }
+  }
+
+  &:first-child {
+    & > .title {
+      padding-top: 0;
+    }
+  }
+
+  & > .list {
+    list-style: none;
+    .box();
+    .box-sizing();
+
+    & > .mgt-menu-item,
+    & > .mgt-menu-divider {
+      margin-left: 1em;
+    }
+  }
+}

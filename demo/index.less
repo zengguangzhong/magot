@@ -39,7 +39,8 @@ body {
 .demo-block > .mgt-button,
 .demo-box > .mgt-button-group,
 .demo-block > .mgt-button-group,
-.demo-box > .mgt-loading {
+.demo-box > .mgt-loading,
+.demo-box > .mgt-menu {
   margin-right: 8px;
   margin-bottom: 10px;
 }
@@ -57,4 +58,11 @@ body {
   display: inline-block;
   margin-bottom: 20px;
   font-size: 18px;
+}
+
+.demo-float {
+  .clearfix();
+  & > .mgt-menu {
+    float: left;
+  }
 }
