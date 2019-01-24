@@ -1,5 +1,6 @@
 import { ReactNode, CSSProperties } from 'react';
 import cx from 'classnames';
+import { IconPosition } from './Icon/Iconable';
 
 export const prefix = 'mgt';
 
@@ -44,6 +45,24 @@ export interface ClickableComponent<T extends HTMLElement> {
   onClick?: (e: React.MouseEvent<T>) => void;
 }
 
+export interface IconableComponent {
+  /**
+   * 图标
+   */
+  icon?: string;
+
+  /**
+   * 图标位置，可选值有：`left`, `right`，默认`left`。
+   * @default left
+   */
+  iconPosition?: IconPosition;
+
+  /**
+   * 大小，即`Icon`组件的`fontSize`属性
+   */
+  iconSize?: number;
+}
+
 /**
  *
  *
@@ -60,15 +79,13 @@ export function getComponentPrefix(type: string) {
  *
  * @export
  * @param {string} type 组件类型
- * @param {(Partial<ComponentBase & SizedComponent & DisableComponent>)} props 组件Props
+ * @param {P} props 组件Props
  * @param {...any[]} classes 额外样式
  * @returns {string}
  */
-export function getComponentClasses(
-  type: string,
-  props: Partial<ComponentBase & SizedComponent & DisableComponent>,
-  ...classes: any[]
-) {
+export function getComponentClasses<
+  P extends ComponentBase & SizedComponent & DisableComponent
+>(type: string, props: P, ...classes: any[]) {
   const main = getComponentPrefix(type);
   return cx(
     main,
@@ -88,9 +105,8 @@ export function getComponentClasses(
  * @export
  * @returns {SizedComponent}
  */
-export function getDefaultSizedProps() {
-  const props: SizedComponent = { size: 'normal' };
-  return props;
+export function getDefaultSizedProps(): SizedComponent {
+  return { size: 'normal' };
 }
 
 /**
@@ -99,7 +115,7 @@ export function getDefaultSizedProps() {
  * @export
  * @returns {DisableComponent}
  */
-export function getDefaultDisabledProps() {
+export function getDefaultDisabledProps(): DisableComponent {
   return { disabled: false };
 }
 
