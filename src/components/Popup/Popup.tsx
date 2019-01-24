@@ -28,6 +28,12 @@ export interface PopupProps
    * 当鼠标悬停在弹出层组件上时，是否阻止它隐藏
    */
   preventOut?: boolean;
+
+  /**
+   * 弹出层组件与目标组件之间的间距
+   * @default 10
+   */
+  space?: number;
 }
 
 interface WrappedComponentProps
@@ -40,6 +46,7 @@ type DispatchOffset = React.Dispatch<React.SetStateAction<Offset>>;
 
 const defaultProps: Partial<PopupProps> = {
   align: 'top',
+  space: 10,
 };
 
 function Popup(props: PopupProps) {
