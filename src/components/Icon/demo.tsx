@@ -10,19 +10,24 @@ function IconDemo() {
       <Link to="/" className="demo-goback">
         返回
       </Link>
-      <div className="demo-box">
+      <div className="demo-list">
         {icons.map(icon => {
           return (
-            <Icon
+            <li
               key={icon}
-              name={icon}
-              size={32}
-              style={{
-                color: '#bfbfbf',
-                marginRight: 30,
-                marginBottom: 30,
-              }}
-            />
+              className="demo-item"
+              style={{ width: 100, textAlign: 'center', color: '#bfbfbf' }}>
+              <Icon key={icon} name={icon} size={32} />
+              <div
+                style={{
+                  marginTop: 10,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}>
+                {icon}
+              </div>
+            </li>
           );
         })}
       </div>
