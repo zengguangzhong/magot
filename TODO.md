@@ -43,6 +43,7 @@
 - [ ] Notification
 - [ ] Pagination
 - [ ] Popover
+- [x] Popup
 - [ ] Qrcode
 - [ ] Radio
 - [ ] RadioGroup
