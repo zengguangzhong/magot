@@ -2,13 +2,13 @@
 
 .loading-size(@font-size; @icon-size; @space) {
   font-size: @font-size;
-  & > .mgt-icon {
+  & > .@{prefix}-icon {
     font-size: @icon-size;
   }
   & > .tip {
     padding-top: @space;
   }
-  &.mgt-loading-row {
+  &.@{prefix}-loading-row {
     & > .tip {
       padding-top: 0;
       padding-left: @space;
@@ -16,7 +16,7 @@
   }
 }
 
-.mgt-loading {
+.@{prefix}-loading {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -36,23 +36,23 @@
   );
 }
 
-.mgt-loading-row {
+.@{prefix}-loading-row {
   flex-direction: row;
 }
 
-.mgt-loading-sm {
+.@{prefix}-loading-sm {
   .loading-size(
     @loading-font-size-sm; @loading-icon-font-size-sm; @loading-tip-space-sm
   );
 }
 
-.mgt-loading-lg {
+.@{prefix}-loading-lg {
   .loading-size(
     @loading-font-size-lg; @loading-icon-font-size-lg; @loading-tip-space-lg
   );
 }
 
-.mgt-loading-global {
+.@{prefix}-loading-global {
   background-color: @loading-mask-color;
   z-index: @loading-global-zindex;
   .overlay(fixed);
@@ -60,7 +60,7 @@
 
 .msg-loading-container {
   position: relative;
-  & > .mgt-loading {
+  & > .@{prefix}-loading {
     display: flex;
     background-color: @loading-mask-color;
     z-index: 2;

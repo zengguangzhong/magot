@@ -1,13 +1,13 @@
 @import '../../variable.less';
 
-.mgt-menu-item-group {
+.@{prefix}-menu-item-group {
   & > .title {
     padding: @menu-group-padding;
     color: @menu-group-color;
     font-size: @menu-group-font-size;
     .text-overflow();
-    & > .mgt-icon + span,
-    & > span + .mgt-icon {
+    & > .@{prefix}-icon + span,
+    & > span + .@{prefix}-icon {
       margin-left: @menu-icon-space;
     }
   }
@@ -23,8 +23,8 @@
     .box();
     .box-sizing();
 
-    & > .mgt-menu-item,
-    & > .mgt-menu-divider {
+    & > .@{prefix}-menu-item,
+    & > .@{prefix}-menu-divider {
       margin-left: 1em;
     }
   }

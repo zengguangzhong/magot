@@ -1,6 +1,6 @@
 @import '../../variable.less';
 
-.mgt-toast-root {
+.@{prefix}-toast-root {
   .box();
   .box-sizing();
 
@@ -15,7 +15,7 @@
   pointer-events: none;
 }
 
-.mgt-toast {
+.@{prefix}-toast {
   .box();
   .box-sizing();
 
@@ -52,7 +52,7 @@
     .box-sizing();
   }
 
-  & > .mgt-button {
+  & > .@{prefix}-button {
     position: absolute;
     top: 0;
     right: 0;
@@ -63,19 +63,19 @@
   }
 }
 
-.mgt-toast-info {
+.@{prefix}-toast-info {
   .toast-color(@info-color);
 }
 
-.mgt-toast-success {
+.@{prefix}-toast-success {
   .toast-color(@success-color);
 }
 
-.mgt-toast-warning {
+.@{prefix}-toast-warning {
   .toast-color(@warning-color);
 }
 
-.mgt-toast-error {
+.@{prefix}-toast-error {
   .toast-color(@error-color);
 }
 

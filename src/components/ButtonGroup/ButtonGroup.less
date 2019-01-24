@@ -1,13 +1,13 @@
 @import '../../variable.less';
 
-.mgt-button-group {
+.@{prefix}-button-group {
   .box-sizing();
   .box();
 
   position: relative;
   display: inline-block;
 
-  & > .mgt-button {
+  & > .@{prefix}-button {
     &:not(:first-child) {
       margin-left: -1px;
     }
@@ -27,16 +27,16 @@
     }
   }
 
-  & > .mgt-button-primary {
+  & > .@{prefix}-button-primary {
     .group-btn-divider(@btn-primary-border-color);
   }
-  & > .mgt-button-success {
+  & > .@{prefix}-button-success {
     .group-btn-divider(@btn-success-border-color);
   }
-  & > .mgt-button-warning {
+  & > .@{prefix}-button-warning {
     .group-btn-divider(@btn-warning-border-color);
   }
-  & > .mgt-button-danger {
+  & > .@{prefix}-button-danger {
     .group-btn-divider(@btn-danger-border-color);
   }
 }

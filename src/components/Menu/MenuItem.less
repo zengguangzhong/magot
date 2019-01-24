@@ -1,6 +1,6 @@
 @import '../../variable.less';
 
-.mgt-menu-item {
+.@{prefix}-menu-item {
   .box();
   .text-overflow();
 
@@ -19,13 +19,13 @@
     background-color: @menu-item-active-background-color;
   }
 
-  & > .mgt-icon + span,
-  & > span + .mgt-icon {
+  & > .@{prefix}-icon + span,
+  & > span + .@{prefix}-icon {
     margin-left: @menu-icon-space;
   }
 }
 
-.mgt-menu-item-disabled {
+.@{prefix}-menu-item-disabled {
   color: @menu-item-disabled-color;
   pointer-events: none;
 }

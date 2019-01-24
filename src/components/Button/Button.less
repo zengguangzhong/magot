@@ -14,10 +14,10 @@
 .btn-square() {
   padding: 0;
   width: @btn-height-base;
-  &.mgt-button-sm {
+  &.@{prefix}-button-sm {
     width: @btn-height-sm;
   }
-  &.mgt-button-lg {
+  &.@{prefix}-button-lg {
     width: @btn-height-lg;
   }
 }
@@ -41,7 +41,7 @@
   }
 }
 
-.mgt-button {
+.@{prefix}-button {
   .box-sizing();
   .box();
 
@@ -87,45 +87,45 @@
     text-decoration: @btn-decoration-hover;
   }
 
-  & > .mgt-icon + span,
-  & > span + .mgt-icon {
+  & > .@{prefix}-icon + span,
+  & > span + .@{prefix}-icon {
     margin-left: @btn-icon-space;
   }
 }
 
-.mgt-button-primary {
+.@{prefix}-button-primary {
   .btn-color(
     @btn-primary-color; @btn-primary-background-color;
       @btn-primary-border-color;
   );
 }
 
-.mgt-button-success {
+.@{prefix}-button-success {
   .btn-color(
     @btn-success-color; @btn-success-background-color;
       @btn-success-border-color;
   );
 }
 
-.mgt-button-warning {
+.@{prefix}-button-warning {
   .btn-color(
     @btn-warning-color; @btn-warning-background-color;
       @btn-warning-border-color;
   );
 }
 
-.mgt-button-danger {
+.@{prefix}-button-danger {
   .btn-color(
     @btn-danger-color; @btn-danger-background-color; @btn-danger-border-color;
   );
 }
 
-.mgt-button-text {
+.@{prefix}-button-text {
   box-shadow: none;
   .btn-color(@btn-text-color; transparent; transparent);
 }
 
-.mgt-button-link {
+.@{prefix}-button-link {
   text-decoration: @btn-link-decoration;
   box-shadow: none;
   .btn-color(@btn-link-color; transparent; transparent);
@@ -139,40 +139,40 @@
   }
 }
 
-.mgt-button-sm {
+.@{prefix}-button-sm {
   .btn-size(
     @btn-padding-sm; @btn-height-sm; @btn-font-size-sm; @btn-border-radius-sm
   );
 }
 
-.mgt-button-lg {
+.@{prefix}-button-lg {
   .btn-size(
     @btn-padding-lg; @btn-height-lg; @btn-font-size-lg; @btn-border-radius-lg
   );
 }
 
-.mgt-button-block {
+.@{prefix}-button-block {
   display: block;
   width: 100%;
 }
 
-.mgt-button-circular {
+.@{prefix}-button-circular {
   border-radius: 50%;
   .btn-square();
 }
 
-.mgt-button-square {
+.@{prefix}-button-square {
   .btn-square();
 }
 
-.mgt-button-disabled {
+.@{prefix}-button-disabled {
   .btn-disabled(
     @btn-disabled-color; @btn-disabled-background-color;
       @btn-disabled-border-color;
   );
 
-  &.mgt-button-text,
-  &.mgt-button-link {
+  &.@{prefix}-button-text,
+  &.@{prefix}-button-link {
     .btn-disabled(@btn-disabled-color; transparent; transparent;);
   }
 
