@@ -1,0 +1,138 @@
+.arrow(@color; @size;) {
+  &::before {
+    content: '';
+    position: absolute;
+    border: @size solid transparent;
+    .square(0);
+  }
+
+  &.left {
+    .arrow-caret-left(@color; @size;);
+    .arrow-align-middle(@size;);
+  }
+
+  &.top {
+    .arrow-caret-top(@color; @size;);
+    .arrow-align-center(@size;);
+  }
+
+  &.right {
+    .arrow-caret-right(@color; @size;);
+    .arrow-align-middle(@size;);
+  }
+
+  &.bottom {
+    .arrow-caret-bottom(@color; @size;);
+    .arrow-align-center(@size;);
+  }
+
+  &.topleft {
+    .arrow-caret-top(@color; @size;);
+    .arrow-align-left();
+  }
+
+  &.topright {
+    .arrow-caret-top(@color; @size;);
+    .arrow-align-right();
+  }
+
+  &.lefttop {
+    .arrow-caret-left(@color; @size;);
+    .arrow-align-top();
+  }
+
+  &.righttop {
+    .arrow-caret-right(@color; @size;);
+    .arrow-align-top();
+  }
+
+  &.leftbottom {
+    .arrow-caret-left(@color; @size;);
+    .arrow-align-bottom();
+  }
+
+  &.rightbottom {
+    .arrow-caret-right(@color; @size;);
+    .arrow-align-bottom();
+  }
+
+  &.bottomleft {
+    .arrow-caret-bottom(@color; @size;);
+    .arrow-align-left();
+  }
+
+  &.bottomright {
+    .arrow-caret-bottom(@color; @size;);
+    .arrow-align-right();
+  }
+}
+
+.arrow-caret-left(@color; @size;) {
+  &::before {
+    right: -(@size - 1px);
+    border-left-color: @color;
+    border-right-width: 0;
+  }
+}
+
+.arrow-caret-top(@color; @size;) {
+  &::before {
+    bottom: -(@size - 1px);
+    border-top-color: @color;
+    border-bottom-width: 0;
+  }
+}
+
+.arrow-caret-right(@color; @size;) {
+  &::before {
+    left: -(@size - 1px);
+    border-right-color: @color;
+    border-left-width: 0;
+  }
+}
+
+.arrow-caret-bottom(@color; @size;) {
+  &::before {
+    top: -(@size - 1px);
+    border-bottom-color: @color;
+    border-top-width: 0;
+  }
+}
+
+.arrow-align-left() {
+  &::before {
+    left: 10%;
+  }
+}
+
+.arrow-align-top() {
+  &::before {
+    top: 20%;
+  }
+}
+
+.arrow-align-right() {
+  &::before {
+    right: 10%;
+  }
+}
+
+.arrow-align-bottom() {
+  &::before {
+    bottom: 20%;
+  }
+}
+
+.arrow-align-center(@size;) {
+  &::before {
+    left: 50%;
+    margin-left: -@size;
+  }
+}
+
+.arrow-align-middle(@size;) {
+  &::before {
+    top: 50%;
+    margin-top: -@size;
+  }
+}
