@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface BreadcrumbItemProps extends component.ComponentBase {}
+export interface BreadcrumbItemProps extends component.BaseComponent {}
 
 const defaultProps: Partial<BreadcrumbItemProps> = {};
 

@@ -4,7 +4,7 @@ import './Search.less';
 
 import * as component from '../component';
 
-export interface SearchProps extends component.ComponentBase {}
+export interface SearchProps extends component.BaseComponent {}
 
 const defaultProps: Partial<SearchProps> = {};
 

@@ -4,7 +4,7 @@ import './Dropdown.less';
 
 import * as component from '../component';
 
-export interface DropdownProps extends component.ComponentBase {}
+export interface DropdownProps extends component.BaseComponent {}
 
 const defaultProps: Partial<DropdownProps> = {};
 

@@ -10,7 +10,7 @@ import { useTimingToggle } from '../../hooks/visible';
 
 export type ToastType = 'info' | 'success' | 'warning' | 'error';
 
-export interface ToastProps extends component.ComponentBase {
+export interface ToastProps extends component.BaseComponent {
   container?: Element | null;
 
   /**

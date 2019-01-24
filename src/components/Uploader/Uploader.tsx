@@ -4,7 +4,7 @@ import './Uploader.less';
 
 import * as component from '../component';
 
-export interface UploaderProps extends component.ComponentBase {}
+export interface UploaderProps extends component.BaseComponent {}
 
 const defaultProps: Partial<UploaderProps> = {};
 

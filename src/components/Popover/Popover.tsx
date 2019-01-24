@@ -4,7 +4,7 @@ import './Popover.less';
 
 import * as component from '../component';
 
-export interface PopoverProps extends component.ComponentBase {}
+export interface PopoverProps extends component.BaseComponent {}
 
 const defaultProps: Partial<PopoverProps> = {};
 

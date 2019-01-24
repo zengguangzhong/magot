@@ -4,7 +4,7 @@ import './Loader.less';
 
 import * as component from '../component';
 
-export interface LoaderProps extends component.ComponentBase {}
+export interface LoaderProps extends component.BaseComponent {}
 
 const defaultProps: Partial<LoaderProps> = {};
 

@@ -7,7 +7,7 @@ import * as component from '../component';
 import { Alignment } from '../../utils/alignment';
 
 export interface TooltipProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.NestedComponent {
   /**
    * 提示文案

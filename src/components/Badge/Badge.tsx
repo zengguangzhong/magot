@@ -4,7 +4,7 @@ import './Badge.less';
 
 import * as component from '../component';
 
-export interface BadgeProps extends component.ComponentBase {}
+export interface BadgeProps extends component.BaseComponent {}
 
 const defaultProps: Partial<BadgeProps> = {};
 

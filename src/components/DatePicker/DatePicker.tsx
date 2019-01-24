@@ -4,7 +4,7 @@ import './DatePicker.less';
 
 import * as component from '../component';
 
-export interface DatePickerProps extends component.ComponentBase {}
+export interface DatePickerProps extends component.BaseComponent {}
 
 const defaultProps: Partial<DatePickerProps> = {};
 

@@ -4,7 +4,7 @@ import './Image.less';
 
 import * as component from '../component';
 
-export interface ImageProps extends component.ComponentBase {}
+export interface ImageProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ImageProps> = {};
 

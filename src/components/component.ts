@@ -6,7 +6,7 @@ export const prefix = 'mgt';
 
 export type ComponentSize = 'normal' | 'small' | 'large';
 
-export interface ComponentBase {
+export interface BaseComponent {
   /**
    * 自定义组件样式类，可用于实现自定义样式
    */
@@ -84,7 +84,7 @@ export function getComponentPrefix(type: string) {
  * @returns {string}
  */
 export function getComponentClasses<
-  P extends ComponentBase & SizedComponent & DisableComponent
+  P extends BaseComponent & SizedComponent & DisableComponent
 >(type: string, props: P, ...classes: any[]) {
   const main = getComponentPrefix(type);
   return cx(

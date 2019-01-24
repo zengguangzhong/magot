@@ -4,7 +4,7 @@ import './Shortcuts.less';
 
 import * as component from '../component';
 
-export interface ShortcutsProps extends component.ComponentBase {}
+export interface ShortcutsProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ShortcutsProps> = {};
 

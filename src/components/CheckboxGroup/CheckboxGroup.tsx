@@ -4,7 +4,7 @@ import './CheckboxGroup.less';
 
 import * as component from '../component';
 
-export interface CheckboxGroupProps extends component.ComponentBase {}
+export interface CheckboxGroupProps extends component.BaseComponent {}
 
 const defaultProps: Partial<CheckboxGroupProps> = {};
 

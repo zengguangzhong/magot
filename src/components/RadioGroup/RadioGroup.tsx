@@ -4,7 +4,7 @@ import './RadioGroup.less';
 
 import * as component from '../component';
 
-export interface RadioGroupProps extends component.ComponentBase {}
+export interface RadioGroupProps extends component.BaseComponent {}
 
 const defaultProps: Partial<RadioGroupProps> = {};
 

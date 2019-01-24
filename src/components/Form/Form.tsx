@@ -4,7 +4,7 @@ import './Form.less';
 
 import * as component from '../component';
 
-export interface FormProps extends component.ComponentBase {}
+export interface FormProps extends component.BaseComponent {}
 
 const defaultProps: Partial<FormProps> = {};
 

@@ -6,7 +6,7 @@ import './\${name}.less';
 
 import * as component from '../component';
 
-export interface \${name}Props extends component.ComponentBase {}
+export interface \${name}Props extends component.BaseComponent {}
 
 const defaultProps: Partial<\${name}Props> = {};
 

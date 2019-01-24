@@ -16,7 +16,7 @@ export type ButtonType =
 export type ButtonHTMLType = 'button' | 'submit' | 'reset';
 
 interface BaseButtonProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.DisableComponent,
     component.SizedComponent,
     component.NestedComponent,

@@ -4,7 +4,7 @@ import './Modal.less';
 
 import * as component from '../component';
 
-export interface ModalProps extends component.ComponentBase {}
+export interface ModalProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ModalProps> = {};
 

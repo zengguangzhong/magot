@@ -6,7 +6,7 @@ import * as component from '../component';
 import { ButtonProps } from '../Button/Button';
 
 export interface ButtonGroupProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.DisableComponent,
     component.SizedComponent,
     component.NestedComponent {

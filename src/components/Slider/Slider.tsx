@@ -4,7 +4,7 @@ import './Slider.less';
 
 import * as component from '../component';
 
-export interface SliderProps extends component.ComponentBase {}
+export interface SliderProps extends component.BaseComponent {}
 
 const defaultProps: Partial<SliderProps> = {};
 

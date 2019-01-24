@@ -4,7 +4,7 @@ import './Rate.less';
 
 import * as component from '../component';
 
-export interface RateProps extends component.ComponentBase {}
+export interface RateProps extends component.BaseComponent {}
 
 const defaultProps: Partial<RateProps> = {};
 

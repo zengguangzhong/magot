@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface ListItemProps extends component.ComponentBase {}
+export interface ListItemProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ListItemProps> = {};
 

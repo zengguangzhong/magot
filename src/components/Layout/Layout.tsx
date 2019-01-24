@@ -4,7 +4,7 @@ import './Layout.less';
 
 import * as component from '../component';
 
-export interface LayoutProps extends component.ComponentBase {}
+export interface LayoutProps extends component.BaseComponent {}
 
 const defaultProps: Partial<LayoutProps> = {};
 

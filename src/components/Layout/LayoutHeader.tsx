@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface LayoutHeaderProps extends component.ComponentBase {}
+export interface LayoutHeaderProps extends component.BaseComponent {}
 
 const defaultProps: Partial<LayoutHeaderProps> = {};
 

@@ -4,7 +4,7 @@ import './Input.less';
 
 import * as component from '../component';
 
-export interface InputProps extends component.ComponentBase {}
+export interface InputProps extends component.BaseComponent {}
 
 const defaultProps: Partial<InputProps> = {};
 

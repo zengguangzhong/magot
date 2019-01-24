@@ -4,7 +4,7 @@ import './Switch.less';
 
 import * as component from '../component';
 
-export interface SwitchProps extends component.ComponentBase {}
+export interface SwitchProps extends component.BaseComponent {}
 
 const defaultProps: Partial<SwitchProps> = {};
 

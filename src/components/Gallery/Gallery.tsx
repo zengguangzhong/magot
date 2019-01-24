@@ -4,7 +4,7 @@ import './Gallery.less';
 
 import * as component from '../component';
 
-export interface GalleryProps extends component.ComponentBase {}
+export interface GalleryProps extends component.BaseComponent {}
 
 const defaultProps: Partial<GalleryProps> = {};
 

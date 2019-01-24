@@ -9,7 +9,7 @@ import * as component from '../component';
 export type Diretion = 'row' | 'column';
 
 export interface LoadingProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.SizedComponent,
     component.NestedComponent {
   /**

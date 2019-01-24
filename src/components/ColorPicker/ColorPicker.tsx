@@ -4,7 +4,7 @@ import './ColorPicker.less';
 
 import * as component from '../component';
 
-export interface ColorPickerProps extends component.ComponentBase {}
+export interface ColorPickerProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ColorPickerProps> = {};
 

@@ -9,7 +9,7 @@ import * as node from '../../utils/node';
 import { getAdjustment, getAlignment, Alignment } from '../../utils/alignment';
 
 export interface PopupProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.NestedComponent {
   /**
    * 对齐位置，12个方位，

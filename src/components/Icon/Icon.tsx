@@ -4,7 +4,7 @@ import './Icon.less';
 
 import * as component from '../component';
 
-export interface IconProps extends component.ComponentBase {
+export interface IconProps extends component.BaseComponent {
   /**
    * 图标名称，即iconfont中的图标名
    */

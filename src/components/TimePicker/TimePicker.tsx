@@ -4,7 +4,7 @@ import './TimePicker.less';
 
 import * as component from '../component';
 
-export interface TimePickerProps extends component.ComponentBase {}
+export interface TimePickerProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TimePickerProps> = {};
 

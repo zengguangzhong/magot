@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface TableRowProps extends component.ComponentBase {}
+export interface TableRowProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TableRowProps> = {};
 

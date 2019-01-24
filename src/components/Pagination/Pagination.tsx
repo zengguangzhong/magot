@@ -4,7 +4,7 @@ import './Pagination.less';
 
 import * as component from '../component';
 
-export interface PaginationProps extends component.ComponentBase {}
+export interface PaginationProps extends component.BaseComponent {}
 
 const defaultProps: Partial<PaginationProps> = {};
 

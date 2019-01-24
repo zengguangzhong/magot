@@ -4,7 +4,7 @@ import './Radio.less';
 
 import * as component from '../component';
 
-export interface RadioProps extends component.ComponentBase {}
+export interface RadioProps extends component.BaseComponent {}
 
 const defaultProps: Partial<RadioProps> = {};
 

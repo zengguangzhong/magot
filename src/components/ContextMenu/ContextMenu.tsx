@@ -4,7 +4,7 @@ import './ContextMenu.less';
 
 import * as component from '../component';
 
-export interface ContextMenuProps extends component.ComponentBase {}
+export interface ContextMenuProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ContextMenuProps> = {};
 

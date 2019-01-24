@@ -4,7 +4,7 @@ import './Drawer.less';
 
 import * as component from '../component';
 
-export interface DrawerProps extends component.ComponentBase {}
+export interface DrawerProps extends component.BaseComponent {}
 
 const defaultProps: Partial<DrawerProps> = {};
 

@@ -4,7 +4,7 @@ import './List.less';
 
 import * as component from '../component';
 
-export interface ListProps extends component.ComponentBase {}
+export interface ListProps extends component.BaseComponent {}
 
 const defaultProps: Partial<ListProps> = {};
 

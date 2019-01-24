@@ -4,7 +4,7 @@ import './VideoPlayer.less';
 
 import * as component from '../component';
 
-export interface VideoPlayerProps extends component.ComponentBase {}
+export interface VideoPlayerProps extends component.BaseComponent {}
 
 const defaultProps: Partial<VideoPlayerProps> = {};
 

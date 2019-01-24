@@ -4,7 +4,7 @@ import './Empty.less';
 
 import * as component from '../component';
 
-export interface EmptyProps extends component.ComponentBase {}
+export interface EmptyProps extends component.BaseComponent {}
 
 const defaultProps: Partial<EmptyProps> = {};
 

@@ -4,7 +4,7 @@ import './Collapse.less';
 
 import * as component from '../component';
 
-export interface CollapseProps extends component.ComponentBase {}
+export interface CollapseProps extends component.BaseComponent {}
 
 const defaultProps: Partial<CollapseProps> = {};
 

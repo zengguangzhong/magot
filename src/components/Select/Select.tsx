@@ -4,7 +4,7 @@ import './Select.less';
 
 import * as component from '../component';
 
-export interface SelectProps extends component.ComponentBase {}
+export interface SelectProps extends component.BaseComponent {}
 
 const defaultProps: Partial<SelectProps> = {};
 

@@ -4,7 +4,7 @@ import './Table.less';
 
 import * as component from '../component';
 
-export interface TableProps extends component.ComponentBase {}
+export interface TableProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TableProps> = {};
 

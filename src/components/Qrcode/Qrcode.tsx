@@ -4,7 +4,7 @@ import './Qrcode.less';
 
 import * as component from '../component';
 
-export interface QrcodeProps extends component.ComponentBase {}
+export interface QrcodeProps extends component.BaseComponent {}
 
 const defaultProps: Partial<QrcodeProps> = {};
 

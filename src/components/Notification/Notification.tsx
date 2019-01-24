@@ -4,7 +4,7 @@ import './Notification.less';
 
 import * as component from '../component';
 
-export interface NotificationProps extends component.ComponentBase {}
+export interface NotificationProps extends component.BaseComponent {}
 
 const defaultProps: Partial<NotificationProps> = {};
 

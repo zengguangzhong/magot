@@ -5,7 +5,7 @@ import './Checkbox.less';
 import * as component from '../component';
 
 export interface CheckboxProps
-  extends component.ComponentBase,
+  extends component.BaseComponent,
     component.DisableComponent,
     component.NestedComponent {
   /**

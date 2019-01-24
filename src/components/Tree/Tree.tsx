@@ -4,7 +4,7 @@ import './Tree.less';
 
 import * as component from '../component';
 
-export interface TreeProps extends component.ComponentBase {}
+export interface TreeProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TreeProps> = {};
 

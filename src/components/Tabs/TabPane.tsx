@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface TabPaneProps extends component.ComponentBase {}
+export interface TabPaneProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TabPaneProps> = {};
 

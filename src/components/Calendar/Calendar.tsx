@@ -4,7 +4,7 @@ import './Calendar.less';
 
 import * as component from '../component';
 
-export interface CalendarProps extends component.ComponentBase {}
+export interface CalendarProps extends component.BaseComponent {}
 
 const defaultProps: Partial<CalendarProps> = {};
 

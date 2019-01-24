@@ -4,7 +4,7 @@ import './Carousel.less';
 
 import * as component from '../component';
 
-export interface CarouselProps extends component.ComponentBase {}
+export interface CarouselProps extends component.BaseComponent {}
 
 const defaultProps: Partial<CarouselProps> = {};
 

@@ -4,7 +4,7 @@ import './Card.less';
 
 import * as component from '../component';
 
-export interface CardProps extends component.ComponentBase {}
+export interface CardProps extends component.BaseComponent {}
 
 const defaultProps: Partial<CardProps> = {};
 

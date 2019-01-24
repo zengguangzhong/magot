@@ -4,7 +4,7 @@ import './Breadcrumb.less';
 
 import * as component from '../component';
 
-export interface BreadcrumbProps extends component.ComponentBase {}
+export interface BreadcrumbProps extends component.BaseComponent {}
 
 const defaultProps: Partial<BreadcrumbProps> = {};
 

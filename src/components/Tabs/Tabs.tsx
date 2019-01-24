@@ -4,7 +4,7 @@ import './Tabs.less';
 
 import * as component from '../component';
 
-export interface TabsProps extends component.ComponentBase {}
+export interface TabsProps extends component.BaseComponent {}
 
 const defaultProps: Partial<TabsProps> = {};
 
