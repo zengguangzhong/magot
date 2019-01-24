@@ -1,17 +1,17 @@
 @import '../../variable.less';
 
-.loading-size(@font-size; @icon-size; @gap) {
+.loading-size(@font-size; @icon-size; @space) {
   font-size: @font-size;
   & > .mgt-icon {
     font-size: @icon-size;
   }
   & > .tip {
-    padding-top: @gap;
+    padding-top: @space;
   }
   &.mgt-loading-row {
     & > .tip {
       padding-top: 0;
-      padding-left: @gap;
+      padding-left: @space;
     }
   }
 }
@@ -31,7 +31,8 @@
   .box();
   .box-sizing();
   .loading-size(
-    @loading-font-size-base; @loading-icon-font-size-base; @loading-tip-gap-base
+    @loading-font-size-base; @loading-icon-font-size-base;
+      @loading-tip-space-base
   );
 }
 
@@ -41,13 +42,13 @@
 
 .mgt-loading-sm {
   .loading-size(
-    @loading-font-size-sm; @loading-icon-font-size-sm; @loading-tip-gap-sm
+    @loading-font-size-sm; @loading-icon-font-size-sm; @loading-tip-space-sm
   );
 }
 
 .mgt-loading-lg {
   .loading-size(
-    @loading-font-size-lg; @loading-icon-font-size-lg; @loading-tip-gap-lg
+    @loading-font-size-lg; @loading-icon-font-size-lg; @loading-tip-space-lg
   );
 }
 
