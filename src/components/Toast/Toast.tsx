@@ -89,10 +89,12 @@ function Toast(props: ToastProps) {
 Toast.defaultProps = defaultProps;
 
 function createToastRoot() {
-  let root = document.body.querySelector('.mgt-toast-root');
+  const prefix = component.getComponentPrefix('toast');
+  const cls = prefix + '-root';
+  let root = document.body.querySelector('.' + cls);
   if (root === null) {
     root = document.createElement('div');
-    root.className = 'mgt-toast-root';
+    root.className = cls;
     document.body.appendChild(root);
   }
   return root;

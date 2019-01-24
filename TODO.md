@@ -59,7 +59,7 @@
 - [ ] Tabs
 - [ ] TabPane
 - [ ] TimePicker
-- [ ] Toast
+- [x] Toast
 - [x] Tooltip
 - [ ] Tree
 - [ ] Uploader
