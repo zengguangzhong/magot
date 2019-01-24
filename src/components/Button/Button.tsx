@@ -3,7 +3,7 @@ import React, { HTMLAttributes } from 'react';
 import './Button.less';
 
 import ButtonGroup from '../ButtonGroup';
-import Iconable, { IconPosition } from '../Icon/Iconable';
+import Iconable from '../Icon/Iconable';
 import * as component from '../component';
 
 export type ButtonType =
@@ -19,7 +19,8 @@ interface BaseButtonProps
   extends component.ComponentBase,
     component.DisableComponent,
     component.SizedComponent,
-    component.NestedComponent {
+    component.NestedComponent,
+    component.IconableComponent {
   /**
    * 是否是全宽按钮，按钮的宽度将被渲染为父组件的宽度
    * @default false
@@ -31,22 +32,6 @@ interface BaseButtonProps
    * @default false
    */
   circular?: boolean;
-
-  /**
-   * 按钮图标
-   */
-  icon?: string;
-
-  /**
-   * 按钮图标位置，可选值有：`left`, `right`，默认`left`。
-   * @default left
-   */
-  iconPosition?: IconPosition;
-
-  /**
-   * 图标大小，即`Icon`组件的`fontSize`属性
-   */
-  iconSize?: number;
 
   /**
    * 是否是加载中状态
