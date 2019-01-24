@@ -77,7 +77,7 @@ function Popup(props: PopupProps) {
   };
 
   const handleMouseLeave = () => setLeaving(true);
-  const handleLeaved = () => setVisible(true);
+  const handleLeaved = () => setVisible(false);
 
   return (
     <>
