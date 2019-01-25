@@ -10,8 +10,8 @@
   line-height: @menu-item-height;
   color: @menu-item-color;
   font-size: @menu-item-font-size;
-  cursor: pointer;
   transition: all 150ms ease-out;
+  cursor: pointer;
 
   &:hover,
   &.selected {
@@ -24,6 +24,11 @@
   }
   & > .@{prefix}-icon.right {
     margin-left: @menu-icon-space;
+  }
+
+  & > a {
+    text-decoration: none;
+    color: inherit;
   }
 }
 
