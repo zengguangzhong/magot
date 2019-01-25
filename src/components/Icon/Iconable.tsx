@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import Icon from './Icon';
 import * as component from '../component';
 
@@ -32,14 +33,12 @@ const defaultProps: Partial<IconableProps> = {
 };
 
 function Iconable(props: IconableProps) {
-  const children = [props.children];
-  let icon = props.name ? <Icon key="1" {...props} /> : null;
-  if (props.position === 'right') {
-    children.push(icon);
-  } else {
-    children.unshift(icon);
-  }
-  return <>{children}</>;
+  const { name, position, children } = props;
+  const items = [children];
+  const cls = position ? cx({ [position]: !!children }) : '';
+  let icon = name ? <Icon key="1" {...props} className={cls} /> : null;
+  position === 'right' ? items.push(icon) : items.unshift(icon);
+  return <>{items}</>;
 }
 
 Iconable.defaultProps = defaultProps;

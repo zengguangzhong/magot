@@ -150,14 +150,13 @@ function LinkButton(props: LinkButtonProps) {
 }
 
 function ButtonContent(props: BaseButtonProps) {
-  const text = props.children ? <span>{props.children}</span> : null;
   return (
     <Iconable
       name={props.loading ? 'loading' : props.icon}
       spin={props.loading}
       position={props.iconPosition}
       size={props.iconSize}>
-      {text}
+      {props.children}
     </Iconable>
   );
 }

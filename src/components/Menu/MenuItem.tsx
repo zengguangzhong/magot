@@ -40,7 +40,7 @@ function MenuItem(props: MenuItemProps) {
               name={props.icon}
               position={props.iconPosition}
               size={props.iconSize}>
-              <span>{props.children}</span>
+              {props.children}
             </Iconable>
           </li>
         );

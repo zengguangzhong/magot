@@ -6,8 +6,11 @@
     color: @menu-group-color;
     font-size: @menu-group-font-size;
     .text-overflow();
-    & > .@{prefix}-icon + span,
-    & > span + .@{prefix}-icon {
+
+    & > .@{prefix}-icon.left {
+      margin-right: @menu-icon-space;
+    }
+    & > .@{prefix}-icon.right {
       margin-left: @menu-icon-space;
     }
   }

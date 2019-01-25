@@ -87,8 +87,10 @@
     text-decoration: @btn-decoration-hover;
   }
 
-  & > .@{prefix}-icon + span,
-  & > span + .@{prefix}-icon {
+  & > .@{prefix}-icon.left {
+    margin-right: @btn-icon-space;
+  }
+  & > .@{prefix}-icon.right {
     margin-left: @btn-icon-space;
   }
 }

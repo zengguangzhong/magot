@@ -46,7 +46,7 @@ function MenuItemGroup(props: MenuItemGroupProps) {
           name={props.icon}
           position={props.iconPosition}
           size={props.iconSize}>
-          <span>{props.title}</span>
+          {props.title}
         </Iconable>
       </div>
       <ul className="list">
