@@ -96,7 +96,7 @@ function ToastDemo() {
           // tslint:disable
           onClick={() =>
             Toast.info('This is a message of info', undefined, true, () => {
-              alert('Closed');
+              Toast.info('Closed');
             })
           }>
           Info(onClose)

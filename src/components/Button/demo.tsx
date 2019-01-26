@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import Button from './Button';
-import Tooltip from '../Tooltip';
 import { Link } from 'react-router-dom';
+import Button from './Button';
+import Toast from '../Toast';
+import Tooltip from '../Tooltip';
 
 function onClick() {
-  alert('You clicked the Button');
+  Toast.info('You clicked the Button');
 }
 
 function ButtonDemo() {

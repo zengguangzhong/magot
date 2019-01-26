@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FileButton from './FileButton';
+import Toast from '../Toast';
 import { Link } from 'react-router-dom';
 
 function FileButtonDemo() {
@@ -66,7 +67,7 @@ function FileButtonDemo() {
 }
 
 function alertError(err: Error) {
-  alert(err.message);
+  Toast.error(err.message);
 }
 
 export default FileButtonDemo;

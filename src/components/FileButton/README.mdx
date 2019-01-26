@@ -6,6 +6,7 @@ menu: Components
 
 import { Playground, PropsTable } from 'docz';
 import FileButton from './FileButton';
+import Toast from '../Toast';
 
 # FileButton
 
@@ -58,7 +59,7 @@ import FileButton from './FileButton';
         dom.innerHTML = filenames.join(',');
       }
     }}
-    onError={err => alert(err.message)}>
+    onError={err => Toast.error(err.message)}>
     批量选择文件(最多5个)
   </FileButton>
   <div id="demo-filenames" className="demo-container" />
@@ -72,7 +73,7 @@ import FileButton from './FileButton';
     icon="image"
     filters={['image/jpg', 'image/jpeg', 'image/png', 'image/gif']}
     filterError="只能选择图片"
-    onError={err => alert(err.message)}>
+    onError={err => Toast.error(err.message)}>
     选择图片
   </FileButton>
   <span className="demo-tip">选择非图片的文件，将会弹出错误提示信息</span>
@@ -85,7 +86,7 @@ import FileButton from './FileButton';
     type="primary"
     maxSize={200}
     sizeError="文件大小超限"
-    onError={err => alert(err.message)}>
+    onError={err => Toast.error(err.message)}>
     选择文件(小于200k)
   </FileButton>
   <span className="demo-tip">选择大于200k的文件，将会弹出错误提示信息</span>

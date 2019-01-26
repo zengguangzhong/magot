@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu, { MenuItemArray } from './Menu';
+import Toast from '../Toast';
 
 const items1: MenuItemArray = [
   { label: 'Menu Item 1', name: 'menu_item_1' },
@@ -53,7 +54,7 @@ const items4: MenuItemArray = [
 ];
 
 function handleItemClick(name?: string, value?: any) {
-  alert(name + ':' + value);
+  Toast.info(name + ':' + value);
 }
 
 function MenuDemo() {

@@ -6,6 +6,7 @@ menu: Components
 
 import { Playground, PropsTable } from 'docz';
 import Button from './Button';
+import Toast from '../Toast';
 
 # Button
 
@@ -344,23 +345,23 @@ import Button from './Button';
 ### 按钮点击交互
 
 <Playground>
-  <Button onClick={() => alert('You clicked the Button')}>Click me</Button>
-  <Button type="primary" onClick={() => alert('You clicked the Button')}>
+  <Button onClick={() => Toast.info('You clicked the Button')}>Click me</Button>
+  <Button type="primary" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
-  <Button type="success" onClick={() => alert('You clicked the Button')}>
+  <Button type="success" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
-  <Button type="warning" onClick={() => alert('You clicked the Button')}>
+  <Button type="warning" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
-  <Button type="danger" onClick={() => alert('You clicked the Button')}>
+  <Button type="danger" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
-  <Button type="text" onClick={() => alert('You clicked the Button')}>
+  <Button type="text" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
-  <Button type="link" onClick={() => alert('You clicked the Button')}>
+  <Button type="link" onClick={() => Toast.info('You clicked the Button')}>
     Click me
   </Button>
 </Playground>
