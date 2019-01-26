@@ -7,7 +7,7 @@ import { getAdjustment, getAlignment } from '../../utils/alignment';
 
 export interface OverlayProps
   extends PopupProps,
-    component.MouseMovableComponent<HTMLElement> {
+    component.MouseEventComponent<HTMLElement> {
   /**
    * 开始离场(popdown)
    */
@@ -24,15 +24,22 @@ export interface OverlayProps
   target: { size: Size; offset: Offset };
 
   /**
-   * 与目标组件之间的间距
-   */
-  space?: number;
-
-  /**
    * 离场动画结束的回调函数
    */
   onLeaved: () => void;
 }
+
+const componentProps = [
+  'align',
+  'leaving',
+  'overlay',
+  'preventOut',
+  'space',
+  'target',
+  'trigger',
+  'visible',
+  'onLeaved',
+];
 
 function PopupOverlay(props: OverlayProps) {
   if (!props.visible) return null;
@@ -65,13 +72,13 @@ function PopupOverlay(props: OverlayProps) {
     showed: visibility && !leaving,
   });
 
+  const nativeProps = component.getNativeProps<
+    OverlayProps,
+    component.MouseEventComponent<HTMLElement>
+  >(props, componentProps);
+
   return ReactDOM.createPortal(
-    <div
-      className={classes}
-      ref={popupRef}
-      style={position}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}>
+    <div {...nativeProps} className={classes} ref={popupRef} style={position}>
       {React.cloneElement(overlay, {
         className: cx(overlayProps.className, align.toLowerCase()),
       })}

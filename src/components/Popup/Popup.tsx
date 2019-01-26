@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './Popup.less';
 
-import PopupOverlay from './PopupOverlay';
+import PopupOverlay, { OverlayProps } from './PopupOverlay';
 import * as component from '../component';
 import * as node from '../../utils/node';
 import { Alignment } from '../../utils/alignment';
+
+export type PopupTrigger = 'hover' | 'click' | 'contextMenu';
 
 export interface PopupProps
   extends component.BaseComponent,
@@ -34,11 +36,17 @@ export interface PopupProps
    * @default 10
    */
   space?: number;
+
+  /**
+   * 触发弹出层的行为方式，可选值：`hover`, `click`, `contextMenu`，默认`hover`
+   * @default hover
+   */
+  trigger?: PopupTrigger;
 }
 
 interface WrappedComponentProps
   extends component.NestedComponent,
-    component.MouseMovableComponent<HTMLElement> {}
+    component.MouseEventComponent<HTMLElement> {}
 
 type DispatchBoolean = React.Dispatch<React.SetStateAction<boolean>>;
 type DispatchSize = React.Dispatch<React.SetStateAction<Size>>;
@@ -47,6 +55,7 @@ type DispatchOffset = React.Dispatch<React.SetStateAction<Offset>>;
 const defaultProps: Partial<PopupProps> = {
   align: 'top',
   space: 10,
+  trigger: 'hover',
 };
 
 function Popup(props: PopupProps) {
@@ -57,38 +66,64 @@ function Popup(props: PopupProps) {
   const [targetOffset, setTargetOffset] = React.useState({ left: 0, top: 0 });
   const [targetSize, setTargetSize] = React.useState({ width: 0, height: 0 });
 
-  const hanldeTargetEnter = getTargetEnterHandler(
+  const handleTriggerEnter = getTriggerEnterHandler(
     setLeaving,
     setVisible,
     setTargetOffset,
-    setTargetSize
+    setTargetSize,
+    props.trigger === 'contextMenu'
   );
-  const handleTargetLeave = () => setLeaving(true);
+  const handleTriggerLeave = getTriggerLeaveHanlder(setLeaving);
 
-  let handleOverlayEnter, handleOverlayLeave;
-  const handleOverlayLeaved = () => setVisible(false);
+  const wrappedProps: WrappedComponentProps = {};
+  const overlayProps: OverlayProps = {
+    ...props,
+    leaving,
+    visible,
+    target: { size: targetSize, offset: targetOffset },
+    onLeaved: () => setVisible(false),
+  };
 
-  if (props.preventOut) {
-    handleOverlayEnter = () => setLeaving(false);
-    handleOverlayLeave = handleTargetLeave;
+  const handleStopPropagationClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    handleTriggerLeave();
+  };
+
+  switch (props.trigger) {
+    case 'click': {
+      wrappedProps.onClick = handleTriggerEnter;
+      overlayProps.onClick = handleStopPropagationClick;
+      break;
+    }
+    case 'contextMenu': {
+      wrappedProps.onContextMenu = handleTriggerEnter;
+      overlayProps.onClick = handleStopPropagationClick;
+      overlayProps.space = 0;
+      break;
+    }
+    // hover
+    default: {
+      wrappedProps.onMouseEnter = handleTriggerEnter;
+      wrappedProps.onMouseLeave = handleTriggerLeave;
+      if (props.preventOut) {
+        overlayProps.onMouseEnter = () => setLeaving(false);
+        overlayProps.onMouseLeave = handleTriggerLeave;
+      }
+      break;
+    }
   }
+
+  useEffect(() => {
+    if (activeGlobalClick(props.trigger) && visible && !leaving) {
+      window.addEventListener('click', handleTriggerLeave);
+    }
+    return () => window.removeEventListener('click', handleTriggerLeave);
+  });
 
   return (
     <>
-      <WrappedComponent
-        onMouseEnter={hanldeTargetEnter}
-        onMouseLeave={handleTargetLeave}>
-        {props.children}
-      </WrappedComponent>
-      <PopupOverlay
-        {...props}
-        leaving={leaving}
-        visible={visible}
-        target={{ size: targetSize, offset: targetOffset }}
-        onMouseEnter={handleOverlayEnter}
-        onMouseLeave={handleOverlayLeave}
-        onLeaved={handleOverlayLeaved}
-      />
+      <WrappedComponent {...wrappedProps}>{props.children}</WrappedComponent>
+      <PopupOverlay {...overlayProps} />
     </>
   );
 }
@@ -98,20 +133,37 @@ function WrappedComponent(props: WrappedComponentProps) {
   return React.cloneElement(React.Children.only(children), otherProps);
 }
 
-function getTargetEnterHandler(
+function getTriggerEnterHandler(
   setLeaving: DispatchBoolean,
   setVisible: DispatchBoolean,
   setTargetOffset: DispatchOffset,
-  setTargetSize: DispatchSize
+  setTargetSize: DispatchSize,
+  isContextMenu?: boolean
 ) {
   return (e: React.MouseEvent<HTMLElement>) => {
+    if (isContextMenu) e.preventDefault();
     const target = e.currentTarget;
-    const offet = node.offset(target, document.body);
     setLeaving(false);
     setVisible(true);
-    offet && setTargetOffset(offet);
-    setTargetSize({ width: target.offsetWidth, height: target.offsetHeight });
+    if (!isContextMenu) {
+      const offset = node.offset(target, document.body);
+      offset && setTargetOffset(offset);
+      setTargetSize({ width: target.offsetWidth, height: target.offsetHeight });
+    } else {
+      const offset = { left: e.pageX, top: e.pageY };
+      setTargetOffset(offset);
+    }
   };
+}
+
+function getTriggerLeaveHanlder(setLeaving: DispatchBoolean) {
+  return () => {
+    setLeaving(true);
+  };
+}
+
+function activeGlobalClick(trigger?: PopupTrigger) {
+  return !!trigger && ['click', 'contextMenu'].includes(trigger);
 }
 
 Popup.defaultProps = defaultProps;

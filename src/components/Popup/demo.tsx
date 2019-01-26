@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Popup from './Popup';
 import Button from '../Button';
 import Loading from '../Loading';
+import Menu from '../Menu';
 
 function PopupDemo() {
   return (
@@ -16,6 +17,31 @@ function PopupDemo() {
         </Popup>
         <Popup overlay={<Loading tip="loading..." />}>
           <Button type="primary">hover me to show loading</Button>
+        </Popup>
+        <Popup
+          align="bottomLeft"
+          trigger="click"
+          space={4}
+          overlay={
+            <Menu>
+              <Menu.Item>menu item 1</Menu.Item>
+              <Menu.Item>menu item 2</Menu.Item>
+              <Menu.Item>menu item 3</Menu.Item>
+            </Menu>
+          }>
+          <Button>I'm a Menu, click me</Button>
+        </Popup>
+        <Popup
+          align="bottomLeft"
+          trigger="contextMenu"
+          overlay={
+            <Menu>
+              <Menu.Item>menu item 1</Menu.Item>
+              <Menu.Item>menu item 2</Menu.Item>
+              <Menu.Item>menu item 3</Menu.Item>
+            </Menu>
+          }>
+          <Button>I'm a ContextMenu, click me</Button>
         </Popup>
       </div>
     </>
