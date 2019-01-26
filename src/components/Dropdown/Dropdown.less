@@ -1,5 +1,12 @@
 @import '../../variable.less';
 
 .@{prefix}-dropdown {
-  position: relative;
+  z-index: @zindex-dropdown;
+  .box();
+  .box-sizing();
+}
+
+.@{prefix}-dropdown-disabled {
+  color: @dropdown-disabled-color;
+  pointer-events: none;
 }

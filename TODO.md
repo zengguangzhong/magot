@@ -18,7 +18,7 @@
 - [ ] DatePicker
 - [ ] DateTimePicker
 - [ ] Drawer
-- [ ] Dropdown
+- [x] Dropdown
 - [ ] Empty
 - [x] FileButton
 - [ ] FormItem
