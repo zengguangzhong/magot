@@ -6,7 +6,7 @@ import './Toast.less';
 import Icon from '../Icon';
 import Button from '../Button';
 import * as component from '../component';
-import { useTimingToggle } from '../../hooks/visible';
+import { useTimingToggle } from '../../hooks/timer';
 
 export type ToastType = 'info' | 'success' | 'warning' | 'error';
 
