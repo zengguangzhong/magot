@@ -38,19 +38,12 @@ export interface DisableComponent {
   disabled?: boolean;
 }
 
-export interface ClickableComponent<T extends HTMLElement> {
-  /**
-   * 点击组件时的回调函数
-   */
+export interface MouseEventComponent<T extends HTMLElement> {
   onClick?: (e: React.MouseEvent<T>) => void;
-
-  /**
-   * 双击组件时的回调函数
-   */
   onDoubleClick?: (e: React.MouseEvent<T>) => void;
-}
-
-export interface MouseMovableComponent<T extends HTMLElement> {
+  onContextMenu?: (e: React.MouseEvent<T>) => void;
+  onMouseDown?: (e: React.MouseEvent<T>) => void;
+  onMouseUp?: (e: React.MouseEvent<T>) => void;
   onMouseEnter?: (e: React.MouseEvent<T>) => void;
   onMouseLeave?: (e: React.MouseEvent<T>) => void;
   onMouseMove?: (e: React.MouseEvent<T>) => void;

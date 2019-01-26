@@ -53,7 +53,7 @@ interface BaseButtonProps
 
 interface NativeButtonProps
   extends BaseButtonProps,
-    component.ClickableComponent<HTMLButtonElement>,
+    component.MouseEventComponent<HTMLButtonElement>,
     HTMLAttributes<HTMLButtonElement> {
   /**
    * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
@@ -64,7 +64,7 @@ interface NativeButtonProps
 
 interface LinkButtonProps
   extends BaseButtonProps,
-    component.ClickableComponent<HTMLAnchorElement>,
+    component.MouseEventComponent<HTMLAnchorElement>,
     HTMLAttributes<HTMLAnchorElement> {
   /**
    * 点击按钮跳转的链接，指定此属性后的行为将和`<a>`链接一致
