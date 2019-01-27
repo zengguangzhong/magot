@@ -48,29 +48,28 @@ function DropdownDemo() {
         返回
       </Link>
       <div className="demo-box">
-        <Dropdown overlay={menus1}>
+        <Dropdown menu={menus1}>
           <a href="javascript:;" style={{ marginRight: 40 }}>
             hover me
           </a>
         </Dropdown>
-        <Dropdown overlay={menus1} disabled={true}>
+        <Dropdown menu={menus1} disabled={true}>
           <a href="javascript:;" style={{ marginRight: 40 }}>
             hover me
           </a>
         </Dropdown>
-        <Dropdown overlay={menus1} trigger="click">
+        <Dropdown menu={menus1} trigger="click">
           <a href="javascript:;" style={{ marginRight: 40 }}>
             click me
           </a>
         </Dropdown>
-        <Dropdown
-          overlay={<Menu items={menus2} onItemClick={handleItemClick} />}>
+        <Dropdown menu={<Menu items={menus2} onItemClick={handleItemClick} />}>
           <a href="javascript:;" style={{ marginRight: 40 }}>
             cascading dropdown
           </a>
         </Dropdown>
         <Dropdown.Button
-          overlay={menus1}
+          menu={menus1}
           trigger="click"
           type="primary"
           icon="caret"
@@ -78,7 +77,7 @@ function DropdownDemo() {
           Dropdown
         </Dropdown.Button>
         <Dropdown.Button
-          overlay={menus1}
+          menu={menus1}
           trigger="click"
           type="primary"
           icon="caret"
@@ -88,22 +87,22 @@ function DropdownDemo() {
         </Dropdown.Button>
       </div>
       <div className="demo-box">
-        <Dropdown overlay={menus1} align="topLeft">
+        <Dropdown menu={menus1} align="topLeft">
           <Button>topLeft</Button>
         </Dropdown>
-        <Dropdown overlay={menus1} align="top">
+        <Dropdown menu={menus1} align="top">
           <Button>top</Button>
         </Dropdown>
-        <Dropdown overlay={menus1} align="topRight">
+        <Dropdown menu={menus1} align="topRight">
           <Button>topRight</Button>
         </Dropdown>
-        <Dropdown overlay={menus1} align="bottomLeft">
+        <Dropdown menu={menus1} align="bottomLeft">
           <Button>bottomLeft</Button>
         </Dropdown>
-        <Dropdown overlay={menus1} align="bottom">
+        <Dropdown menu={menus1} align="bottom">
           <Button>bottom</Button>
         </Dropdown>
-        <Dropdown overlay={menus1} align="bottomRight">
+        <Dropdown menu={menus1} align="bottomRight">
           <Button>bottomRight</Button>
         </Dropdown>
       </div>

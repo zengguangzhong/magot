@@ -31,7 +31,7 @@ export interface DropdownProps
   /**
    * 下拉菜单组件(Menu)
    */
-  overlay: React.ReactElement<MenuProps>;
+  menu: React.ReactElement<MenuProps>;
 }
 
 const defaultProps: Partial<DropdownProps> = {
@@ -47,7 +47,7 @@ function Dropdown(props: DropdownProps) {
 
   const dropdown = (
     <div className={cls} style={props.style}>
-      {props.overlay}
+      {props.menu}
     </div>
   );
 
@@ -73,7 +73,7 @@ function ButtonDropdown(props: DropdownProps & ButtonProps) {
   const {
     align,
     trigger,
-    overlay,
+    menu,
     disabled,
     className,
     style,
@@ -84,7 +84,7 @@ function ButtonDropdown(props: DropdownProps & ButtonProps) {
     <Dropdown
       align={align}
       trigger={trigger}
-      overlay={overlay}
+      menu={menu}
       disabled={disabled}
       className={className}
       style={style}>
