@@ -34,7 +34,7 @@ export interface ToastProps extends component.BaseComponent {
    * 是否显示关闭按钮
    * @default false
    */
-  showClose?: boolean;
+  closable?: boolean;
 
   /**
    * 关闭时触发的回调函数
@@ -52,7 +52,7 @@ const icons = {
 const defaultProps: Partial<ToastProps> = {
   type: 'info',
   duration: 3000,
-  showClose: false,
+  closable: false,
 };
 
 function Toast(props: ToastProps) {
@@ -78,7 +78,7 @@ function Toast(props: ToastProps) {
         <Icon name={icons[props.type || 'info']} />
       </span>
       <div className="msg">{props.message}</div>
-      {props.showClose && (
+      {props.closable && (
         <Button icon="close" square={true} onClick={onClose} />
       )}
     </div>,
@@ -109,37 +109,37 @@ function create(props: ToastProps) {
 Toast.info = function(
   message: string | ReactNode,
   duration?: number,
-  showClose?: boolean,
+  closable?: boolean,
   onClose?: () => void
 ) {
-  return create({ type: 'info', message, duration, showClose, onClose });
+  return create({ type: 'info', message, duration, closable, onClose });
 };
 
 Toast.success = function(
   message: string | ReactNode,
   duration?: number,
-  showClose?: boolean,
+  closable?: boolean,
   onClose?: () => void
 ) {
-  return create({ type: 'success', message, duration, showClose, onClose });
+  return create({ type: 'success', message, duration, closable, onClose });
 };
 
 Toast.warning = function(
   message: string | ReactNode,
   duration?: number,
-  showClose?: boolean,
+  closable?: boolean,
   onClose?: () => void
 ) {
-  return create({ type: 'warning', message, duration, showClose, onClose });
+  return create({ type: 'warning', message, duration, closable, onClose });
 };
 
 Toast.error = function(
   message: string | ReactNode,
   duration?: number,
-  showClose?: boolean,
+  closable?: boolean,
   onClose?: () => void
 ) {
-  return create({ type: 'error', message, duration, showClose, onClose });
+  return create({ type: 'error', message, duration, closable, onClose });
 };
 
 export default Toast;
