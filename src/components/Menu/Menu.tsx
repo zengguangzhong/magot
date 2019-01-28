@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Menu.less';
-
 import SubMenu from './SubMenu';
 import MenuItem from './MenuItem';
 import MenuItemGroup from './MenuItemGroup';
@@ -10,6 +8,8 @@ import MenuItems from './MenuItems';
 import ItemClickContext, { ItemClickHandler } from './ItemClickContext';
 import { IconPosition } from '../Icon/Iconable';
 import * as component from '../component';
+
+import './Menu.less';
 
 export interface MenuDividerData {
   divider: boolean;

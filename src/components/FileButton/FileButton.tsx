@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './FileButton.less';
-
 import Button, { ButtonProps } from '../Button';
 import * as component from '../component';
 import * as fileChecker from '../../utils/check-file';
+
+import './FileButton.less';
 
 type PickButtonProps = Pick<
   ButtonProps,

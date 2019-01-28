@@ -1,10 +1,10 @@
 import React, { HTMLAttributes } from 'react';
 
-import './Button.less';
-
 import ButtonGroup from '../ButtonGroup';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
+
+import './Button.less';
 
 export type ButtonType =
   | 'primary'

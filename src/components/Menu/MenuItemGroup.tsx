@@ -1,11 +1,11 @@
 import React, { Children, cloneElement } from 'react';
 
-import './MenuItemGroup.less';
-
 import { MenuItemArray } from './Menu';
 import MenuItems from './MenuItems';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
+
+import './MenuItemGroup.less';
 
 export interface MenuItemGroupProps
   extends component.BaseComponent,

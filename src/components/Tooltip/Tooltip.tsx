@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Tooltip.less';
-
 import Popup from '../Popup';
 import * as component from '../component';
 import { Alignment } from '../../utils/alignment';
+
+import './Tooltip.less';
 
 export interface TooltipProps
   extends component.BaseComponent,

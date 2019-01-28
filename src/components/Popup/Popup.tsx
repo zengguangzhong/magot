@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-import './Popup.less';
-
 import PopupOverlay, { OverlayProps } from './PopupOverlay';
 import * as component from '../component';
 import * as node from '../../utils/node';
 import { Alignment } from '../../utils/alignment';
+
+import './Popup.less';
 
 export type PopupTrigger = 'hover' | 'click' | 'contextMenu';
 

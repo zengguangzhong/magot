@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './SubMenu.less';
-
 import Menu, { MenuItemArray } from './Menu';
 import MenuItems from './MenuItems';
 import ItemClickContext from './ItemClickContext';
@@ -9,6 +7,8 @@ import Popup from '../Popup';
 import Icon from '../Icon';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
+
+import './SubMenu.less';
 
 export interface SubMenuProps
   extends component.BaseComponent,

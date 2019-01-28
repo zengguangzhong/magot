@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './MenuItem.less';
-
 import ItemClickContext from './ItemClickContext';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
+
+import './MenuItem.less';
 
 export interface MenuItemProps
   extends component.BaseComponent,

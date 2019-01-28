@@ -1,12 +1,12 @@
 import React, { ReactNode, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import './Toast.less';
-
 import Icon from '../Icon';
 import Button from '../Button';
 import * as component from '../component';
 import { useTimingToggle } from '../../hooks/timer';
+
+import './Toast.less';
 
 export type ToastType = 'info' | 'success' | 'warning' | 'error';
 

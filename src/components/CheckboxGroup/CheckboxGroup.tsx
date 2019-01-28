@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './CheckboxGroup.less';
-
 import * as component from '../component';
+
+import './CheckboxGroup.less';
 
 export interface CheckboxGroupProps extends component.BaseComponent {}
 

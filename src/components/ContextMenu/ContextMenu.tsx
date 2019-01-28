@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './ContextMenu.less';
-
 import { MenuProps } from '../Menu';
 import Dropdown from '../Dropdown';
 import * as component from '../component';
+
+import './ContextMenu.less';
 
 export interface ContextMenuProps
   extends component.BaseComponent,

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './Loading.less';
-
 import Icon from '../Icon';
 import * as component from '../component';
+
+import './Loading.less';
 
 export type Diretion = 'row' | 'column';
 

@@ -2,9 +2,9 @@ export default {
   filename: '${name}.tsx',
   code: `import React from 'react';
 
-import './\${name}.less';
-
 import * as component from '../component';
+
+import './\${name}.less';
 
 export interface \${name}Props extends component.BaseComponent {}
 

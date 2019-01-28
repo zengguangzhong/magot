@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import './Checkbox.less';
-
 import * as component from '../component';
+
+import './Checkbox.less';
 
 export interface CheckboxProps
   extends component.BaseComponent,

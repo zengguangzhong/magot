@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './ButtonGroup.less';
-
 import * as component from '../component';
 import { ButtonProps } from '../Button/Button';
+
+import './ButtonGroup.less';
 
 export interface ButtonGroupProps
   extends component.BaseComponent,

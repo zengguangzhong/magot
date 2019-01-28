@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Icon.less';
-
 import * as component from '../component';
+
+import './Icon.less';
 
 export interface IconProps extends component.BaseComponent {
   /**

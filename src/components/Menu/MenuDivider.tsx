@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './MenuDivider.less';
-
 import * as component from '../component';
+
+import './MenuDivider.less';
 
 function MenuDivider() {
   const cls = component.getComponentClasses('menu-divider', {});

@@ -1,13 +1,13 @@
 import React from 'react';
 import cx from 'classnames';
 
-import './Dropdown.less';
-
 import { MenuProps } from '../Menu';
 import Popup, { PopupTrigger } from '../Popup';
 import * as component from '../component';
 import { Alignment } from '../../utils/alignment';
 import Button, { ButtonProps } from 'components/Button';
+
+import './Dropdown.less';
 
 export interface DropdownProps
   extends component.BaseComponent,
