@@ -28,3 +28,17 @@ export function offset(node: Element | null, container?: Element | null) {
 
   return { top, left };
 }
+
+/**
+ *
+ *
+ * @export
+ * @param {Node} node
+ * @returns {boolean}
+ */
+export function isEditableNode(node: Node) {
+  const inputableNodes = ['INPUT', 'TEXTAREA'];
+  if (!(node instanceof HTMLElement)) return false;
+  const editable = node.contentEditable;
+  return inputableNodes.includes(node.nodeName) || editable === 'true';
+}

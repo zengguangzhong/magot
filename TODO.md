@@ -24,6 +24,7 @@
 - [ ] FormItem
 - [ ] Form
 - [ ] Gallery
+- [x] Hotkey
 - [x] Icon
 - [ ] Image
 - [ ] Input
@@ -50,7 +51,6 @@
 - [ ] Search
 - [ ] Select
 - [ ] SelectOption
-- [ ] Shortcuts
 - [ ] Slider
 - [ ] Switch
 - [ ] Table
