@@ -129,6 +129,7 @@ function Modal(props: ModalProps) {
   });
 
   const handleClose = () => {
+    if (!visibility) return;
     internallyRef.current = true;
     setVisibility(false);
   };
@@ -164,7 +165,10 @@ function Modal(props: ModalProps) {
 
   if (props.escapeClosable) {
     modal = (
-      <Hotkey hotkeys={[{ key: 27 }]} onTrigger={handleClose}>
+      <Hotkey
+        active={visibility}
+        hotkeys={[{ key: 27 }]}
+        onTrigger={handleClose}>
         {modal}
       </Hotkey>
     );
