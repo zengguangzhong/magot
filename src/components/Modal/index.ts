@@ -1,1 +1,7 @@
-export { default, ModalProps } from './Modal';
+export {
+  default,
+  ModalProps,
+  ModalPlacement,
+  ModalBodyProps,
+  ModalFooterProps,
+} from './Modal';

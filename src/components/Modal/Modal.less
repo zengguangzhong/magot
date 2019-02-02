@@ -1,5 +1,115 @@
 @import '../../variable.less';
 
 .@{prefix}-modal {
+  z-index: @zindex-modal;
+  .overlay(fixed);
+}
+
+.@{prefix}-modal-enter {
+  animation: modalEnterAnimation ease-out 300ms;
+}
+
+.@{prefix}-modal-leave {
+  animation: modalLeaveAnimation ease-out 300ms;
+}
+
+.@{prefix}-modal-hidden {
+  display: none;
+}
+
+.@{prefix}-modal-mask {
+  background-color: @modal-mask-background-color;
+  .overlay(fixed);
+}
+
+.@{prefix}-modal-content {
+  .box();
+  .box-sizing();
+
   position: relative;
+  top: 0;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-clip: padding-box;
+  background-color: @modal-background-color;
+  border-radius: @modal-border-radius;
+  box-shadow: @modal-box-shadow;
+  color: @modal-color;
+  font-size: @modal-font-size;
+}
+
+.@{prefix}-modal-top {
+  .@{prefix}-modal-content {
+    top: 15%;
+  }
+}
+
+.@{prefix}-modal-center {
+  .@{prefix}-modal-content {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.@{prefix}-modal-close {
+  position: absolute;
+  top: @modal-close-top;
+  right: 0;
+  border: none;
+  box-shadow: none;
+  color: @modal-close-color;
+  font-size: @modal-close-font-size;
+}
+
+.@{prefix}-modal-header {
+  padding: @modal-header-padding;
+  border-bottom: 1px solid @modal-header-border-color;
+  & + .@{prefix}-modal-body {
+    padding-top: @modal-body-padding-top-with-header;
+  }
+}
+
+.@{prefix}-modal-title {
+  color: @modal-title-color;
+  font-size: @modal-title-font-size;
+  font-weight: @modal-title-font-weight;
+  .box();
+}
+
+.@{prefix}-modal-body {
+  padding: @modal-body-padding;
+  word-wrap: break-word;
+  line-height: normal;
+}
+
+.@{prefix}-modal-footer {
+  padding: @modal-footer-padding;
+  text-align: right;
+  & > .@{prefix}-button + .@{prefix}-button {
+    margin-left: @modal-footer-button-space;
+    min-width: @modal-footer-button-min-width;
+  }
+}
+
+@keyframes modalEnterAnimation {
+  from {
+    top: -60px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes modalLeaveAnimation {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: -60px;
+    opacity: 0;
+  }
 }

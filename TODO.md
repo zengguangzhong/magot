@@ -39,7 +39,7 @@
 - [ ] Loader
 - [x] Loading
 - [x] Menu
-- [ ] Modal
+- [x] Modal
 - [ ] Notification
 - [ ] Pagination
 - [ ] Popover
