@@ -21,7 +21,7 @@ function getIcons() {
   const icons = [];
   const iconfontPath = path.join(src, 'iconfont/iconfont.less');
   const iconfontData = fs.readFileSync(iconfontPath, 'utf8');
-  const iconPattern = /.mgt-icon-(.+?):{1,2}before/gi;
+  const iconPattern = /.@{prefix}-icon-(.+?):{1,2}before/gi;
   let match = null;
   while ((match = iconPattern.exec(iconfontData))) {
     icons.push(match[1]);
