@@ -14,6 +14,7 @@ export { default as ColorPicker } from './components/ColorPicker';
 export { default as ContextMenu } from './components/ContextMenu';
 export { default as DatePicker } from './components/DatePicker';
 export { default as DateTimePicker } from './components/DateTimePicker';
+export { default as Dialog } from './components/Dialog';
 export { default as Drawer } from './components/Drawer';
 export { default as Dropdown } from './components/Dropdown';
 export { default as Empty } from './components/Empty';

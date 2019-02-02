@@ -1,0 +1,56 @@
+@import '../../variable.less';
+
+// .@{prefix}-dialog {
+// }
+
+.@{prefix}-dialog-info {
+  .iconColor(@info-color);
+}
+
+.@{prefix}-dialog-success {
+  .iconColor(@success-color);
+}
+
+.@{prefix}-dialog-error {
+  .iconColor(@error-color);
+}
+
+.@{prefix}-dialog-warning {
+  .iconColor(@warning-color);
+}
+
+.@{prefix}-dialog-confirm {
+  .iconColor(@primary-color);
+}
+
+.@{prefix}-dialog-title {
+  & > .@{prefix}-icon {
+    float: left;
+    margin-right: @dialog-icon-margin-right;
+    font-size: @dialog-icon-font-size;
+  }
+
+  & > .text {
+    color: @dialog-title-color;
+    font-size: @dialog-title-font-size;
+    font-weight: @dialog-title-font-weight;
+    vertical-align: middle;
+    .text-overflow();
+  }
+}
+
+.@{prefix}-dialog-content {
+  margin-top: @dialog-content-margin-top;
+  margin-left: @dialog-content-margin-left;
+  color: @dialog-content-color;
+  font-size: @dialog-content-font-size;
+}
+
+.iconColor(@color) {
+  .@{prefix}-dialog-title {
+    & > .@{prefix}-icon,
+    & > .text {
+      color: @color;
+    }
+  }
+}

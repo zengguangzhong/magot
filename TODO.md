@@ -17,6 +17,7 @@
 - [x] ContextMenu
 - [ ] DatePicker
 - [ ] DateTimePicker
+- [x] Dialog
 - [ ] Drawer
 - [x] Dropdown
 - [ ] Empty
