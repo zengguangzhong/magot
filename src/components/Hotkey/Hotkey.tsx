@@ -16,6 +16,12 @@ export interface HotkeyProps
   extends component.BaseComponent,
     component.NestedComponent {
   /**
+   * 热键是否是激活状态，非激活状态，不处理按键事件
+   * @default false
+   */
+  active?: boolean;
+
+  /**
    * 热键配置列表
    * @default []
    */
@@ -28,12 +34,15 @@ export interface HotkeyProps
 }
 
 const defaultProps: Partial<HotkeyProps> = {
+  active: false,
   hotkeys: [],
 };
 
 function Hotkey(props: HotkeyProps) {
   const hotkeys = props.hotkeys || [];
   const hanldeKeyDown = (evt: KeyboardEvent) => {
+    if (!props.active) return;
+
     if (isEditableNode(evt.target as Node)) {
       evt.stopPropagation();
       return;
