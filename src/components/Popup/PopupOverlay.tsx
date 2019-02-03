@@ -34,6 +34,7 @@ const componentProps = [
   'leaving',
   'overlay',
   'preventOut',
+  'clickClosable',
   'space',
   'target',
   'trigger',

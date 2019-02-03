@@ -42,6 +42,12 @@ export interface PopupProps
    * @default hover
    */
   trigger?: PopupTrigger;
+
+  /**
+   * 当点击弹出层组件时，是否隐藏自己，默认隐藏
+   * @default true
+   */
+  clickClosable?: boolean;
 }
 
 interface WrappedComponentProps
@@ -56,6 +62,7 @@ const defaultProps: Partial<PopupProps> = {
   align: 'top',
   space: 10,
   trigger: 'hover',
+  clickClosable: true,
 };
 
 function Popup(props: PopupProps) {
@@ -86,7 +93,7 @@ function Popup(props: PopupProps) {
 
   const handleStopPropagationClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    handleTriggerLeave();
+    if (props.clickClosable) handleTriggerLeave();
   };
 
   switch (props.trigger) {
