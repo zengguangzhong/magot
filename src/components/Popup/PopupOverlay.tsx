@@ -69,7 +69,7 @@ function PopupOverlay(props: OverlayProps) {
   const align = adjust[props.align || 'top'](size, target);
   const position = alignment[align](size, target);
   const classes = component.getComponentClasses('popup', props, {
-    showed: visibility && !leaving,
+    popped: visibility && !leaving,
   });
 
   const nativeProps = component.getNativeProps<
