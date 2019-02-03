@@ -1,16 +1,64 @@
 import React from 'react';
 
+import Popup, { PopupTrigger } from '../Popup';
+import * as component from '../component';
+import { Alignment } from '../../utils/alignment';
+
 import './Popover.less';
 
-import * as component from '../component';
+export interface PopoverProps
+  extends component.BaseComponent,
+    component.NestedComponent {
+  /**
+   * 气泡标题
+   */
+  title?: string | React.ReactNode;
 
-export interface PopoverProps extends component.BaseComponent {}
+  /**
+   * 气泡内容
+   */
+  content: string | React.ReactNode;
 
-const defaultProps: Partial<PopoverProps> = {};
+  /**
+   * 气泡位置，12个方位，
+   * 可选值：`left`,`top`,`right`,`bottom`,`topLeft`,`topRight`,`bottomLeft`,`bottomRight`,`leftTop`,`leftBottom`,`rightTop`,`rightBottom`，
+   * 默认值是`top`
+   * @default top
+   */
+  align?: Alignment;
+
+  /**
+   * 触发气泡的行为方式，可选值：`hover`, `click`，默认`hover`
+   * @default hover
+   */
+  trigger?: Extract<PopupTrigger, 'hover' | 'click'>;
+}
+
+const defaultProps: Partial<PopoverProps> = {
+  align: 'top',
+  trigger: 'hover',
+};
 
 function Popover(props: PopoverProps) {
-  const cls = component.getComponentClasses('popover', props);
-  return <div className={cls} />;
+  const type = 'popover';
+  const prefix = component.getComponentPrefix(type);
+  const cls = component.getComponentClasses(type, props);
+  const popover = (
+    <div className={cls} style={props.style}>
+      {props.title && <div className={prefix + '-title'}>{props.title}</div>}
+      <div className={prefix + '-content'}>{props.content}</div>
+    </div>
+  );
+  return (
+    <Popup
+      align={props.align}
+      preventOut={true}
+      clickClosable={false}
+      trigger={props.trigger}
+      overlay={popover}>
+      {props.children}
+    </Popup>
+  );
 }
 
 Popover.defaultProps = defaultProps;

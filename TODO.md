@@ -43,7 +43,7 @@
 - [x] Modal
 - [ ] Notification
 - [ ] Pagination
-- [ ] Popover
+- [x] Popover
 - [x] Popup
 - [ ] Qrcode
 - [ ] Radio

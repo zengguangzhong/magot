@@ -1,5 +1,29 @@
 @import '../../variable.less';
 
 .@{prefix}-popover {
-  position: relative;
+  .box();
+  .box-sizing();
+  .arrow(@popover-background-color; @popover-arrow-size; @popover-border-color);
+
+  min-width: @popover-min-width;
+  background-clip: padding-box;
+  background-color: @popover-background-color;
+  border: 1px solid @popover-border-color;
+  border-radius: @popover-border-radius;
+  box-shadow: @popover-box-shadow;
+  z-index: @zindex-popover;
+}
+
+.@{prefix}-popover-title {
+  padding: @popover-title-padding;
+  color: @popover-title-color;
+  font-size: @popover-title-font-size;
+  font-weight: @popover-title-font-weight;
+  border-bottom: 1px solid @popover-title-border-color;
+}
+
+.@{prefix}-popover-content {
+  padding: @popover-content-padding;
+  color: @popover-content-color;
+  font-size: @popover-content-font-size;
 }
