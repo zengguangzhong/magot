@@ -41,7 +41,7 @@
 - [x] Loading
 - [x] Menu
 - [x] Modal
-- [ ] Notification
+- [x] Notification
 - [ ] Pagination
 - [x] Popover
 - [x] Popup

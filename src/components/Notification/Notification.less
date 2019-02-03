@@ -1,5 +1,114 @@
 @import '../../variable.less';
 
+.@{prefix}-notification-root {
+  .box();
+  .box-sizing();
+
+  position: fixed;
+  top: @notification-root-top;
+  right: @notificatioon-root-right;
+  width: @notification-root-width;
+  z-index: @zindex-notification;
+  pointer-events: none;
+}
+
 .@{prefix}-notification {
   position: relative;
+  padding: @notification-padding;
+  margin-bottom: @notification-bottom-space;
+  background-color: @notification-background-color;
+  border-radius: @notification-border-radius;
+  box-shadow: @notification-box-shadow;
+  pointer-events: all;
+  overflow: hidden;
+
+  & > .@{prefix}-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    color: @notification-close-color;
+    font-size: @notification-close-font-size;
+  }
+}
+
+.@{prefix}-notification-enter {
+  animation: notificationEnterAnimation ease-out 300ms;
+}
+
+.@{prefix}-notification-leave {
+  animation: notificationLeaveAnimation ease-out 300ms;
+}
+
+.@{prefix}-notification-info {
+  .hasIcon(@info-color);
+}
+
+.@{prefix}-notification-success {
+  .hasIcon(@success-color);
+}
+
+.@{prefix}-notification-error {
+  .hasIcon(@error-color);
+}
+
+.@{prefix}-notification-warning {
+  .hasIcon(@warning-color);
+}
+
+.@{prefix}-notification-confirm {
+  .hasIcon(@primary-color);
+}
+
+.@{prefix}-notification-title {
+  margin-right: @notification-title-right-space;
+  margin-bottom: @notification-title-bottom-space;
+
+  & > .@{prefix}-icon {
+    float: left;
+    margin-right: @notification-icon-margin-right;
+    font-size: @notification-icon-font-size;
+  }
+
+  & > .text {
+    color: @notification-title-color;
+    font-size: @notification-title-font-size;
+    vertical-align: middle;
+    .text-overflow();
+  }
+}
+
+.@{prefix}-notification-message {
+  color: @notification-message-color;
+  font-size: @notification-message-font-size;
+}
+
+.hasIcon(@color) {
+  .@{prefix}-notification-title {
+    & > .@{prefix}-icon,
+    & > .text {
+      color: @color;
+    }
+  }
+  .@{prefix}-notification-message {
+    margin-left: @notification-message-margin-left;
+  }
+}
+
+@keyframes notificationEnterAnimation {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationLeaveAnimation {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }
