@@ -2,7 +2,7 @@ import React from 'react';
 
 import Popup from '../Popup';
 import * as component from '../component';
-import { Alignment } from '../../utils/alignment';
+import { Placement } from '../../utils/placement';
 
 import './Tooltip.less';
 
@@ -20,7 +20,7 @@ export interface TooltipProps
    * 默认值是`top`
    * @default top
    */
-  align?: Alignment;
+  placement?: Placement;
 }
 
 function Tooltip(props: TooltipProps) {
@@ -31,7 +31,7 @@ function Tooltip(props: TooltipProps) {
     </div>
   );
   return (
-    <Popup align={props.align} overlay={tooltip}>
+    <Popup placement={props.placement} overlay={tooltip}>
       {props.children}
     </Popup>
   );

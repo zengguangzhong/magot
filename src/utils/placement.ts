@@ -1,4 +1,4 @@
-export type Alignment =
+export type Placement =
   | 'left'
   | 'top'
   | 'right'
@@ -114,7 +114,7 @@ export function getAdjustment(space = 0) {
   };
 }
 
-export function getAlignment(space = 0) {
+export function getPlacement(space = 0) {
   return {
     left(size: Size, target: { size: Size; offset: Offset }) {
       let left = target.offset.left;

@@ -11,62 +11,62 @@
 
   &.left {
     .arrow-caret-left(@color; @size; @borderColor; @bw;);
-    .arrow-align-middle(@size;);
+    .arrow-placement-middle(@size;);
   }
 
   &.top {
     .arrow-caret-top(@color; @size; @borderColor; @bw;);
-    .arrow-align-center(@size;);
+    .arrow-placement-center(@size;);
   }
 
   &.right {
     .arrow-caret-right(@color; @size; @borderColor; @bw;);
-    .arrow-align-middle(@size;);
+    .arrow-placement-middle(@size;);
   }
 
   &.bottom {
     .arrow-caret-bottom(@color; @size; @borderColor; @bw;);
-    .arrow-align-center(@size;);
+    .arrow-placement-center(@size;);
   }
 
   &.topleft {
     .arrow-caret-top(@color; @size; @borderColor; @bw;);
-    .arrow-align-left();
+    .arrow-placement-left();
   }
 
   &.topright {
     .arrow-caret-top(@color; @size; @borderColor; @bw;);
-    .arrow-align-right();
+    .arrow-placement-right();
   }
 
   &.lefttop {
     .arrow-caret-left(@color; @size; @borderColor; @bw;);
-    .arrow-align-top();
+    .arrow-placement-top();
   }
 
   &.righttop {
     .arrow-caret-right(@color; @size; @borderColor; @bw;);
-    .arrow-align-top();
+    .arrow-placement-top();
   }
 
   &.leftbottom {
     .arrow-caret-left(@color; @size; @borderColor; @bw;);
-    .arrow-align-bottom();
+    .arrow-placement-bottom();
   }
 
   &.rightbottom {
     .arrow-caret-right(@color; @size; @borderColor; @bw;);
-    .arrow-align-bottom();
+    .arrow-placement-bottom();
   }
 
   &.bottomleft {
     .arrow-caret-bottom(@color; @size; @borderColor; @bw;);
-    .arrow-align-left();
+    .arrow-placement-left();
   }
 
   &.bottomright {
     .arrow-caret-bottom(@color; @size; @borderColor; @bw;);
-    .arrow-align-right();
+    .arrow-placement-right();
   }
 }
 
@@ -129,35 +129,35 @@
   }
 }
 
-.arrow-align-left() {
+.arrow-placement-left() {
   &::before,
   &::after {
     left: 10%;
   }
 }
 
-.arrow-align-top() {
+.arrow-placement-top() {
   &::before,
   &::after {
     top: 20%;
   }
 }
 
-.arrow-align-right() {
+.arrow-placement-right() {
   &::before,
   &::after {
     right: 10%;
   }
 }
 
-.arrow-align-bottom() {
+.arrow-placement-bottom() {
   &::before,
   &::after {
     bottom: 20%;
   }
 }
 
-.arrow-align-center(@size;) {
+.arrow-placement-center(@size;) {
   &::before,
   &::after {
     left: 50%;
@@ -165,7 +165,7 @@
   }
 }
 
-.arrow-align-middle(@size;) {
+.arrow-placement-middle(@size;) {
   &::before,
   &::after {
     top: 50%;

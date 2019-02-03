@@ -19,7 +19,7 @@ function PopupDemo() {
           <Button type="primary">hover me to show loading</Button>
         </Popup>
         <Popup
-          align="bottomLeft"
+          placement="bottomLeft"
           trigger="click"
           space={4}
           overlay={
@@ -32,7 +32,7 @@ function PopupDemo() {
           <Button>I'm a Menu, click me</Button>
         </Popup>
         <Popup
-          align="bottomLeft"
+          placement="bottomLeft"
           trigger="contextMenu"
           overlay={
             <Menu>

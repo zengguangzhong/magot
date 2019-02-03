@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PopupOverlay, { OverlayProps } from './PopupOverlay';
 import * as component from '../component';
 import * as node from '../../utils/node';
-import { Alignment } from '../../utils/alignment';
+import { Placement } from '../../utils/placement';
 
 import './Popup.less';
 
@@ -19,7 +19,7 @@ export interface PopupProps
    * 默认值是`top`
    * @default top
    */
-  align?: Alignment;
+  placement?: Placement;
 
   /**
    * 弹出层组件，可以是任意需要被popup出来的组件
@@ -59,7 +59,7 @@ type DispatchSize = React.Dispatch<React.SetStateAction<Size>>;
 type DispatchOffset = React.Dispatch<React.SetStateAction<Offset>>;
 
 const defaultProps: Partial<PopupProps> = {
-  align: 'top',
+  placement: 'top',
   space: 10,
   trigger: 'hover',
   clickClosable: true,

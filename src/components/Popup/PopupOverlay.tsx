@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import { PopupProps } from './Popup';
 import * as component from '../component';
-import { getAdjustment, getAlignment } from '../../utils/alignment';
+import { getAdjustment, getPlacement } from '../../utils/placement';
 
 export interface OverlayProps
   extends PopupProps,
@@ -30,7 +30,7 @@ export interface OverlayProps
 }
 
 const componentProps = [
-  'align',
+  'placement',
   'leaving',
   'overlay',
   'preventOut',
@@ -66,9 +66,9 @@ function PopupOverlay(props: OverlayProps) {
   });
 
   const adjust = getAdjustment(props.space);
-  const alignment = getAlignment(props.space);
-  const align = adjust[props.align || 'top'](size, target);
-  const position = alignment[align](size, target);
+  const placementFn = getPlacement(props.space);
+  const placement = adjust[props.placement || 'top'](size, target);
+  const position = placementFn[placement](size, target);
   const classes = component.getComponentClasses('popup', props, {
     popped: visibility && !leaving,
   });
@@ -81,7 +81,7 @@ function PopupOverlay(props: OverlayProps) {
   return ReactDOM.createPortal(
     <div {...nativeProps} className={classes} ref={popupRef} style={position}>
       {React.cloneElement(overlay, {
-        className: cx(overlayProps.className, align.toLowerCase()),
+        className: cx(overlayProps.className, placement.toLowerCase()),
       })}
     </div>,
     document.body

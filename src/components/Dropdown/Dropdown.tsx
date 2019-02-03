@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { MenuProps } from '../Menu';
 import Popup, { PopupTrigger } from '../Popup';
 import * as component from '../component';
-import { Alignment } from '../../utils/alignment';
+import { Placement } from '../../utils/placement';
 import Button, { ButtonProps } from 'components/Button';
 
 import './Dropdown.less';
@@ -17,8 +17,8 @@ export interface DropdownProps
    * 下拉菜单对齐位置，可选值：`top`, `bottom, `topLeft`, `topRight`, `bottomLeft`, `bottomRight`，默认`bottomLeft`
    * @default bottomLeft
    */
-  align?: Extract<
-    Alignment,
+  placement?: Extract<
+    Placement,
     'top' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
   >;
 
@@ -36,7 +36,7 @@ export interface DropdownProps
 
 const defaultProps: Partial<DropdownProps> = {
   ...component.getDefaultDisabledProps(),
-  align: 'bottomLeft',
+  placement: 'bottomLeft',
   trigger: 'hover',
 };
 
@@ -60,7 +60,7 @@ function Dropdown(props: DropdownProps) {
 
   return (
     <Popup
-      align={props.align}
+      placement={props.placement}
       preventOut={true}
       trigger={props.trigger}
       overlay={dropdown}>
@@ -71,7 +71,7 @@ function Dropdown(props: DropdownProps) {
 
 function ButtonDropdown(props: DropdownProps & ButtonProps) {
   const {
-    align,
+    placement,
     trigger,
     menu,
     disabled,
@@ -82,7 +82,7 @@ function ButtonDropdown(props: DropdownProps & ButtonProps) {
   const button = <Button {...btnProps}>{props.children}</Button>;
   return (
     <Dropdown
-      align={align}
+      placement={placement}
       trigger={trigger}
       menu={menu}
       disabled={disabled}

@@ -87,22 +87,22 @@ function DropdownDemo() {
         </Dropdown.Button>
       </div>
       <div className="demo-box">
-        <Dropdown menu={menus1} align="topLeft">
+        <Dropdown menu={menus1} placement="topLeft">
           <Button>topLeft</Button>
         </Dropdown>
-        <Dropdown menu={menus1} align="top">
+        <Dropdown menu={menus1} placement="top">
           <Button>top</Button>
         </Dropdown>
-        <Dropdown menu={menus1} align="topRight">
+        <Dropdown menu={menus1} placement="topRight">
           <Button>topRight</Button>
         </Dropdown>
-        <Dropdown menu={menus1} align="bottomLeft">
+        <Dropdown menu={menus1} placement="bottomLeft">
           <Button>bottomLeft</Button>
         </Dropdown>
-        <Dropdown menu={menus1} align="bottom">
+        <Dropdown menu={menus1} placement="bottom">
           <Button>bottom</Button>
         </Dropdown>
-        <Dropdown menu={menus1} align="bottomRight">
+        <Dropdown menu={menus1} placement="bottomRight">
           <Button>bottomRight</Button>
         </Dropdown>
       </div>

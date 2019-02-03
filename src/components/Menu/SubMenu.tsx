@@ -56,7 +56,7 @@ function SubMenu(props: SubMenuProps) {
         };
         return (
           <Popup
-            align="rightTop"
+            placement="rightTop"
             space={4}
             preventOut={true}
             overlay={

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Popup, { PopupTrigger } from '../Popup';
 import * as component from '../component';
-import { Alignment } from '../../utils/alignment';
+import { Placement } from '../../utils/placement';
 
 import './Popover.less';
 
@@ -25,7 +25,7 @@ export interface PopoverProps
    * 默认值是`top`
    * @default top
    */
-  align?: Alignment;
+  placement?: Placement;
 
   /**
    * 触发气泡的行为方式，可选值：`hover`, `click`，默认`hover`
@@ -35,7 +35,7 @@ export interface PopoverProps
 }
 
 const defaultProps: Partial<PopoverProps> = {
-  align: 'top',
+  placement: 'top',
   trigger: 'hover',
 };
 
@@ -51,7 +51,7 @@ function Popover(props: PopoverProps) {
   );
   return (
     <Popup
-      align={props.align}
+      placement={props.placement}
       preventOut={true}
       clickClosable={false}
       trigger={props.trigger}

@@ -50,7 +50,7 @@ function PopoverDemo() {
           <Button>Nested Components</Button>
         </Popover>
         <Popover
-          align="bottom"
+          placement="bottom"
           trigger="click"
           title="Delete Tips"
           content={
@@ -71,48 +71,48 @@ function PopoverDemo() {
       </div>
       <div className="demo-box">
         <div style={style1}>
-          <Popover title={title} content={content} align="topLeft">
+          <Popover title={title} content={content} placement="topLeft">
             <Button>TL</Button>
           </Popover>
-          <Popover title={title} content={content} align="top">
+          <Popover title={title} content={content} placement="top">
             <Button>Top</Button>
           </Popover>
-          <Popover title={title} content={content} align="topRight">
+          <Popover title={title} content={content} placement="topRight">
             <Button>TR</Button>
           </Popover>
         </div>
         <div style={style2}>
-          <Popover title={title} content={content} align="leftTop">
+          <Popover title={title} content={content} placement="leftTop">
             <Button>LT</Button>
           </Popover>
-          <Popover title={title} content={content} align="rightTop">
+          <Popover title={title} content={content} placement="rightTop">
             <Button>RT</Button>
           </Popover>
         </div>
         <div style={style2}>
-          <Popover title={title} content={content} align="left">
+          <Popover title={title} content={content} placement="left">
             <Button>Left</Button>
           </Popover>
-          <Popover title={title} content={content} align="right">
+          <Popover title={title} content={content} placement="right">
             <Button>Right</Button>
           </Popover>
         </div>
         <div style={style2}>
-          <Popover title={title} content={content} align="leftBottom">
+          <Popover title={title} content={content} placement="leftBottom">
             <Button>LB</Button>
           </Popover>
-          <Popover title={title} content={content} align="rightBottom">
+          <Popover title={title} content={content} placement="rightBottom">
             <Button>RB</Button>
           </Popover>
         </div>
         <div style={{ ...style1, marginBottom: 0 }}>
-          <Popover title={title} content={content} align="bottomLeft">
+          <Popover title={title} content={content} placement="bottomLeft">
             <Button>BL</Button>
           </Popover>
-          <Popover title={title} content={content} align="bottom">
+          <Popover title={title} content={content} placement="bottom">
             <Button>Bottom</Button>
           </Popover>
-          <Popover title={title} content={content} align="bottomRight">
+          <Popover title={title} content={content} placement="bottomRight">
             <Button>BR</Button>
           </Popover>
         </div>

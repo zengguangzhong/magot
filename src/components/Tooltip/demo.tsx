@@ -47,48 +47,48 @@ function TooltipDemo() {
       </div>
       <div className="demo-box">
         <div style={style1}>
-          <Tooltip title={text} align="topLeft">
+          <Tooltip title={text} placement="topLeft">
             <Button>TL</Button>
           </Tooltip>
-          <Tooltip title={text} align="top">
+          <Tooltip title={text} placement="top">
             <Button>Top</Button>
           </Tooltip>
-          <Tooltip title={text} align="topRight">
+          <Tooltip title={text} placement="topRight">
             <Button>TR</Button>
           </Tooltip>
         </div>
         <div style={style2}>
-          <Tooltip title={text} align="leftTop">
+          <Tooltip title={text} placement="leftTop">
             <Button>LT</Button>
           </Tooltip>
-          <Tooltip title={text} align="rightTop">
+          <Tooltip title={text} placement="rightTop">
             <Button>RT</Button>
           </Tooltip>
         </div>
         <div style={style2}>
-          <Tooltip title={text} align="left">
+          <Tooltip title={text} placement="left">
             <Button>Left</Button>
           </Tooltip>
-          <Tooltip title={text} align="right">
+          <Tooltip title={text} placement="right">
             <Button>Right</Button>
           </Tooltip>
         </div>
         <div style={style2}>
-          <Tooltip title={text} align="leftBottom">
+          <Tooltip title={text} placement="leftBottom">
             <Button>LB</Button>
           </Tooltip>
-          <Tooltip title={text} align="rightBottom">
+          <Tooltip title={text} placement="rightBottom">
             <Button>RB</Button>
           </Tooltip>
         </div>
         <div style={{ ...style1, marginBottom: 0 }}>
-          <Tooltip title={text} align="bottomLeft">
+          <Tooltip title={text} placement="bottomLeft">
             <Button>BL</Button>
           </Tooltip>
-          <Tooltip title={text} align="bottom">
+          <Tooltip title={text} placement="bottom">
             <Button>Bottom</Button>
           </Tooltip>
-          <Tooltip title={text} align="bottomRight">
+          <Tooltip title={text} placement="bottomRight">
             <Button>BR</Button>
           </Tooltip>
         </div>
