@@ -3,8 +3,7 @@
 - [ ] AutoComplete
 - [ ] Avatar
 - [ ] Badge
-- [ ] Breadcrumb
-- [ ] BreadcrumbItem
+- [x] Breadcrumb
 - [x] Button
 - [x] ButtonGroup
 - [ ] Calendar

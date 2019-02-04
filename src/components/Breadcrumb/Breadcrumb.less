@@ -1,5 +1,44 @@
 @import '../../variable.less';
 
 .@{prefix}-breadcrumb {
-  position: relative;
+  list-style: none;
+  .box();
+  .box-sizing();
+  .clearfix();
+}
+
+.@{prefix}-breadcrumb-item {
+  float: left;
+  color: @breadcrumb-color;
+  font-size: @breadcrumb-font-size;
+
+  &:last-child {
+    color: @breadcrumb-current-color;
+    .@{prefix}-breadcrumb-separator {
+      display: none;
+    }
+  }
+
+  & > a {
+    color: inherit;
+    text-decoration: @link-decoration;
+    transition: color 300ms;
+    &:hover {
+      color: @link-color-hover;
+    }
+    &:active {
+      color: @link-color-active;
+    }
+  }
+
+  & > .@{prefix}-icon.left {
+    margin-right: @breadcrumb-icon-space;
+  }
+  & > .@{prefix}-icon.right {
+    margin-left: @breadcrumb-icon-space;
+  }
+}
+
+.@{prefix}-breadcrumb-separator {
+  margin: 0 @breadcrumb-separator-space;
 }

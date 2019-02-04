@@ -1,18 +1,40 @@
 import React from 'react';
 
-import './Breadcrumb.less';
-
+import BreadcrumbItem from './BreadcrumbItem';
 import * as component from '../component';
 
-export interface BreadcrumbProps extends component.BaseComponent {}
+import './Breadcrumb.less';
 
-const defaultProps: Partial<BreadcrumbProps> = {};
+export interface BreadcrumbProps
+  extends component.BaseComponent,
+    component.NestedComponent {
+  /**
+   * 分隔符，默认`/`
+   * @default /
+   */
+  separator?: string;
+}
+
+const defaultProps: Partial<BreadcrumbProps> = {
+  separator: '/',
+};
 
 function Breadcrumb(props: BreadcrumbProps) {
   const cls = component.getComponentClasses('breadcrumb', props);
-  return <div className={cls} />;
+  const items = React.Children.toArray(props.children);
+  return (
+    <ul className={cls}>
+      {items.map((item, index) => {
+        return React.cloneElement(React.Children.only(item), {
+          key: index,
+          separator: props.separator,
+        });
+      })}
+    </ul>
+  );
 }
 
 Breadcrumb.defaultProps = defaultProps;
+Breadcrumb.Item = BreadcrumbItem;
 
 export default Breadcrumb;
