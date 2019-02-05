@@ -1,5 +1,6 @@
 # Component List
 
+- [x] Animation
 - [ ] AutoComplete
 - [ ] Avatar
 - [ ] Badge
