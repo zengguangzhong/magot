@@ -1,3 +1,4 @@
+export { default as Animation } from './components/Animation';
 export { default as AutoComplete } from './components/AutoComplete';
 export { default as Avatar } from './components/Avatar';
 export { default as Badge } from './components/Badge';
