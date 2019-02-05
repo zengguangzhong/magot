@@ -85,8 +85,7 @@ export interface ConfirmProps extends DialogProps {
   onCancel?: () => void;
 }
 
-type FullDialogProps = DialogProps &
-  ConfirmProps & { type: string; onClose?: () => void };
+type FullDialogProps = DialogProps & ConfirmProps & { type: string };
 
 const dialogDefaultProps: Partial<DialogProps> = {
   width: 420,
@@ -135,7 +134,7 @@ function Dialog(props: FullDialogProps) {
       maskClosable={props.maskClosable}
       placement={props.placement}
       zIndex={props.zIndex}
-      onClose={props.onClose}>
+      removeWhenClosed={true}>
       <Modal.Body>
         <div className={prefix + '-title'}>
           <DialogIcon icon={props.icon} />
@@ -164,10 +163,7 @@ function DialogIcon(props: Pick<DialogProps, 'icon'>) {
 
 function createDialog(props: FullDialogProps) {
   const div = document.createElement('div');
-  const handleClose = () => {
-    ReactDOM.unmountComponentAtNode(div);
-  };
-  return ReactDOM.render(<Dialog {...props} onClose={handleClose} />, div);
+  return ReactDOM.render(<Dialog {...props} />, div);
 }
 
 function info(props: DialogProps) {

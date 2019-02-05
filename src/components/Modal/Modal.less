@@ -13,10 +13,6 @@
   animation: modalLeaveAnimation ease-out 300ms;
 }
 
-.@{prefix}-modal-hidden {
-  display: none;
-}
-
 .@{prefix}-modal-mask {
   background-color: @modal-mask-background-color;
   .overlay(fixed);
@@ -104,10 +100,6 @@
 }
 
 @keyframes modalLeaveAnimation {
-  from {
-    top: 0;
-    opacity: 1;
-  }
   to {
     top: -60px;
     opacity: 0;

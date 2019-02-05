@@ -2,17 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import { PopupProps } from './Popup';
+import Animation from '../Animation';
 import * as component from '../component';
 import { getAdjustment, getPlacement } from '../../utils/placement';
 
 export interface OverlayProps
   extends PopupProps,
     component.MouseEventComponent<HTMLElement> {
-  /**
-   * 开始离场(popdown)
-   */
-  leaving: boolean;
-
   /**
    * 是否可见
    */
@@ -22,16 +18,11 @@ export interface OverlayProps
    * 目标组件的显示大小和绝对位置(相对于popup的容器来计算)
    */
   target: { size: Size; offset: Offset };
-
-  /**
-   * 离场动画结束的回调函数
-   */
-  onLeaved: () => void;
 }
 
 const componentProps = [
+  'name',
   'placement',
-  'leaving',
   'overlay',
   'preventOut',
   'clickClosable',
@@ -39,51 +30,54 @@ const componentProps = [
   'target',
   'trigger',
   'visible',
-  'onLeaved',
+  'leaveDelay',
 ];
 
 function PopupOverlay(props: OverlayProps) {
-  if (!props.visible) return null;
-
-  const { overlay, leaving, target, onLeaved } = props;
+  const { visible, overlay, target, space } = props;
   const overlayProps = overlay.props;
 
+  const popupRef = React.useRef<HTMLDivElement>(null);
   const [size, setSize] = React.useState({ width: 0, height: 0 });
   const visibility = size.width > 0 && size.height > 0;
-
-  const popupRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const node = popupRef.current;
     if (node && !visibility) {
       setSize({ width: node.offsetWidth, height: node.offsetHeight });
     }
-    const handleTransitionEnd = () => leaving && onLeaved();
-    node && node.addEventListener('transitionend', handleTransitionEnd, false);
-    return () => {
-      node && node.removeEventListener('transitionend', handleTransitionEnd);
-    };
   });
 
-  const adjust = getAdjustment(props.space);
-  const placementFn = getPlacement(props.space);
-  const placement = adjust[props.placement || 'top'](size, target);
-  const position = placementFn[placement](size, target);
-  const classes = component.getComponentClasses('popup', props, {
-    popped: visibility && !leaving,
-  });
+  let position;
+  let placement = props.placement || 'top';
+  if (visibility) {
+    const adjust = getAdjustment(space);
+    const placementFn = getPlacement(space);
+    placement = adjust[placement](size, target);
+    position = placementFn[placement](size, target);
+  }
 
+  const type = 'popup';
+  const cls = component.getComponentClasses(type, props, {
+    popped: visibility,
+  });
   const nativeProps = component.getNativeProps<
     OverlayProps,
     component.MouseEventComponent<HTMLElement>
   >(props, componentProps);
 
   return ReactDOM.createPortal(
-    <div {...nativeProps} className={classes} ref={popupRef} style={position}>
-      {React.cloneElement(overlay, {
-        className: cx(overlayProps.className, placement.toLowerCase()),
-      })}
-    </div>,
+    <Animation
+      ref={popupRef}
+      name={props.name || type}
+      visible={visible}
+      removeWhenHidden={true}>
+      <div {...nativeProps} className={cls} style={position}>
+        {React.cloneElement(overlay, {
+          className: cx(overlayProps.className, placement.toLowerCase()),
+        })}
+      </div>
+    </Animation>,
     document.body
   );
 }

@@ -3,8 +3,34 @@
 .@{prefix}-popup {
   position: absolute;
   opacity: 0;
-  transition: opacity ease-out 200ms 50ms;
+  visibility: hidden;
   &.popped {
+    visibility: visible;
+  }
+}
+
+.@{prefix}-popup-enter {
+  animation: popupEnterAnimation ease-out 300ms both;
+}
+
+.@{prefix}-popup-leave {
+  animation: popupLeaveAnimation ease-out 300ms both;
+}
+
+@keyframes popupEnterAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
     opacity: 1;
+  }
+}
+
+@keyframes popupLeaveAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

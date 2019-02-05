@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import Icon, { IconProps } from '../Icon';
+import Animation from '../Animation';
 import * as component from '../component';
-import { useCreated } from '../../hooks/created';
 import { useTimingToggle } from '../../hooks/timer';
-import { useAnimation } from '../../hooks/animation';
-import { useVisibility } from '../../hooks/visibility';
 
 import './Notification.less';
 
@@ -55,51 +53,39 @@ const defaultProps: Partial<NotificationProps> = {
 };
 
 function Notification(props: FullNotificationProps) {
-  const modalRef = React.useRef<HTMLDivElement>(null);
-  const internallyRef = React.useRef(false);
+  const [visible, setVisible] = React.useState(true);
+  const close = () => visible && setVisible(false);
 
-  const created = useCreated(modalRef);
-  const [visibility, setVisibility] = useVisibility(
-    true,
-    internallyRef.current
-  );
-
-  const close = () => {
-    if (!visibility) return;
-    internallyRef.current = true;
-    setVisibility(false);
-  };
-
-  const timingEnd = useTimingToggle(false, props.duration, !visibility);
+  const timingEnd = useTimingToggle(false, props.duration, !visible);
   if (timingEnd) close();
-
-  const handleAnimationEnd = () => {
-    if (!visibility) {
-      props.onClose && props.onClose();
-    }
-  };
-  const animation = useAnimation(visibility, modalRef, handleAnimationEnd);
-  const hidden = animation === null && !visibility;
-  if (hidden) internallyRef.current = false;
-
-  if ((!visibility && !created) || hidden) return null;
 
   const type = 'notification';
   const prefix = component.getComponentPrefix(type);
   const cls = component.getComponentClasses(type, props, {
     [`${prefix}-${props.type}`]: !!props.type,
-    [`${prefix}-${animation}`]: !!animation,
   });
 
+  const handleLeave = () => {
+    props.onClose && props.onClose();
+  };
+
   return ReactDOM.createPortal(
-    <div ref={modalRef} className={cls} style={props.style}>
-      <div className={prefix + '-title'}>
-        <NotificationIcon icon={props.icon} />
-        <span className="text">{props.title}</span>
+    <Animation
+      name={type}
+      visible={visible}
+      removeWhenHidden={true}
+      onLeave={handleLeave}>
+      <div className={cls} style={props.style}>
+        <div className={prefix + '-title'}>
+          <NotificationIcon icon={props.icon} />
+          <span className="text">{props.title}</span>
+        </div>
+        <div className={prefix + '-message'}>{props.message}</div>
+        {props.closable && (
+          <Button icon="close" square={true} onClick={close} />
+        )}
       </div>
-      <div className={prefix + '-message'}>{props.message}</div>
-      {props.closable && <Button icon="close" square={true} onClick={close} />}
-    </div>,
+    </Animation>,
     props.container || document.body
   );
 }

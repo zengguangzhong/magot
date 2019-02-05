@@ -13,6 +13,11 @@ export interface PopupProps
   extends component.BaseComponent,
     component.NestedComponent {
   /**
+   * 应用Popup的组件名称
+   */
+  name?: string;
+
+  /**
    * 对齐位置，12个方位，
    * 可选值：`left`,`top`,`right`,`bottom`,`topLeft`,`topRight`,
    * `bottomLeft`,`bottomRight`,`leftTop`,`leftBottom`,`rightTop`,`rightBottom`，
@@ -48,47 +53,62 @@ export interface PopupProps
    * @default true
    */
   clickClosable?: boolean;
+
+  /**
+   * 离场延迟时间，默认100ms
+   * @default 100
+   */
+  leaveDelay?: number;
 }
 
 interface WrappedComponentProps
   extends component.NestedComponent,
     component.MouseEventComponent<HTMLElement> {}
 
-type DispatchBoolean = React.Dispatch<React.SetStateAction<boolean>>;
-type DispatchSize = React.Dispatch<React.SetStateAction<Size>>;
-type DispatchOffset = React.Dispatch<React.SetStateAction<Offset>>;
-
 const defaultProps: Partial<PopupProps> = {
   placement: 'top',
   space: 10,
   trigger: 'hover',
   clickClosable: true,
+  leaveDelay: 100,
 };
 
 function Popup(props: PopupProps) {
   if (!props.children || !props.overlay) return null;
 
-  const [leaving, setLeaving] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const [targetOffset, setTargetOffset] = React.useState({ left: 0, top: 0 });
   const [targetSize, setTargetSize] = React.useState({ width: 0, height: 0 });
 
-  const handleTriggerEnter = getTriggerEnterHandler(
-    setLeaving,
-    setVisible,
-    setTargetOffset,
-    setTargetSize,
-    props.trigger === 'contextMenu'
-  );
-  const handleTriggerLeave = getTriggerLeaveHanlder(setLeaving);
+  let leaveDelayTimer = 0;
+
+  const handleTriggerEnter = (e: React.MouseEvent<HTMLElement>) => {
+    if (leaveDelayTimer) window.clearTimeout(leaveDelayTimer);
+    const isContextMenu = props.trigger === 'contextMenu';
+    if (isContextMenu) e.preventDefault();
+    const target = e.currentTarget;
+    setVisible(true);
+    if (!isContextMenu) {
+      const offset = node.offset(target, document.body);
+      offset && setTargetOffset(offset);
+      setTargetSize({ width: target.offsetWidth, height: target.offsetHeight });
+    } else {
+      const offset = { left: e.pageX, top: e.pageY };
+      setTargetOffset(offset);
+    }
+  };
+
+  const handleTriggerLeave = () => {
+    leaveDelayTimer = window.setTimeout(() => {
+      setVisible(false);
+    }, props.leaveDelay);
+  };
 
   const wrappedProps: WrappedComponentProps = {};
   const overlayProps: OverlayProps = {
     ...props,
-    leaving,
     visible,
     target: { size: targetSize, offset: targetOffset },
-    onLeaved: () => setVisible(false),
   };
 
   const handleStopPropagationClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -113,7 +133,10 @@ function Popup(props: PopupProps) {
       wrappedProps.onMouseEnter = handleTriggerEnter;
       wrappedProps.onMouseLeave = handleTriggerLeave;
       if (props.preventOut) {
-        overlayProps.onMouseEnter = () => setLeaving(false);
+        overlayProps.onMouseEnter = () => {
+          if (leaveDelayTimer) window.clearTimeout(leaveDelayTimer);
+          setVisible(true);
+        };
         overlayProps.onMouseLeave = handleTriggerLeave;
       }
       break;
@@ -121,7 +144,7 @@ function Popup(props: PopupProps) {
   }
 
   useEffect(() => {
-    if (activeGlobalClick(props.trigger) && visible && !leaving) {
+    if (activeGlobalClick(props.trigger) && visible) {
       window.addEventListener('click', handleTriggerLeave);
     }
     return () => window.removeEventListener('click', handleTriggerLeave);
@@ -138,35 +161,6 @@ function Popup(props: PopupProps) {
 function WrappedComponent(props: WrappedComponentProps) {
   const { children, ...otherProps } = props;
   return React.cloneElement(React.Children.only(children), otherProps);
-}
-
-function getTriggerEnterHandler(
-  setLeaving: DispatchBoolean,
-  setVisible: DispatchBoolean,
-  setTargetOffset: DispatchOffset,
-  setTargetSize: DispatchSize,
-  isContextMenu?: boolean
-) {
-  return (e: React.MouseEvent<HTMLElement>) => {
-    if (isContextMenu) e.preventDefault();
-    const target = e.currentTarget;
-    setLeaving(false);
-    setVisible(true);
-    if (!isContextMenu) {
-      const offset = node.offset(target, document.body);
-      offset && setTargetOffset(offset);
-      setTargetSize({ width: target.offsetWidth, height: target.offsetHeight });
-    } else {
-      const offset = { left: e.pageX, top: e.pageY };
-      setTargetOffset(offset);
-    }
-  };
-}
-
-function getTriggerLeaveHanlder(setLeaving: DispatchBoolean) {
-  return () => {
-    setLeaving(true);
-  };
 }
 
 function activeGlobalClick(trigger?: PopupTrigger) {

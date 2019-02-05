@@ -87,3 +87,29 @@
     color: @color;
   }
 }
+
+.@{prefix}-toast-enter {
+  animation: toastEnterAnimation ease-out 300ms;
+}
+
+.@{prefix}-toast-leave {
+  animation: toastLeaveAnimation ease-out 300ms;
+}
+
+@keyframes toastEnterAnimation {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastLeaveAnimation {
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}

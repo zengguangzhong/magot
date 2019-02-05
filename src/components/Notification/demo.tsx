@@ -28,22 +28,22 @@ function NotificationDemo() {
         </Button>
         <Button
           // tslint:disable-next-line
-          onClick={() => Notification.info({ title, message, duration: 0 })}>
+          onClick={() => Notification.info({ title, message })}>
           Info
         </Button>
         <Button
           // tslint:disable-next-line
-          onClick={() => Notification.success({ title, message, duration: 0 })}>
+          onClick={() => Notification.success({ title, message })}>
           Success
         </Button>
         <Button
           // tslint:disable-next-line
-          onClick={() => Notification.error({ title, message, duration: 0 })}>
+          onClick={() => Notification.error({ title, message })}>
           Error
         </Button>
         <Button
           // tslint:disable-next-line
-          onClick={() => Notification.warning({ title, message, duration: 0 })}>
+          onClick={() => Notification.warning({ title, message })}>
           Warning
         </Button>
       </div>

@@ -61,6 +61,7 @@ function Dropdown(props: DropdownProps) {
   return (
     <Popup
       placement={props.placement}
+      space={4}
       preventOut={true}
       trigger={props.trigger}
       overlay={dropdown}>

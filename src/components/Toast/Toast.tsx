@@ -1,8 +1,9 @@
-import React, { ReactNode, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Icon from '../Icon';
 import Button from '../Button';
+import Animation from '../Animation';
 import * as component from '../component';
 import { useTimingToggle } from '../../hooks/timer';
 
@@ -16,7 +17,7 @@ export interface ToastProps extends component.BaseComponent {
   /**
    * 提示消息文案
    */
-  message: string | ReactNode;
+  message: string | React.ReactNode;
 
   /**
    * 消息类型，可选值：`info`, `success`, `warning`, `error`，默认是`info`。
@@ -56,13 +57,11 @@ const defaultProps: Partial<ToastProps> = {
 };
 
 function Toast(props: ToastProps) {
-  const [closed, setClosed] = useState(false);
-  const visible = useTimingToggle(true, props.duration, closed);
+  const [visible, setVisible] = React.useState(true);
+  const close = () => visible && setVisible(false);
 
-  if (closed || !visible) {
-    props.onClose && props.onClose();
-    return null;
-  }
+  const timingEnd = useTimingToggle(false, props.duration, !visible);
+  if (timingEnd) close();
 
   const type = 'toast';
   const prefix = component.getComponentPrefix(type);
@@ -70,18 +69,26 @@ function Toast(props: ToastProps) {
     [`${prefix}-${props.type}`]: !!props.type,
   });
 
-  const onClose = () => setClosed(true);
+  const handleLeave = () => {
+    props.onClose && props.onClose();
+  };
 
   return ReactDOM.createPortal(
-    <div className={cls} style={props.style}>
-      <span className="icon">
-        <Icon name={icons[props.type || 'info']} />
-      </span>
-      <div className="msg">{props.message}</div>
-      {props.closable && (
-        <Button icon="close" square={true} onClick={onClose} />
-      )}
-    </div>,
+    <Animation
+      name={type}
+      visible={visible}
+      removeWhenHidden={true}
+      onLeave={handleLeave}>
+      <div className={cls} style={props.style}>
+        <span className="icon">
+          <Icon name={icons[props.type || 'info']} />
+        </span>
+        <div className="msg">{props.message}</div>
+        {props.closable && (
+          <Button icon="close" square={true} onClick={close} />
+        )}
+      </div>
+    </Animation>,
     props.container || document.body
   );
 }
@@ -107,7 +114,7 @@ function create(props: ToastProps) {
 }
 
 Toast.info = function(
-  message: string | ReactNode,
+  message: string | React.ReactNode,
   duration?: number,
   closable?: boolean,
   onClose?: () => void
@@ -116,7 +123,7 @@ Toast.info = function(
 };
 
 Toast.success = function(
-  message: string | ReactNode,
+  message: string | React.ReactNode,
   duration?: number,
   closable?: boolean,
   onClose?: () => void
@@ -125,7 +132,7 @@ Toast.success = function(
 };
 
 Toast.warning = function(
-  message: string | ReactNode,
+  message: string | React.ReactNode,
   duration?: number,
   closable?: boolean,
   onClose?: () => void
@@ -134,7 +141,7 @@ Toast.warning = function(
 };
 
 Toast.error = function(
-  message: string | ReactNode,
+  message: string | React.ReactNode,
   duration?: number,
   closable?: boolean,
   onClose?: () => void
