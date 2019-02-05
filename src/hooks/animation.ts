@@ -6,7 +6,8 @@ export function useAnimation(
   animationEnd?: () => void,
   isTransition?: boolean
 ) {
-  const [animation, setAnimation] = useState<string | null>(null);
+  const anim = visibility ? 'enter' : 'leave';
+  const [animation, setAnimation] = useState<string | null>(anim);
   useEffect(
     () => {
       const node = nodeRef.current;
@@ -17,7 +18,6 @@ export function useAnimation(
         animationEnd && animationEnd();
       };
       if (node) {
-        const anim = visibility ? 'enter' : 'leave';
         if (animation !== anim) setAnimation(anim);
         node.addEventListener(event, handleEvent, false);
       }
