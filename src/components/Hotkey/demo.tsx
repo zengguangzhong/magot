@@ -21,6 +21,7 @@ function HotkeyDemo() {
       </Link>
       <div className="demo-box">
         <Hotkey
+          active={true}
           hotkeys={hotkeys}
           // tslint:disable-next-line
           onTrigger={data => Toast.info(data.name)}>

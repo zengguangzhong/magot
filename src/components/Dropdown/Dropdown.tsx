@@ -41,6 +41,8 @@ const defaultProps: Partial<DropdownProps> = {
 };
 
 function Dropdown(props: DropdownProps) {
+  if (!React.isValidElement(props.children)) return null;
+
   const type = 'dropdown';
   const prefix = component.getComponentPrefix(type);
   const cls = component.getComponentClasses(type, props);
@@ -51,7 +53,8 @@ function Dropdown(props: DropdownProps) {
     </div>
   );
 
-  const children = React.cloneElement(React.Children.only(props.children), {
+  const element = props.children as React.ReactElement<any>;
+  const children = React.cloneElement(element, {
     disabled: props.disabled,
     className: cx(prefix + '-trigger', {
       [prefix + '-disabled']: !!props.disabled,

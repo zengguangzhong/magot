@@ -160,7 +160,8 @@ function Popup(props: PopupProps) {
 
 function WrappedComponent(props: WrappedComponentProps) {
   const { children, ...otherProps } = props;
-  return React.cloneElement(React.Children.only(children), otherProps);
+  if (!React.isValidElement(children)) return null;
+  return React.cloneElement(children, otherProps);
 }
 
 function activeGlobalClick(trigger?: PopupTrigger) {

@@ -36,7 +36,9 @@ function MenuItemGroup(props: MenuItemGroupProps) {
   });
   if (props.disabled && children) {
     children = Children.toArray(children).map(child => {
-      return cloneElement(Children.only(child), { disabled: props.disabled });
+      if (!React.isValidElement(child)) return null;
+      const element = child as React.ReactElement<any>;
+      return cloneElement(element, { disabled: props.disabled });
     });
   }
   return (

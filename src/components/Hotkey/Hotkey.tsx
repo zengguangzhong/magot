@@ -80,7 +80,7 @@ function Hotkey(props: HotkeyProps) {
     return () => document.removeEventListener('keydown', hanldeKeyDown);
   });
 
-  return React.Children.only(props.children);
+  return <>{props.children}</>;
 }
 
 Hotkey.defaultProps = defaultProps;
