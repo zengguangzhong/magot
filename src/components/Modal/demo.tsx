@@ -35,6 +35,7 @@ function ModalBody() {
 function BasicModal(props: Partial<ModalProps>) {
   const [visible, setVisible] = useState(false);
   const handleOpen = () => setVisible(true);
+  const handleClose = () => setVisible(false);
   return (
     <>
       <Button type="primary" onClick={handleOpen}>
@@ -43,7 +44,8 @@ function BasicModal(props: Partial<ModalProps>) {
       <Modal
         title={`This is a Modal(${props.placement})`}
         placement={props.placement}
-        visible={visible}>
+        visible={visible}
+        onClose={handleClose}>
         <ModalBody />
       </Modal>
     </>
@@ -59,7 +61,10 @@ function FooterModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal with footer
       </Button>
-      <Modal title="This is a Modal with footer" visible={visible}>
+      <Modal
+        title="This is a Modal with footer"
+        visible={visible}
+        onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
@@ -81,7 +86,7 @@ function NoTitleModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal(no title)
       </Button>
-      <Modal visible={visible}>
+      <Modal visible={visible} onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
@@ -103,7 +108,7 @@ function DisableClosableModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal(disable closable)
       </Button>
-      <Modal visible={visible} closable={false}>
+      <Modal visible={visible} closable={false} onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
@@ -125,7 +130,7 @@ function DisableMaskModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal(disable mask)
       </Button>
-      <Modal visible={visible} mask={false}>
+      <Modal visible={visible} mask={false} onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
@@ -147,7 +152,7 @@ function DisableMaskClosableModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal(disable mask closable)
       </Button>
-      <Modal visible={visible} maskClosable={false}>
+      <Modal visible={visible} maskClosable={false} onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
@@ -169,7 +174,7 @@ function DisableEscapeClosableModal() {
       <Button type="primary" onClick={handleOpen}>
         Open Modal(disable escape closable)
       </Button>
-      <Modal visible={visible} escapeClosable={false}>
+      <Modal visible={visible} escapeClosable={false} onClose={handleClose}>
         <ModalBody />
         <Modal.Footer>
           <Button onClick={handleClose}>Cancel</Button>
