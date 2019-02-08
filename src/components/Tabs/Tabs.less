@@ -1,5 +1,111 @@
 @import '../../variable.less';
 
+.@{prefix}-tabs,
+.@{prefix}-tabs-nav-list,
+.@{prefix}-tabs-pane-list {
+  list-style: none;
+  .box();
+  .box-sizing();
+}
+
 .@{prefix}-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.@{prefix}-tabs-nav-wrap {
   position: relative;
+  margin-bottom: @tabs-nav-gutter;
+}
+
+.@{prefix}-tabs-nav-list {
+  border-bottom: 1px solid @tabs-nav-border;
+  .clearfix();
+}
+
+.@{prefix}-tabs-nav-item {
+  float: left;
+  margin-right: @tabs-nav-item-space;
+  padding: @tabs-nav-item-padding;
+  color: @tabs-nav-item-color;
+  font-size: @tabs-nav-item-font-size;
+  transition: color ease-out 300ms;
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover,
+  &.active {
+    color: @tabs-nav-item-color-active;
+  }
+
+  & > .@{prefix}-icon.left {
+    margin-right: @tabs-nav-item-icon-space;
+  }
+  & > .@{prefix}-icon.right {
+    margin-left: @tabs-nav-item-icon-space;
+  }
+}
+
+.@{prefix}-tabs-nav-item-disabled {
+  color: @tabs-nav-item-color-disabled;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.@{prefix}-tabs-nav-active-bar {
+  position: absolute;
+  left: 0;
+  bottom: @tabs-nav-active-bar-thickness / 2;
+  height: @tabs-nav-active-bar-thickness;
+  background-color: @tabs-nav-active-bar-color;
+  transition: all ease-out 300ms;
+  z-index: 1;
+}
+
+.@{prefix}-tabs-pane-list {
+  position: relative;
+  flex: 1;
+}
+
+.@{prefix}-tabs-pane-item {
+  display: none;
+  overflow: hidden;
+  &.active {
+    display: list-item;
+  }
+}
+
+.@{prefix}-tabs-row {
+  flex-direction: row;
+
+  .@{prefix}-tabs-nav-wrap {
+    margin-right: @tabs-nav-gutter;
+    margin-bottom: 0;
+  }
+
+  .@{prefix}-tabs-nav-list {
+    border-right: 1px solid @tabs-nav-border;
+    border-bottom: none;
+  }
+
+  .@{prefix}-tabs-nav-item {
+    float: none;
+    margin-right: 0;
+    margin-bottom: @tabs-nav-item-space-row;
+    padding: @tabs-nav-item-padding-row;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .@{prefix}-tabs-nav-active-bar {
+    left: auto;
+    bottom: auto;
+    top: 0;
+    right: @tabs-nav-active-bar-thickness / 2;
+    width: @tabs-nav-active-bar-thickness;
+  }
 }

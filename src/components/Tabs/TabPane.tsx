@@ -2,13 +2,28 @@ import React from 'react';
 
 import * as component from '../component';
 
-export interface TabPaneProps extends component.BaseComponent {}
+export interface TabPaneProps
+  extends component.NestedComponent,
+    component.IconableComponent,
+    component.DisableComponent {
+  /**
+   * 指定该Tab的名称，name必须唯一
+   */
+  name: string;
 
-const defaultProps: Partial<TabPaneProps> = {};
+  /**
+   * 指定该Tab的标签名
+   */
+  label: string | React.ReactNode;
+}
+
+const defaultProps: Partial<TabPaneProps> = {
+  ...component.getDefaultDisabledProps(),
+};
 
 function TabPane(props: TabPaneProps) {
-  const cls = component.getComponentClasses('tab-pane', props);
-  return <div className={cls} />;
+  console.log(props);
+  return null;
 }
 
 TabPane.defaultProps = defaultProps;

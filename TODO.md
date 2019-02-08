@@ -56,8 +56,7 @@
 - [ ] Switch
 - [ ] Table
 - [ ] TableRow
-- [ ] Tabs
-- [ ] TabPane
+- [x] Tabs
 - [ ] TimePicker
 - [x] Toast
 - [x] Tooltip

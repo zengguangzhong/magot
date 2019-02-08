@@ -1,1 +1,2 @@
-export { default, TabsProps } from './Tabs';
+export { default, TabsProps, TabsMode } from './Tabs';
+export { TabPaneProps } from './TabPane';
