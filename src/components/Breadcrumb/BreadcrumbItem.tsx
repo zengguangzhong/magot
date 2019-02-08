@@ -13,7 +13,7 @@ export interface BreadcrumbItemProps
 const defaultProps: Partial<BreadcrumbItemProps> = {};
 
 function BreadcrumbItem(props: BreadcrumbItemProps) {
-  const sp = component.getComponentClasses('breadcrumb-separator', {});
+  const sp = component.getComponentClasses('breadcrumb-separator');
   const cls = component.getComponentClasses('breadcrumb-item', props);
   return (
     <li className={cls}>

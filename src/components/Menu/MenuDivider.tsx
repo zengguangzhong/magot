@@ -5,7 +5,7 @@ import * as component from '../component';
 import './MenuDivider.less';
 
 function MenuDivider() {
-  const cls = component.getComponentClasses('menu-divider', {});
+  const cls = component.getComponentClasses('menu-divider');
   return <li className={cls} />;
 }
 

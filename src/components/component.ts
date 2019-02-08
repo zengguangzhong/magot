@@ -91,7 +91,7 @@ export function getComponentPrefix(type: string) {
  */
 export function getComponentClasses<
   P extends BaseComponent & SizedComponent & DisableComponent
->(type: string, props: P, ...classes: any[]) {
+>(type: string, props: Partial<P> = {}, ...classes: any[]) {
   const main = getComponentPrefix(type);
   return cx(
     main,
