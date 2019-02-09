@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CheckboxGroup from '../CheckboxGroup';
 import * as component from '../component';
 
 import './Checkbox.less';
@@ -74,5 +75,6 @@ function Checkbox(props: CheckboxProps) {
 }
 
 Checkbox.defaultProps = defaultProps;
+Checkbox.Group = CheckboxGroup;
 
 export default Checkbox;

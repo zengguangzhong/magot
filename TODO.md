@@ -11,7 +11,7 @@
 - [ ] Card
 - [ ] Carousel
 - [x] Checkbox
-- [ ] CheckboxGroup
+- [x] CheckboxGroup
 - [ ] Collapse
 - [ ] ColorPicker
 - [x] ContextMenu

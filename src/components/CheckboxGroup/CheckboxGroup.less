@@ -1,5 +1,8 @@
 @import '../../variable.less';
 
 .@{prefix}-checkbox-group {
-  position: relative;
+  display: inline-block;
+  & > .@{prefix}-checkbox {
+    margin-right: @checkbox-group-item-gutter;
+  }
 }
