@@ -10,7 +10,7 @@
 - [ ] Calendar
 - [ ] Card
 - [ ] Carousel
-- [ ] Checkbox
+- [x] Checkbox
 - [ ] CheckboxGroup
 - [ ] Collapse
 - [ ] ColorPicker
