@@ -1,5 +1,77 @@
 @import '../../variable.less';
 
 .@{prefix}-radio {
+  display: inline-block;
+  cursor: pointer;
+  .box-sizing();
+  .box();
+
+  &:hover {
+    .@{prefix}-radio-control {
+      &::before {
+        border-color: @radio-check-border-color;
+      }
+    }
+  }
+}
+
+.@{prefix}-radio-control {
+  display: inline-block;
   position: relative;
+  line-height: 1;
+  vertical-align: middle;
+
+  & > input[type='radio'] {
+    font-size: 0;
+    opacity: 0.0001;
+    cursor: pointer;
+    .overlay();
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    border-width: @radio-border-width;
+    border-style: @radio-border-style;
+    border-color: @radio-uncheck-border-color;
+    border-radius: 50%;
+    transition: all ease-out 300ms;
+    .square(@radio-control-size);
+    .box-sizing();
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: @radio-checker-top;
+    left: @radio-checker-left;
+    background-color: @radio-checker-color;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all ease-out 200ms 100ms;
+    .square(@radio-checker-size);
+  }
+}
+
+.@{prefix}-radio-text {
+  color: @radio-text-color;
+  font-size: @radio-text-font-size;
+  padding-left: @radio-text-gutter;
+  vertical-align: middle;
+}
+
+.@{prefix}-radio-checked {
+  .@{prefix}-radio-control {
+    &::before {
+      border-color: @radio-check-border-color;
+    }
+    &::after {
+      transform: scale(1);
+    }
+  }
+}
+
+.@{prefix}-radio-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: not-allowed;
 }

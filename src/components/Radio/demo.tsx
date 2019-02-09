@@ -1,6 +1,6 @@
 import React from 'react';
-import Radio from './Radio';
 import { Link } from 'react-router-dom';
+import Radio from './Radio';
 
 function RadioDemo() {
   return (
@@ -9,6 +9,11 @@ function RadioDemo() {
         返回
       </Link>
       <div className="demo-box">
+        <Radio name="demo-checkbox">Radio</Radio>
+        <Radio checked={true}>Radio</Radio>
+        <Radio checked={true} disabled={true}>
+          Radio
+        </Radio>
         <Radio />
       </div>
     </>
