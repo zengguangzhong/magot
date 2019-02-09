@@ -4,6 +4,8 @@ import * as component from '../component';
 
 import './Checkbox.less';
 
+export type CheckboxValue = string | string[] | number;
+
 export interface CheckboxProps
   extends component.BaseComponent,
     component.DisableComponent,
@@ -22,12 +24,12 @@ export interface CheckboxProps
   /**
    * 原生表单value属性
    */
-  value?: string | string[] | number;
+  value?: CheckboxValue;
 
   /**
    * 选中或反选时的回调函数
    */
-  onChange?: (checked?: boolean) => void;
+  onChange?: (checked: boolean, value?: CheckboxValue) => void;
 }
 
 const defaultProps: Partial<CheckboxProps> = {
@@ -48,7 +50,7 @@ function Checkbox(props: CheckboxProps) {
     const newChecked = e.target.checked;
     if (newChecked !== checked) {
       setChecked(newChecked);
-      props.onChange && props.onChange(newChecked);
+      props.onChange && props.onChange(newChecked, props.value);
     }
   };
 
