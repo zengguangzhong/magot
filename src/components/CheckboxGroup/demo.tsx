@@ -16,6 +16,7 @@ function CheckboxGroupDemo() {
     {
       label: 'Option3',
       value: 'option3',
+      disabled: true,
     },
   ];
   return (
@@ -27,6 +28,27 @@ function CheckboxGroupDemo() {
         <Checkbox.Group options={options} onChange={console.log} />
         <br />
         <Checkbox.Group options={options} disabled={true} />
+      </div>
+      <div className="demo-box">
+        <Checkbox.Group onChange={console.log}>
+          <Checkbox value="option1" checked={true}>
+            Option1
+          </Checkbox>
+          <Checkbox value="option2">Option2</Checkbox>
+          <Checkbox value="option3" disabled={true}>
+            Option3
+          </Checkbox>
+        </Checkbox.Group>
+        <br />
+        <Checkbox.Group disabled={true}>
+          <Checkbox value="option1" checked={true}>
+            Option1
+          </Checkbox>
+          <Checkbox value="option2">Option2</Checkbox>
+          <Checkbox value="option3" disabled={true}>
+            Option3
+          </Checkbox>
+        </Checkbox.Group>
       </div>
     </>
   );

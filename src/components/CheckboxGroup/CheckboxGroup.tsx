@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Checkbox, { CheckboxValue } from '../Checkbox';
+import Checkbox, { CheckboxValue, CheckboxProps } from '../Checkbox';
 import * as component from '../component';
 
 import './CheckboxGroup.less';
@@ -18,6 +18,7 @@ export interface CheckboxGroupProps
   extends component.BaseComponent,
     component.DisableComponent {
   options?: CheckboxOption[];
+  children?: Array<React.ReactElement<CheckboxProps>>;
   onChange?: (checkedValues: CheckboxValue[]) => void;
 }
 
@@ -27,10 +28,11 @@ const defaultProps: Partial<CheckboxGroupProps> = {
 };
 
 function CheckboxGroup(props: CheckboxGroupProps) {
+  let children = props.children;
   const { options = [], disabled, onChange } = props;
   const cls = component.getComponentClasses('checkbox-group', props);
 
-  const checked = options.filter(opt => !!opt.checked).map(opt => opt.value);
+  const checked = getCheckedValues(options, children);
   const [checkedValues, setCheckedValues] = React.useState(checked);
 
   const handleItemChange = (checked: boolean, value: CheckboxValue = '') => {
@@ -44,22 +46,44 @@ function CheckboxGroup(props: CheckboxGroupProps) {
     onChange && onChange(newCheckedValues);
   };
 
+  if (children) {
+    children = React.Children.toArray(children).map(child => {
+      let props: Partial<CheckboxProps> = { onChange: handleItemChange };
+      if (disabled) props.disabled = disabled;
+      return React.cloneElement(child, props);
+    });
+  } else {
+    children = options.map((option, index) => {
+      const { label, ...checkboxProps } = option;
+      if (disabled) checkboxProps.disabled = disabled;
+      return (
+        <Checkbox
+          key={option.id || '' + index}
+          {...checkboxProps}
+          onChange={handleItemChange}>
+          {label}
+        </Checkbox>
+      );
+    });
+  }
+
   return (
     <div className={cls} style={props.style}>
-      {options.map((option, index) => {
-        const { label, ...checkboxProps } = option;
-        if (disabled) checkboxProps.disabled = disabled;
-        return (
-          <Checkbox
-            key={option.id || '' + index}
-            {...checkboxProps}
-            onChange={handleItemChange}>
-            {label}
-          </Checkbox>
-        );
-      })}
+      {children}
     </div>
   );
+}
+
+function getCheckedValues(
+  options?: CheckboxOption[],
+  children?: Array<React.ReactElement<CheckboxProps>>
+) {
+  if (children) {
+    return (children || [])
+      .filter(child => !!child.props.checked)
+      .map(child => child.props.value || '');
+  }
+  return (options || []).filter(opt => !!opt.checked).map(opt => opt.value);
 }
 
 CheckboxGroup.defaultProps = defaultProps;
