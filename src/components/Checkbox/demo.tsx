@@ -20,6 +20,7 @@ function CheckboxDemo() {
           onChange={checked => Toast.info(checked ? 'checked' : 'unchecked')}>
           Change Event
         </Checkbox>
+        <Checkbox />
       </div>
     </>
   );
