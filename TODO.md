@@ -53,7 +53,7 @@
 - [ ] Select
 - [ ] SelectOption
 - [ ] Slider
-- [ ] Switch
+- [x] Switch
 - [ ] Table
 - [ ] TableRow
 - [x] Tabs

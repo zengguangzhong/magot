@@ -1,5 +1,92 @@
 @import '../../variable.less';
 
 .@{prefix}-switch {
+  .box();
+  .box-sizing();
+
+  display: inline-block;
   position: relative;
+  background-color: @switch-background-color-off;
+  border-radius: @switch-border-radius;
+  border: none;
+  user-select: none;
+  appearance: none;
+  outline: none;
+  vertical-align: middle;
+  transition: all ease-out 300ms;
+  cursor: pointer;
+  .switchSize(
+    @switch-min-width-base; @switch-height-base; @switch-thumb-size-base
+  );
+
+  & > input[type='checkbox'] {
+    font-size: 0;
+    opacity: 0.0001;
+    cursor: pointer;
+    .overlay();
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: @switch-thumb-space / 2;
+    top: @switch-thumb-space / 2;
+    background-color: @switch-thumb-background-color;
+    border-radius: 50%;
+    transition: all ease-out 300ms;
+    pointer-events: none;
+    cursor: pointer;
+  }
+}
+
+.@{prefix}-switch-text {
+  display: block;
+  color: @switch-text-color;
+  font-size: @switch-text-font-size;
+}
+
+.@{prefix}-switch-checked {
+  background-color: @switch-background-color-on;
+
+  &::after {
+    left: 100%;
+    margin-left: -@switch-thumb-space / 2;
+    transform: translateX(-100%);
+  }
+}
+
+.@{prefix}-switch-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.@{prefix}-switch-sm {
+  .switchSize(@switch-min-width-sm; @switch-height-sm; @switch-thumb-size-sm);
+}
+
+.@{prefix}-switch-lg {
+  .switchSize(@switch-min-width-lg; @switch-height-lg; @switch-thumb-size-lg);
+}
+
+.switchSize(@min-width; @height; @thumb-size) {
+  min-width: @min-width;
+  height: @height;
+  line-height: @height;
+
+  &::after {
+    .square(@thumb-size);
+  }
+
+  .@{prefix}-switch-text {
+    margin-left: @thumb-size + 6px;
+    margin-right: 6px;
+  }
+
+  &.@{prefix}-switch-checked {
+    .@{prefix}-switch-text {
+      margin-left: 6px;
+      margin-right: @thumb-size + 6px;
+    }
+  }
 }
