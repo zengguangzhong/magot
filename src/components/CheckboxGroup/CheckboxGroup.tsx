@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Checkbox, { CheckboxValue, CheckboxProps } from '../Checkbox';
+import Checkbox, { CheckboxProps } from '../Checkbox';
 import * as component from '../component';
 
 import './CheckboxGroup.less';
@@ -8,7 +8,7 @@ import './CheckboxGroup.less';
 export interface CheckboxOption {
   id?: string;
   label?: string;
-  value?: CheckboxValue;
+  value?: string | number;
   disabled?: boolean;
 }
 
@@ -23,7 +23,7 @@ export interface CheckboxGroupProps
   /**
    * 当前选中的值，只能单选
    */
-  value?: CheckboxValue[];
+  value?: Array<string | number>;
 
   /**
    * 复选按钮列表数据
@@ -39,7 +39,7 @@ export interface CheckboxGroupProps
   /**
    * 选中值发生变化时的回调函数
    */
-  onChange?: (value: CheckboxValue[]) => void;
+  onChange?: (value: Array<string | number>) => void;
 }
 
 const defaultProps: Partial<CheckboxGroupProps> = {
@@ -54,11 +54,11 @@ function CheckboxGroup(props: CheckboxGroupProps) {
 
   const [value, setValue] = React.useState(props.value || []);
 
-  const isChecked = (val?: CheckboxValue) => {
+  const isChecked = (val?: string | number) => {
     return val !== void 0 && value.includes(val);
   };
 
-  const handleItemChange = (checked: boolean, val: CheckboxValue = '') => {
+  const handleItemChange = (checked: boolean, val: string | number = '') => {
     let newValue;
     if (checked) {
       newValue = [...value, val];
