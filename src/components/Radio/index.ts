@@ -1,2 +1,2 @@
 export { default, RadioProps, RadioValue } from './Radio';
-export { RadioGroupProps } from '../RadioGroup';
+export { RadioGroupProps, RadioOption } from '../RadioGroup';

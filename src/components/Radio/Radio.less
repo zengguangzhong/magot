@@ -1,6 +1,7 @@
 @import '../../variable.less';
 
 .@{prefix}-radio {
+  position: relative;
   display: inline-block;
   cursor: pointer;
   .box-sizing();
@@ -15,18 +16,29 @@
   }
 }
 
+.@{prefix}-radio-native-control {
+  font-size: 0;
+  opacity: 0.0001;
+  cursor: pointer;
+  .overlay();
+
+  &:checked {
+    & + .@{prefix}-radio-control {
+      &::before {
+        border-color: @radio-check-border-color;
+      }
+      &::after {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
 .@{prefix}-radio-control {
   display: inline-block;
   position: relative;
   line-height: 1;
   vertical-align: middle;
-
-  & > input[type='radio'] {
-    font-size: 0;
-    opacity: 0.0001;
-    cursor: pointer;
-    .overlay();
-  }
 
   &::before {
     content: '';
@@ -39,6 +51,7 @@
     .square(@radio-control-size);
     .box-sizing();
   }
+
   &::after {
     content: '';
     position: absolute;
@@ -57,17 +70,6 @@
   font-size: @radio-text-font-size;
   padding-left: @radio-text-gutter;
   vertical-align: middle;
-}
-
-.@{prefix}-radio-checked {
-  .@{prefix}-radio-control {
-    &::before {
-      border-color: @radio-check-border-color;
-    }
-    &::after {
-      transform: scale(1);
-    }
-  }
 }
 
 .@{prefix}-radio-disabled {
