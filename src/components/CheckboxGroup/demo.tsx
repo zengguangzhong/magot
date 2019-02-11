@@ -7,7 +7,6 @@ function CheckboxGroupDemo() {
     {
       label: 'Option1',
       value: 'option1',
-      checked: true,
     },
     {
       label: 'Option2',
@@ -25,29 +24,36 @@ function CheckboxGroupDemo() {
         返回
       </Link>
       <div className="demo-box">
-        <Checkbox.Group options={options} onChange={console.log} />
+        <Checkbox.Group
+          options={options}
+          value={['option1']}
+          onChange={console.log}
+        />
         <br />
-        <Checkbox.Group options={options} disabled={true} />
+        <Checkbox.Group options={options} value={['option1']} disabled={true} />
       </div>
       <div className="demo-box">
-        <Checkbox.Group onChange={console.log}>
-          <Checkbox value="option1" checked={true}>
-            Option1
-          </Checkbox>
+        <Checkbox.Group value={['option1']} onChange={console.log}>
+          <Checkbox value="option1">Option1</Checkbox>
+          <Checkbox value="option2">Option2</Checkbox>
+          <Checkbox value="option3">Option3</Checkbox>
+        </Checkbox.Group>
+        <br />
+        <Checkbox.Group value={['option1']} disabled={true}>
+          <Checkbox value="option1">Option1</Checkbox>
           <Checkbox value="option2">Option2</Checkbox>
           <Checkbox value="option3" disabled={true}>
             Option3
           </Checkbox>
         </Checkbox.Group>
         <br />
-        <Checkbox.Group disabled={true}>
-          <Checkbox value="option1" checked={true}>
-            Option1
-          </Checkbox>
-          <Checkbox value="option2">Option2</Checkbox>
-          <Checkbox value="option3" disabled={true}>
-            Option3
-          </Checkbox>
+        <Checkbox.Group
+          name="demo-checkbox-group"
+          value={['option1']}
+          onChange={console.log}>
+          <Checkbox value="option1">Native Group1</Checkbox>
+          <Checkbox value="option2">Native Group2</Checkbox>
+          <Checkbox value="option3">Native Group3</Checkbox>
         </Checkbox.Group>
       </div>
     </>

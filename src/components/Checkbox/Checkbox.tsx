@@ -12,10 +12,18 @@ export interface CheckboxProps
     component.DisableComponent,
     component.NestedComponent {
   /**
-   * 当前是否选中，默认不选中
+   * 当前是否选中，用于受控组件，默认不选中
+   * @see https://reactjs.org/docs/forms.html?#controlled-components
    * @default false
    */
   checked?: boolean;
+
+  /**
+   * 默认是否选中，用于非受控组件
+   * @see https://reactjs.org/docs/uncontrolled-components.html
+   * @default false
+   */
+  defaultChecked?: boolean;
 
   /**
    * 原生表单name属性
@@ -35,38 +43,32 @@ export interface CheckboxProps
 
 const defaultProps: Partial<CheckboxProps> = {
   ...component.getDefaultDisabledProps(),
-  checked: false,
+  defaultChecked: false,
 };
 
 function Checkbox(props: CheckboxProps) {
-  const [checked, setChecked] = React.useState(!!props.checked);
-
   const type = 'checkbox';
   const prefix = component.getComponentPrefix(type);
-  const cls = component.getComponentClasses(type, props, {
-    [`${prefix}-checked`]: checked,
-  });
+  const cls = component.getComponentClasses(type, props);
 
+  const isControlled = 'checked' in props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = e.target.checked;
-    if (newChecked !== checked) {
-      setChecked(newChecked);
-      props.onChange && props.onChange(newChecked, props.value);
-    }
+    props.onChange && props.onChange(e.target.checked, props.value);
   };
 
   return (
     <label className={cls}>
-      <span className={prefix + '-control'}>
-        <input
-          type="checkbox"
-          name={props.name}
-          value={props.value}
-          checked={checked}
-          disabled={!!props.disabled}
-          onChange={handleChange}
-        />
-      </span>
+      <input
+        className={prefix + '-native-control'}
+        type="checkbox"
+        name={props.name}
+        value={props.value}
+        disabled={props.disabled}
+        checked={isControlled ? props.checked : undefined}
+        defaultChecked={!isControlled ? props.defaultChecked : undefined}
+        onChange={handleChange}
+      />
+      <span className={prefix + '-control'} />
       {props.children && (
         <span className={prefix + '-text'}>{props.children}</span>
       )}

@@ -1,6 +1,7 @@
 @import '../../variable.less';
 
 .@{prefix}-checkbox {
+  position: relative;
   display: inline-block;
   cursor: pointer;
   .box-sizing();
@@ -15,18 +16,41 @@
   }
 }
 
+.@{prefix}-checkbox-native-control {
+  font-size: 0;
+  opacity: 0.0001;
+  cursor: pointer;
+  .overlay();
+
+  &:checked {
+    & + .@{prefix}-checkbox-control {
+      &::before {
+        border-color: @checkbox-check-border-color;
+        background-color: @checkbox-check-background-color;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: @checkbox-checker-top;
+        left: @checkbox-checker-left;
+        width: @checkbox-checker-width;
+        height: @checkbox-checker-height;
+        transform: rotate(45deg);
+        border: @checkbox-checker-border-width solid
+          @checkbox-checker-border-color;
+        border-top: 0;
+        border-left: 0;
+        transition: all ease-out 200ms 100ms;
+      }
+    }
+  }
+}
+
 .@{prefix}-checkbox-control {
   display: inline-block;
   position: relative;
   line-height: 1;
   vertical-align: middle;
-
-  & > input[type='checkbox'] {
-    font-size: 0;
-    opacity: 0.0001;
-    cursor: pointer;
-    .overlay();
-  }
 
   &::before {
     content: '';
@@ -47,29 +71,6 @@
   font-size: @checkbox-text-font-size;
   padding-left: @checkbox-text-gutter;
   vertical-align: middle;
-}
-
-.@{prefix}-checkbox-checked {
-  .@{prefix}-checkbox-control {
-    &::before {
-      border-color: @checkbox-check-border-color;
-      background-color: @checkbox-check-background-color;
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      top: @checkbox-checker-top;
-      left: @checkbox-checker-left;
-      width: @checkbox-checker-width;
-      height: @checkbox-checker-height;
-      transform: rotate(45deg);
-      border: @checkbox-checker-border-width solid
-        @checkbox-checker-border-color;
-      border-top: 0;
-      border-left: 0;
-      transition: all ease-out 200ms 100ms;
-    }
-  }
 }
 
 .@{prefix}-checkbox-disabled {
