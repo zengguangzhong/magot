@@ -48,6 +48,15 @@ function RadioDemo() {
         <Radio name="demo-radio-native-group">Radio Group</Radio>
         <Radio name="demo-radio-native-group">Radio Group</Radio>
       </div>
+      <div className="demo-box">
+        <Radio.Button>Radio Button</Radio.Button>
+        <Radio.Button defaultChecked={true}>Radio Button</Radio.Button>
+        <Radio.Button defaultChecked={true} disabled={true}>
+          Radio Button
+        </Radio.Button>
+        <Radio.Button size="small">Radio Button</Radio.Button>
+        <Radio.Button size="large">Radio Button</Radio.Button>
+      </div>
     </>
   );
 }

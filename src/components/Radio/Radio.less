@@ -19,8 +19,12 @@
 .@{prefix}-radio-native-control {
   font-size: 0;
   opacity: 0.0001;
+  appearance: none;
+  outline: none;
   cursor: pointer;
   .overlay();
+  .box-sizing();
+  .box();
 
   &:checked {
     & + .@{prefix}-radio-control {
@@ -66,6 +70,7 @@
 }
 
 .@{prefix}-radio-text {
+  position: relative;
   color: @radio-text-color;
   font-size: @radio-text-font-size;
   padding-left: @radio-text-gutter;

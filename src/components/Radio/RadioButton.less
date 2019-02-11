@@ -1,0 +1,97 @@
+@import '../../variable.less';
+
+.@{prefix}-radio-button {
+  .@{prefix}-radio-native-control {
+    opacity: 1;
+    background: none;
+    border: @radio-btn-default-border-width @radio-btn-default-border-style
+      transparent;
+    transition: all ease-out 200ms;
+    z-index: 1;
+    .radioButtonColor(
+      @radio-btn-default-color; @radio-btn-default-background-color;
+        @radio-btn-default-border-color
+    );
+  }
+
+  .@{prefix}-radio-control {
+    display: none;
+  }
+
+  .@{prefix}-radio-text {
+    display: block;
+    height: 100%;
+    padding: 0;
+    transition: color ease-out 200ms;
+    z-index: 2;
+  }
+
+  .radioButtonSize(
+    @radio-btn-padding-base; @radio-btn-height-base; @radio-btn-font-size-base;
+      @radio-btn-border-radius-base
+  );
+
+  &:hover {
+    .@{prefix}-radio-text {
+      color: @radio-btn-hover-color;
+    }
+  }
+
+  &.@{prefix}-radio-disabled {
+    opacity: 1;
+    .@{prefix}-radio-native-control {
+      .radioButtonColor(
+        @radio-btn-disabled-color; @radio-btn-disabled-background-color;
+          @radio-btn-disabled-border-color
+      );
+    }
+    .@{prefix}-radio-native-control:checked {
+      background-color: fade(@radio-btn-checked-background-color, 15%);
+    }
+  }
+
+  &:not(.@{prefix}-radio-disabled) {
+    .@{prefix}-radio-native-control:checked {
+      .radioButtonColor(
+        @radio-btn-checked-color; @radio-btn-checked-background-color;
+          @radio-btn-checked-border-color
+      );
+    }
+  }
+}
+
+.@{prefix}-radio-button-sm {
+  .radioButtonSize(
+    @radio-btn-padding-sm; @radio-btn-height-sm; @radio-btn-font-size-sm;
+      @radio-btn-border-radius-sm
+  );
+}
+
+.@{prefix}-radio-button-lg {
+  .radioButtonSize(
+    @radio-btn-padding-lg; @radio-btn-height-lg; @radio-btn-font-size-lg;
+      @radio-btn-border-radius-lg
+  );
+}
+
+.radioButtonSize(@padding; @height; @font-size; @border-radius) {
+  padding: @padding;
+  height: @height;
+
+  .@{prefix}-radio-native-control {
+    border-radius: @border-radius;
+  }
+
+  .@{prefix}-radio-text {
+    line-height: @height - 2px;
+    font-size: @font-size;
+  }
+}
+
+.radioButtonColor(@color; @background; @border) {
+  background-color: @background;
+  border-color: @border;
+  & ~ .@{prefix}-radio-text {
+    color: @color;
+  }
+}

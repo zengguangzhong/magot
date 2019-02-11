@@ -1,9 +1,10 @@
 import React from 'react';
 
+import './Radio.less';
+
+import RadioButton from './RadioButton';
 import RadioGroup from '../RadioGroup';
 import * as component from '../component';
-
-import './Radio.less';
 
 export type RadioValue = string | string[] | number;
 
@@ -77,6 +78,7 @@ function Radio(props: RadioProps) {
 }
 
 Radio.defaultProps = defaultProps;
+Radio.Button = RadioButton;
 Radio.Group = RadioGroup;
 
 export default Radio;
