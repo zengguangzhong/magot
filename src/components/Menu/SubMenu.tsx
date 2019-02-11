@@ -21,14 +21,9 @@ export interface SubMenuProps
   label: string;
 
   /**
-   * 子菜单标识
-   */
-  name?: string;
-
-  /**
    * 子菜单内容值
    */
-  value?: any;
+  value?: string | number;
 
   /**
    * 子菜单项数据列表
@@ -52,7 +47,7 @@ function SubMenu(props: SubMenuProps) {
     <ItemClickContext.Consumer>
       {onClick => {
         const handleClick = () => {
-          if (onClick) onClick(props.name, props.value);
+          if (onClick) onClick(props.value);
         };
         return (
           <Popup

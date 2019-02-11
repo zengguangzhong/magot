@@ -21,13 +21,9 @@ export interface MenuItemData {
    */
   label: string;
   /**
-   * 菜单项标识
-   */
-  name?: string;
-  /**
    * 菜单项内容值
    */
-  value?: any;
+  value?: string | number;
   icon?: string;
   iconPosition?: IconPosition;
   iconSize?: number;

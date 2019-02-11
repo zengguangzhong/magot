@@ -29,14 +29,14 @@ export default function MenuItems(props: MenuItemsProps) {
           }
           // SubMenu
           return (
-            <SubMenu key={item.name || '' + index} {...item} items={items} />
+            <SubMenu key={'' + (item.value || index)} {...item} items={items} />
           );
         }
 
         // MenuItem
         const { label, ...props } = item;
         return (
-          <MenuItem key={props.name || '' + index} {...props}>
+          <MenuItem key={'' + (props.value || index)} {...props}>
             {label}
           </MenuItem>
         );

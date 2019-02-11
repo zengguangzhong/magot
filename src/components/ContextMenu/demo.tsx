@@ -7,13 +7,13 @@ import Button from '../Button';
 function ContextMenuDemo() {
   const menu = (
     <Menu>
-      <Menu.Item name="copy">Copy</Menu.Item>
-      <Menu.Item name="paste">Paste</Menu.Item>
+      <Menu.Item value="copy">Copy</Menu.Item>
+      <Menu.Item value="paste">Paste</Menu.Item>
       <Menu.Divider />
-      <Menu.Item name="save" icon="publish">
+      <Menu.Item value="save" icon="publish">
         Save
       </Menu.Item>
-      <Menu.Item name="download" icon="download">
+      <Menu.Item value="download" icon="download">
         Download
       </Menu.Item>
     </Menu>

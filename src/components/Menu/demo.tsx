@@ -4,18 +4,18 @@ import Menu, { MenuItemArray } from './Menu';
 import Toast from '../Toast';
 
 const items1: MenuItemArray = [
-  { label: 'Menu Item 1', name: 'menu_item_1' },
-  { label: 'Menu Item 2', name: 'menu_item_2' },
-  { label: 'Menu Item 3', name: 'menu_item_3', disabled: true },
-  { label: 'Menu Item 4', name: 'menu_item_4' },
+  { label: 'Menu Item 1', value: 'menu_item_1' },
+  { label: 'Menu Item 2', value: 'menu_item_2' },
+  { label: 'Menu Item 3', value: 'menu_item_3', disabled: true },
+  { label: 'Menu Item 4', value: 'menu_item_4' },
 ];
 
 const items2: MenuItemArray = [
-  { label: 'Menu Item 1', name: 'menu_item_1', icon: 'home' },
-  { label: 'Menu Item 2', name: 'menu_item_2', icon: 'store' },
-  { label: 'Menu Item 3', name: 'menu_item_3', icon: 'chat', disabled: true },
+  { label: 'Menu Item 1', value: 'menu_item_1', icon: 'home' },
+  { label: 'Menu Item 2', value: 'menu_item_2', icon: 'store' },
+  { label: 'Menu Item 3', value: 'menu_item_3', icon: 'chat', disabled: true },
   { divider: true },
-  { label: 'Menu Item 4', name: 'menu_item_4', icon: 'setting' },
+  { label: 'Menu Item 4', value: 'menu_item_4', icon: 'setting' },
 ];
 
 const items3: MenuItemArray = [
@@ -24,37 +24,37 @@ const items3: MenuItemArray = [
 ];
 
 const items4: MenuItemArray = [
-  { label: 'Sub Menu 1', name: 'sub_menu_1', icon: 'home', items: items1 },
-  { label: 'Sub Menu 2', name: 'sub_menu_2', icon: 'store', items: items3 },
+  { label: 'Sub Menu 1', value: 'sub_menu_1', icon: 'home', items: items1 },
+  { label: 'Sub Menu 2', value: 'sub_menu_2', icon: 'store', items: items3 },
   {
     label: 'Sub Menu 3',
-    name: 'sub_menu_3',
+    value: 'sub_menu_3',
     icon: 'chat',
     items: [
-      { label: 'Menu Item 1', name: 'menu_item_1' },
-      { label: 'Menu Item 2', name: 'menu_item_2' },
+      { label: 'Menu Item 1', value: 'menu_item_1' },
+      { label: 'Menu Item 2', value: 'menu_item_2' },
       {
         label: 'Menu Item 3',
-        name: 'menu_item_3',
+        value: 'menu_item_3',
         items: [
-          { label: 'Menu Item 3.1', name: 'menu_item_3.1' },
-          { label: 'Menu Item 3.2', name: 'menu_item_3.2' },
+          { label: 'Menu Item 3.1', value: 'menu_item_3.1' },
+          { label: 'Menu Item 3.2', value: 'menu_item_3.2' },
         ],
       },
     ],
   },
   {
     label: 'Sub Menu 4',
-    name: 'sub_menu_4',
+    value: 'sub_menu_4',
     icon: 'setting',
     disabled: true,
     items: [],
   },
-  { label: 'Menu Item 5', name: 'menu_item_5', icon: 'money' },
+  { label: 'Menu Item 5', value: 'menu_item_5', icon: 'money' },
 ];
 
-function handleItemClick(name?: string, value?: any) {
-  Toast.info(name + ':' + value);
+function handleItemClick(value?: string | number) {
+  Toast.info(value);
 }
 
 function MenuDemo() {
@@ -67,12 +67,12 @@ function MenuDemo() {
       <div className="demo-box demo-float">
         {/* basic usage */}
         <Menu onItemClick={handleItemClick}>
-          <Menu.Item name="menu_item_1">Menu Item 1</Menu.Item>
-          <Menu.Item name="menu_item_2">Menu Item 2</Menu.Item>
-          <Menu.Item name="menu_item_3" disabled={true}>
+          <Menu.Item value="menu_item_1">Menu Item 1</Menu.Item>
+          <Menu.Item value="menu_item_2">Menu Item 2</Menu.Item>
+          <Menu.Item value="menu_item_3" disabled={true}>
             Menu Item 3
           </Menu.Item>
-          <Menu.Item name="menu_item_4">Menu Item 4</Menu.Item>
+          <Menu.Item value="menu_item_4">Menu Item 4</Menu.Item>
         </Menu>
         {/* basic usage, have icons */}
         <Menu>

@@ -1,8 +1,6 @@
 import React from 'react';
 
-export type ItemClickHandler =
-  | ((name?: string, value?: any) => void)
-  | undefined;
+export type ItemClickHandler = ((value?: string | number) => void) | undefined;
 
 const context = React.createContext<ItemClickHandler>(undefined);
 

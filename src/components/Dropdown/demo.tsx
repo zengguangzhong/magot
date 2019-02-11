@@ -27,20 +27,20 @@ function DropdownDemo() {
     </Menu>
   );
   const menus2: MenuItemArray = [
-    { label: 'dropdown item 1', name: 'dropdown_item_1' },
-    { label: 'dropdown item 2', name: 'dropdown_item_2' },
+    { label: 'dropdown item 1', value: 'dropdown_item_1' },
+    { label: 'dropdown item 2', value: 'dropdown_item_2' },
     {
       label: 'dropdown item 3',
-      name: 'dropdown_item_3',
+      value: 'dropdown_item_3',
       items: [
-        { label: 'dropdown item 3.1', name: 'dropdown_item_3.1' },
-        { label: 'dropdown item 3.2', name: 'dropdown_item_3.2' },
+        { label: 'dropdown item 3.1', value: 'dropdown_item_3.1' },
+        { label: 'dropdown item 3.2', value: 'dropdown_item_3.2' },
       ],
     },
-    { label: 'dropdown item 4', name: 'dropdown_item_4', disabled: true },
+    { label: 'dropdown item 4', value: 'dropdown_item_4', disabled: true },
   ];
-  const handleItemClick = (name?: string) => {
-    Toast.info('You click on ' + name);
+  const handleItemClick = (value?: string | number) => {
+    Toast.info('You click on ' + value);
   };
   return (
     <>

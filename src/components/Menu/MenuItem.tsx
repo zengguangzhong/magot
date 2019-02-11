@@ -12,14 +12,9 @@ export interface MenuItemProps
     component.NestedComponent,
     component.IconableComponent {
   /**
-   * 菜单项标识
-   */
-  name?: string;
-
-  /**
    * 菜单项内容值
    */
-  value?: any;
+  value?: string | number;
 }
 
 const defaultProps: Partial<MenuItemProps> = {
@@ -32,7 +27,7 @@ function MenuItem(props: MenuItemProps) {
     <ItemClickContext.Consumer>
       {onClick => {
         const handleClick = () => {
-          if (onClick) onClick(props.name, props.value);
+          if (onClick) onClick(props.value);
         };
         return (
           <li className={cls} style={props.style} onClick={handleClick}>
