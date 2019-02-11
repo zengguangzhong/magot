@@ -1,5 +1,8 @@
 @import '../../variable.less';
 
 .@{prefix}-radio-group {
-  position: relative;
+  display: inline-block;
+  & > .@{prefix}-radio {
+    margin-right: @radio-group-item-gutter;
+  }
 }
