@@ -6,8 +6,6 @@ import RadioButton from './RadioButton';
 import RadioGroup from '../RadioGroup';
 import * as component from '../component';
 
-export type RadioValue = string | string[] | number;
-
 export interface RadioProps
   extends component.BaseComponent,
     component.DisableComponent,
@@ -34,12 +32,12 @@ export interface RadioProps
   /**
    * 原生表单value属性
    */
-  value?: RadioValue;
+  value?: string | number;
 
   /**
    * 当选中时的回调函数，仅在checked时才会触发
    */
-  onChange?: (value?: RadioValue) => void;
+  onChange?: (value?: string | number) => void;
 }
 
 const defaultProps: Partial<RadioProps> = {
