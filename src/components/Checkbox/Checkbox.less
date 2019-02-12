@@ -40,7 +40,7 @@
           @checkbox-checker-border-color;
         border-top: 0;
         border-left: 0;
-        transition: all ease-out 200ms 100ms;
+        .transition(@duration: 200ms; @delay: 100ms);
       }
     }
   }
@@ -59,7 +59,7 @@
     border-color: @checkbox-uncheck-border-color;
     background-color: @checkbox-uncheck-background-color;
     border-radius: @checkbox-border-radius;
-    transition: all ease-out 300ms;
+    .transition();
     .square(@checkbox-control-size);
     .box-sizing();
   }

@@ -29,8 +29,8 @@
   padding: @tabs-nav-item-padding;
   color: @tabs-nav-item-color;
   font-size: @tabs-nav-item-font-size;
-  transition: color ease-out 300ms;
   cursor: pointer;
+  .transition(color);
 
   &:last-child {
     margin-right: 0;
@@ -61,8 +61,8 @@
   bottom: @tabs-nav-active-bar-thickness / 2;
   height: @tabs-nav-active-bar-thickness;
   background-color: @tabs-nav-active-bar-color;
-  transition: all ease-out 300ms;
   z-index: 1;
+  .transition();
 }
 
 .@{prefix}-tabs-pane-list {

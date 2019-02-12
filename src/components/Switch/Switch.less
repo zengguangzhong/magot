@@ -13,8 +13,8 @@
   appearance: none;
   outline: none;
   vertical-align: middle;
-  transition: all ease-out 300ms;
   cursor: pointer;
+  .transition();
   .switchSize(
     @switch-min-width-base; @switch-height-base; @switch-thumb-size-base
   );
@@ -33,9 +33,9 @@
     top: @switch-thumb-space / 2;
     background-color: @switch-thumb-background-color;
     border-radius: 50%;
-    transition: all ease-out 300ms;
     pointer-events: none;
     cursor: pointer;
+    .transition();
   }
 }
 

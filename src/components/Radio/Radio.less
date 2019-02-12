@@ -50,7 +50,7 @@
     border-style: @radio-border-style;
     border-color: @radio-uncheck-border-color;
     border-radius: 50%;
-    transition: all ease-out 300ms;
+    .transition();
     .square(@radio-control-size);
     .box-sizing();
   }
@@ -63,7 +63,7 @@
     background-color: @radio-checker-color;
     border-radius: 50%;
     transform: scale(0);
-    transition: all ease-out 200ms 100ms;
+    .transition(@duration: 200ms; @delay: 100ms);
     .square(@radio-checker-size);
   }
 }

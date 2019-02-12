@@ -5,8 +5,8 @@
     opacity: 1;
     background: none;
     border: @radio-btn-border-width @radio-btn-border-style transparent;
-    transition: all ease-out 200ms;
     z-index: 1;
+    .transition();
     .radioButtonColor(
       @radio-btn-default-color; @radio-btn-default-background-color;
         @radio-btn-default-border-color
@@ -21,8 +21,8 @@
     display: block;
     height: 100%;
     padding: 0;
-    transition: color ease-out 200ms;
     z-index: 2;
+    .transition();
   }
 
   .radioButtonSize(
