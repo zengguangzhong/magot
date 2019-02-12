@@ -51,6 +51,7 @@ function Popover(props: PopoverProps) {
   );
   return (
     <Popup
+      className={prefix + '-popup'}
       placement={props.placement}
       preventOut={true}
       clickClosable={false}

@@ -24,14 +24,19 @@ export interface TooltipProps
 }
 
 function Tooltip(props: TooltipProps) {
-  const cls = component.getComponentClasses('tooltip', props);
+  const type = 'tooltip';
+  const prefix = component.getComponentPrefix(type);
+  const cls = component.getComponentClasses(type, props);
   const tooltip = (
     <div className={cls} style={{ ...props.style }}>
       {props.title}
     </div>
   );
   return (
-    <Popup placement={props.placement} overlay={tooltip}>
+    <Popup
+      className={prefix + '-popup'}
+      placement={props.placement}
+      overlay={tooltip}>
       {props.children}
     </Popup>
   );

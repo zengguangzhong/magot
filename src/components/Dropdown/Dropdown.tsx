@@ -63,6 +63,7 @@ function Dropdown(props: DropdownProps) {
 
   return (
     <Popup
+      className={prefix + '-popup'}
       placement={props.placement}
       space={4}
       preventOut={true}

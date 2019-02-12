@@ -51,6 +51,7 @@ function SubMenu(props: SubMenuProps) {
         };
         return (
           <Popup
+            className={prefix + '-popup'}
             placement="rightTop"
             space={4}
             preventOut={true}
