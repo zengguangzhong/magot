@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 
 import ButtonGroup from '../ButtonGroup';
 import Iconable from '../Icon/Iconable';
@@ -53,8 +53,7 @@ interface BaseButtonProps
 
 interface NativeButtonProps
   extends BaseButtonProps,
-    component.MouseEventComponent<HTMLButtonElement>,
-    HTMLAttributes<HTMLButtonElement> {
+    component.MouseEventComponent<HTMLButtonElement> {
   /**
    * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
    * @default button
@@ -64,8 +63,7 @@ interface NativeButtonProps
 
 interface LinkButtonProps
   extends BaseButtonProps,
-    component.MouseEventComponent<HTMLAnchorElement>,
-    HTMLAttributes<HTMLAnchorElement> {
+    component.MouseEventComponent<HTMLAnchorElement> {
   /**
    * 点击按钮跳转的链接，指定此属性后的行为将和`<a>`链接一致
    */
@@ -78,21 +76,6 @@ interface LinkButtonProps
 }
 
 export type ButtonProps = NativeButtonProps | LinkButtonProps;
-
-const componentProps = [
-  'block',
-  'children',
-  'className',
-  'circular',
-  'icon',
-  'iconPosition',
-  'iconSize',
-  'loading',
-  'size',
-  'square',
-  'type',
-  'htmlType',
-];
 
 const defaultProps: Partial<ButtonProps> = {
   ...component.getDefaultDisabledProps(),
@@ -123,28 +106,49 @@ function Button(props: ButtonProps) {
 }
 
 function NativeButton(props: NativeButtonProps) {
-  const nativeProps = component.getNativeProps<
-    NativeButtonProps,
-    HTMLAttributes<HTMLButtonElement>
-  >(props, componentProps);
+  const {
+    block,
+    children,
+    className,
+    circular,
+    icon,
+    iconPosition,
+    iconSize,
+    loading,
+    size,
+    square,
+    type,
+    htmlType,
+    ...nativeProps
+  } = props;
   return (
     <button
-      className={getClasses(props)}
-      type={props.htmlType || 'button'}
-      {...nativeProps}>
-      <ButtonContent {...props}>{props.children}</ButtonContent>
+      {...nativeProps}
+      type={htmlType || 'button'}
+      className={getClasses(props)}>
+      <ButtonContent {...props}>{children}</ButtonContent>
     </button>
   );
 }
 
 function LinkButton(props: LinkButtonProps) {
-  const nativeProps = component.getNativeProps<
-    LinkButtonProps,
-    HTMLAttributes<HTMLAnchorElement>
-  >(props, componentProps);
+  const {
+    block,
+    children,
+    className,
+    circular,
+    icon,
+    iconPosition,
+    iconSize,
+    loading,
+    size,
+    square,
+    type,
+    ...nativeProps
+  } = props;
   return (
-    <a className={getClasses(props)} {...nativeProps}>
-      <ButtonContent {...props}>{props.children}</ButtonContent>
+    <a {...nativeProps} className={getClasses(props)}>
+      <ButtonContent {...props}>{children}</ButtonContent>
     </a>
   );
 }

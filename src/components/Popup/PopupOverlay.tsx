@@ -20,21 +20,23 @@ export interface OverlayProps
   target: { size: Size; offset: Offset };
 }
 
-const componentProps = [
-  'name',
-  'placement',
-  'overlay',
-  'preventOut',
-  'clickClosable',
-  'space',
-  'target',
-  'trigger',
-  'visible',
-  'leaveDelay',
-];
-
 function PopupOverlay(props: OverlayProps) {
-  const { visible, overlay, target, space } = props;
+  const {
+    className,
+    style,
+    children,
+    name,
+    placement: placementProp,
+    visible,
+    overlay,
+    target,
+    trigger,
+    space,
+    preventOut,
+    clickClosable,
+    leaveDelay,
+    ...mouseEventProps
+  } = props;
   const overlayProps = overlay.props;
 
   const popupRef = React.useRef<HTMLDivElement>(null);
@@ -49,7 +51,7 @@ function PopupOverlay(props: OverlayProps) {
   });
 
   let position;
-  let placement = props.placement || 'top';
+  let placement = placementProp || 'top';
   if (visibility) {
     const adjust = getAdjustment(space);
     const placementFn = getPlacement(space);
@@ -61,18 +63,14 @@ function PopupOverlay(props: OverlayProps) {
   const cls = component.getComponentClasses(type, props, {
     popped: visibility,
   });
-  const nativeProps = component.getNativeProps<
-    OverlayProps,
-    component.MouseEventComponent<HTMLElement>
-  >(props, componentProps);
 
   return ReactDOM.createPortal(
     <Animation
       ref={popupRef}
-      name={props.name || type}
+      name={name || type}
       visible={visible}
       removeWhenHidden={true}>
-      <div {...nativeProps} className={cls} style={position}>
+      <div {...mouseEventProps} className={cls} style={position}>
         {React.cloneElement(overlay, {
           className: cx(overlayProps.className, placement.toLowerCase()),
         })}

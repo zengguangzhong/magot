@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import { IconPosition } from './Icon/Iconable';
 
@@ -15,11 +15,11 @@ export interface BaseComponent {
   /**
    * 高优先级的内联自定义样式，可用于覆盖某些默认样式
    */
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export interface NestedComponent {
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface SizedComponent {
@@ -123,24 +123,4 @@ export function getDefaultSizedProps(): SizedComponent {
  */
 export function getDefaultDisabledProps(): DisableComponent {
   return { disabled: false };
-}
-
-/**
- *
- *
- * @export
- * @template P
- * @template N
- * @param {P} props
- * @param {string[]} excludeProps
- * @returns {N}
- */
-export function getNativeProps<P, N>(props: P, excludeProps: string[]) {
-  const nativeProps: Record<string, any> = {};
-  for (const key in props) {
-    if (excludeProps.indexOf(key) === -1) {
-      nativeProps[key] = props[key];
-    }
-  }
-  return nativeProps as N;
 }
