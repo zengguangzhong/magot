@@ -18,7 +18,7 @@ export interface SubMenuProps
   /**
    * 子菜单标签
    */
-  label: string;
+  label?: string | number;
 
   /**
    * 子菜单内容值
@@ -69,7 +69,9 @@ function SubMenu(props: SubMenuProps) {
                 name={props.icon}
                 position={props.iconPosition}
                 size={props.iconSize}>
-                <span className="label">{props.label}</span>
+                <span className="label">
+                  {props.label !== void 0 ? props.label : props.value}
+                </span>
               </Iconable>
               <Icon name="forward" />
             </li>
