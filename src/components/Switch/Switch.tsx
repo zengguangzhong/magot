@@ -5,8 +5,7 @@ import * as component from '../component';
 import './Switch.less';
 
 export interface SwitchProps
-  extends component.BaseComponent,
-    component.DisableComponent,
+  extends component.FormComponent<HTMLInputElement>,
     component.SizedComponent {
   /**
    * 是否选中，默认不选中
@@ -25,14 +24,13 @@ export interface SwitchProps
   offText?: string | React.ReactNode;
 
   /**
-   * 组件名称，即表单元素的name属性
-   */
-  name?: string;
-
-  /**
    * 切换时的回调函数
    */
-  onChange?: (checked: boolean) => void;
+  onChange?: (
+    checked: boolean,
+    value: any,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 interface SwitchTextProps {
@@ -48,6 +46,16 @@ const defaultProps: Partial<SwitchProps> = {
 };
 
 function Switch(props: SwitchProps) {
+  const {
+    className,
+    style,
+    size,
+    onText,
+    offText,
+    onChange,
+    ...formProps
+  } = props;
+
   const [checked, setChecked] = React.useState(!!props.checked);
 
   const type = 'switch';
@@ -56,11 +64,11 @@ function Switch(props: SwitchProps) {
     [`${prefix}-checked`]: checked,
   });
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = evt.target.checked;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newChecked = e.target.checked;
     if (newChecked !== checked) {
       setChecked(newChecked);
-      props.onChange && props.onChange(newChecked);
+      onChange && onChange(newChecked, props.value, e);
     }
   };
 
@@ -69,19 +77,14 @@ function Switch(props: SwitchProps) {
       className={cls}
       type="button"
       disabled={props.disabled}
-      style={props.style}>
+      style={style}>
       <input
+        {...formProps}
         type="checkbox"
-        name={props.name}
         checked={checked}
-        disabled={props.disabled}
         onChange={handleChange}
       />
-      <SwitchText
-        checked={checked}
-        onText={props.onText}
-        offText={props.offText}
-      />
+      <SwitchText checked={checked} onText={onText} offText={offText} />
     </button>
   );
 }

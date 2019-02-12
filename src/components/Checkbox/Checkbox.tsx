@@ -6,8 +6,7 @@ import * as component from '../component';
 import './Checkbox.less';
 
 export interface CheckboxProps
-  extends component.BaseComponent,
-    component.DisableComponent,
+  extends component.FormComponent<HTMLInputElement>,
     component.NestedComponent {
   /**
    * 当前是否选中，用于受控组件，默认不选中
@@ -24,19 +23,13 @@ export interface CheckboxProps
   defaultChecked?: boolean;
 
   /**
-   * 原生表单name属性
-   */
-  name?: string;
-
-  /**
-   * 原生表单value属性
-   */
-  value?: string | number;
-
-  /**
    * 选中或反选时的回调函数
    */
-  onChange?: (checked: boolean, value?: string | number) => void;
+  onChange?: (
+    checked: boolean,
+    value: any,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 const defaultProps: Partial<CheckboxProps> = {
@@ -45,31 +38,29 @@ const defaultProps: Partial<CheckboxProps> = {
 };
 
 function Checkbox(props: CheckboxProps) {
+  const isControlled = 'checked' in props;
+  const { children, className, style, onChange, ...formProps } = props;
+
   const type = 'checkbox';
   const prefix = component.getComponentPrefix(type);
   const cls = component.getComponentClasses(type, props);
 
-  const isControlled = 'checked' in props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onChange && props.onChange(e.target.checked, props.value);
+    onChange && onChange(e.target.checked, props.value, e);
   };
 
   return (
-    <label className={cls}>
+    <label className={cls} style={style}>
       <input
-        className={prefix + '-native-control'}
+        {...formProps}
         type="checkbox"
-        name={props.name}
-        value={props.value}
-        disabled={props.disabled}
+        className={prefix + '-native-control'}
         checked={isControlled ? props.checked : undefined}
         defaultChecked={!isControlled ? props.defaultChecked : undefined}
         onChange={handleChange}
       />
       <span className={prefix + '-control'} />
-      {props.children && (
-        <span className={prefix + '-text'}>{props.children}</span>
-      )}
+      {children && <span className={prefix + '-text'}>{children}</span>}
     </label>
   );
 }

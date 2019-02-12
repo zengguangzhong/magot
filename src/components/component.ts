@@ -51,6 +51,53 @@ export interface MouseEventComponent<T extends HTMLElement> {
   onMouseOut?: (e: React.MouseEvent<T>) => void;
 }
 
+export interface KeyboardEventComponent<T extends HTMLElement> {
+  onKeyDown?: (e: React.KeyboardEvent<T>) => void;
+  onKeyPress?: (e: React.KeyboardEvent<T>) => void;
+  onKeyUp?: (e: React.KeyboardEvent<T>) => void;
+}
+
+export interface FormEventComponent<T extends HTMLElement> {
+  onChange?: (e: any, ...extra: any[]) => void;
+  onInput?: (e: React.FormEvent<T>) => void;
+  onReset?: (e: React.FormEvent<T>) => void;
+  onSubmit?: (e: React.FormEvent<T>) => void;
+  onInvalid?: (e: React.FormEvent<T>) => void;
+}
+
+export interface FocusEventComponent<T extends HTMLElement> {
+  onFocus?: (e: React.FocusEvent<T>) => void;
+  onBlur?: (e: React.FocusEvent<T>) => void;
+}
+
+export interface FormComponent<T extends HTMLElement>
+  extends BaseComponent,
+    FormEventComponent<T>,
+    FocusEventComponent<T>,
+    DisableComponent {
+  /**
+   * 表单ID属性
+   */
+  id?: string;
+
+  /**
+   * 表单name属性
+   */
+  name?: string;
+
+  /**
+   * 表单value，用于受控表单组件
+   * @see https://reactjs.org/docs/forms.html?#controlled-components
+   */
+  value?: any;
+
+  /**
+   * 表单默认value，用于非受控表单组件
+   * @see https://reactjs.org/docs/uncontrolled-components.html
+   */
+  defaultValue?: any;
+}
+
 export interface IconableComponent {
   /**
    * 图标
