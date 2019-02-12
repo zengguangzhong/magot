@@ -140,6 +140,34 @@ function MenuDemo() {
           <Menu.SubMenu icon="setting" label="Sub Menu 4" disabled={true} />
           <Menu.Item icon="money">Menu Item 5</Menu.Item>
         </Menu>
+        <Menu width={240}>
+          <Menu.ItemGroup title="Custom Item Renderer">
+            <Menu.Item value="menu_item_1">
+              <span style={{ float: 'left' }}>Menu Item 1</span>
+              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
+                No.1
+              </span>
+            </Menu.Item>
+            <Menu.Item value="menu_item_2">
+              <span style={{ float: 'left' }}>Menu Item 2</span>
+              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
+                No.2
+              </span>
+            </Menu.Item>
+            <Menu.Item value="menu_item_3">
+              <span style={{ float: 'left' }}>Menu Item 3</span>
+              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
+                No.3
+              </span>
+            </Menu.Item>
+            <Menu.Item value="menu_item_4">
+              <span style={{ float: 'left' }}>Menu Item 4</span>
+              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
+                No.4
+              </span>
+            </Menu.Item>
+          </Menu.ItemGroup>
+        </Menu>
       </div>
       {/* render by data */}
       <div className="demo-box demo-float">
