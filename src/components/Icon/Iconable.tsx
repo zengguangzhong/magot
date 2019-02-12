@@ -5,7 +5,9 @@ import * as component from '../component';
 
 export type IconPosition = 'left' | 'right';
 
-export interface IconableProps extends component.NestedComponent {
+export interface IconableProps
+  extends component.BaseComponent,
+    component.NestedComponent {
   /**
    * 图标
    */
@@ -26,6 +28,11 @@ export interface IconableProps extends component.NestedComponent {
    * 图标大小，即`Icon`组件的`fontSize`属性
    */
   size?: number;
+
+  /**
+   * 图标点击后的回调函数
+   */
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const defaultProps: Partial<IconableProps> = {
@@ -35,8 +42,10 @@ const defaultProps: Partial<IconableProps> = {
 function Iconable(props: IconableProps) {
   const { name, position, children } = props;
   const items = [children];
-  const cls = position ? cx({ [position]: !!children }) : '';
-  let icon = name ? <Icon key="1" {...props} className={cls} /> : null;
+  const cls = position ? { [position]: !!children } : '';
+  let icon = name ? (
+    <Icon key="1" {...props} className={cx(cls, props.className)} />
+  ) : null;
   position === 'right' ? items.push(icon) : items.unshift(icon);
   return <>{items}</>;
 }

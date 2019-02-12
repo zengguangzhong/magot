@@ -20,6 +20,11 @@ export interface IconProps extends component.BaseComponent {
    * 图标大小，即iconfont的font-size值
    */
   size?: number;
+
+  /**
+   * 图标点击后的回调函数
+   */
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const defaultProps: Partial<IconProps> = {
@@ -37,7 +42,13 @@ function Icon(props: IconProps) {
       spin: !!props.spin,
     }
   );
-  return <i className={cls} style={{ ...props.style, fontSize: props.size }} />;
+  return (
+    <i
+      className={cls}
+      style={{ ...props.style, fontSize: props.size }}
+      onClick={props.onClick}
+    />
+  );
 }
 
 Icon.defaultProps = defaultProps;
