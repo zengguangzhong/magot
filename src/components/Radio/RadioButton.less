@@ -4,8 +4,7 @@
   .@{prefix}-radio-native-control {
     opacity: 1;
     background: none;
-    border: @radio-btn-default-border-width @radio-btn-default-border-style
-      transparent;
+    border: @radio-btn-border-width @radio-btn-border-style transparent;
     transition: all ease-out 200ms;
     z-index: 1;
     .radioButtonColor(
@@ -33,7 +32,7 @@
 
   &:hover {
     .@{prefix}-radio-text {
-      color: @radio-btn-hover-color;
+      color: @radio-btn-color-hover;
     }
   }
 
@@ -41,8 +40,8 @@
     opacity: 1;
     .@{prefix}-radio-native-control {
       .radioButtonColor(
-        @radio-btn-disabled-color; @radio-btn-disabled-background-color;
-          @radio-btn-disabled-border-color
+        @radio-btn-color-disabled; @radio-btn-background-color-disabled;
+          @radio-btn-border-color-disabled
       );
     }
     .@{prefix}-radio-native-control:checked {
@@ -83,7 +82,7 @@
   }
 
   .@{prefix}-radio-text {
-    line-height: @height - 2px;
+    line-height: @height - @radio-btn-border-width * 2;
     font-size: @font-size;
   }
 }

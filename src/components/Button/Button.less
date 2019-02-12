@@ -51,7 +51,7 @@
   background-image: none;
   font-family: none;
   font-weight: @btn-font-weight;
-  border: @btn-default-border-width @btn-default-border-style transparent;
+  border: @btn-border-width @btn-border-style transparent;
   outline: @btn-outline;
   box-shadow: @btn-box-shadow;
   text-decoration: @btn-decoration;
@@ -169,13 +169,13 @@
 
 .@{prefix}-button-disabled {
   .btn-disabled(
-    @btn-disabled-color; @btn-disabled-background-color;
-      @btn-disabled-border-color;
+    @btn-color-disabled; @btn-background-color-disabled;
+      @btn-border-color-disabled;
   );
 
   &.@{prefix}-button-text,
   &.@{prefix}-button-link {
-    .btn-disabled(@btn-disabled-color; transparent; transparent;);
+    .btn-disabled(@btn-color-disabled; transparent; transparent;);
   }
 
   box-shadow: none;
