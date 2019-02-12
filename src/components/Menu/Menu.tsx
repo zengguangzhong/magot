@@ -66,6 +66,11 @@ export interface MenuProps
   border?: boolean;
 
   /**
+   * 指定菜单的宽度，若不指定，则随着内容自由伸缩
+   */
+  width?: number;
+
+  /**
    * 菜单项数据列表
    * @default null
    */
@@ -92,7 +97,7 @@ function Menu(props: MenuProps) {
 
   return (
     <ItemClickContext.Provider value={onItemClick}>
-      <ul className={cls} style={style}>
+      <ul className={cls} style={{ ...style, width: props.width }}>
         {items ? <MenuItems items={items} /> : children}
       </ul>
     </ItemClickContext.Provider>
