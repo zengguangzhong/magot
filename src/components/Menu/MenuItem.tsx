@@ -12,6 +12,11 @@ export interface MenuItemProps
     component.NestedComponent,
     component.IconableComponent {
   /**
+   * 选项标签
+   */
+  label?: string | number;
+
+  /**
    * 菜单项内容值
    */
   value?: string | number;
@@ -23,6 +28,12 @@ const defaultProps: Partial<MenuItemProps> = {
 
 function MenuItem(props: MenuItemProps) {
   const cls = component.getComponentClasses('menu-item', props);
+  const label =
+    props.children !== void 0
+      ? props.children
+      : props.label !== void 0
+      ? props.label
+      : props.value;
   return (
     <ItemClickContext.Consumer>
       {onClick => {
@@ -35,7 +46,7 @@ function MenuItem(props: MenuItemProps) {
               name={props.icon}
               position={props.iconPosition}
               size={props.iconSize}>
-              {props.children}
+              {label}
             </Iconable>
           </li>
         );
