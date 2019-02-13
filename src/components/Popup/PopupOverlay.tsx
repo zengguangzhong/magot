@@ -35,6 +35,8 @@ function PopupOverlay(props: OverlayProps) {
     preventOut,
     clickClosable,
     leaveDelay,
+    onOpen,
+    onClose,
     ...mouseEventProps
   } = props;
   const overlayProps = overlay.props;

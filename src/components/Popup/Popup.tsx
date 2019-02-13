@@ -59,6 +59,16 @@ export interface PopupProps
    * @default 100
    */
   leaveDelay?: number;
+
+  /**
+   * 弹出层打开时的回调函数
+   */
+  onOpen?: () => void;
+
+  /**
+   * 弹出层关闭时的回调函数
+   */
+  onClose?: () => void;
 }
 
 interface WrappedComponentProps
@@ -96,11 +106,13 @@ function Popup(props: PopupProps) {
       const offset = { left: e.pageX, top: e.pageY };
       setTargetOffset(offset);
     }
+    props.onOpen && props.onOpen();
   };
 
   const handleTriggerLeave = () => {
     leaveDelayTimer = window.setTimeout(() => {
       setVisible(false);
+      props.onClose && props.onClose();
     }, props.leaveDelay);
   };
 
