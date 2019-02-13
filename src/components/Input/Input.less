@@ -1,5 +1,131 @@
 @import '../../variable.less';
 
 .@{prefix}-input {
+  .box();
+  .box-sizing();
+
   position: relative;
+  display: inline-block;
+}
+
+.@{prefix}-input-control {
+  .box();
+  .box-sizing();
+  .placeholder();
+
+  width: 100%;
+  appearance: none;
+  outline: 0;
+  touch-action: manipulation;
+  background-image: none;
+  border-width: @input-border-width;
+  border-style: @input-border-style;
+  .transition();
+
+  .inputSize(
+    @input-padding-base; @input-height-base; @input-font-size-base;
+      @input-border-radius-base; @input-icon-size-base
+  );
+  .inputColor(@input-color; @input-background-color; @input-border-color);
+
+  &:hover,
+  &:focus {
+    border-color: @input-border-color-active;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &[type='password']::-ms-reveal {
+    display: none;
+  }
+}
+
+.@{prefix}-input-icon {
+  position: absolute;
+  color: @input-icon-color;
+  .iconSize(@input-icon-size-base; @input-height-base; @input-padding-base);
+}
+
+.@{prefix}-input-clear {
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  .transition();
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.@{prefix}-input-sm {
+  .@{prefix}-input-control {
+    .inputSize(
+      @input-padding-sm; @input-height-sm; @input-font-size-sm;
+        @input-border-radius-sm; @input-icon-size-sm
+    );
+  }
+  .@{prefix}-input-icon {
+    .iconSize(@input-icon-size-sm; @input-height-sm; @input-padding-sm);
+  }
+}
+
+.@{prefix}-input-lg {
+  .@{prefix}-input-control {
+    .inputSize(
+      @input-padding-lg; @input-height-lg; @input-font-size-lg;
+        @input-border-radius-lg; @input-icon-size-lg
+    );
+  }
+  .@{prefix}-input-icon {
+    .iconSize(@input-icon-size-lg; @input-height-lg; @input-padding-lg);
+  }
+}
+
+.@{prefix}-input-disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+
+  .@{prefix}-input-control {
+    .inputColor(
+      @input-color-disabled; @input-background-color-disabled;
+        @input-border-color-disabled
+    );
+  }
+}
+
+.inputSize(@padding; @height; @font-size; @border-radius; @icon-size) {
+  padding: 0 @padding;
+  height: @height;
+  font-size: @font-size;
+  border-radius: @border-radius;
+
+  &:not(:first-child) {
+    padding-left: @padding * 2 + @icon-size;
+  }
+  &:not(:last-child) {
+    padding-right: @padding * 2 + @icon-size;
+  }
+}
+
+.iconSize(@size; @input-height; @input-padding) {
+  font-size: @size;
+  top: (@input-height - @size) / 2;
+  right: @input-padding;
+  &.left {
+    right: auto;
+    left: @input-padding;
+  }
+}
+
+.inputColor(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
 }
