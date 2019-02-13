@@ -37,8 +37,8 @@ function MenuItem(props: MenuItemProps) {
   return (
     <ItemClickContext.Consumer>
       {onClick => {
-        const handleClick = () => {
-          if (onClick) onClick(props.value);
+        const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+          if (onClick) onClick(props, e);
         };
         return (
           <li className={cls} style={props.style} onClick={handleClick}>

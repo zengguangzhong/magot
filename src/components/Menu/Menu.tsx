@@ -19,7 +19,7 @@ export interface MenuItemData {
   /**
    * 菜单项标签
    */
-  label: string;
+  label?: string | number;
   /**
    * 菜单项内容值
    */

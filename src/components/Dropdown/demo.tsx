@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
-import Menu, { MenuItemArray } from '../Menu';
+import Menu, { MenuItemArray, SubMenuProps, MenuItemProps } from '../Menu';
 import Button from '../Button';
 import Toast from '../Toast';
 
@@ -39,8 +39,8 @@ function DropdownDemo() {
     },
     { label: 'dropdown item 4', value: 'dropdown_item_4', disabled: true },
   ];
-  const handleItemClick = (value?: string | number) => {
-    Toast.info('You click on ' + value);
+  const handleItemClick = (item: MenuItemProps | SubMenuProps) => {
+    Toast.info('You click on ' + item.value);
   };
   return (
     <>

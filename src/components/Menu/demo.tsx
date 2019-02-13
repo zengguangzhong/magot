@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu, { MenuItemArray } from './Menu';
+import { SubMenuProps } from './SubMenu';
+import { MenuItemProps } from './MenuItem';
 import Toast from '../Toast';
 
 const items1: MenuItemArray = [
@@ -53,8 +55,9 @@ const items4: MenuItemArray = [
   { label: 'Menu Item 5', value: 'menu_item_5', icon: 'money' },
 ];
 
-function handleItemClick(value?: string | number) {
-  Toast.info(value);
+function handleItemClick(item: MenuItemProps | SubMenuProps) {
+  console.log(item);
+  Toast.info(item.value);
 }
 
 function MenuDemo() {
@@ -140,7 +143,7 @@ function MenuDemo() {
           <Menu.SubMenu icon="setting" label="Sub Menu 4" disabled={true} />
           <Menu.Item icon="money">Menu Item 5</Menu.Item>
         </Menu>
-        <Menu width={240}>
+        <Menu width={240} onItemClick={handleItemClick}>
           <Menu.ItemGroup title="Custom Item Renderer">
             <Menu.Item value="menu_item_1">
               <span style={{ float: 'left' }}>Menu Item 1</span>
