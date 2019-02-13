@@ -75,7 +75,7 @@ export interface FileButtonProps extends PickButtonProps {
    * 选择文件后（文件类型匹配、大小匹配），触发onChange回调
    * 当multiple=true，则参数是FileList
    */
-  onChange?: (file: File | FileList) => void;
+  onChange?: (file: any) => void;
 
   /**
    * 抛出错误

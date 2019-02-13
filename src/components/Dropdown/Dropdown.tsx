@@ -34,6 +34,10 @@ export interface DropdownProps
   menu: React.ReactElement<MenuProps>;
 }
 
+interface TriggerProps
+  extends component.BaseComponent,
+    component.DisableComponent {}
+
 const defaultProps: Partial<DropdownProps> = {
   ...component.getDefaultDisabledProps(),
   placement: 'bottomLeft',
@@ -53,8 +57,8 @@ function Dropdown(props: DropdownProps) {
     </div>
   );
 
-  const element = props.children as React.ReactElement<any>;
-  const children = React.cloneElement(element, {
+  const element = props.children;
+  const children = React.cloneElement<TriggerProps>(element, {
     disabled: props.disabled,
     className: cx(prefix + '-trigger', {
       [prefix + '-disabled']: !!props.disabled,

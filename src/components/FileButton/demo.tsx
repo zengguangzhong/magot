@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 
 function FileButtonDemo() {
   const [selectedFile, setSelectedFile] = useState('');
-  const selectFile = function(file: any) {
+  const selectFile = function(file: File) {
     setSelectedFile(file.name);
   };
 
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
-  const selectFiles = function(files: any) {
+  const selectFiles = function(files: FileList) {
     const filenames = [];
     for (let i = 0; i < files.length; i++) {
       const file = files.item(i);
-      filenames.push(file.name);
+      file && filenames.push(file.name);
     }
     setSelectedFiles(filenames);
   };
