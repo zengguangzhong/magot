@@ -19,11 +19,11 @@ export interface MenuItemData {
   /**
    * 菜单项标签
    */
-  label?: string | number;
+  label?: React.ReactText;
   /**
    * 菜单项内容值
    */
-  value?: string | number;
+  value?: React.ReactText;
   icon?: string;
   iconPosition?: IconPosition;
   iconSize?: number;

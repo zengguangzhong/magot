@@ -128,7 +128,7 @@ function Tabs(props: TabsProps) {
     [`${prefix}-${props.mode}`]: !!props.mode,
   });
 
-  const activeBarStyle: Record<string, any> = {
+  const activeBarStyle: Record<string, React.ReactText | undefined> = {
     width: activeBarThickness,
     transform: `translateX(${activeBarTranslate}px)`,
   };

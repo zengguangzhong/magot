@@ -28,7 +28,7 @@ export interface SwitchProps
    */
   onChange?: (
     checked: boolean,
-    value: any,
+    value: React.ReactText | undefined,
     e: React.ChangeEvent<HTMLInputElement>
   ) => void;
 }

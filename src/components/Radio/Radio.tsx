@@ -26,7 +26,10 @@ export interface RadioProps
   /**
    * 当选中时的回调函数，仅在checked时才会触发
    */
-  onChange?: (value: any, e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: React.ReactText | undefined,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 const defaultProps: Partial<RadioProps> = {

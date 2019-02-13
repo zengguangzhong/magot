@@ -89,7 +89,7 @@ export interface FormComponent<T extends HTMLElement>
    * 表单value，用于受控表单组件
    * @see https://reactjs.org/docs/forms.html?#controlled-components
    */
-  value?: any;
+  value?: React.ReactText;
 
   /**
    * 表单默认value，用于非受控表单组件

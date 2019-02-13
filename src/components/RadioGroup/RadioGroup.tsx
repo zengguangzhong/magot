@@ -9,7 +9,7 @@ import './RadioGroup.less';
 export interface RadioOption {
   id?: string;
   label?: string;
-  value?: string | number;
+  value?: React.ReactText;
   disabled?: boolean;
 }
 
@@ -25,7 +25,7 @@ export interface RadioGroupProps
   /**
    * 当前选中的值，只能单选
    */
-  value?: string | number;
+  value?: React.ReactText;
 
   /**
    * 单选按钮列表数据
@@ -48,7 +48,7 @@ export interface RadioGroupProps
   /**
    * 选中值发生变化时的回调函数
    */
-  onChange?: (value?: string | number) => void;
+  onChange?: (value?: React.ReactText) => void;
 }
 
 const defaultProps: Partial<RadioGroupProps> = {
@@ -62,7 +62,7 @@ function RadioGroup(props: RadioGroupProps) {
   const [value, setValue] = React.useState(props.value);
   const { options = [], isButtonMode, disabled, onChange } = props;
 
-  const handleItemChange = (val: string | number = '') => {
+  const handleItemChange = (val: React.ReactText = '') => {
     if (val !== value) {
       setValue(val);
       onChange && onChange(val);

@@ -18,12 +18,12 @@ export interface SubMenuProps
   /**
    * 子菜单标签
    */
-  label?: string | number;
+  label?: React.ReactText;
 
   /**
    * 子菜单内容值
    */
-  value?: string | number;
+  value?: React.ReactText;
 
   /**
    * 子菜单项数据列表

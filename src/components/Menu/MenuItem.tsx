@@ -14,12 +14,12 @@ export interface MenuItemProps
   /**
    * 选项标签
    */
-  label?: string | number;
+  label?: React.ReactText;
 
   /**
    * 菜单项内容值
    */
-  value?: string | number;
+  value?: React.ReactText;
 }
 
 const defaultProps: Partial<MenuItemProps> = {
@@ -28,7 +28,7 @@ const defaultProps: Partial<MenuItemProps> = {
 
 function MenuItem(props: MenuItemProps) {
   const cls = component.getComponentClasses('menu-item', props);
-  const label =
+  const children =
     props.children !== void 0
       ? props.children
       : props.label !== void 0
@@ -46,7 +46,7 @@ function MenuItem(props: MenuItemProps) {
               name={props.icon}
               position={props.iconPosition}
               size={props.iconSize}>
-              {label}
+              {children}
             </Iconable>
           </li>
         );
