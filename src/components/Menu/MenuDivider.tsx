@@ -4,8 +4,10 @@ import * as component from '../component';
 
 import './MenuDivider.less';
 
-function MenuDivider() {
-  const cls = component.getComponentClasses('menu-divider');
+export interface MenuDividerProps {}
+
+function MenuDivider(props: MenuDividerProps) {
+  const cls = component.getComponentClasses('menu-divider', props);
   return <li className={cls} />;
 }
 

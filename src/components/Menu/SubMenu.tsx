@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Menu, { MenuItemArray } from './Menu';
+import Menu, { MenuItemArray, MenuChildren } from './Menu';
 import MenuItems from './MenuItems';
 import ItemClickContext from './ItemClickContext';
 import Popup from '../Popup';
@@ -30,6 +30,11 @@ export interface SubMenuProps
    * @default null
    */
   items?: MenuItemArray | null;
+
+  /**
+   * 子菜单项组件
+   */
+  children?: MenuChildren;
 }
 
 const defaultProps: Partial<SubMenuProps> = {

@@ -10,7 +10,7 @@ export interface ButtonGroupProps
     component.DisableComponent,
     component.SizedComponent,
     component.NestedComponent {
-  children: Array<React.ReactElement<ButtonProps>>;
+  children: Array<React.FunctionComponentElement<ButtonProps>>;
 }
 
 const defaultProps: Partial<ButtonGroupProps> = {

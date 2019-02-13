@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
 
-import { MenuItemArray } from './Menu';
+import { MenuItemArray, MenuChildren } from './Menu';
 import MenuItems from './MenuItems';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
@@ -22,6 +22,11 @@ export interface MenuItemGroupProps
    * @default null
    */
   items?: MenuItemArray | null;
+
+  /**
+   * 子菜单项组件
+   */
+  children?: MenuChildren;
 }
 
 const defaultProps: Partial<MenuItemGroupProps> = {
@@ -36,8 +41,7 @@ function MenuItemGroup(props: MenuItemGroupProps) {
   });
   if (props.disabled && children) {
     children = Children.toArray(children).map(child => {
-      if (!React.isValidElement(child)) return null;
-      const element = child as React.ReactElement<any>;
+      const element = child as React.FunctionComponentElement<any>;
       return cloneElement(element, { disabled: props.disabled });
     });
   }

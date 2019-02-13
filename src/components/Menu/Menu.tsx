@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SubMenu from './SubMenu';
-import MenuItem from './MenuItem';
-import MenuItemGroup from './MenuItemGroup';
-import MenuDivider from './MenuDivider';
+import SubMenu, { SubMenuProps } from './SubMenu';
+import MenuItem, { MenuItemProps } from './MenuItem';
+import MenuItemGroup, { MenuItemGroupProps } from './MenuItemGroup';
+import MenuDivider, { MenuDividerProps } from './MenuDivider';
 import MenuItems from './MenuItems';
 import ItemClickContext, { ItemClickHandler } from './ItemClickContext';
 import { IconPosition } from '../Icon/Iconable';
@@ -56,6 +56,18 @@ export type MenuItemArray = Array<
   MenuItemData | MenuDividerData | MenuItemGroupData | SubMenuData
 >;
 
+export type MenuChildren =
+  | React.FunctionComponentElement<MenuItemProps>
+  | React.FunctionComponentElement<MenuDividerProps>
+  | React.FunctionComponentElement<MenuItemGroupProps>
+  | React.FunctionComponentElement<SubMenuProps>
+  | Array<
+      | React.FunctionComponentElement<MenuItemProps>
+      | React.FunctionComponentElement<MenuDividerProps>
+      | React.FunctionComponentElement<MenuItemGroupProps>
+      | React.FunctionComponentElement<SubMenuProps>
+    >;
+
 export interface MenuProps
   extends component.BaseComponent,
     component.NestedComponent {
@@ -75,6 +87,11 @@ export interface MenuProps
    * @default null
    */
   items?: MenuItemArray | null;
+
+  /**
+   * 菜单项组件
+   */
+  children?: MenuChildren;
 
   /**
    * 菜单项点击事件的回调函数
