@@ -35,6 +35,7 @@ function PopupOverlay(props: OverlayProps) {
     preventOut,
     clickClosable,
     leaveDelay,
+    removeWhenClose,
     onOpen,
     onClose,
     ...mouseEventProps
@@ -71,7 +72,7 @@ function PopupOverlay(props: OverlayProps) {
       ref={popupRef}
       name={name || type}
       visible={visible}
-      removeWhenHidden={true}>
+      removeWhenHidden={removeWhenClose}>
       <div {...mouseEventProps} className={cls} style={position}>
         {React.cloneElement(overlay, {
           className: cx(overlayProps.className, placement.toLowerCase()),

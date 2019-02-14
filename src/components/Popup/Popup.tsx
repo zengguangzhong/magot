@@ -61,6 +61,12 @@ export interface PopupProps
   leaveDelay?: number;
 
   /**
+   * 弹出层关闭时，是否立刻移除组件
+   * @default false
+   */
+  removeWhenClose?: boolean;
+
+  /**
    * 弹出层打开时的回调函数
    */
   onOpen?: () => void;
@@ -81,6 +87,7 @@ const defaultProps: Partial<PopupProps> = {
   trigger: 'hover',
   clickClosable: true,
   leaveDelay: 100,
+  removeWhenClose: false,
 };
 
 function Popup(props: PopupProps) {
