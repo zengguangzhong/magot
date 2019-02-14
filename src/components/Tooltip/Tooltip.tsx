@@ -36,6 +36,7 @@ function Tooltip(props: TooltipProps) {
     <Popup
       className={prefix + '-popup'}
       placement={props.placement}
+      removeWhenClose={true}
       overlay={tooltip}>
       {props.children}
     </Popup>
