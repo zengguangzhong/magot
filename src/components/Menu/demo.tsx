@@ -1,63 +1,85 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu, { MenuItemArray } from './Menu';
-import { SubMenuProps } from './SubMenu';
-import { MenuItemProps } from './MenuItem';
-import Toast from '../Toast';
 
-const items1: MenuItemArray = [
-  { label: 'Menu Item 1', value: 'menu_item_1' },
-  { label: 'Menu Item 2', value: 'menu_item_2' },
-  { label: 'Menu Item 3', value: 'menu_item_3', disabled: true },
-  { label: 'Menu Item 4', value: 'menu_item_4' },
-];
+function range(count: number) {
+  return Array.from({ length: count }, (v, i) => {
+    v;
+    return i + 1;
+  });
+}
 
-const items2: MenuItemArray = [
-  { label: 'Menu Item 1', value: 'menu_item_1', icon: 'home' },
-  { label: 'Menu Item 2', value: 'menu_item_2', icon: 'store' },
-  { label: 'Menu Item 3', value: 'menu_item_3', icon: 'chat', disabled: true },
-  { divider: true },
-  { label: 'Menu Item 4', value: 'menu_item_4', icon: 'setting' },
-];
+const itemIcons = ['home', 'image', 'chat', 'setting', 'qrcode'];
+const groupIcons = ['folder', 'store'];
+
+const items1: MenuItemArray = getMenuItemsData();
+const items2: MenuItemArray = getMenuItemsData(true);
 
 const items3: MenuItemArray = [
-  { title: 'Group 1', icon: 'folder', items: items1 },
-  { title: 'Group 2', icon: 'store', disabled: true, items: items2 },
+  { title: 'Group 1', icon: 'folder', items: getMenuItemsData(true, 1) },
+  {
+    title: 'Group 2',
+    icon: 'store',
+    disabled: true,
+    items: getMenuItemsData(true, 2),
+  },
 ];
 
 const items4: MenuItemArray = [
-  { label: 'Sub Menu 1', value: 'sub_menu_1', icon: 'home', items: items1 },
-  { label: 'Sub Menu 2', value: 'sub_menu_2', icon: 'store', items: items3 },
+  {
+    label: 'Sub Menu 1',
+    value: 'sub_menu_1',
+    icon: itemIcons[0],
+    items: getMenuItemsData(false, 1),
+  },
+  {
+    label: 'Sub Menu 2',
+    value: 'sub_menu_2',
+    icon: itemIcons[1],
+    items: getMenuItemsData(false, 2),
+  },
   {
     label: 'Sub Menu 3',
     value: 'sub_menu_3',
-    icon: 'chat',
-    items: [
-      { label: 'Menu Item 1', value: 'menu_item_1' },
-      { label: 'Menu Item 2', value: 'menu_item_2' },
-      {
-        label: 'Menu Item 3',
-        value: 'menu_item_3',
-        items: [
-          { label: 'Menu Item 3.1', value: 'menu_item_3.1' },
-          { label: 'Menu Item 3.2', value: 'menu_item_3.2' },
-        ],
-      },
-    ],
+    icon: itemIcons[2],
+    items: getMenuItemsData(false, 3),
   },
   {
     label: 'Sub Menu 4',
     value: 'sub_menu_4',
-    icon: 'setting',
+    icon: itemIcons[3],
     disabled: true,
-    items: [],
+    items: getMenuItemsData(false, 4),
   },
-  { label: 'Menu Item 5', value: 'menu_item_5', icon: 'money' },
 ];
 
-function handleItemClick(item: MenuItemProps | SubMenuProps) {
-  console.log(item);
-  Toast.info(item.value);
+function getMenuItemsData(withIcon?: boolean, prefix?: number) {
+  return range(5).map((v, i) => {
+    if (v === 4) return { divider: true };
+    const key = prefix !== void 0 ? prefix + '.' + v : v;
+    return {
+      label: 'Menu Item ' + key,
+      value: 'menu_item_' + key,
+      icon: withIcon ? itemIcons[i] : undefined,
+      disabled: v === 5,
+    };
+  });
+}
+
+function getMenuItems(withIcon?: boolean, prefix?: number) {
+  return range(5).map((v, i) => {
+    const key = prefix !== void 0 ? prefix + '.' + v : v;
+    if (v === 4) return <Menu.Divider key={key} />;
+    return (
+      <Menu.Item
+        key={key}
+        icon={withIcon ? itemIcons[i] : undefined}
+        value={'menu_item_' + key}
+        disabled={v === 5}>
+        Menu Item {key}
+      </Menu.Item>
+    );
+  });
 }
 
 function MenuDemo() {
@@ -69,115 +91,60 @@ function MenuDemo() {
       {/* render by component */}
       <div className="demo-box demo-float">
         {/* basic usage */}
-        <Menu onItemClick={handleItemClick}>
-          <Menu.Item value="menu_item_1">Menu Item 1</Menu.Item>
-          <Menu.Item value="menu_item_2">Menu Item 2</Menu.Item>
-          <Menu.Item value="menu_item_3" disabled={true}>
-            Menu Item 3
-          </Menu.Item>
-          <Menu.Item value="menu_item_4">Menu Item 4</Menu.Item>
-        </Menu>
+        <Menu onItemClick={console.log}>{getMenuItems()}</Menu>
         {/* basic usage, have icons */}
-        <Menu>
-          <Menu.Item icon="home">Menu Item 1</Menu.Item>
-          <Menu.Item icon="store">Menu Item 2</Menu.Item>
-          <Menu.Item icon="chat" disabled={true}>
-            Menu Item 3
-          </Menu.Item>
-          <Menu.Divider />
-          <Menu.Item icon="setting">Menu Item 4</Menu.Item>
-        </Menu>
+        <Menu onItemClick={console.log}>{getMenuItems(true)}</Menu>
         {/* ItemGroup */}
-        <Menu>
-          <Menu.ItemGroup title="Group 1" icon="folder">
-            <Menu.SubMenu label="Menu Item 1">
-              <Menu.Item>Menu Item 1.1</Menu.Item>
-              <Menu.Item>Menu Item 1.2</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.Item>Menu Item 2</Menu.Item>
-            <Menu.Item disabled={true}>Menu Item 3</Menu.Item>
-            <Menu.Item>Menu Item 4</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Group 2" icon="store" disabled={true}>
-            <Menu.Item icon="home">Menu Item 1</Menu.Item>
-            <Menu.Item icon="store">Menu Item 2</Menu.Item>
-            <Menu.Item icon="chat">Menu Item 3</Menu.Item>
-            <Menu.Divider />
-            <Menu.Item icon="setting">Menu Item 4</Menu.Item>
-          </Menu.ItemGroup>
+        <Menu onItemClick={console.log}>
+          {range(2).map((g, i) => {
+            return (
+              <Menu.ItemGroup
+                key={g}
+                title={'Group ' + g}
+                icon={groupIcons[i]}
+                disabled={g === 2}>
+                {getMenuItems(true, g)}
+              </Menu.ItemGroup>
+            );
+          })}
         </Menu>
         {/* nested SubMenu and ItemGroup */}
-        <Menu>
-          <Menu.SubMenu icon="home" label="Sub Menu 1">
-            <Menu.Item>Menu Item 1</Menu.Item>
-            <Menu.Item>Menu Item 2</Menu.Item>
-            <Menu.Item disabled={true}>Menu Item 3</Menu.Item>
-            <Menu.Item>Menu Item 4</Menu.Item>
-          </Menu.SubMenu>
-          <Menu.SubMenu icon="store" label="Sub Menu 2">
-            <Menu.ItemGroup title="Group 1" icon="folder">
-              <Menu.SubMenu label="Menu Item 1">
-                <Menu.Item>Menu Item 1.1</Menu.Item>
-                <Menu.Item>Menu Item 1.2</Menu.Item>
+        <Menu onItemClick={console.log}>
+          {range(4).map((s, i) => {
+            return (
+              <Menu.SubMenu
+                key={s}
+                value={`sub_menu_${s}`}
+                label={`Sub Menu ${s}`}
+                icon={itemIcons[i]}
+                disabled={s === 4}>
+                {getMenuItems(false, s)}
               </Menu.SubMenu>
-              <Menu.Item>Menu Item 2</Menu.Item>
-              <Menu.Item disabled={true}>Menu Item 3</Menu.Item>
-              <Menu.Item>Menu Item 4</Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup title="Group 2" icon="store" disabled={true}>
-              <Menu.Item icon="home">Menu Item 1</Menu.Item>
-              <Menu.Item icon="store">Menu Item 2</Menu.Item>
-              <Menu.Item icon="chat">Menu Item 3</Menu.Item>
-              <Menu.Divider />
-              <Menu.Item icon="setting">Menu Item 4</Menu.Item>
-            </Menu.ItemGroup>
-          </Menu.SubMenu>
-          <Menu.SubMenu icon="chat" label="Sub Menu 3">
-            <Menu.Item>Menu Item 1</Menu.Item>
-            <Menu.Item>Menu Item 2</Menu.Item>
-            <Menu.SubMenu label="Menu Item 3">
-              <Menu.Item>Menu Item 3.1</Menu.Item>
-              <Menu.Item>Menu Item 3.2</Menu.Item>
-            </Menu.SubMenu>
-          </Menu.SubMenu>
-          <Menu.SubMenu icon="setting" label="Sub Menu 4" disabled={true} />
-          <Menu.Item icon="money">Menu Item 5</Menu.Item>
+            );
+          })}
         </Menu>
-        <Menu width={240} onItemClick={handleItemClick}>
+        <Menu width={240} onItemClick={console.log}>
           <Menu.ItemGroup title="Custom Item Renderer">
-            <Menu.Item value="menu_item_1">
-              <span style={{ float: 'left' }}>Menu Item 1</span>
-              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
-                No.1
-              </span>
-            </Menu.Item>
-            <Menu.Item value="menu_item_2">
-              <span style={{ float: 'left' }}>Menu Item 2</span>
-              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
-                No.2
-              </span>
-            </Menu.Item>
-            <Menu.Item value="menu_item_3">
-              <span style={{ float: 'left' }}>Menu Item 3</span>
-              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
-                No.3
-              </span>
-            </Menu.Item>
-            <Menu.Item value="menu_item_4">
-              <span style={{ float: 'left' }}>Menu Item 4</span>
-              <span style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
-                No.4
-              </span>
-            </Menu.Item>
+            {range(6).map(v => {
+              return (
+                <Menu.Item key={v} value={`menu_item_${v}`}>
+                  <span style={{ float: 'left' }}>Menu Item {v}</span>
+                  <span
+                    style={{ float: 'right', color: '#d9d9d9', fontSize: 12 }}>
+                    No.{v}
+                  </span>
+                </Menu.Item>
+              );
+            })}
           </Menu.ItemGroup>
         </Menu>
       </div>
       {/* render by data */}
       <div className="demo-box demo-float">
-        <Menu items={items1} onItemClick={handleItemClick} />
-        <Menu items={items2} onItemClick={handleItemClick} />
-        <Menu items={items3} onItemClick={handleItemClick} />
-        <Menu items={items4} onItemClick={handleItemClick} />
+        <Menu items={items1} onItemClick={console.log} />
+        <Menu items={items2} onItemClick={console.log} />
+        <Menu items={items3} onItemClick={console.log} />
+        <Menu items={items4} onItemClick={console.log} />
       </div>
     </>
   );
