@@ -31,6 +31,10 @@
   &:hover,
   &:focus {
     border-color: @input-border-color-active;
+
+    & ~ .@{prefix}-input-clear.show {
+      opacity: 1;
+    }
   }
 
   &::-ms-clear {
@@ -50,17 +54,32 @@
 
 .@{prefix}-input-clear {
   opacity: 0;
+  color: @input-clear-icon-color;
+  font-size: @input-clear-icon-font-size;
+  background-color: @input-clear-icon-background-color;
+  border-radius: 50%;
   visibility: hidden;
+  text-align: center;
   cursor: pointer;
+  z-index: 5;
+  .square(@input-clear-icon-size);
   .transition();
 
-  &:hover {
-    opacity: 0.75;
+  &::before {
+    content: '×';
+    position: relative;
+    display: block;
+    height: 100%;
+    line-height: 1;
+    left: 0.5px;
   }
 
   &.show {
-    opacity: 1;
     visibility: visible;
+    &:hover {
+      opacity: 1;
+      background-color: darken(@input-clear-icon-background-color, 10%);
+    }
   }
 }
 
@@ -115,9 +134,11 @@
 }
 
 .iconSize(@size; @input-height; @input-padding) {
-  font-size: @size;
   top: (@input-height - @size) / 2;
   right: @input-padding;
+  &:not(.@{prefix}-input-clear) {
+    font-size: @size;
+  }
   &.left {
     right: auto;
     left: @input-padding;

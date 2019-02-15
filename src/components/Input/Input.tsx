@@ -109,8 +109,8 @@ function Input(props: InputProps) {
     } as React.ChangeEvent<HTMLInputElement>;
     inputRef.current.value = '';
     if (clearableState) setClearableState(false);
-    onClear && onClear();
     formProps.onChange && formProps.onChange(e);
+    onClear && onClear();
   };
 
   return (
