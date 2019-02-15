@@ -91,11 +91,32 @@ function MenuDemo() {
       {/* render by component */}
       <div className="demo-box demo-float">
         {/* basic usage */}
-        <Menu onItemClick={console.log}>{getMenuItems()}</Menu>
+        <Menu
+          selectable={true}
+          selectedValues={['menu_item_2']}
+          onItemClick={console.log}>
+          {getMenuItems()}
+        </Menu>
         {/* basic usage, have icons */}
-        <Menu onItemClick={console.log}>{getMenuItems(true)}</Menu>
+        <Menu
+          multiple={true}
+          selectable={true}
+          selectedValues={['menu_item_1', 'menu_item_3']}
+          // tslint:disable-next-line
+          onSelect={item => console.log('selected: ', item)}
+          // tslint:disable-next-line
+          onDeselect={item => console.log('deselected: ', item)}
+          onItemClick={console.log}>
+          {getMenuItems(true)}
+        </Menu>
         {/* ItemGroup */}
-        <Menu onItemClick={console.log}>
+        <Menu
+          multiple={true}
+          selectable={true} // tslint:disable-next-line
+          onSelect={item => console.log('selected: ', item)}
+          // tslint:disable-next-line
+          onDeselect={item => console.log('deselected: ', item)}
+          onItemClick={console.log}>
           {range(2).map((g, i) => {
             return (
               <Menu.ItemGroup
@@ -108,8 +129,16 @@ function MenuDemo() {
             );
           })}
         </Menu>
-        {/* nested SubMenu and ItemGroup */}
-        <Menu onItemClick={console.log}>
+        {/* nested SubMenu */}
+        <Menu
+          multiple={true}
+          selectable={true} // tslint:disable-next-line
+          onSelect={(item, values) => console.log('selected: ', item, values)}
+          // tslint:disable-next-line
+          onDeselect={(item, values) =>
+            console.log('deselected: ', item, values)
+          }
+          onItemClick={console.log}>
           {range(4).map((s, i) => {
             return (
               <Menu.SubMenu

@@ -5,7 +5,7 @@ import MenuItem, { MenuItemProps } from './MenuItem';
 import MenuItemGroup, { MenuItemGroupProps } from './MenuItemGroup';
 import MenuDivider, { MenuDividerProps } from './MenuDivider';
 import MenuItems from './MenuItems';
-import ItemClickContext, { ItemClickHandler } from './ItemClickContext';
+import MenuContext from './MenuContext';
 import { IconPosition } from '../Icon/Iconable';
 import * as component from '../component';
 
@@ -83,6 +83,24 @@ export interface MenuProps
   width?: number;
 
   /**
+   * 是否允许多选，当时多选时，则可以反选已经选中的菜单项
+   * @default false
+   */
+  multiple?: boolean;
+
+  /**
+   * 是否允许选中（高亮选中的菜单项）
+   * @default false
+   */
+  selectable?: boolean;
+
+  /**
+   * 选中的内容列表（value）
+   * @default []
+   */
+  selectedValues?: React.ReactText[];
+
+  /**
    * 菜单项数据列表
    * @default null
    */
@@ -96,28 +114,92 @@ export interface MenuProps
   /**
    * 菜单项点击事件的回调函数
    */
-  onItemClick?: ItemClickHandler;
+  onItemClick?: (
+    item: MenuItemProps,
+    e: React.MouseEvent<HTMLLIElement>
+  ) => void;
+
+  /**
+   * 选中菜单项时的回调函数
+   */
+  onSelect?: (item: MenuItemProps, selectedValues?: React.ReactText[]) => void;
+
+  /**
+   * 反选菜单项时的回调函数，仅在多选时有效
+   */
+  onDeselect?: (
+    item: MenuItemProps,
+    selectedValues?: React.ReactText[]
+  ) => void;
 }
 
 const defaultProps: Partial<MenuProps> = {
   items: null,
   border: true,
+  multiple: false,
+  selectable: false,
+  selectedValues: [],
 };
 
 function Menu(props: MenuProps) {
-  const { border, items, children, style, onItemClick } = props;
-  if (!children && !items) return null;
+  if (!props.children && !props.items) return null;
+
+  let values = props.selectedValues || [];
+  if (!props.multiple) values = [values[0]];
+
+  const [selectedValues, setSelectedValues] = React.useState(values);
+
+  const updateSelectedValues = (item: MenuItemProps) => {
+    if (props.selectable && item.value) {
+      let newSelectedValues = [item.value];
+      let deselected = false;
+
+      if (props.multiple) {
+        const index = selectedValues.indexOf(item.value);
+        if (index >= 0) {
+          selectedValues.splice(index, 1);
+          deselected = true;
+        } else {
+          selectedValues.push(item.value);
+        }
+        newSelectedValues = [...selectedValues];
+      }
+
+      setSelectedValues(newSelectedValues);
+
+      if (deselected) {
+        props.onDeselect && props.onDeselect(item, newSelectedValues);
+      } else {
+        props.onSelect && props.onSelect(item, newSelectedValues);
+      }
+    }
+  };
+
+  const handleItemClick = (
+    item: MenuItemProps,
+    e: React.MouseEvent<HTMLLIElement>
+  ) => {
+    updateSelectedValues(item);
+    props.onItemClick && props.onItemClick(item, e);
+  };
+
+  const ctx = {
+    multiple: props.multiple,
+    selectable: props.selectable,
+    selectedValues,
+    onItemClick: handleItemClick,
+  };
 
   const cls = component.getComponentClasses('menu', props, {
-    'no-border': !border,
+    'no-border': !props.border,
   });
 
   return (
-    <ItemClickContext.Provider value={onItemClick}>
-      <ul className={cls} style={{ ...style, width: props.width }}>
-        {items ? <MenuItems items={items} /> : children}
+    <MenuContext.Provider value={ctx}>
+      <ul className={cls} style={{ ...props.style, width: props.width }}>
+        {props.items ? <MenuItems items={props.items} /> : props.children}
       </ul>
-    </ItemClickContext.Provider>
+    </MenuContext.Provider>
   );
 }
 

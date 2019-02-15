@@ -1,6 +1,7 @@
 import React from 'react';
+import cx from 'classnames';
 
-import ItemClickContext from './ItemClickContext';
+import MenuContext from './MenuContext';
 import Iconable from '../Icon/Iconable';
 import * as component from '../component';
 
@@ -27,31 +28,37 @@ const defaultProps: Partial<MenuItemProps> = {
 };
 
 function MenuItem(props: MenuItemProps) {
+  const { label, value, children, disabled } = props;
   const cls = component.getComponentClasses('menu-item', props);
-  const children =
-    props.children !== void 0
-      ? props.children
-      : props.label !== void 0
-      ? props.label
-      : props.value;
+  const cel = children !== void 0 ? children : label !== void 0 ? label : value;
   return (
-    <ItemClickContext.Consumer>
-      {onClick => {
+    <MenuContext.Consumer>
+      {ctx => {
+        let selected = false;
+        if (ctx && ctx.selectable && !disabled && value !== void 0) {
+          const selectedValues = (ctx && ctx.selectedValues) || [];
+          selected = selectedValues.includes(value);
+        }
+
         const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-          if (onClick) onClick(props, e);
+          ctx && ctx.onItemClick && ctx.onItemClick(props, e);
         };
+
         return (
-          <li className={cls} style={props.style} onClick={handleClick}>
+          <li
+            className={cx(cls, { selected })}
+            style={props.style}
+            onClick={handleClick}>
             <Iconable
               name={props.icon}
               position={props.iconPosition}
               size={props.iconSize}>
-              {children}
+              {cel}
             </Iconable>
           </li>
         );
       }}
-    </ItemClickContext.Consumer>
+    </MenuContext.Consumer>
   );
 }
 

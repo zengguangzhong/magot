@@ -2,7 +2,7 @@ import React from 'react';
 
 import Menu, { MenuItemArray, MenuChildren } from './Menu';
 import MenuItems from './MenuItems';
-import ItemClickContext from './ItemClickContext';
+import MenuContext from './MenuContext';
 import Popup from '../Popup';
 import Icon from '../Icon';
 import Iconable from '../Icon/Iconable';
@@ -48,42 +48,39 @@ function SubMenu(props: SubMenuProps) {
   const prefix = component.getComponentPrefix(type);
   const inherits = component.getComponentClasses('menu-item', { disabled });
   const cls = component.getComponentClasses(type, otherProps, inherits);
-  return (
-    <ItemClickContext.Consumer>
-      {onClick => {
-        const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-          if (onClick) onClick(props, e);
-        };
+
+  const overlay = (
+    <MenuContext.Consumer>
+      {ctx => {
         return (
-          <Popup
-            className={prefix + '-popup'}
-            placement="rightTop"
-            space={4}
-            preventOut={true}
-            overlay={
-              <Menu className={prefix + '-popup'} onItemClick={onClick}>
-                {props.items ? (
-                  <MenuItems items={props.items} />
-                ) : (
-                  props.children
-                )}
-              </Menu>
-            }>
-            <li className={cls} style={props.style} onClick={handleClick}>
-              <Iconable
-                name={props.icon}
-                position={props.iconPosition}
-                size={props.iconSize}>
-                <span className="label">
-                  {props.label !== void 0 ? props.label : props.value}
-                </span>
-              </Iconable>
-              <Icon name="forward" />
-            </li>
-          </Popup>
+          <Menu {...ctx} className={prefix + '-popup'}>
+            {props.items ? <MenuItems items={props.items} /> : props.children}
+          </Menu>
         );
       }}
-    </ItemClickContext.Consumer>
+    </MenuContext.Consumer>
+  );
+
+  return (
+    <Popup
+      className={prefix + '-popup'}
+      placement="rightTop"
+      space={4}
+      preventOut={true}
+      removeWhenClose={false}
+      overlay={overlay}>
+      <li className={cls} style={props.style}>
+        <Iconable
+          name={props.icon}
+          position={props.iconPosition}
+          size={props.iconSize}>
+          <span className="label">
+            {props.label !== void 0 ? props.label : props.value}
+          </span>
+        </Iconable>
+        <Icon name="forward" />
+      </li>
+    </Popup>
   );
 }
 

@@ -22,13 +22,10 @@
   }
 
   & > .list {
-    list-style: none;
     .box();
     .box-sizing();
 
-    & > .@{prefix}-menu-item,
-    & > .@{prefix}-menu-divider {
-      margin-left: 1em;
-    }
+    padding-left: @menu-group-item-indent;
+    list-style: none;
   }
 }
