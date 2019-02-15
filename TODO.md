@@ -28,7 +28,7 @@
 - [x] Hotkey
 - [x] Icon
 - [ ] Image
-- [ ] Input
+- [x] Input
 - [ ] InputNumber
 - [ ] Layout
 - [ ] LayoutContent
@@ -50,8 +50,7 @@
 - [x] RadioGroup
 - [ ] Rate
 - [ ] Search
-- [ ] Select
-- [ ] SelectOption
+- [x] Select
 - [ ] Slider
 - [x] Switch
 - [ ] Table
