@@ -1,5 +1,24 @@
 @import '../../variable.less';
 
 .@{prefix}-select {
-  position: relative;
+  & > .@{prefix}-input-control {
+    user-select: none;
+    cursor: pointer;
+  }
+
+  & > .@{prefix}-icon-caret {
+    color: @select-caret-color;
+    .transition();
+  }
+
+  &.opened {
+    & > .@{prefix}-icon-caret {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.@{prefix}-select-menu {
+  max-height: @select-menu-max-height;
+  overflow: auto;
 }
