@@ -12,7 +12,7 @@ const defaultProps: Partial<\${name}Props> = {};
 
 function \${name}(props: \${name}Props) {
   const cls = component.getComponentClasses('\${type}', props);
-  return <div className={cls} />;
+  return <div className={cls} style={props.style} />;
 }
 
 \${name}.defaultProps = defaultProps;
