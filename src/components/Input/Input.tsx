@@ -1,6 +1,7 @@
 import React from 'react';
 
 import InputBase, { InputBaseProps } from '../InputBase';
+import TextArea from '../TextArea';
 import * as component from '../component';
 
 import './Input.less';
@@ -22,5 +23,6 @@ function Input(props: InputProps) {
 }
 
 Input.defaultProps = defaultProps;
+Input.TextArea = TextArea;
 
 export default Input;

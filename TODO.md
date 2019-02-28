@@ -56,6 +56,7 @@
 - [ ] Table
 - [ ] TableRow
 - [x] Tabs
+- [x] TextArea
 - [ ] TimePicker
 - [x] Toast
 - [x] Tooltip
