@@ -43,6 +43,7 @@
 - [x] Modal
 - [x] Notification
 - [ ] Pagination
+- [x] Password
 - [x] Popover
 - [x] Popup
 - [ ] Qrcode

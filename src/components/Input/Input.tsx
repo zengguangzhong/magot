@@ -2,6 +2,7 @@ import React from 'react';
 
 import InputBase, { InputBaseProps } from '../InputBase';
 import TextArea from '../TextArea';
+import Password from '../Password';
 import * as component from '../component';
 
 import './Input.less';
@@ -24,5 +25,6 @@ function Input(props: InputProps) {
 
 Input.defaultProps = defaultProps;
 Input.TextArea = TextArea;
+Input.Password = Password;
 
 export default Input;

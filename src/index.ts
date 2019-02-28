@@ -35,6 +35,7 @@ export { default as Menu } from './components/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Notification } from './components/Notification';
 export { default as Pagination } from './components/Pagination';
+export { default as Password } from './components/Password';
 export { default as Popover } from './components/Popover';
 export { default as Popup } from './components/Popup';
 export { default as Qrcode } from './components/Qrcode';
