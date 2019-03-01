@@ -8,7 +8,16 @@ import './Password.less';
 export interface PasswordProps
   extends InputBaseProps<HTMLInputElement>,
     component.SizedComponent {
+  /**
+   * 是否可切换密码显示状态
+   * @default true
+   */
   togglable?: boolean;
+
+  /**
+   * 密码显示状态切换后的回调函数
+   */
+  onVisibilityChange?: (visibility: boolean) => void;
 }
 
 const defaultProps: Partial<PasswordProps> = {
@@ -18,12 +27,13 @@ const defaultProps: Partial<PasswordProps> = {
 
 function Password(props: PasswordProps) {
   const [visibility, setVisibility] = React.useState(false);
-  const { togglable, onIconClick, ...baseProps } = props;
+  const { togglable, onVisibilityChange, ...baseProps } = props;
 
   const handleToggle = () => {
     if (!togglable) return;
-    setVisibility(!visibility);
-    onIconClick && onIconClick();
+    const newVisibility = !visibility;
+    setVisibility(newVisibility);
+    onVisibilityChange && onVisibilityChange(newVisibility);
   };
 
   const cls = component.getComponentClasses('password', {}, props.className, {

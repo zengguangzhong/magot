@@ -9,7 +9,8 @@ function PasswordDemo() {
         返回
       </Link>
       <div className="demo-box">
-        <Password />
+        <Password onVisibilityChange={console.log} />
+        <Password togglable={false} />
       </div>
     </>
   );
