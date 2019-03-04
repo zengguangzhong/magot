@@ -29,7 +29,7 @@
 - [x] Icon
 - [ ] Image
 - [x] Input
-- [ ] InputNumber
+- [x] InputNumber
 - [ ] Layout
 - [ ] LayoutContent
 - [ ] LayoutFooter
