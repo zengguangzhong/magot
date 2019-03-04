@@ -21,8 +21,9 @@ const defaultProps: Partial<ButtonGroupProps> = {
 function ButtonGroup(props: ButtonGroupProps) {
   const cls = component.getComponentClasses('button-group', props);
   const btns = props.children.map((child, index) => {
+    const disabled = props.disabled ? props.disabled : child.props.disabled;
     return React.cloneElement(child, {
-      disabled: props.disabled,
+      disabled,
       size: props.size,
       key: index,
     });
