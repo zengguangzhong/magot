@@ -1,5 +1,51 @@
 @import '../../variable.less';
 
-.@{prefix}-input-number {
+.@{prefix}-input-number-wrapper {
   position: relative;
+  display: inline-block;
+
+  & > .@{prefix}-button-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: @input-number-btns-width;
+    height: 100%;
+    border-left: 1px solid @input-number-btns-border-color;
+
+    & > .@{prefix}-button {
+      display: block;
+      width: 100%;
+      height: 50%;
+      padding: 0;
+      line-height: 0;
+      border-radius: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      font-size: 12px;
+      color: @input-number-btns-color;
+
+      &:first-child {
+        transform: rotate(180deg);
+        & > .@{prefix}-icon {
+          left: 1px;
+        }
+      }
+      &:last-child {
+        border-top: 1px solid @input-number-btns-border-color;
+      }
+
+      &.@{prefix}-button-disabled {
+        color: @btn-color-disabled;
+      }
+    }
+  }
+}
+
+.@{prefix}-input-number {
+  width: @input-number-width;
+
+  & > .@{prefix}-input-control {
+    padding-right: @input-number-btns-width;
+  }
 }
