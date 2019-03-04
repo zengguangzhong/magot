@@ -4,6 +4,7 @@ import Input from './Input';
 import Toast from '../Toast';
 
 function InputDemo() {
+  const [controlledValue, setControlledValue] = React.useState('');
   return (
     <>
       <Link to="/" className="demo-goback">
@@ -38,6 +39,14 @@ function InputDemo() {
         <Input icon="search" placeholder="This is a Input" size="small" />
         <Input icon="search" placeholder="This is a Input" size="normal" />
         <Input icon="search" placeholder="This is a Input" size="large" />
+      </div>
+      <div className="demo-box">
+        <Input
+          placeholder="controlled input"
+          value={controlledValue}
+          // tslint:disable-next-line
+          onChange={e => setControlledValue(e.target.value)}
+        />
       </div>
     </>
   );
