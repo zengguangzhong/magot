@@ -23,6 +23,8 @@ export interface RadioProps
    */
   defaultChecked?: boolean;
 
+  defaultValue?: string;
+
   /**
    * 当选中时的回调函数，仅在checked时才会触发
    */

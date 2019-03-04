@@ -95,7 +95,7 @@ export interface FormComponent<T extends HTMLElement>
    * 表单默认value，用于非受控表单组件
    * @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  defaultValue?: string;
+  defaultValue?: string | number;
 }
 
 export interface IconableComponent {

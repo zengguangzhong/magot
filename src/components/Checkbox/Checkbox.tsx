@@ -22,6 +22,8 @@ export interface CheckboxProps
    */
   defaultChecked?: boolean;
 
+  defaultValue?: string;
+
   /**
    * 选中或反选时的回调函数
    */

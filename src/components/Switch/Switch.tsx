@@ -13,6 +13,8 @@ export interface SwitchProps
    */
   checked?: boolean;
 
+  defaultValue?: string;
+
   /**
    * 选中时的文案，默认无
    */
