@@ -28,6 +28,12 @@ export interface HotkeyProps
   hotkeys?: HotkeyData[];
 
   /**
+   * 是否忽略可输入节点的热键，如：`input` `textarea` `div[contentEditable]`等
+   * @default true
+   */
+  ignoreEditableNode?: boolean;
+
+  /**
    * 热键命中，触发回调
    */
   onTrigger?: (data: HotkeyData) => void;
@@ -36,6 +42,7 @@ export interface HotkeyProps
 const defaultProps: Partial<HotkeyProps> = {
   active: false,
   hotkeys: [],
+  ignoreEditableNode: true,
 };
 
 function Hotkey(props: HotkeyProps) {
@@ -43,7 +50,7 @@ function Hotkey(props: HotkeyProps) {
   const hanldeKeyDown = (evt: KeyboardEvent) => {
     if (!props.active) return;
 
-    if (isEditableNode(evt.target as Node)) {
+    if (props.ignoreEditableNode && isEditableNode(evt.target as Node)) {
       evt.stopPropagation();
       return;
     }
