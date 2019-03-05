@@ -5,7 +5,7 @@ import Button from '../Button';
 import Hotkey from '../Hotkey';
 import Animation from '../Animation';
 import * as component from '../component';
-import { useVisibility } from '../../hooks/visibility';
+import { useChanges } from '../../hooks/changes';
 
 import './Modal.less';
 
@@ -112,7 +112,7 @@ const defaultProps: Partial<ModalProps> = {
 function Modal(props: ModalProps) {
   const internallyRef = React.useRef(false);
 
-  const [visibility, setVisibility] = useVisibility(
+  const [visibility, setVisibility] = useChanges(
     !!props.visible,
     internallyRef.current
   );
