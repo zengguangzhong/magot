@@ -7,7 +7,7 @@
 - [x] Breadcrumb
 - [x] Button
 - [x] ButtonGroup
-- [ ] Calendar
+- [x] Calendar
 - [ ] Card
 - [ ] Carousel
 - [x] Checkbox

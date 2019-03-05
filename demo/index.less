@@ -48,9 +48,14 @@ body {
 .demo-box > .@{prefix}-radio-group,
 .demo-box > .@{prefix}-input,
 .demo-box > .@{prefix}-input-number-wrapper,
-.demo-box > .@{prefix}-select {
+.demo-box > .@{prefix}-select,
+.demo-box > .@{prefix}-calendar {
   margin-right: 8px;
   margin-bottom: 10px;
+}
+
+.demo-box > .@{prefix}-calendar {
+  height: 300px;
 }
 
 .demo-box > .@{prefix}-loading {
@@ -75,7 +80,8 @@ body {
 
 .demo-float {
   .clearfix();
-  & > .@{prefix}-menu {
+  & > .@{prefix}-menu,
+  & > .@{prefix}-calendar {
     float: left;
   }
 }
