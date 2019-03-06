@@ -48,26 +48,26 @@
   }
 }
 
-.@{prefix}-calendar-day {
+.@{prefix}-calendar-cell {
   display: block;
-  width: @calendar-column-width;
-  height: @calendar-column-height;
-  line-height: @calendar-column-height;
-  border-radius: @calendar-day-border-radius;
-  font-size: @calendar-day-font-size;
-  color: @calendar-day-color;
+  width: @calendar-cell-width;
+  height: @calendar-cell-height;
+  line-height: @calendar-cell-height;
+  border-radius: @calendar-cell-border-radius;
+  font-size: @calendar-cell-font-size;
+  color: @calendar-cell-color;
   border: 1px solid transparent;
   cursor: pointer;
   .transition();
   .box-sizing();
 
   &:hover {
-    background-color: @calendar-day-background-color-hover;
+    background-color: @calendar-cell-background-color-hover;
   }
 
   &.prev-month,
   &.next-month {
-    color: @calendar-day-color-dark;
+    color: @calendar-cell-color-dark;
   }
 
   &.today {
@@ -76,13 +76,13 @@
   }
 
   &.selected {
-    color: @calendar-day-color-active;
-    background-color: @calendar-day-background-color-active;
+    color: @calendar-cell-color-active;
+    background-color: @calendar-cell-background-color-active;
   }
 
   &.disabled {
-    color: @calendar-day-color-disabled;
-    background-color: @calendar-day-background-color-disabled;
+    color: @calendar-cell-color-disabled;
+    background-color: @calendar-cell-background-color-disabled;
     pointer-events: none;
   }
 }

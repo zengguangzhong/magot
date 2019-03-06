@@ -297,7 +297,7 @@ function CalendarBody(props: CalendarBodyProps) {
               return (
                 <td key={date.getTime()}>
                   <span
-                    className={cx(prefix + '-day', {
+                    className={cx(prefix + '-cell', {
                       today: isToday,
                       selected,
                       disabled: isDisabledDate(
