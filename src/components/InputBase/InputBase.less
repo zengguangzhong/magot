@@ -50,10 +50,12 @@
 
 .@{prefix}-input-icon {
   position: absolute;
+  color: @input-icon-color;
 }
 
 .@{prefix}-input-clear {
   opacity: 0;
+  color: @input-clear-icon-color;
   background-color: @input-clear-icon-background-color;
   border-radius: 50%;
   visibility: hidden;
@@ -140,11 +142,5 @@
     color: @color;
     background-color: @background;
     border-color: @border;
-  }
-  .@{prefix}-input-icon {
-    color: fadeout(@color, 40%);
-  }
-  .@{prefix}-input-clear {
-    color: @input-clear-icon-color;
   }
 }
