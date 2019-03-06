@@ -6,7 +6,7 @@ import * as component from '../component';
 import './Checkbox.less';
 
 export interface CheckboxProps
-  extends component.FormComponent<HTMLInputElement>,
+  extends component.FormComponent<HTMLInputElement, React.ReactText>,
     component.NestedComponent {
   /**
    * 当前是否选中，用于受控组件，默认不选中
@@ -21,8 +21,6 @@ export interface CheckboxProps
    * @default false
    */
   defaultChecked?: boolean;
-
-  defaultValue?: string;
 
   /**
    * 选中或反选时的回调函数
@@ -59,6 +57,7 @@ function Checkbox(props: CheckboxProps) {
         className={prefix + '-native-control'}
         checked={isControlled ? props.checked : undefined}
         defaultChecked={!isControlled ? props.defaultChecked : undefined}
+        defaultValue={formProps.defaultValue as string}
         onChange={handleChange}
       />
       <span className={prefix + '-control'} />

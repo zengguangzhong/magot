@@ -8,7 +8,7 @@ import * as component from '../component';
 import './InputBase.less';
 
 export interface InputBaseProps<T extends HTMLElement>
-  extends component.InputFormComponent<T>,
+  extends component.InputFormComponent<T, React.ReactText>,
     component.IconableComponent {
   /**
    * 最短字符数，默认无限制

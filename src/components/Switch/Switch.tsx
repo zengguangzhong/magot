@@ -5,15 +5,13 @@ import * as component from '../component';
 import './Switch.less';
 
 export interface SwitchProps
-  extends component.FormComponent<HTMLInputElement>,
+  extends component.FormComponent<HTMLInputElement, React.ReactText>,
     component.SizedComponent {
   /**
    * 是否选中，默认不选中
    * @default false
    */
   checked?: boolean;
-
-  defaultValue?: string;
 
   /**
    * 选中时的文案，默认无
@@ -84,6 +82,7 @@ function Switch(props: SwitchProps) {
         {...formProps}
         type="checkbox"
         checked={checked}
+        defaultValue={formProps.defaultValue as string}
         onChange={handleChange}
       />
       <SwitchText checked={checked} onText={onText} offText={offText} />

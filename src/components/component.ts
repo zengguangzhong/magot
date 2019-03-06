@@ -70,7 +70,7 @@ export interface FocusEventComponent<T extends HTMLElement> {
   onBlur?: (e: React.FocusEvent<T>) => void;
 }
 
-export interface FormComponent<T extends HTMLElement>
+export interface FormComponent<T extends HTMLElement, V>
   extends BaseComponent,
     FormEventComponent<T>,
     FocusEventComponent<T>,
@@ -89,17 +89,17 @@ export interface FormComponent<T extends HTMLElement>
    * 表单value，用于受控表单组件
    * @see https://reactjs.org/docs/forms.html?#controlled-components
    */
-  value?: React.ReactText;
+  value?: V;
 
   /**
    * 表单默认value，用于非受控表单组件
    * @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  defaultValue?: React.ReactText;
+  defaultValue?: V;
 }
 
-export interface InputFormComponent<T extends HTMLElement>
-  extends FormComponent<T>,
+export interface InputFormComponent<T extends HTMLElement, V>
+  extends FormComponent<T, V>,
     KeyboardEventComponent<T>,
     SizedComponent {
   /**
@@ -200,8 +200,9 @@ export function getDefaultDisabledProps(): DisableComponent {
 }
 
 export function getDefaultInputFormProps<
-  T extends HTMLElement
->(): InputFormComponent<T> {
+  T extends HTMLElement,
+  V
+>(): InputFormComponent<T, V> {
   return {
     ...getDefaultDisabledProps(),
     ...getDefaultSizedProps(),

@@ -16,7 +16,7 @@ export type SelectChildren =
     >;
 
 export interface SelectProps
-  extends component.InputFormComponent<HTMLInputElement>,
+  extends component.InputFormComponent<HTMLInputElement, React.ReactText>,
     component.NestedComponent {
   /**
    * 指定选择框宽度

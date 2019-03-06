@@ -7,7 +7,7 @@ import RadioGroup from '../RadioGroup';
 import * as component from '../component';
 
 export interface RadioProps
-  extends component.FormComponent<HTMLInputElement>,
+  extends component.FormComponent<HTMLInputElement, React.ReactText>,
     component.NestedComponent {
   /**
    * 当前是否选中，用于受控组件，默认不选中
@@ -22,8 +22,6 @@ export interface RadioProps
    * @default false
    */
   defaultChecked?: boolean;
-
-  defaultValue?: string;
 
   /**
    * 当选中时的回调函数，仅在checked时才会触发
@@ -59,6 +57,7 @@ function Radio(props: RadioProps) {
         className={prefix + '-native-control'}
         checked={isControlled ? props.checked : undefined}
         defaultChecked={!isControlled ? props.defaultChecked : undefined}
+        defaultValue={formProps.defaultValue as string}
         onChange={handleChange}
       />
       <span className={prefix + '-control'} />

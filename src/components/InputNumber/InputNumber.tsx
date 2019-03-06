@@ -8,13 +8,9 @@ import * as component from '../component';
 import './InputNumber.less';
 
 export interface InputNumberProps
-  extends component.FormComponent<HTMLInputElement>,
+  extends component.FormComponent<HTMLInputElement, number>,
     component.KeyboardEventComponent<HTMLInputElement>,
     component.SizedComponent {
-  value?: number;
-
-  defaultValue?: number;
-
   /**
    * 最小值
    * @default -Infinity
