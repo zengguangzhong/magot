@@ -9,7 +9,9 @@ import * as dateUtil from '../../utils/date';
 
 import './Calendar.less';
 
-export interface CalendarProps extends component.BaseComponent {
+export interface CalendarProps
+  extends component.BaseComponent,
+    component.NestedComponent {
   /**
    * 默认日期
    */
@@ -91,6 +93,11 @@ export interface CalendarProps extends component.BaseComponent {
    * 头部栏点击事件的回调函数
    */
   onHeaderClick?: (e: React.MouseEvent<HTMLElement>) => void;
+
+  /**
+   * 页脚点击事件的回调函数
+   */
+  onFooterClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface CalendarHeaderProps {
@@ -232,6 +239,11 @@ function Calendar(props: CalendarProps) {
           />
         </table>
       </div>
+      {props.children && (
+        <div className={prefix + '-footer'} onClick={props.onFooterClick}>
+          {props.children}
+        </div>
+      )}
     </div>
   );
 }

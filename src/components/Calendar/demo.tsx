@@ -50,29 +50,37 @@ function ControlledCalendar() {
   const fromDate = (d: Date, diff: number) => {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate() + diff);
   };
-  const [currentDate, setCurrentDate] = React.useState(new Date('2019/03/15'));
+  const [currentDate, setCurrentDate] = React.useState<Date | null>(null);
   return (
-    <>
-      <Calendar value={currentDate} onChange={console.log} />
+    <Calendar
+      value={currentDate}
+      highlightToday={false}
+      onChange={setCurrentDate}>
       <Button
-        type="primary"
+        type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, -1))}>
         Yesterday
       </Button>
       <Button
-        type="primary"
+        type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(today)}>
         Today
       </Button>
       <Button
-        type="primary"
+        type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, 1))}>
         Tomorrow
       </Button>
-    </>
+      <Button
+        type="link"
+        // tslint:disable-next-line
+        onClick={() => setCurrentDate(null)}>
+        Clear
+      </Button>
+    </Calendar>
   );
 }
 
