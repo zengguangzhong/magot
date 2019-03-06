@@ -16,6 +16,7 @@ function TextAreaDemo() {
           placeholder="please enter...(with clear icon)"
           clearable={true}
         />
+        <TextArea placeholder="This is a readonly TextArea" readOnly={true} />
       </div>
     </>
   );

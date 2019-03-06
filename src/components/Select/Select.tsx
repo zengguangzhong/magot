@@ -16,8 +16,7 @@ export type SelectChildren =
     >;
 
 export interface SelectProps
-  extends component.FormComponent<HTMLInputElement>,
-    component.SizedComponent,
+  extends component.InputFormComponent<HTMLInputElement>,
     component.NestedComponent {
   /**
    * 指定选择框宽度
@@ -26,21 +25,10 @@ export interface SelectProps
   width?: number;
 
   /**
-   * 选择框占位符
-   */
-  placeholder?: string;
-
-  /**
    * 是否是多选选择框
    * @default false
    */
   multiple?: boolean;
-
-  /**
-   * 可清除的选择框，即在选择框右侧显示清除图标
-   * @default false
-   */
-  clearable?: boolean;
 
   /**
    * 是否显示右侧的箭头符号
@@ -57,19 +45,12 @@ export interface SelectProps
    * 当前选中值发生变化后的回调函数
    */
   onChange?: (value: React.ReactText | undefined) => void;
-
-  /**
-   * 清除选择框内容后的回调函数
-   */
-  onClear?: () => void;
 }
 
 const defaultProps: Partial<SelectProps> = {
-  ...component.getDefaultDisabledProps(),
-  ...component.getDefaultSizedProps(),
+  readOnly: true,
   width: 120,
   multiple: false,
-  clearable: false,
   showCaret: true,
 };
 
@@ -121,7 +102,6 @@ function Select(props: SelectProps) {
       style={{ ...style, width: width }}
       icon={showCaret ? 'caret' : undefined}
       value={getLabelByValue(children, valueState)}
-      readOnly={true}
       onClear={handleClear}
     />
   );

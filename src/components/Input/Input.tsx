@@ -3,17 +3,12 @@ import React from 'react';
 import InputBase, { InputBaseProps } from '../InputBase';
 import TextArea from '../TextArea';
 import Password from '../Password';
-import * as component from '../component';
 
 import './Input.less';
 
-export interface InputProps
-  extends InputBaseProps<HTMLInputElement>,
-    component.SizedComponent {}
+export interface InputProps extends InputBaseProps<HTMLInputElement> {}
 
-const defaultProps: Partial<InputProps> = {
-  ...component.getDefaultSizedProps(),
-};
+const defaultProps: Partial<InputProps> = {};
 
 function Input(props: InputProps) {
   return (

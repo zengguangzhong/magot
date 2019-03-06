@@ -34,6 +34,7 @@ function InputDemo() {
           // tslint:disable-next-line
           onChange={e => console.log(e.target.value)}
         />
+        <Input placeholder="This is a readonly Input" readOnly={true} />
       </div>
       <div className="demo-box">
         <Input icon="search" placeholder="This is a Input" size="small" />

@@ -66,6 +66,16 @@ function SelectDemo() {
             <Select.Option value="option2.4">Group Item 2.4</Select.Option>
           </Select.OptionGroup>
         </Select>
+        <Select
+          width={selectWidth}
+          placeholder="Can Input"
+          readOnly={false}
+          onChange={console.log}>
+          <Select.Option value="option1" label="Option1" />
+          <Select.Option value="option2" label="Option2" />
+          <Select.Option value="option3" label="Option3" />
+          <Select.Option value="option4" label="Option4" />
+        </Select>
       </div>
       <div className="demo-box">
         <Select

@@ -8,14 +8,8 @@ import * as component from '../component';
 import './InputBase.less';
 
 export interface InputBaseProps<T extends HTMLElement>
-  extends component.FormComponent<T>,
-    component.IconableComponent,
-    component.KeyboardEventComponent<T> {
-  /**
-   * 输入框占位符，默认空白
-   */
-  placeholder?: string;
-
+  extends component.InputFormComponent<T>,
+    component.IconableComponent {
   /**
    * 最短字符数，默认无限制
    */
@@ -27,18 +21,6 @@ export interface InputBaseProps<T extends HTMLElement>
   maxLength?: number;
 
   /**
-   * 是否是只读输入框
-   * @default false
-   */
-  readOnly?: boolean;
-
-  /**
-   * 可清除的输入框，即在输入框右侧显示清除图标
-   * @default false
-   */
-  clearable?: boolean;
-
-  /**
    * 输入框内容发生变化时的回调函数
    */
   onChange?: (e: React.ChangeEvent<T>) => void;
@@ -47,17 +29,10 @@ export interface InputBaseProps<T extends HTMLElement>
    * 图标点击时的回调函数
    */
   onIconClick?: () => void;
-
-  /**
-   * 清除输入框内容后的回调函数
-   */
-  onClear?: () => void;
 }
 
 const defaultProps: Partial<InputBaseProps<HTMLElement>> = {
-  ...component.getDefaultDisabledProps(),
-  readOnly: false,
-  clearable: false,
+  ...component.getDefaultInputFormProps(),
 };
 
 interface InputBaseElement extends HTMLElement {

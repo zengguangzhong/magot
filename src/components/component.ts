@@ -95,7 +95,34 @@ export interface FormComponent<T extends HTMLElement>
    * 表单默认value，用于非受控表单组件
    * @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  defaultValue?: string | number;
+  defaultValue?: React.ReactText;
+}
+
+export interface InputFormComponent<T extends HTMLElement>
+  extends FormComponent<T>,
+    KeyboardEventComponent<T>,
+    SizedComponent {
+  /**
+   * 输入框占位符，默认空白
+   */
+  placeholder?: string;
+
+  /**
+   * 是否是只读输入框
+   * @default false
+   */
+  readOnly?: boolean;
+
+  /**
+   * 可清除的输入框，即在输入框右侧显示清除图标
+   * @default false
+   */
+  clearable?: boolean;
+
+  /**
+   * 清除输入框内容后的回调函数
+   */
+  onClear?: () => void;
 }
 
 export interface IconableComponent {
@@ -170,4 +197,15 @@ export function getDefaultSizedProps(): SizedComponent {
  */
 export function getDefaultDisabledProps(): DisableComponent {
   return { disabled: false };
+}
+
+export function getDefaultInputFormProps<
+  T extends HTMLElement
+>(): InputFormComponent<T> {
+  return {
+    ...getDefaultDisabledProps(),
+    ...getDefaultSizedProps(),
+    readOnly: false,
+    clearable: false,
+  };
 }
