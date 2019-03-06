@@ -86,6 +86,11 @@ export interface CalendarProps extends component.BaseComponent {
    * 选择日期之后的回调函数
    */
   onChange?: (date: Date) => void;
+
+  /**
+   * 头部栏点击事件的回调函数
+   */
+  onHeaderClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface CalendarHeaderProps {
@@ -98,6 +103,7 @@ interface CalendarHeaderProps {
   onPreviousMonth: () => void;
   onNextYear: () => void;
   onNextMonth: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface CalendarWeekBoxProps {
@@ -207,6 +213,7 @@ function Calendar(props: CalendarProps) {
         onPreviousMonth={handlePreviousMonth}
         onNextYear={handleNextYear}
         onNextMonth={handleNextMonth}
+        onClick={props.onHeaderClick}
       />
       <div className={prefix + '-body'}>
         <table cellSpacing={0} cellPadding={0}>
@@ -233,7 +240,7 @@ function Header(props: CalendarHeaderProps) {
   if (!props.visible) return null;
   const date = new Date(props.year, props.month);
   return (
-    <header className={getPrefix() + '-header'}>
+    <header className={getPrefix() + '-header'} onClick={props.onClick}>
       <Button onClick={props.onPreviousYear}>&lt;&lt;</Button>
       <Button onClick={props.onPreviousMonth}>&lt;</Button>
       <span className="year">{dateFormatter(props.formatYear, date)}</span>
