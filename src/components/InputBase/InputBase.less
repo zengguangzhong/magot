@@ -7,6 +7,12 @@
   position: relative;
   display: inline-block;
   width: 100%;
+
+  .inputSize(
+    @input-padding-base; @input-height-base; @input-font-size-base;
+      @input-border-radius-base;
+  );
+  .inputColor(@input-color; @input-background-color; @input-border-color);
 }
 
 .@{prefix}-input-control {
@@ -23,12 +29,6 @@
   border-width: @input-border-width;
   border-style: @input-border-style;
   .transition();
-
-  .inputSize(
-    @input-padding-base; @input-height-base; @input-font-size-base;
-      @input-border-radius-base; @input-icon-size-base
-  );
-  .inputColor(@input-color; @input-background-color; @input-border-color);
 
   &:hover,
   &:focus {
@@ -50,21 +50,16 @@
 
 .@{prefix}-input-icon {
   position: absolute;
-  color: @input-icon-color;
-  .iconSize(@input-icon-size-base; @input-height-base; @input-padding-base);
 }
 
 .@{prefix}-input-clear {
   opacity: 0;
-  color: @input-clear-icon-color;
-  font-size: @input-clear-icon-font-size;
   background-color: @input-clear-icon-background-color;
   border-radius: 50%;
   visibility: hidden;
   text-align: center;
   cursor: pointer;
   z-index: 5;
-  .square(@input-clear-icon-size);
   .transition();
 
   &::before {
@@ -86,69 +81,70 @@
 }
 
 .@{prefix}-input-sm {
-  .@{prefix}-input-control {
-    .inputSize(
-      @input-padding-sm; @input-height-sm; @input-font-size-sm;
-        @input-border-radius-sm; @input-icon-size-sm
-    );
-  }
-  .@{prefix}-input-icon {
-    .iconSize(@input-icon-size-sm; @input-height-sm; @input-padding-sm);
-  }
+  .inputSize(
+    @input-padding-sm; @input-height-sm; @input-font-size-sm;
+      @input-border-radius-sm;
+  );
 }
 
 .@{prefix}-input-lg {
-  .@{prefix}-input-control {
-    .inputSize(
-      @input-padding-lg; @input-height-lg; @input-font-size-lg;
-        @input-border-radius-lg; @input-icon-size-lg
-    );
-  }
-  .@{prefix}-input-icon {
-    .iconSize(@input-icon-size-lg; @input-height-lg; @input-padding-lg);
-  }
+  .inputSize(
+    @input-padding-lg; @input-height-lg; @input-font-size-lg;
+      @input-border-radius-lg;
+  );
 }
 
 .@{prefix}-input-disabled {
   pointer-events: none;
   cursor: not-allowed;
+  .inputColor(
+    @input-color-disabled; @input-background-color-disabled;
+      @input-border-color-disabled
+  );
+}
 
+.inputSize(@padding; @height; @font-size; @border-radius;) {
+  @icon-size: @font-size + 2px;
   .@{prefix}-input-control {
-    .inputColor(
-      @input-color-disabled; @input-background-color-disabled;
-        @input-border-color-disabled
-    );
-  }
-}
+    padding: 0 @padding;
+    height: @height;
+    font-size: @font-size;
+    border-radius: @border-radius;
 
-.inputSize(@padding; @height; @font-size; @border-radius; @icon-size) {
-  padding: 0 @padding;
-  height: @height;
-  font-size: @font-size;
-  border-radius: @border-radius;
-
-  &:not(:first-child) {
-    padding-left: @padding * 2 + @icon-size;
+    &:not(:first-child) {
+      padding-left: @padding * 2 + @icon-size;
+    }
+    &:not(:last-child) {
+      padding-right: @padding * 2 + @icon-size;
+    }
   }
-  &:not(:last-child) {
-    padding-right: @padding * 2 + @icon-size;
+  .@{prefix}-input-icon {
+    top: (@height - @icon-size) / 2;
+    right: @padding;
+    &:not(.@{prefix}-input-clear) {
+      font-size: @icon-size;
+    }
+    &.left {
+      right: auto;
+      left: @padding;
+    }
   }
-}
-
-.iconSize(@size; @input-height; @input-padding) {
-  top: (@input-height - @size) / 2;
-  right: @input-padding;
-  &:not(.@{prefix}-input-clear) {
-    font-size: @size;
-  }
-  &.left {
-    right: auto;
-    left: @input-padding;
+  .@{prefix}-input-clear {
+    font-size: @font-size;
+    .square(@icon-size);
   }
 }
 
 .inputColor(@color; @background; @border) {
-  color: @color;
-  background-color: @background;
-  border-color: @border;
+  .@{prefix}-input-control {
+    color: @color;
+    background-color: @background;
+    border-color: @border;
+  }
+  .@{prefix}-input-icon {
+    color: fadeout(@color, 40%);
+  }
+  .@{prefix}-input-clear {
+    color: @input-clear-icon-color;
+  }
 }
