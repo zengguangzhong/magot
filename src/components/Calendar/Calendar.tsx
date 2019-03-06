@@ -5,6 +5,7 @@ import Button from '../Button';
 import * as component from '../component';
 import { useChanges } from '../../hooks/changes';
 import dateFormatter from '../../utils/date-formatter';
+import * as dateUtil from '../../utils/date';
 
 import './Calendar.less';
 
@@ -128,18 +129,18 @@ const defaultProps: Partial<CalendarProps> = {
 function Calendar(props: CalendarProps) {
   const { defaultValue, value = new Date(), weekStart = 0 } = props;
 
-  const propsDate = getSafeDate(defaultValue || value);
-  const propsYear = propsDate.getFullYear();
-  const propsMonth = propsDate.getMonth();
+  const dateProp = dateUtil.getSafeDate(defaultValue || value);
+  const yearProp = dateProp.getFullYear();
+  const monthProp = dateProp.getMonth();
 
   const internallyRef = React.useRef(false);
   const [selectedDate, setSelectedDate] = useChanges(
-    propsDate,
+    dateProp,
     internallyRef.current,
-    isEqualDate
+    dateUtil.isEqualDate
   );
-  const [currentYear, setCurrentYear] = React.useState(propsYear);
-  const [currentMonth, setCurrentMonth] = React.useState(propsMonth);
+  const [currentYear, setCurrentYear] = React.useState(yearProp);
+  const [currentMonth, setCurrentMonth] = React.useState(monthProp);
 
   internallyRef.current = false;
 
@@ -178,13 +179,13 @@ function Calendar(props: CalendarProps) {
   };
 
   const handleSelectDate = (date: Date) => {
-    if (!isEqualDate(date, selectedDate)) {
+    if (!dateUtil.isEqualDate(date, selectedDate)) {
       internallyRef.current = true;
       setSelectedDate(date);
-      if (!isCurrentMonth(date, currentMonth)) {
+      if (!dateUtil.isCurrentMonth(date, currentMonth)) {
         setCurrentMonth(date.getMonth());
       }
-      if (!isCurrentYear(date, currentYear)) {
+      if (!dateUtil.isCurrentYear(date, currentYear)) {
         setCurrentYear(date.getFullYear());
       }
       props.onChange && props.onChange(date);
@@ -282,22 +283,25 @@ function CalendarBody(props: CalendarBodyProps) {
         return (
           <tr key={index}>
             {dates.map(date => {
-              const isToday = isEqualDate(date, today);
+              const isToday = dateUtil.isEqualDate(date, today);
               const handleClick = () => onSelect(date);
               return (
                 <td key={date.getTime()}>
                   <span
                     className={cx(prefix + '-day', {
                       today: isToday && highlightToday,
-                      selected: isEqualDate(date, value),
+                      selected: dateUtil.isEqualDate(date, value),
                       disabled: isDisabledDate(
                         date,
                         today,
                         disableTodayAgo,
                         disabledDate
                       ),
-                      'prev-month': isPreviousMonth(date, currentMonth),
-                      'next-month': isNextMonth(date, currentMonth),
+                      'prev-month': dateUtil.isPreviousMonth(
+                        date,
+                        currentMonth
+                      ),
+                      'next-month': dateUtil.isNextMonth(date, currentMonth),
                     })}
                     onClick={handleClick}>
                     {(isToday && todayText) || dateFormatter(date)}
@@ -316,20 +320,10 @@ function getPrefix() {
   return component.getComponentPrefix('calendar');
 }
 
-function getSafeDate(d: Date | string | number) {
-  if (typeof d === 'number') return new Date(d);
-  if (typeof d === 'string') return new Date(d.replace(/-/g, '/'));
-  return d;
-}
-
-function getPureDate(d: Date) {
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-}
-
 function getDatesByWeek(year: number, month: number, weekStart: number) {
   const datesByWeek: Date[][] = [];
-  const firstDate = getFirstDateOfMonth(year, month);
-  const lastDate = getLastDateOfMonth(year, month);
+  const firstDate = dateUtil.getFirstDateOfMonth(year, month);
+  const lastDate = dateUtil.getLastDateOfMonth(year, month);
   const firstDayOfWeek = firstDate.getDay();
   const lastDayOfWeek = lastDate.getDay();
 
@@ -355,28 +349,6 @@ function getDatesByWeek(year: number, month: number, weekStart: number) {
   return datesByWeek;
 }
 
-function getFirstDateOfMonth(year: number, month: number) {
-  return new Date(year, month, 1);
-}
-
-function getLastDateOfMonth(year: number, month: number) {
-  return new Date(year, month + 1, 0);
-}
-
-function isEqualDate(date1: Date, date2: Date) {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  );
-}
-
-function lessThanDate(date1: Date, date2: Date) {
-  const d1 = getPureDate(date1);
-  const d2 = getPureDate(date2);
-  return d1.getTime() < d2.getTime();
-}
-
 function isDisabledDate(
   date: Date,
   today: Date,
@@ -384,24 +356,8 @@ function isDisabledDate(
   disabledDate?: (date: Date) => boolean
 ) {
   if (disabledDate && disabledDate(date)) return true;
-  if (disableTodayAgo && lessThanDate(date, today)) return true;
+  if (disableTodayAgo && dateUtil.lessThanDate(date, today)) return true;
   return false;
-}
-
-function isPreviousMonth(date: Date, month: number) {
-  return date.getMonth() < month;
-}
-
-function isNextMonth(date: Date, month: number) {
-  return date.getMonth() > month;
-}
-
-function isCurrentMonth(date: Date, month: number) {
-  return date.getMonth() === month;
-}
-
-function isCurrentYear(date: Date, year: number) {
-  return date.getFullYear() === year;
 }
 
 function defaultWeekFormatter(value: number) {
