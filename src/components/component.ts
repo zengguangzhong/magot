@@ -123,6 +123,11 @@ export interface InputFormComponent<T extends HTMLElement, V>
    * 清除输入框内容后的回调函数
    */
   onClear?: () => void;
+
+  /**
+   * 按下回车键时的回调函数，通常用在按下回车时执行某个动作的场景
+   */
+  onPressEnter?: (e: React.KeyboardEvent<T>) => void;
 }
 
 export interface IconableComponent {

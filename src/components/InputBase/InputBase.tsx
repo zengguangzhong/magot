@@ -52,6 +52,7 @@ function Input<T extends InputBaseElement>(
     children,
     onIconClick,
     onClear,
+    onPressEnter,
     ...formProps
   } = props;
 
@@ -82,6 +83,11 @@ function Input<T extends InputBaseElement>(
     formProps.onChange && formProps.onChange(e);
   };
 
+  const handleKeyUp = (e: React.KeyboardEvent<T>) => {
+    const keyCode = e.keyCode || e.which;
+    if (onPressEnter && keyCode === 13) onPressEnter(e);
+  };
+
   const handleClear = () => {
     if (!inputRef.current || !inputRef.current.value) return;
     const e = {
@@ -99,6 +105,7 @@ function Input<T extends InputBaseElement>(
     ref: inputRef,
     className: prefix + '-control',
     onChange: handleChange,
+    onKeyUp: onPressEnter ? handleKeyUp : undefined,
   });
 
   return (
