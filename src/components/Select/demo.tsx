@@ -13,7 +13,6 @@ function SelectDemo() {
         <Select
           width={selectWidth}
           placeholder="Label Options"
-          clearable={true}
           onChange={console.log}>
           <Select.Option value="option1" label="Option1" />
           <Select.Option value="option2" label="Option2" />

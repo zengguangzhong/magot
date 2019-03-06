@@ -48,6 +48,7 @@ export interface SelectProps
 }
 
 const defaultProps: Partial<SelectProps> = {
+  clearable: true,
   readOnly: true,
   width: 120,
   multiple: false,
