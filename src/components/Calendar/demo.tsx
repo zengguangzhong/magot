@@ -60,25 +60,25 @@ function ControlledCalendar() {
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, -1))}>
-        Yesterday
+        昨天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(today)}>
-        Today
+        今天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, 1))}>
-        Tomorrow
+        明天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(null)}>
-        Clear
+        清除
       </Button>
     </Calendar>
   );

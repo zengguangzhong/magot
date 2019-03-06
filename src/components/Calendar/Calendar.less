@@ -11,6 +11,7 @@
 }
 
 .@{prefix}-calendar-header {
+  display: flex;
   padding: @calendar-header-padding;
   height: @calendar-header-height;
   line-height: @calendar-header-height;
@@ -26,9 +27,11 @@
     font-size: @calendar-header-btn-font-size;
   }
 
-  & > .year,
-  & > .month {
-    padding: @calendar-header-text-padding;
+  & > .title {
+    flex: 1;
+    & > span {
+      padding: @calendar-header-text-padding;
+    }
   }
 }
 
@@ -53,7 +56,7 @@
   border-top: 1px solid @calendar-footer-border-color;
 }
 
-.@{prefix}-calendar-cell {
+.@{prefix}-calendar-date {
   display: block;
   margin: 0 auto;
   width: @calendar-cell-width;

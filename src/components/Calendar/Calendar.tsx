@@ -121,7 +121,6 @@ interface CalendarWeekBoxProps {
 
 interface CalendarBodyProps extends CalendarProps {
   value: Date | null;
-  datesByWeek: Date[][];
   currentMonth: number;
   currentYear: number;
   onSelect: (date: Date) => void;
@@ -138,7 +137,7 @@ const defaultProps: Partial<CalendarProps> = {
 };
 
 function Calendar(props: CalendarProps) {
-  const { defaultValue, value, weekStart = 0 } = props;
+  const { defaultValue, value } = props;
 
   const today = new Date();
   const valueProp = defaultValue || value;
@@ -156,8 +155,6 @@ function Calendar(props: CalendarProps) {
   const [currentMonth, setCurrentMonth] = React.useState(monthProp);
 
   internallyRef.current = false;
-
-  const displayDates = getDatesByWeek(currentYear, currentMonth, weekStart);
 
   const handlePreviousYear = () => {
     const newYear = currentYear - 1;
@@ -223,21 +220,13 @@ function Calendar(props: CalendarProps) {
         onClick={props.onHeaderClick}
       />
       <div className={prefix + '-body'}>
-        <table cellSpacing={0} cellPadding={0}>
-          <WeekBox
-            start={weekStart}
-            visible={!props.hideWeekBox}
-            formatter={props.weekFormatter}
-          />
-          <CalendarBody
-            {...props}
-            value={selectedDate}
-            datesByWeek={displayDates}
-            currentMonth={currentMonth}
-            currentYear={currentYear}
-            onSelect={handleSelectDate}
-          />
-        </table>
+        <DateCalendar
+          {...props}
+          value={selectedDate}
+          currentMonth={currentMonth}
+          currentYear={currentYear}
+          onSelect={handleSelectDate}
+        />
       </div>
       {props.children && (
         <div className={prefix + '-footer'} onClick={props.onFooterClick}>
@@ -255,11 +244,26 @@ function Header(props: CalendarHeaderProps) {
     <header className={getPrefix() + '-header'} onClick={props.onClick}>
       <Button onClick={props.onPreviousYear}>&lt;&lt;</Button>
       <Button onClick={props.onPreviousMonth}>&lt;</Button>
-      <span className="year">{dateFormatter(props.formatYear, date)}</span>
-      <span className="month">{dateFormatter(props.formatMonth, date)}</span>
+      <div className="title">
+        <span>{dateFormatter(props.formatYear, date)}</span>
+        <span>{dateFormatter(props.formatMonth, date)}</span>
+      </div>
       <Button onClick={props.onNextMonth}>&gt;</Button>
       <Button onClick={props.onNextYear}>&gt;&gt;</Button>
     </header>
+  );
+}
+
+function DateCalendar(props: CalendarBodyProps) {
+  return (
+    <table cellSpacing={0} cellPadding={0}>
+      <WeekBox
+        start={props.weekStart || 0}
+        visible={!props.hideWeekBox}
+        formatter={props.weekFormatter}
+      />
+      <DateCalendarBody {...props} />
+    </table>
   );
 }
 
@@ -270,9 +274,10 @@ function WeekBox(props: CalendarWeekBoxProps) {
   for (let i = start; i < start + 7; i++) {
     week.push(i < 7 ? i : i - 7);
   }
+  const prefix = getPrefix();
   return (
-    <thead>
-      <tr>
+    <thead className={prefix + '-week'}>
+      <tr className={prefix + '-column'}>
         {week.map(v => (
           <th key={v}>{formatter(v)}</th>
         ))}
@@ -281,10 +286,42 @@ function WeekBox(props: CalendarWeekBoxProps) {
   );
 }
 
-function CalendarBody(props: CalendarBodyProps) {
+function DateCalendarBody(props: CalendarBodyProps) {
+  const { currentYear, currentMonth, weekStart = 0 } = props;
+  const datesByWeek = getDatesByWeek(currentYear, currentMonth, weekStart);
+  const today = new Date();
+  const prefix = getPrefix();
+  return (
+    <tbody className={prefix + '-dates'}>
+      {datesByWeek.map((dates, index) => {
+        return (
+          <DateCalendarRow {...props} dates={dates} today={today} key={index} />
+        );
+      })}
+    </tbody>
+  );
+}
+
+function DateCalendarRow(
+  props: CalendarBodyProps & { dates: Date[]; today: Date }
+) {
+  const prefix = getPrefix();
+  return (
+    <tr className={prefix + '-row'}>
+      {props.dates.map(date => {
+        return <DateCalendarCell {...props} date={date} key={date.getTime()} />;
+      })}
+    </tr>
+  );
+}
+
+function DateCalendarCell(
+  props: CalendarBodyProps & { date: Date; today: Date }
+) {
   const {
+    date,
+    today,
     value,
-    datesByWeek,
     currentMonth,
     dateFormatter = defaultDateFormatter,
     todayText,
@@ -293,47 +330,25 @@ function CalendarBody(props: CalendarBodyProps) {
     disabledDate,
     onSelect,
   } = props;
+  const isToday = dateUtil.isEqualDate(date, today);
+  let selected = dateUtil.isEqualDate(date, value);
+  if (!value && highlightToday) selected = isToday;
+  const handleClick = () => onSelect(date);
   const prefix = getPrefix();
-  const today = new Date();
-
   return (
-    <tbody>
-      {datesByWeek.map((dates, index) => {
-        return (
-          <tr key={index}>
-            {dates.map(date => {
-              const isToday = dateUtil.isEqualDate(date, today);
-              let selected = dateUtil.isEqualDate(date, value);
-              if (!value && highlightToday) selected = isToday;
-              const handleClick = () => onSelect(date);
-              return (
-                <td key={date.getTime()}>
-                  <span
-                    className={cx(prefix + '-cell', {
-                      today: isToday,
-                      selected,
-                      disabled: isDisabledDate(
-                        date,
-                        today,
-                        disableTodayAgo,
-                        disabledDate
-                      ),
-                      'prev-month': dateUtil.isPreviousMonth(
-                        date,
-                        currentMonth
-                      ),
-                      'next-month': dateUtil.isNextMonth(date, currentMonth),
-                    })}
-                    onClick={handleClick}>
-                    {(isToday && todayText) || dateFormatter(date)}
-                  </span>
-                </td>
-              );
-            })}
-          </tr>
-        );
-      })}
-    </tbody>
+    <td className={prefix + '-cell'}>
+      <span
+        className={cx(prefix + '-date', {
+          today: isToday,
+          selected,
+          disabled: isDisabledDate(date, today, disableTodayAgo, disabledDate),
+          'prev-month': dateUtil.isPreviousMonth(date, currentMonth),
+          'next-month': dateUtil.isNextMonth(date, currentMonth),
+        })}
+        onClick={handleClick}>
+        {(isToday && todayText) || dateFormatter(date)}
+      </span>
+    </td>
   );
 }
 
