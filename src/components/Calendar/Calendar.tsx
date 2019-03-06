@@ -332,22 +332,14 @@ function getPrefix() {
 function getDatesByWeek(year: number, month: number, weekStart: number) {
   const datesByWeek: Date[][] = [];
   const firstDate = dateUtil.getFirstDateOfMonth(year, month);
-  const lastDate = dateUtil.getLastDateOfMonth(year, month);
   const firstDayOfWeek = firstDate.getDay();
-  const lastDayOfWeek = lastDate.getDay();
 
   let start = 0;
-  let end = lastDate.getDate();
   const startDelta = firstDayOfWeek - weekStart;
-  const endDelta =
-    lastDayOfWeek >= weekStart
-      ? lastDayOfWeek - weekStart
-      : 7 - lastDayOfWeek - weekStart;
-
   if (startDelta > 0) start -= startDelta;
-  if (endDelta < 6) end += 6 - endDelta;
 
-  for (let i = start; i < end; i++) {
+  // grid: 6 * 7
+  for (let i = start; i < 42 + start; i++) {
     const week = Math.floor((i + startDelta) / 7);
     let dates = datesByWeek[week];
     if (!dates) dates = datesByWeek[week] = [];
