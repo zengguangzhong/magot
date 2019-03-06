@@ -15,7 +15,7 @@
 - [ ] Collapse
 - [ ] ColorPicker
 - [x] ContextMenu
-- [ ] DatePicker
+- [x] DatePicker
 - [ ] DateTimePicker
 - [x] Dialog
 - [ ] Drawer
