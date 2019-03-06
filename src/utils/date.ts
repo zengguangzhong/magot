@@ -16,7 +16,10 @@ export function getLastDateOfMonth(year: number, month: number) {
   return new Date(year, month + 1, 0);
 }
 
-export function isEqualDate(date1: Date, date2: Date) {
+export function isEqualDate(date1: Date | null, date2: Date | null) {
+  if (date1 === null || date2 === null) {
+    return date1 === date2;
+  }
   return (
     date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&

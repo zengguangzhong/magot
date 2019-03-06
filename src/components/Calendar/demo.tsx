@@ -14,7 +14,6 @@ function CalendarDemo() {
         <Calendar defaultValue="2019/03/15" onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
         <Calendar
-          defaultValue="2019/03/15"
           todayText="今天"
           highlightToday={false}
           onChange={console.log}

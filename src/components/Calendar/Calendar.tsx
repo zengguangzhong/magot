@@ -13,13 +13,12 @@ export interface CalendarProps extends component.BaseComponent {
   /**
    * 默认日期
    */
-  defaultValue?: string | number | Date;
+  defaultValue?: string | number | Date | null;
 
   /**
    * 当前展示日期
-   * @default 今天
    */
-  value?: string | number | Date;
+  value?: string | number | Date | null;
 
   /**
    * 是否禁用今天以前的日期
@@ -28,7 +27,7 @@ export interface CalendarProps extends component.BaseComponent {
   disableTodayAgo?: boolean;
 
   /**
-   * 是否高亮今天
+   * 是否高亮今天(当未选中日期时)
    * @default true
    */
   highlightToday?: boolean;
@@ -108,7 +107,7 @@ interface CalendarWeekBoxProps {
 }
 
 interface CalendarBodyProps extends CalendarProps {
-  value: Date;
+  value: Date | null;
   datesByWeek: Date[][];
   currentMonth: number;
   currentYear: number;
@@ -116,7 +115,6 @@ interface CalendarBodyProps extends CalendarProps {
 }
 
 const defaultProps: Partial<CalendarProps> = {
-  value: new Date(),
   disableTodayAgo: false,
   highlightToday: true,
   weekStart: 0,
@@ -127,14 +125,16 @@ const defaultProps: Partial<CalendarProps> = {
 };
 
 function Calendar(props: CalendarProps) {
-  const { defaultValue, value = new Date(), weekStart = 0 } = props;
+  const { defaultValue, value, weekStart = 0 } = props;
 
-  const dateProp = dateUtil.getSafeDate(defaultValue || value);
-  const yearProp = dateProp.getFullYear();
-  const monthProp = dateProp.getMonth();
+  const today = new Date();
+  const valueProp = defaultValue || value;
+  const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
+  const yearProp = (dateProp || today).getFullYear();
+  const monthProp = (dateProp || today).getMonth();
 
   const internallyRef = React.useRef(false);
-  const [selectedDate, setSelectedDate] = useChanges(
+  const [selectedDate, setSelectedDate] = useChanges<Date | null>(
     dateProp,
     internallyRef.current,
     dateUtil.isEqualDate
@@ -284,13 +284,15 @@ function CalendarBody(props: CalendarBodyProps) {
           <tr key={index}>
             {dates.map(date => {
               const isToday = dateUtil.isEqualDate(date, today);
+              let selected = dateUtil.isEqualDate(date, value);
+              if (!value && highlightToday) selected = isToday;
               const handleClick = () => onSelect(date);
               return (
                 <td key={date.getTime()}>
                   <span
                     className={cx(prefix + '-day', {
-                      today: isToday && highlightToday,
-                      selected: dateUtil.isEqualDate(date, value),
+                      today: isToday,
+                      selected,
                       disabled: isDisabledDate(
                         date,
                         today,
