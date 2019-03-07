@@ -9,7 +9,7 @@ function CalendarDemo() {
       <Link to="/" className="demo-goback">
         返回
       </Link>
-      <div className="demo-box demo-float">
+      <div className="demo-box demo-flex">
         <Calendar onChange={console.log} />
         <Calendar defaultValue="2019/03/15" onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
@@ -40,6 +40,10 @@ function CalendarDemo() {
       </div>
       <div className="demo-box">
         <ControlledCalendar />
+      </div>
+      <div className="demo-box">
+        <Calendar mode="month" onChange={console.log} />
+        <Calendar mode="year" onChange={console.log} />
       </div>
     </>
   );

@@ -54,10 +54,6 @@ body {
   margin-bottom: 10px;
 }
 
-.demo-box > .@{prefix}-calendar {
-  height: 350px;
-}
-
 .demo-box > .@{prefix}-loading {
   margin-right: 40px;
 }
@@ -80,8 +76,12 @@ body {
 
 .demo-float {
   .clearfix();
-  & > .@{prefix}-menu,
-  & > .@{prefix}-calendar {
+  & > .@{prefix}-menu {
     float: left;
   }
+}
+
+.demo-flex {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -3,11 +3,12 @@ import cx from 'classnames';
 
 import Button from '../Button';
 import * as component from '../component';
-import { useChanges } from '../../hooks/changes';
-import dateFormatter from '../../utils/date-formatter';
 import * as dateUtil from '../../utils/date';
+import { useChanges } from '../../hooks/changes';
 
 import './Calendar.less';
+
+type CalendarMode = 'year' | 'month' | 'date';
 
 export interface CalendarProps
   extends component.BaseComponent,
@@ -70,19 +71,35 @@ export interface CalendarProps
   formatHeaderMonth?: string;
 
   /**
+   * 日历显示模式，可选值：year-年份日历，month-月份日历，date-详细日历
+   * @default date
+   */
+  mode?: CalendarMode;
+
+  /**
    * 自定义禁用日期的函数，返回true则表示该天禁用
    */
   disabledDate?: (date: Date) => boolean;
 
   /**
-   * 自定义格式化日期的函数
+   * 自定义日期格式化函数
    */
   dateFormatter?: (date: Date) => string;
 
   /**
-   * 自定义格式化周的函数
+   * 自定义周格式化函数
    */
   weekFormatter?: (value: number) => string;
+
+  /**
+   * 自定义月份格式化函数
+   */
+  monthFormatter?: (month: number) => string;
+
+  /**
+   * 自定义年份格式化函数
+   */
+  yearFormatter?: (year: number) => string;
 
   /**
    * 选择日期之后的回调函数
@@ -106,17 +123,10 @@ interface CalendarHeaderProps {
   visible: boolean;
   formatYear?: string;
   formatMonth?: string;
-  onPreviousYear: () => void;
-  onPreviousMonth: () => void;
-  onNextYear: () => void;
-  onNextMonth: () => void;
+  mode?: CalendarMode;
+  onYearChange: (year: number) => void;
+  onMonthChange: (month: number) => void;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
-}
-
-interface CalendarWeekBoxProps {
-  start: number;
-  visible: boolean;
-  formatter?: (value: number) => string;
 }
 
 interface CalendarBodyProps extends CalendarProps {
@@ -124,6 +134,12 @@ interface CalendarBodyProps extends CalendarProps {
   currentMonth: number;
   currentYear: number;
   onSelect: (date: Date) => void;
+}
+
+interface CalendarWeekBoxProps {
+  start: number;
+  visible: boolean;
+  formatter?: (value: number) => string;
 }
 
 const defaultProps: Partial<CalendarProps> = {
@@ -134,10 +150,11 @@ const defaultProps: Partial<CalendarProps> = {
   hideHeader: false,
   formatHeaderYear: 'yyyy年',
   formatHeaderMonth: 'M月',
+  mode: 'date',
 };
 
 function Calendar(props: CalendarProps) {
-  const { defaultValue, value } = props;
+  const { defaultValue, value, mode } = props;
 
   const today = new Date();
   const valueProp = defaultValue || value;
@@ -156,35 +173,21 @@ function Calendar(props: CalendarProps) {
 
   internallyRef.current = false;
 
-  const handlePreviousYear = () => {
-    const newYear = currentYear - 1;
-    if (newYear > 0) setCurrentYear(newYear);
+  const handleYearChange = (year: number) => {
+    setCurrentYear(year);
   };
 
-  const handleNextYear = () => {
-    const newYear = currentYear + 1;
-    setCurrentYear(newYear);
-  };
-
-  const handlePreviousMonth = () => {
-    const newMonth = currentMonth - 1;
-    if (newMonth >= 0) {
-      setCurrentMonth(newMonth);
-    } else {
+  const handleMonthChange = (month: number) => {
+    if (month < 0) {
       const newYear = currentYear - 1;
       setCurrentYear(newYear);
       setCurrentMonth(11);
-    }
-  };
-
-  const handleNextMonth = () => {
-    const newMonth = currentMonth + 1;
-    if (newMonth <= 11) {
-      setCurrentMonth(newMonth);
-    } else {
+    } else if (month > 11) {
       const newYear = currentYear + 1;
       setCurrentYear(newYear);
       setCurrentMonth(0);
+    } else {
+      setCurrentMonth(month);
     }
   };
 
@@ -207,20 +210,19 @@ function Calendar(props: CalendarProps) {
 
   return (
     <div className={cls} style={props.style}>
-      <Header
+      <CalendarHeader
+        mode={mode}
         year={currentYear}
         month={currentMonth}
         visible={!props.hideHeader}
         formatYear={props.formatHeaderYear}
         formatMonth={props.formatHeaderMonth}
-        onPreviousYear={handlePreviousYear}
-        onPreviousMonth={handlePreviousMonth}
-        onNextYear={handleNextYear}
-        onNextMonth={handleNextMonth}
+        onYearChange={handleYearChange}
+        onMonthChange={handleMonthChange}
         onClick={props.onHeaderClick}
       />
       <div className={prefix + '-body'}>
-        <DateCalendar
+        <CalendarBody
           {...props}
           value={selectedDate}
           currentMonth={currentMonth}
@@ -237,52 +239,92 @@ function Calendar(props: CalendarProps) {
   );
 }
 
-function Header(props: CalendarHeaderProps) {
+function CalendarHeader(props: CalendarHeaderProps) {
   if (!props.visible) return null;
+
+  if (props.mode === 'year') {
+    return <YearCalendarHeader {...props} />;
+  }
+
+  const handlePreviousYear = () => {
+    props.onYearChange(props.year - 1);
+  };
+  const handleNextYear = () => {
+    props.onYearChange(props.year + 1);
+  };
+  const handlePreviousMonth = () => {
+    props.onMonthChange(props.month - 1);
+  };
+  const handleNextMonth = () => {
+    props.onMonthChange(props.month + 1);
+  };
+
+  const isDateMode = props.mode === 'date';
   const date = new Date(props.year, props.month);
+
   return (
     <header className={getPrefix() + '-header'} onClick={props.onClick}>
-      <Button onClick={props.onPreviousYear}>&lt;&lt;</Button>
-      <Button onClick={props.onPreviousMonth}>&lt;</Button>
+      <Button onClick={handlePreviousYear}>&lt;&lt;</Button>
+      {isDateMode && <Button onClick={handlePreviousMonth}>&lt;</Button>}
       <div className="title">
-        <span>{dateFormatter(props.formatYear, date)}</span>
-        <span>{dateFormatter(props.formatMonth, date)}</span>
+        <span>{dateUtil.formatter(props.formatYear, date)}</span>
+        {isDateMode && (
+          <span>{dateUtil.formatter(props.formatMonth, date)}</span>
+        )}
       </div>
-      <Button onClick={props.onNextMonth}>&gt;</Button>
-      <Button onClick={props.onNextYear}>&gt;&gt;</Button>
+      {isDateMode && <Button onClick={handleNextMonth}>&gt;</Button>}
+      <Button onClick={handleNextYear}>&gt;&gt;</Button>
     </header>
   );
 }
 
-function DateCalendar(props: CalendarBodyProps) {
+function YearCalendarHeader(props: CalendarHeaderProps) {
+  const decade = getDecade(props.year);
+  const handlePreviousDecade = () => {
+    props.onYearChange(props.year - 10);
+  };
+  const handleNextDecade = () => {
+    props.onYearChange(props.year + 10);
+  };
   return (
-    <table cellSpacing={0} cellPadding={0}>
-      <WeekBox
-        start={props.weekStart || 0}
-        visible={!props.hideWeekBox}
-        formatter={props.weekFormatter}
-      />
-      <DateCalendarBody {...props} />
-    </table>
+    <header className={getPrefix() + '-header'} onClick={props.onClick}>
+      <Button onClick={handlePreviousDecade}>&lt;&lt;</Button>
+      <div className="title">
+        <span>
+          {decade[0]}-{decade[1]}
+        </span>
+      </div>
+      <Button onClick={handleNextDecade}>&gt;&gt;</Button>
+    </header>
   );
 }
 
-function WeekBox(props: CalendarWeekBoxProps) {
-  const { start, visible, formatter = defaultWeekFormatter } = props;
-  if (!visible) return null;
-  const week = [];
-  for (let i = start; i < start + 7; i++) {
-    week.push(i < 7 ? i : i - 7);
+function CalendarBody(props: CalendarBodyProps) {
+  let body;
+  if (props.mode === 'year') {
+    body = <YearCalendarBody {...props} />;
+  } else if (props.mode === 'month') {
+    body = <MonthCalendarBody {...props} />;
+  } else {
+    body = (
+      <>
+        <WeekBox
+          start={props.weekStart || 0}
+          visible={!props.hideWeekBox}
+          formatter={props.weekFormatter}
+        />
+        <DateCalendarBody {...props} />
+      </>
+    );
   }
   const prefix = getPrefix();
   return (
-    <thead className={prefix + '-week'}>
-      <tr className={prefix + '-column'}>
-        {week.map(v => (
-          <th key={v}>{formatter(v)}</th>
-        ))}
-      </tr>
-    </thead>
+    <table
+      cellSpacing={0}
+      cellPadding={0}
+      className={cx(prefix + '-table', props.className)}>
+      {body}
+    </table>
   );
 }
 
@@ -292,7 +334,7 @@ function DateCalendarBody(props: CalendarBodyProps) {
   const today = new Date();
   const prefix = getPrefix();
   return (
-    <tbody className={prefix + '-dates'}>
+    <tbody className={prefix + '-grid'}>
       {datesByWeek.map((dates, index) => {
         return (
           <DateCalendarRow {...props} dates={dates} today={today} key={index} />
@@ -318,22 +360,17 @@ function DateCalendarRow(
 function DateCalendarCell(
   props: CalendarBodyProps & { date: Date; today: Date }
 ) {
-  const {
+  const { date, dateFormatter = defaultDateFormatter } = props;
+  const isToday = dateUtil.isEqualDate(date, props.today);
+  let selected = dateUtil.isEqualDate(date, props.value);
+  if (!props.value && props.highlightToday) selected = isToday;
+  const disabled = isDisabledDate(
     date,
-    today,
-    value,
-    currentMonth,
-    dateFormatter = defaultDateFormatter,
-    todayText,
-    highlightToday,
-    disableTodayAgo,
-    disabledDate,
-    onSelect,
-  } = props;
-  const isToday = dateUtil.isEqualDate(date, today);
-  let selected = dateUtil.isEqualDate(date, value);
-  if (!value && highlightToday) selected = isToday;
-  const handleClick = () => onSelect(date);
+    props.today,
+    props.disableTodayAgo,
+    props.disabledDate
+  );
+  const handleClick = () => props.onSelect(date);
   const prefix = getPrefix();
   return (
     <td className={prefix + '-cell'}>
@@ -341,14 +378,125 @@ function DateCalendarCell(
         className={cx(prefix + '-date', {
           today: isToday,
           selected,
-          disabled: isDisabledDate(date, today, disableTodayAgo, disabledDate),
-          'prev-month': dateUtil.isPreviousMonth(date, currentMonth),
-          'next-month': dateUtil.isNextMonth(date, currentMonth),
+          disabled,
+          prev: dateUtil.isPreviousMonth(date, props.currentMonth),
+          next: dateUtil.isNextMonth(date, props.currentMonth),
         })}
         onClick={handleClick}>
-        {(isToday && todayText) || dateFormatter(date)}
+        {(isToday && props.todayText) || dateFormatter(date)}
       </span>
     </td>
+  );
+}
+
+function MonthCalendarBody(props: CalendarBodyProps) {
+  const prefix = getPrefix();
+  const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  return (
+    <tbody className={prefix + '-grid'}>
+      {[0, 1, 2, 3].map(row => (
+        <tr key={row} className={prefix + '-row'}>
+          {[0, 1, 2].map(column => {
+            const month = months[row * 3 + column];
+            return <MonthCalendarCell {...props} key={month} month={month} />;
+          })}
+        </tr>
+      ))}
+    </tbody>
+  );
+}
+
+function MonthCalendarCell(props: CalendarBodyProps & { month: number }) {
+  const { monthFormatter = defaultMonthFormatter } = props;
+  const selected = props.month === props.currentMonth;
+  const handleClick = () => {
+    const date = (props.value || new Date()).getDate();
+    props.onSelect(new Date(props.currentYear, props.month, date));
+  };
+  const prefix = getPrefix();
+  return (
+    <td className={prefix + '-cell'}>
+      <span
+        className={cx(prefix + '-month', { selected })}
+        onClick={handleClick}>
+        {monthFormatter(props.month)}
+      </span>
+    </td>
+  );
+}
+
+function YearCalendarBody(props: CalendarBodyProps) {
+  const prefix = getPrefix();
+  const years = getYearsByDecade(props.currentYear);
+  return (
+    <tbody className={prefix + '-grid'}>
+      {[0, 1, 2, 3].map(row => {
+        return (
+          <tr key={row} className={prefix + '-row'}>
+            {[0, 1, 2].map(column => {
+              const year = years[row * 3 + column];
+              return (
+                <YearCalendarCell
+                  {...props}
+                  key={year}
+                  year={year}
+                  isFirst={year === years[0]}
+                  isLast={year === years[years.length - 1]}
+                />
+              );
+            })}
+          </tr>
+        );
+      })}
+    </tbody>
+  );
+}
+
+function YearCalendarCell(
+  props: CalendarBodyProps & {
+    year: number;
+    isFirst: boolean;
+    isLast: boolean;
+  }
+) {
+  const { yearFormatter = defaultYearFormatter } = props;
+  const selected = props.year === props.currentYear;
+  const handleClick = () => {
+    const date = (props.value || new Date()).getDate();
+    props.onSelect(new Date(props.year, props.currentMonth, date));
+  };
+  const prefix = getPrefix();
+  return (
+    <td className={prefix + '-cell'}>
+      <span
+        className={cx(prefix + '-year', {
+          selected,
+          prev: props.isFirst,
+          next: props.isLast,
+        })}
+        onClick={handleClick}>
+        {yearFormatter(props.year)}
+      </span>
+    </td>
+  );
+}
+
+function WeekBox(props: CalendarWeekBoxProps) {
+  const { start, visible, formatter = defaultWeekFormatter } = props;
+  if (!visible) return null;
+  const week = [];
+  for (let i = start; i < start + 7; i++) {
+    week.push(i < 7 ? i : i - 7);
+  }
+  const prefix = getPrefix();
+  return (
+    <thead className={prefix + '-head'}>
+      <tr className={prefix + '-row'}>
+        {week.map(v => (
+          <th key={v}>{formatter(v)}</th>
+        ))}
+      </tr>
+    </thead>
   );
 }
 
@@ -377,6 +525,29 @@ function getDatesByWeek(year: number, month: number, weekStart: number) {
   return datesByWeek;
 }
 
+function getYearsByDecade(year: number) {
+  const years: number[] = [];
+  const decade = getDecade(year);
+  for (let i = decade[0] - 1; i <= decade[1] + 1; i++) {
+    years.push(i);
+  }
+  return years;
+}
+
+function getDecade(year: number) {
+  const thisYear = new Date().getFullYear();
+  if (year <= thisYear) {
+    const diff = thisYear - year + 1;
+    const d = Math.floor(diff / 10);
+    const end = thisYear - d * 10;
+    return [end - 9, end];
+  }
+  const diff = year - thisYear + 1;
+  const d = Math.floor(diff / 10);
+  const start = thisYear + d * 10 + 1;
+  return [start, start + 9];
+}
+
 function isDisabledDate(
   date: Date,
   today: Date,
@@ -395,6 +566,15 @@ function defaultWeekFormatter(value: number) {
 
 function defaultDateFormatter(date: Date) {
   return '' + date.getDate();
+}
+
+function defaultMonthFormatter(month: number) {
+  const localMonths = '一 二 三 四 五 六 七 八 九 十 十一 十二'.split(' ');
+  return localMonths[month] + '月';
+}
+
+function defaultYearFormatter(year: number) {
+  return '' + year;
 }
 
 Calendar.defaultProps = defaultProps;

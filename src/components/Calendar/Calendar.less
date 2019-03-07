@@ -3,6 +3,7 @@
 .@{prefix}-calendar {
   position: relative;
   display: inline-block;
+  width: @calendar-width;
   color: @calendar-color;
   font-size: @calendar-font-size;
   background-color: @calendar-background-color;
@@ -20,6 +21,7 @@
   & > .@{prefix}-button {
     margin: 0 3px;
     padding: 0;
+    height: auto;
     border: none;
     box-shadow: none;
     background-color: transparent;
@@ -29,6 +31,7 @@
 
   & > .title {
     flex: 1;
+    font-weight: 700;
     & > span {
       padding: @calendar-header-text-padding;
     }
@@ -37,17 +40,22 @@
 
 .@{prefix}-calendar-body {
   padding: @calendar-body-padding;
+  height: @calendar-body-height;
+  .box-sizing();
+}
 
-  & > table {
-    width: 100%;
-    border-collapse: collapse;
-    th,
-    td {
-      text-align: center;
-    }
-    th {
-      font-weight: 400;
-    }
+.@{prefix}-calendar-table {
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  th,
+  td {
+    text-align: center;
+  }
+  th {
+    padding: @calendar-week-padding;
+    font-weight: 400;
   }
 }
 
@@ -56,7 +64,9 @@
   border-top: 1px solid @calendar-footer-border-color;
 }
 
-.@{prefix}-calendar-date {
+.@{prefix}-calendar-date,
+.@{prefix}-calendar-month,
+.@{prefix}-calendar-year {
   display: block;
   margin: 0 auto;
   width: @calendar-cell-width;
@@ -69,13 +79,14 @@
   cursor: pointer;
   .transition();
   .box-sizing();
+  .text-overflow();
 
   &:hover {
     background-color: @calendar-cell-background-color-hover;
   }
 
-  &.prev-month,
-  &.next-month {
+  &.prev,
+  &.next {
     color: @calendar-cell-color-dark;
   }
 
@@ -94,4 +105,10 @@
     background-color: @calendar-cell-background-color-disabled;
     pointer-events: none;
   }
+}
+
+.@{prefix}-calendar-month,
+.@{prefix}-calendar-year {
+  width: 80%;
+  font-size: @calendar-cell-font-size + 2px;
 }
