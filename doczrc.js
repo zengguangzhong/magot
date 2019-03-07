@@ -29,11 +29,7 @@ function getMenuList() {
 }
 
 function getPlugins() {
-  return [
-    css({
-      preprocessor: 'less',
-    }),
-  ];
+  return [css({ preprocessor: 'less' })];
 }
 
 function getThemeStyles() {
