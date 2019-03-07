@@ -6,7 +6,6 @@ import Popup from '../Popup';
 import Calendar, { CalendarProps } from '../Calendar';
 import * as component from '../component';
 import * as dateUtil from '../../utils/date';
-import dateFormatter from '../../utils/date-formatter';
 import { useChanges } from '../../hooks/changes';
 
 import './DatePicker.less';
@@ -81,7 +80,8 @@ function DatePicker(props: DatePickerProps) {
     if (!currentDate || !dateUtil.isEqualDate(date, currentDate)) {
       internallyRef.current = true;
       setCurrentDate(date);
-      onChange && onChange(date, (date && dateFormatter(format, date)) || '');
+      const dateString = (date && dateUtil.formatter(format, date)) || '';
+      onChange && onChange(date, dateString);
     }
   };
 
@@ -129,7 +129,7 @@ function DatePicker(props: DatePickerProps) {
   const cls = component.getComponentClasses(type, { className });
 
   let displayValue = '';
-  if (currentDate) displayValue = dateFormatter(format, currentDate);
+  if (currentDate) displayValue = dateUtil.formatter(format, currentDate);
   if (inputValue !== null) displayValue = inputValue;
 
   const trigger = (
