@@ -8,12 +8,20 @@ export function getPureDate(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
-export function getFirstDateOfMonth(year: number, month: number) {
+export function getFirstDayOfMonth(year: number, month: number) {
   return new Date(year, month, 1);
 }
 
-export function getLastDateOfMonth(year: number, month: number) {
+export function getLastDayOfMonth(year: number, month: number) {
   return new Date(year, month + 1, 0);
+}
+
+export function getWeekNumber(date: Date) {
+  const one = 24 * 3600 * 1000;
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pureDate = getPureDate(date);
+  const pastedDays = (pureDate.getTime() - firstDayOfYear.getTime()) / one;
+  return Math.ceil((pastedDays + firstDayOfYear.getDay() + 1) / 7);
 }
 
 export function isEqualDate(date1: Date | null, date2: Date | null) {

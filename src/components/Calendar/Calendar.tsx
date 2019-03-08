@@ -657,8 +657,8 @@ function getPrefix() {
 
 function getDatesByWeek(year: number, month: number, weekStart: number) {
   const datesByWeek: Date[][] = [];
-  const firstDate = dateUtil.getFirstDateOfMonth(year, month);
-  const firstDayOfWeek = firstDate.getDay();
+  const firstDayOfMonth = dateUtil.getFirstDayOfMonth(year, month);
+  const firstDayOfWeek = firstDayOfMonth.getDay();
 
   let start = 0;
   const startDelta = firstDayOfWeek - weekStart;
