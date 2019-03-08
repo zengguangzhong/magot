@@ -136,7 +136,7 @@ function DatePicker(props: DatePickerProps) {
     <Input
       {...formProps}
       className={cls}
-      style={{ ...style, width: width }}
+      style={{ ...style, width }}
       icon="calendar"
       value={displayValue}
       onChange={handleInputChange}

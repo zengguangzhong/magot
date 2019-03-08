@@ -1,13 +1,15 @@
 @import '../../variable.less';
 
 .@{prefix}-calendar {
+  .box();
+
   position: relative;
   display: inline-block;
   width: @calendar-width;
+  padding: @calendar-padding;
   color: @calendar-color;
   font-size: @calendar-font-size;
   background-color: @calendar-background-color;
-  .box();
 }
 
 .@{prefix}-calendar-header {

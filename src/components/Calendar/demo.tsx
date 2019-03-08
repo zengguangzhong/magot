@@ -134,7 +134,7 @@ function ControlledLocalizeCalendar() {
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, -1))}>
-        Ystd
+        Yesterday
       </Button>
       <Button
         type="link"
@@ -146,7 +146,7 @@ function ControlledLocalizeCalendar() {
         type="link"
         // tslint:disable-next-line
         onClick={() => setCurrentDate(fromDate(today, 1))}>
-        Tmr
+        Tomorrow
       </Button>
     </Calendar>
   );
