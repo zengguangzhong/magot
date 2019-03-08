@@ -18,6 +18,7 @@ function MonthPicker(props: MonthPickerProps) {
     <DatePicker
       {...props}
       className={cx(cls, props.className)}
+      readOnly={true}
       calendarProps={{
         mode: 'month',
         className: cx(

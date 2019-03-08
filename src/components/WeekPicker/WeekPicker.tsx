@@ -18,6 +18,7 @@ function WeekPicker(props: WeekPickerProps) {
     <DatePicker
       {...props}
       className={cx(cls, props.className)}
+      readOnly={true}
       calendarProps={{
         mode: 'week',
         className: cx(

@@ -22,11 +22,6 @@ function MonthPickerDemo() {
           onChange={console.log}
         />
         <MonthPicker defaultValue={new Date()} disabled={true} />
-        <MonthPicker
-          placeholder="readonly"
-          readOnly={true}
-          onChange={console.log}
-        />
       </div>
       <div className="demo-box">
         <MonthPicker

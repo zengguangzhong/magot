@@ -17,11 +17,6 @@ function WeekPickerDemo() {
           onChange={console.log}
         />
         <WeekPicker defaultValue={new Date()} disabled={true} />
-        <WeekPicker
-          placeholder="readonly"
-          readOnly={true}
-          onChange={console.log}
-        />
       </div>
       <div className="demo-box">
         <WeekPicker
