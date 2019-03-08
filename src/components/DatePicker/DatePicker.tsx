@@ -167,6 +167,7 @@ function DatePicker(props: DatePickerProps) {
       placement="bottomLeft"
       trigger="click"
       space={2}
+      removeWhenClose={true}
       overlay={overlay}>
       {trigger}
     </Popup>
