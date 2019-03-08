@@ -87,6 +87,7 @@ export function formatter(fmt = 'yyyy-MM-dd', date?: Date | number) {
     's+': realDate.getSeconds(),
     'q+': Math.floor((realDate.getMonth() + 3) / 3),
     S: realDate.getMilliseconds(),
+    w: getWeekNumber(realDate),
   };
   if (/(y+)/.test(fmt)) {
     const y = (realDate.getFullYear() + '').substr(4 - RegExp.$1.length);
