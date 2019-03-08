@@ -9,7 +9,33 @@ function WeekPickerDemo() {
         返回
       </Link>
       <div className="demo-box">
-        <WeekPicker />
+        <WeekPicker placeholder="select week" onChange={console.log} />
+        <WeekPicker
+          placeholder="select week"
+          format="yyyy - w week"
+          defaultValue="2019/01"
+          onChange={console.log}
+        />
+        <WeekPicker defaultValue={new Date()} disabled={true} />
+        <WeekPicker
+          placeholder="readonly"
+          readOnly={true}
+          onChange={console.log}
+        />
+      </div>
+      <div className="demo-box">
+        <WeekPicker
+          placeholder="select week"
+          size="small"
+          onChange={console.log}
+        />
+        <WeekPicker placeholder="select month" onChange={console.log} />
+        <WeekPicker
+          placeholder="select week"
+          size="large"
+          width={160}
+          onChange={console.log}
+        />
       </div>
     </>
   );
