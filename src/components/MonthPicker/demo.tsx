@@ -9,7 +9,38 @@ function MonthPickerDemo() {
         返回
       </Link>
       <div className="demo-box">
-        <MonthPicker />
+        <MonthPicker placeholder="select month" onChange={console.log} />
+        <MonthPicker
+          placeholder="select month"
+          format="yyyy/MM"
+          defaultValue="2019/01"
+          onChange={console.log}
+        />
+        <MonthPicker
+          placeholder="select month"
+          format="MM/yyyy"
+          onChange={console.log}
+        />
+        <MonthPicker defaultValue={new Date()} disabled={true} />
+        <MonthPicker
+          placeholder="readonly"
+          readOnly={true}
+          onChange={console.log}
+        />
+      </div>
+      <div className="demo-box">
+        <MonthPicker
+          placeholder="select month"
+          size="small"
+          onChange={console.log}
+        />
+        <MonthPicker placeholder="select month" onChange={console.log} />
+        <MonthPicker
+          placeholder="select month"
+          size="large"
+          width={160}
+          onChange={console.log}
+        />
       </div>
     </>
   );
