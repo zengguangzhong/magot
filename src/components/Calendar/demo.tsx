@@ -55,6 +55,11 @@ function CalendarDemo() {
         />
         <Calendar mode="year" onChange={console.log} />
         <Calendar mode="decade" onChange={console.log} />
+        <Calendar
+          mode="week"
+          defaultValue={new Date()}
+          onChange={console.log}
+        />
       </div>
     </>
   );

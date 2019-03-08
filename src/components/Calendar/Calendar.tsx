@@ -8,7 +8,7 @@ import { useChanges } from '../../hooks/changes';
 
 import './Calendar.less';
 
-type CalendarMode = 'year' | 'month' | 'date' | 'decade';
+type CalendarMode = 'date' | 'week' | 'month' | 'year' | 'decade';
 
 export interface CalendarProps
   extends component.BaseComponent,
@@ -104,7 +104,7 @@ export interface CalendarProps
   /**
    * 选择日期之后的回调函数
    */
-  onChange?: (date: Date) => void;
+  onChange?: (date: Date, weekNumber?: number) => void;
 
   /**
    * 头部栏点击事件的回调函数
@@ -141,6 +141,7 @@ interface CalendarBodyProps extends CalendarProps {
 interface CalendarWeekBoxProps {
   start: number;
   visible: boolean;
+  mode?: CalendarMode;
   formatter?: (value: number) => string;
 }
 
@@ -204,7 +205,14 @@ function Calendar(props: CalendarProps) {
         setCurrentYear(date.getFullYear());
       }
     }
-    props.onChange && props.onChange(date);
+    if (props.onChange) {
+      if (isWeekMode(mode)) {
+        const weekNumber = dateUtil.getWeekNumber(date);
+        props.onChange(date, weekNumber);
+      } else {
+        props.onChange(date);
+      }
+    }
   };
 
   const prefix = getPrefix();
@@ -290,24 +298,24 @@ function DateCalendarHeader(props: CalendarHeaderProps) {
   };
 
   const prefix = getPrefix();
-  const isDateMode = props.mode === 'date';
+  const isMonthMode = props.mode === 'month';
   const date = new Date(year, month);
 
   return (
     <header className={prefix + '-header'} onClick={props.onClick}>
       <Button onClick={handlePreviousYear}>&lt;&lt;</Button>
-      {isDateMode && <Button onClick={handlePreviousMonth}>&lt;</Button>}
-      <div className="title">
+      {!isMonthMode && <Button onClick={handlePreviousMonth}>&lt;</Button>}
+      <div className={prefix + '-title'}>
         <a href="javascript:;" onClick={handleYearClick}>
           {dateUtil.formatter(props.formatYear, date)}
         </a>
-        {isDateMode && (
+        {!isMonthMode && (
           <a href="javascript:;" onClick={handleMonthClick}>
             {dateUtil.formatter(props.formatMonth, date)}
           </a>
         )}
       </div>
-      {isDateMode && <Button onClick={handleNextMonth}>&gt;</Button>}
+      {!isMonthMode && <Button onClick={handleNextMonth}>&gt;</Button>}
       <Button onClick={handleNextYear}>&gt;&gt;</Button>
       {yearVisible && (
         <Calendar
@@ -356,7 +364,7 @@ function YearCalendarHeader(props: CalendarHeaderProps) {
   return (
     <header className={prefix + '-header'} onClick={props.onClick}>
       <Button onClick={handlePreviousDecade}>&lt;&lt;</Button>
-      <div className="title">
+      <div className={prefix + '-title'}>
         <a href="javascript:;" onClick={handleDecadeClick}>
           {decade[0]}-{decade[1]}
         </a>
@@ -381,10 +389,11 @@ function DecadeCalendarHeader(props: CalendarHeaderProps) {
   const handlePreviousCentury = () => onYearChange(year - 100);
   const handleNextCentury = () => onYearChange(year + 100);
 
+  const prefix = getPrefix();
   return (
-    <header className={getPrefix() + '-header'} onClick={props.onClick}>
+    <header className={prefix + '-header'} onClick={props.onClick}>
       <Button onClick={handlePreviousCentury}>&lt;&lt;</Button>
-      <div className="title">
+      <div className={prefix + '-title'}>
         <span>
           {decade[0]}-{decade[1]}
         </span>
@@ -407,6 +416,7 @@ function CalendarBody(props: CalendarBodyProps) {
     body = (
       <>
         <WeekBox
+          mode={mode}
           start={props.weekStart || 0}
           visible={!props.hideWeekBox}
           formatter={props.weekFormatter}
@@ -442,10 +452,29 @@ function DateCalendarBody(props: CalendarBodyProps) {
 function DateCalendarRow(
   props: CalendarBodyProps & { dates: Date[]; today: Date }
 ) {
+  const { dates } = props;
   const prefix = getPrefix();
+  const weekMode = isWeekMode(props.mode);
+  let isActived = false;
+  if (weekMode) {
+    isActived = !!dates.find(d => {
+      return dateUtil.isEqualDate(props.value, d);
+    });
+  }
+  const wednesday = dates.find(d => d.getDay() === 3);
   return (
-    <tr className={prefix + '-row'}>
-      {props.dates.map(date => {
+    <tr
+      className={cx(
+        prefix + '-row',
+        weekMode && 'week-row',
+        isActived && 'actived'
+      )}>
+      {weekMode && (
+        <td className={cx(prefix + '-cell', 'week-number')}>
+          {dateUtil.getWeekNumber(wednesday || dates[0])}
+        </td>
+      )}
+      {dates.map(date => {
         return <DateCalendarCell {...props} date={date} key={date.getTime()} />;
       })}
     </tr>
@@ -468,15 +497,16 @@ function DateCalendarCell(
   const handleClick = () => props.onSelect(date);
   const prefix = getPrefix();
   return (
-    <td className={prefix + '-cell'}>
+    <td
+      className={cx(prefix + '-cell', {
+        today: isToday,
+        selected,
+        disabled,
+        prev: dateUtil.isPreviousMonth(date, props.currentMonth),
+        next: dateUtil.isNextMonth(date, props.currentMonth),
+      })}>
       <span
-        className={cx(prefix + '-date', {
-          today: isToday,
-          selected,
-          disabled,
-          prev: dateUtil.isPreviousMonth(date, props.currentMonth),
-          next: dateUtil.isNextMonth(date, props.currentMonth),
-        })}
+        className={cx(prefix + '-date', isWeekMode(props.mode) && 'week-date')}
         onClick={handleClick}>
         {(isToday && props.todayText) || dateFormatter(date)}
       </span>
@@ -510,9 +540,9 @@ function MonthCalendarCell(props: CalendarBodyProps & { month: number }) {
   };
   const prefix = getPrefix();
   return (
-    <td className={prefix + '-cell'}>
+    <td className={cx(prefix + '-cell', { selected })}>
       <span
-        className={cx(prefix + '-month', { selected })}
+        className={cx(prefix + '-date', prefix + '-month')}
         onClick={handleClick}>
         {monthFormatter(props.month)}
       </span>
@@ -562,13 +592,14 @@ function YearCalendarCell(
   };
   const prefix = getPrefix();
   return (
-    <td className={prefix + '-cell'}>
+    <td
+      className={cx(prefix + '-cell', {
+        selected,
+        prev: props.isFirst,
+        next: props.isLast,
+      })}>
       <span
-        className={cx(prefix + '-year', {
-          selected,
-          prev: props.isFirst,
-          next: props.isLast,
-        })}
+        className={cx(prefix + '-date', prefix + '-year')}
         onClick={handleClick}>
         {yearFormatter(props.year)}
       </span>
@@ -618,13 +649,14 @@ function DecadeCalendarCell(
   };
   const prefix = getPrefix();
   return (
-    <td className={prefix + '-cell'}>
+    <td
+      className={cx(prefix + '-cell', {
+        selected,
+        prev: props.isFirst,
+        next: props.isLast,
+      })}>
       <span
-        className={cx(prefix + '-decade', {
-          selected,
-          prev: props.isFirst,
-          next: props.isLast,
-        })}
+        className={cx(prefix + '-date', prefix + '-decade')}
         onClick={handleClick}>
         {props.decade.join('-')}
       </span>
@@ -643,8 +675,13 @@ function WeekBox(props: CalendarWeekBoxProps) {
   return (
     <thead className={prefix + '-head'}>
       <tr className={prefix + '-row'}>
+        {isWeekMode(props.mode) && (
+          <th className={cx(prefix + '-head-cell', 'week-number')} />
+        )}
         {week.map(v => (
-          <th key={v}>{formatter(v)}</th>
+          <th className={prefix + '-head-cell'} key={v}>
+            {formatter(v)}
+          </th>
         ))}
       </tr>
     </thead>
@@ -653,6 +690,10 @@ function WeekBox(props: CalendarWeekBoxProps) {
 
 function getPrefix() {
   return component.getComponentPrefix('calendar');
+}
+
+function isWeekMode(mode?: CalendarMode) {
+  return mode === 'week';
 }
 
 function getDatesByWeek(year: number, month: number, weekStart: number) {
