@@ -8,7 +8,7 @@ import { useChanges } from '../../hooks/changes';
 
 import './Calendar.less';
 
-type CalendarMode = 'year' | 'month' | 'date';
+type CalendarMode = 'year' | 'month' | 'date' | 'decade';
 
 export interface CalendarProps
   extends component.BaseComponent,
@@ -124,6 +124,8 @@ interface CalendarHeaderProps {
   formatYear?: string;
   formatMonth?: string;
   mode?: CalendarMode;
+  monthFormatter?: (month: number) => string;
+  yearFormatter?: (year: number) => string;
   onYearChange: (year: number) => void;
   onMonthChange: (month: number) => void;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -201,8 +203,8 @@ function Calendar(props: CalendarProps) {
       if (!dateUtil.isCurrentYear(date, currentYear)) {
         setCurrentYear(date.getFullYear());
       }
-      props.onChange && props.onChange(date);
     }
+    props.onChange && props.onChange(date);
   };
 
   const prefix = getPrefix();
@@ -217,6 +219,8 @@ function Calendar(props: CalendarProps) {
         visible={!props.hideHeader}
         formatYear={props.formatHeaderYear}
         formatMonth={props.formatHeaderMonth}
+        yearFormatter={props.yearFormatter}
+        monthFormatter={props.monthFormatter}
         onYearChange={handleYearChange}
         onMonthChange={handleMonthChange}
         onClick={props.onHeaderClick}
@@ -241,70 +245,164 @@ function Calendar(props: CalendarProps) {
 
 function CalendarHeader(props: CalendarHeaderProps) {
   if (!props.visible) return null;
-
-  if (props.mode === 'year') {
+  const { mode } = props;
+  if (mode === 'year') {
     return <YearCalendarHeader {...props} />;
   }
+  if (mode === 'decade') {
+    return <DecadeCalendarHeader {...props} />;
+  }
+  return <DateCalendarHeader {...props} />;
+}
 
-  const handlePreviousYear = () => {
-    props.onYearChange(props.year - 1);
-  };
-  const handleNextYear = () => {
-    props.onYearChange(props.year + 1);
-  };
-  const handlePreviousMonth = () => {
-    props.onMonthChange(props.month - 1);
-  };
-  const handleNextMonth = () => {
-    props.onMonthChange(props.month + 1);
+function DateCalendarHeader(props: CalendarHeaderProps) {
+  const { year, month, onYearChange, onMonthChange } = props;
+  const [yearVisible, setYearVisible] = React.useState(false);
+  const [monthVisible, setMonthVisible] = React.useState(false);
+
+  const handlePreviousYear = () => onYearChange(year - 1);
+  const handleNextYear = () => onYearChange(year + 1);
+  const handlePreviousMonth = () => onMonthChange(month - 1);
+  const handleNextMonth = () => onMonthChange(month + 1);
+
+  const handleYearClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!yearVisible) setYearVisible(true);
   };
 
+  const handleMonthClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!monthVisible) setMonthVisible(true);
+  };
+
+  const handleYearChange = (date: Date) => {
+    const newYear = date.getFullYear();
+    if (newYear !== year) onYearChange(newYear);
+    setYearVisible(false);
+  };
+
+  const handleMonthChange = (date: Date) => {
+    const newYear = date.getFullYear();
+    const newMonth = date.getMonth();
+    if (newYear !== year) onYearChange(newYear);
+    if (newMonth !== month) onMonthChange(newMonth);
+    setMonthVisible(false);
+  };
+
+  const prefix = getPrefix();
   const isDateMode = props.mode === 'date';
-  const date = new Date(props.year, props.month);
+  const date = new Date(year, month);
 
   return (
-    <header className={getPrefix() + '-header'} onClick={props.onClick}>
+    <header className={prefix + '-header'} onClick={props.onClick}>
       <Button onClick={handlePreviousYear}>&lt;&lt;</Button>
       {isDateMode && <Button onClick={handlePreviousMonth}>&lt;</Button>}
       <div className="title">
-        <span>{dateUtil.formatter(props.formatYear, date)}</span>
+        <a href="javascript:;" onClick={handleYearClick}>
+          {dateUtil.formatter(props.formatYear, date)}
+        </a>
         {isDateMode && (
-          <span>{dateUtil.formatter(props.formatMonth, date)}</span>
+          <a href="javascript:;" onClick={handleMonthClick}>
+            {dateUtil.formatter(props.formatMonth, date)}
+          </a>
         )}
       </div>
       {isDateMode && <Button onClick={handleNextMonth}>&gt;</Button>}
       <Button onClick={handleNextYear}>&gt;&gt;</Button>
+      {yearVisible && (
+        <Calendar
+          className={prefix + '-selector'}
+          mode="year"
+          value={date}
+          yearFormatter={props.yearFormatter}
+          onChange={handleYearChange}
+        />
+      )}
+      {monthVisible && (
+        <Calendar
+          className={prefix + '-selector'}
+          mode="month"
+          value={date}
+          monthFormatter={props.monthFormatter}
+          onChange={handleMonthChange}
+        />
+      )}
     </header>
   );
 }
 
 function YearCalendarHeader(props: CalendarHeaderProps) {
-  const decade = getDecade(props.year);
-  const handlePreviousDecade = () => {
-    props.onYearChange(props.year - 10);
+  const { year, onYearChange } = props;
+  const prefix = getPrefix();
+  const decade = getDecade(year);
+  const date = new Date(year, props.month);
+
+  const handlePreviousDecade = () => onYearChange(year - 10);
+  const handleNextDecade = () => onYearChange(year + 10);
+
+  const [decadeVisible, setDecadeVisible] = React.useState(false);
+
+  const handleDecadeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!decadeVisible) setDecadeVisible(true);
   };
-  const handleNextDecade = () => {
-    props.onYearChange(props.year + 10);
+
+  const handleDecadeChange = (date: Date) => {
+    const newYear = date.getFullYear();
+    if (newYear !== year) onYearChange(newYear);
+    setDecadeVisible(false);
   };
+
+  return (
+    <header className={prefix + '-header'} onClick={props.onClick}>
+      <Button onClick={handlePreviousDecade}>&lt;&lt;</Button>
+      <div className="title">
+        <a href="javascript:;" onClick={handleDecadeClick}>
+          {decade[0]}-{decade[1]}
+        </a>
+      </div>
+      <Button onClick={handleNextDecade}>&gt;&gt;</Button>
+      {decadeVisible && (
+        <Calendar
+          className={prefix + '-selector'}
+          mode="decade"
+          value={date}
+          onChange={handleDecadeChange}
+        />
+      )}
+    </header>
+  );
+}
+
+function DecadeCalendarHeader(props: CalendarHeaderProps) {
+  const { year, onYearChange } = props;
+  const decade = getDecade(year);
+
+  const handlePreviousCentury = () => onYearChange(year - 100);
+  const handleNextCentury = () => onYearChange(year + 100);
+
   return (
     <header className={getPrefix() + '-header'} onClick={props.onClick}>
-      <Button onClick={handlePreviousDecade}>&lt;&lt;</Button>
+      <Button onClick={handlePreviousCentury}>&lt;&lt;</Button>
       <div className="title">
         <span>
           {decade[0]}-{decade[1]}
         </span>
       </div>
-      <Button onClick={handleNextDecade}>&gt;&gt;</Button>
+      <Button onClick={handleNextCentury}>&gt;&gt;</Button>
     </header>
   );
 }
 
 function CalendarBody(props: CalendarBodyProps) {
+  const { mode } = props;
   let body;
-  if (props.mode === 'year') {
+  if (mode === 'year') {
     body = <YearCalendarBody {...props} />;
-  } else if (props.mode === 'month') {
+  } else if (mode === 'month') {
     body = <MonthCalendarBody {...props} />;
+  } else if (mode === 'decade') {
+    body = <DecadeCalendarBody {...props} />;
   } else {
     body = (
       <>
@@ -319,10 +417,7 @@ function CalendarBody(props: CalendarBodyProps) {
   }
   const prefix = getPrefix();
   return (
-    <table
-      cellSpacing={0}
-      cellPadding={0}
-      className={cx(prefix + '-table', props.className)}>
+    <table cellSpacing={0} cellPadding={0} className={prefix + '-table'}>
       {body}
     </table>
   );
@@ -481,6 +576,62 @@ function YearCalendarCell(
   );
 }
 
+function DecadeCalendarBody(props: CalendarBodyProps) {
+  const prefix = getPrefix();
+  const decades = getDecadesByCentury(props.currentYear);
+  return (
+    <tbody className={prefix + '-grid'}>
+      {[0, 1, 2, 3].map(row => {
+        return (
+          <tr key={row} className={prefix + '-row'}>
+            {[0, 1, 2].map(column => {
+              const decade = decades[row * 3 + column];
+              return (
+                <DecadeCalendarCell
+                  {...props}
+                  key={decade.join('-')}
+                  decade={decade}
+                  isFirst={decade === decades[0]}
+                  isLast={decade === decades[decades.length - 1]}
+                />
+              );
+            })}
+          </tr>
+        );
+      })}
+    </tbody>
+  );
+}
+
+function DecadeCalendarCell(
+  props: CalendarBodyProps & {
+    decade: number[];
+    isFirst: boolean;
+    isLast: boolean;
+  }
+) {
+  const { decade, currentYear } = props;
+  const selected = currentYear >= decade[0] && currentYear <= decade[1];
+  const handleClick = () => {
+    const date = (props.value || new Date()).getDate();
+    props.onSelect(new Date(decade[0], props.currentMonth, date));
+  };
+  const prefix = getPrefix();
+  return (
+    <td className={prefix + '-cell'}>
+      <span
+        className={cx(prefix + '-decade', {
+          selected,
+          prev: props.isFirst,
+          next: props.isLast,
+        })}
+        onClick={handleClick}>
+        {props.decade.join('-')}
+      </span>
+    </td>
+  );
+}
+
 function WeekBox(props: CalendarWeekBoxProps) {
   const { start, visible, formatter = defaultWeekFormatter } = props;
   if (!visible) return null;
@@ -535,17 +686,23 @@ function getYearsByDecade(year: number) {
 }
 
 function getDecade(year: number) {
-  const thisYear = new Date().getFullYear();
-  if (year <= thisYear) {
-    const diff = thisYear - year + 1;
-    const d = Math.floor(diff / 10);
-    const end = thisYear - d * 10;
-    return [end - 9, end];
-  }
-  const diff = year - thisYear + 1;
-  const d = Math.floor(diff / 10);
-  const start = thisYear + d * 10 + 1;
+  const start = ~~(year / 10) * 10;
   return [start, start + 9];
+}
+
+function getDecadesByCentury(year: number) {
+  const decades: number[][] = [];
+  const century = getCentury(year);
+  for (let i = century[0] - 10; i <= century[1] + 10; i += 10) {
+    const decade = getDecade(i);
+    decades.push(decade);
+  }
+  return decades;
+}
+
+function getCentury(year: number) {
+  const start = ~~(year / 100) * 100;
+  return [start, start + 99];
 }
 
 function isDisabledDate(
