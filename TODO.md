@@ -66,4 +66,4 @@
 - [ ] Tree
 - [ ] Uploader
 - [ ] VideoPlayer
-- [ ] WeekPicker
+- [x] WeekPicker
