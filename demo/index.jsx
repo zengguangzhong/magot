@@ -8,29 +8,38 @@ import './index.less';
 const demoComponents = {};
 if (__DEMOS__ && Array.isArray(__DEMOS__)) {
   for (const demo of __DEMOS__) {
-    demoComponents[demo] = React.lazy(() => {
-      return import('../src/components/' + demo + '/demo.tsx');
+    const cmp = React.lazy(() => {
+      return import('../src/components/' + demo.name + '/demo.tsx');
     });
+    demoComponents[demo.name] = { ...demo, cmp };
   }
 }
 
 function Home() {
   const links = [];
-  for (const name in demoComponents) {
+  for (const key in demoComponents) {
+    const item = demoComponents[key];
     links.push(
-      <li key={name}>
-        <Link to={'/' + name}>{name}</Link>
+      <li key={item.name}>
+        <input
+          type="checkbox"
+          defaultChecked={item.done}
+          disabled
+          style={{ marginRight: 12 }}
+        />
+        <Link to={'/' + item.name}>{item.name}</Link>
       </li>
     );
   }
-  return <ul>{links}</ul>;
+  return <ul style={{ listStyle: 'none' }}>{links}</ul>;
 }
 
 function DemoApp() {
   const routes = [];
-  for (const name in demoComponents) {
+  for (const key in demoComponents) {
+    const item = demoComponents[key];
     routes.push(
-      <Route key={name} path={'/' + name} component={demoComponents[name]} />
+      <Route key={item.name} path={'/' + item.name} component={item.cmp} />
     );
   }
   return (

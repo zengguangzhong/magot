@@ -11,10 +11,25 @@ const src = path.resolve(cwd, 'src');
 const demo = path.resolve(cwd, 'demo');
 
 function getDemos() {
+  const todos = getTodos();
   const demoFiles = glob.sync('**/demo.tsx', { cwd: src });
   return demoFiles.map(file => {
-    return file.replace(/(components\/|\/demo.tsx)/g, '');
+    const name = file.replace(/(components\/|\/demo.tsx)/g, '');
+    return { name, done: !!todos[name] };
   });
+}
+
+function getTodos() {
+  const todos = {};
+  const todoFile = path.join(cwd, 'TODO.md');
+  const todoData = fs.readFileSync(todoFile, 'utf8');
+  const todoPattern = /-\s+\[(.+?)\]\s+(\w+)/gi;
+  let match = null;
+  while ((match = todoPattern.exec(todoData))) {
+    const done = match[1] === 'x';
+    todos[match[2]] = done;
+  }
+  return todos;
 }
 
 function getIcons() {
