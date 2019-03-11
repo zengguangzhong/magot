@@ -2,6 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
 import Button from '../Button';
+import * as dateUtil from '../../utils/date';
+
+function yearFormatter(year: number) {
+  return '' + year;
+}
+
+function monthFormatter(month: number) {
+  return 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ')[month];
+}
+
+function weekFormatter(day: number) {
+  return 'Su Mo Tu We Th Fr Sa'.split(' ')[day];
+}
+
+function dateFormatter(date: Date) {
+  return date.getDate() + '日';
+}
 
 function CalendarDemo() {
   return (
@@ -11,7 +28,7 @@ function CalendarDemo() {
       </Link>
       <div className="demo-box demo-flex">
         <Calendar onChange={console.log} />
-        <Calendar defaultValue="2019/03/15" onChange={console.log} />
+        <Calendar defaultValue={dateUtil.addDays(3)} onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
         <Calendar
           todayText="今天"
@@ -21,8 +38,8 @@ function CalendarDemo() {
         <Calendar weekStart={1} onChange={console.log} />
         <Calendar hideWeekBox={true} hideHeader={true} onChange={console.log} />
         <Calendar
-          formatHeaderYear="yyyy"
-          formatHeaderMonth="MM"
+          headerYearFormatter={yearFormatter}
+          headerMonthFormatter={monthFormatter}
           onChange={console.log}
         />
         <Calendar
@@ -31,10 +48,8 @@ function CalendarDemo() {
           onChange={console.log}
         />
         <Calendar
-          // tslint:disable-next-line
-          dateFormatter={date => date.getDate() + '日'}
-          // tslint:disable-next-line
-          weekFormatter={value => 'Su Mo Tu We Th Fr Sa'.split(' ')[value]}
+          dateFormatter={dateFormatter}
+          weekFormatter={weekFormatter}
           onChange={console.log}
         />
       </div>
@@ -43,23 +58,15 @@ function CalendarDemo() {
         <ControlledLocalizeCalendar />
       </div>
       <div className="demo-box">
-        <Calendar mode="month" onChange={console.log} />
-        <Calendar
-          mode="month"
-          // tslint:disable-next-line
-          monthFormatter={month =>
-            'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ')[month]
-          }
-          formatHeaderYear="yyyy Year"
+        <Calendar.Month onChange={console.log} />
+        <Calendar.Month
+          monthFormatter={monthFormatter}
+          headerYearFormatter={yearFormatter}
           onChange={console.log}
         />
-        <Calendar mode="year" onChange={console.log} />
-        <Calendar mode="decade" onChange={console.log} />
-        <Calendar
-          mode="week"
-          defaultValue={new Date()}
-          onChange={console.log}
-        />
+        <Calendar.Year onChange={console.log} />
+        <Calendar.Decade onChange={console.log} />
+        <Calendar.Week defaultValue={new Date()} onChange={console.log} />
       </div>
     </>
   );
@@ -67,9 +74,6 @@ function CalendarDemo() {
 
 function ControlledCalendar() {
   const today = new Date();
-  const fromDate = (d: Date, diff: number) => {
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + diff);
-  };
   const [currentDate, setCurrentDate] = React.useState<Date | null>(null);
   return (
     <Calendar
@@ -83,7 +87,7 @@ function ControlledCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(fromDate(today, -1))}>
+        onClick={() => setCurrentDate(dateUtil.subtractDays(1))}>
         昨天
       </Button>
       <Button
@@ -95,7 +99,7 @@ function ControlledCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(fromDate(today, 1))}>
+        onClick={() => setCurrentDate(dateUtil.addDays(1))}>
         明天
       </Button>
       <Button
@@ -110,21 +114,14 @@ function ControlledCalendar() {
 
 function ControlledLocalizeCalendar() {
   const today = new Date();
-  const fromDate = (d: Date, diff: number) => {
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + diff);
-  };
   const [currentDate, setCurrentDate] = React.useState<Date | null>(null);
   return (
     <Calendar
       value={currentDate}
-      // tslint:disable-next-line
-      weekFormatter={value => 'Su Mo Tu We Th Fr Sa'.split(' ')[value]}
-      // tslint:disable-next-line
-      monthFormatter={month =>
-        'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ')[month]
-      }
-      formatHeaderYear="yyyy"
-      formatHeaderMonth="MM"
+      weekFormatter={weekFormatter}
+      monthFormatter={monthFormatter}
+      headerYearFormatter={yearFormatter}
+      headerMonthFormatter={monthFormatter}
       // tslint:disable-next-line
       onChange={date => {
         console.log(date);
@@ -133,7 +130,7 @@ function ControlledLocalizeCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(fromDate(today, -1))}>
+        onClick={() => setCurrentDate(dateUtil.subtractDays(1))}>
         Yesterday
       </Button>
       <Button
@@ -145,7 +142,7 @@ function ControlledLocalizeCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(fromDate(today, 1))}>
+        onClick={() => setCurrentDate(dateUtil.addDays(1))}>
         Tomorrow
       </Button>
     </Calendar>

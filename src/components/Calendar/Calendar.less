@@ -65,12 +65,14 @@
 
 .@{prefix}-calendar-row {
   .transition();
-  &.week-row:hover {
-    background-color: @calendar-cell-background-color-hover;
-  }
-  &.actived {
-    background-color: @calendar-cell-background-color-hover;
-    font-weight: 700;
+  &.hh-row {
+    &:hover {
+      background-color: @calendar-cell-background-color-hover;
+    }
+    &.actived {
+      background-color: @calendar-cell-background-color-hover;
+      font-weight: 700;
+    }
   }
 }
 
@@ -86,8 +88,7 @@
 .@{prefix}-calendar-cell {
   text-align: center;
 
-  &.prev,
-  &.next {
+  &.outside {
     .@{prefix}-calendar-date {
       color: @calendar-cell-color-dark;
     }
