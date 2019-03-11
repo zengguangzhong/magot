@@ -71,6 +71,26 @@ export function isCurrentYear(date: Date, year: number) {
   return date.getFullYear() === year;
 }
 
+export function getDecade(year: number) {
+  const start = ~~(year / 10) * 10;
+  return [start, start + 9];
+}
+
+export function getCentury(year: number) {
+  const start = ~~(year / 100) * 100;
+  return [start, start + 99];
+}
+
+export function addDays(days: number, date?: Date) {
+  if (!date) date = new Date();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
+}
+
+export function subtractDays(days: number, date?: Date) {
+  if (!date) date = new Date();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days);
+}
+
 /**
  *
  * @param  {string} [fmt=yyyy-MM-dd]  y-year, M-month, d-day, h-hour, m-minute, s-second, S-millisecond, q-quarter
