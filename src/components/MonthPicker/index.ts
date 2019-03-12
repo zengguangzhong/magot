@@ -1,1 +1,1 @@
-export { default, MonthPickerProps } from './MonthPicker';
+export { default } from './MonthPicker';

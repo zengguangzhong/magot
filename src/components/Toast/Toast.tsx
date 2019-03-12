@@ -9,8 +9,6 @@ import { useTimingToggle } from '../../hooks/timer';
 
 import './Toast.less';
 
-export type ToastType = 'info' | 'success' | 'warning' | 'error';
-
 export interface ToastProps extends component.BaseComponent {
   container?: Element | null;
 
@@ -23,7 +21,7 @@ export interface ToastProps extends component.BaseComponent {
    * 消息类型，可选值：`info`, `success`, `warning`, `error`，默认是`info`。
    * @default info
    */
-  type?: ToastType;
+  type?: 'info' | 'success' | 'warning' | 'error';
 
   /**
    * 显示时长，当时间到了之后会自动关闭，如果设置为0，则不会自动关闭。单位毫秒，默认3秒。

@@ -13,12 +13,12 @@ export interface CalendarProps
   /**
    * 默认日期
    */
-  defaultValue?: string | number | Date | null;
+  defaultValue?: AcceptableDate | null;
 
   /**
    * 当前展示日期
    */
-  value?: string | number | Date | null;
+  value?: AcceptableDate | null;
 
   /**
    * 是否禁用今天以前的日期

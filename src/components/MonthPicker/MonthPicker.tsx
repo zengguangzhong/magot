@@ -8,15 +8,13 @@ import * as component from '../component';
 
 import './MonthPicker.less';
 
-export interface MonthPickerProps extends DatePickerProps {}
-
-const defaultProps: Partial<MonthPickerProps> = {
+const defaultProps: Partial<DatePickerProps> = {
   format: 'yyyy-MM',
 };
 
 const Picker = DatePickerWrapper(MonthCalendar);
 
-function MonthPicker(props: MonthPickerProps) {
+function MonthPicker(props: DatePickerProps) {
   const cls = component.getComponentClasses('month-picker');
   return (
     <Picker

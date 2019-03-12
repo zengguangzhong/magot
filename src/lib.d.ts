@@ -12,3 +12,5 @@ interface Offset {
   left: number;
   top: number;
 }
+
+type AcceptableDate = Date | number | string;

@@ -1,1 +1,1 @@
-export { default, WeekPickerProps } from './WeekPicker';
+export { default } from './WeekPicker';

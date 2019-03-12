@@ -6,8 +6,6 @@ import * as component from '../component';
 
 import './Tabs.less';
 
-export type TabsMode = 'column' | 'row';
-
 export interface TabsProps extends component.BaseComponent {
   /**
    * 当前被激活的tab（每个tab都必须指定一个名称），
@@ -24,7 +22,7 @@ export interface TabsProps extends component.BaseComponent {
    * 显示模式，可选值：`column`-纵向排列, `row`-横向排列，默认值`column`
    * @default column
    */
-  mode?: TabsMode;
+  mode?: 'column' | 'row';
 
   /**
    * 切换tab的回调函数

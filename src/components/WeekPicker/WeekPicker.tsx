@@ -8,15 +8,13 @@ import * as component from '../component';
 
 import './WeekPicker.less';
 
-export interface WeekPickerProps extends DatePickerProps {}
-
-const defaultProps: Partial<WeekPickerProps> = {
+const defaultProps: Partial<DatePickerProps> = {
   format: 'yyyy 第 w 周',
 };
 
 const Picker = DatePickerWrapper(WeekCalendar);
 
-function WeekPicker(props: WeekPickerProps) {
+function WeekPicker(props: DatePickerProps) {
   const cls = component.getComponentClasses('week-picker');
   return (
     <Picker

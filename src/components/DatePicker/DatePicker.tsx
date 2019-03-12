@@ -5,10 +5,7 @@ import Calendar, { CalendarProps } from '../Calendar';
 import * as component from '../component';
 
 export interface DatePickerProps
-  extends component.InputFormComponent<
-      HTMLInputElement,
-      string | number | Date | null
-    >,
+  extends component.InputFormComponent<HTMLInputElement, AcceptableDate | null>,
     component.NestedComponent {
   /**
    * 设置日期格式

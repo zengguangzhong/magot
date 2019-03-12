@@ -5,8 +5,6 @@ import * as component from '../component';
 
 import './TextArea.less';
 
-export type TextAreaResize = 'none' | 'both' | 'horizontal' | 'vertical';
-
 export interface TextAreaProps extends InputBaseProps<HTMLTextAreaElement> {
   /**
    * @default 2
@@ -16,7 +14,7 @@ export interface TextAreaProps extends InputBaseProps<HTMLTextAreaElement> {
   /**
    * 控制文本域缩放方式
    */
-  resize?: TextAreaResize;
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 }
 
 const defaultProps: Partial<TextAreaProps> = {

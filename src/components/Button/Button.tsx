@@ -13,7 +13,6 @@ export type ButtonType =
   | 'danger'
   | 'text'
   | 'link';
-export type ButtonHTMLType = 'button' | 'submit' | 'reset';
 
 interface BaseButtonProps
   extends component.BaseComponent,
@@ -58,7 +57,7 @@ interface NativeButtonProps
    * 设置`button`原生的`type`值，可选值有: `button`, `submit`, `reset`，默认`button`。
    * @default button
    */
-  htmlType?: ButtonHTMLType;
+  htmlType?: 'button' | 'submit' | 'reset';
 }
 
 interface LinkButtonProps

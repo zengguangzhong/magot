@@ -6,8 +6,6 @@ import * as component from '../component';
 
 import './Loading.less';
 
-export type Diretion = 'row' | 'column';
-
 export interface LoadingProps
   extends component.BaseComponent,
     component.SizedComponent,
@@ -33,7 +31,7 @@ export interface LoadingProps
    * 加载图标与提示文案的布局方向，可选值：row-按行布局，column-按列布局，默认`column`
    * @default column
    */
-  direction?: Diretion;
+  direction?: 'row' | 'column';
 }
 
 const defaultProps: Partial<LoadingProps> = {
