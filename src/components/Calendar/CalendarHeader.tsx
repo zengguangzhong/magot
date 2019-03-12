@@ -32,15 +32,25 @@ function CalendarHeader(props: CalendarHeaderProps) {
   return (
     <header className={prefix + '-header'} onClick={props.onClick}>
       {props.previousRangeVisible && (
-        <Button onClick={props.onPreviousRange}>&lt;&lt;</Button>
+        <Button className="prev-range" onClick={props.onPreviousRange}>
+          &lt;&lt;
+        </Button>
       )}
       {props.previousVisible && (
-        <Button onClick={props.onPrevious}>&lt;</Button>
+        <Button className="prev" onClick={props.onPrevious}>
+          &lt;
+        </Button>
       )}
       <div className={prefix + '-title'}>{props.title}</div>
-      {props.nextVisible && <Button onClick={props.onNext}>&gt;</Button>}
+      {props.nextVisible && (
+        <Button className="next" onClick={props.onNext}>
+          &gt;
+        </Button>
+      )}
       {props.nextRangeVisible && (
-        <Button onClick={props.onNextRange}>&gt;&gt;</Button>
+        <Button className="next-range" onClick={props.onNextRange}>
+          &gt;&gt;
+        </Button>
       )}
       {props.children}
     </header>

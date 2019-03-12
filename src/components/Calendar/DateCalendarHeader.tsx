@@ -6,21 +6,15 @@ import MonthCalendar from './MonthCalendar';
 import CalendarHeader from './CalendarHeader';
 import { getPrefix } from './prefix';
 
-export interface DateCalendarHeaderProps extends CalendarHeaderProps {
-  hideHeaderMonth?: boolean;
-}
-
-const defaultProps: Partial<DateCalendarHeaderProps> = {
-  hideHeaderMonth: false,
+const defaultProps: Partial<CalendarHeaderProps> = {
   headerYearFormatter: defaultYearFormatter,
   headerMonthFormatter: defaultMonthFormatter,
 };
 
-function DateCalendarHeader(props: DateCalendarHeaderProps) {
+function DateCalendarHeader(props: CalendarHeaderProps) {
   const {
     currentYear,
     currentMonth,
-    hideHeaderMonth,
     headerYearFormatter = defaultYearFormatter,
     headerMonthFormatter = defaultMonthFormatter,
     onYearChange,
@@ -76,10 +70,12 @@ function DateCalendarHeader(props: DateCalendarHeaderProps) {
 
   const title = (
     <>
-      <a href="javascript:;" onClick={handleYearClick}>
-        {headerYearFormatter(currentYear)}
-      </a>
-      {!hideHeaderMonth && (
+      {!props.hideHeaderYear && (
+        <a href="javascript:;" onClick={handleYearClick}>
+          {headerYearFormatter(currentYear)}
+        </a>
+      )}
+      {!props.hideHeaderMonth && (
         <a href="javascript:;" onClick={handleMonthClick}>
           {headerMonthFormatter(currentMonth)}
         </a>
@@ -91,8 +87,10 @@ function DateCalendarHeader(props: DateCalendarHeaderProps) {
     <CalendarHeader
       title={title}
       visible={!props.hideHeader}
-      previousVisible={!hideHeaderMonth}
-      nextVisible={!hideHeaderMonth}
+      previousRangeVisible={!props.hideHeaderPreviousRange}
+      previousVisible={!props.hideHeaderPrevious}
+      nextRangeVisible={!props.hideHeaderNextRange}
+      nextVisible={!props.hideHeaderNext}
       onPreviousRange={handlePreviousYear}
       onNextRange={handleNextYear}
       onPrevious={handlePreviousMonth}

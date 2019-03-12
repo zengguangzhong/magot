@@ -42,6 +42,8 @@ function DecadeCalendarHeader(props: CalendarHeaderProps) {
     <CalendarHeader
       title={title}
       visible={!props.hideHeader}
+      previousRangeVisible={!props.hideHeaderPreviousRange}
+      nextRangeVisible={!props.hideHeaderNextRange}
       previousVisible={false}
       nextVisible={false}
       onPreviousRange={handlePreviousCentury}

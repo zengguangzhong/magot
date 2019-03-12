@@ -19,6 +19,12 @@ const defaultProps: Partial<CalendarProps> = {
   highlightRow: false,
   hideWeekBox: false,
   hideHeader: false,
+  hideHeaderYear: false,
+  hideHeaderMonth: false,
+  hideHeaderPreviousRange: false,
+  hideHeaderPrevious: false,
+  hideHeaderNextRange: false,
+  hideHeaderNext: false,
   showWeekNumber: false,
   weekStart: 0,
 };
@@ -50,6 +56,7 @@ function CalendarWrapper(
     const handleYearChange = (year: number) => {
       internallyRef.current = true;
       setCurrentYear(year);
+      props.onYearChange && props.onYearChange(year);
     };
 
     const handleMonthChange = (month: number) => {
@@ -65,6 +72,7 @@ function CalendarWrapper(
       } else {
         setCurrentMonth(month);
       }
+      props.onMonthChange && props.onMonthChange(month);
     };
 
     const handleSelectDate = (date: Date) => {

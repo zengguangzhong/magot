@@ -13,26 +13,37 @@
 }
 
 .@{prefix}-calendar-header {
-  display: flex;
-  padding: @calendar-header-padding;
+  position: relative;
   height: @calendar-header-height;
   line-height: @calendar-header-height;
   text-align: center;
 
   & > .@{prefix}-button {
-    margin: 0 3px;
+    position: absolute;
+    top: 0;
     padding: 0;
-    height: auto;
+    height: @calendar-header-height;
     border: none;
     box-shadow: none;
     background-color: transparent;
     color: @calendar-header-btn-color;
     font-size: @calendar-header-btn-font-size;
+    &.prev-range {
+      left: 12px;
+    }
+    &.prev {
+      left: 40px;
+    }
+    &.next {
+      right: 40px;
+    }
+    &.next-range {
+      right: 12px;
+    }
   }
 }
 
 .@{prefix}-calendar-title {
-  flex: 1;
   font-weight: 700;
   & > a {
     padding: @calendar-header-text-padding;

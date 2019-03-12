@@ -62,6 +62,23 @@ export interface CalendarProps
   hideHeader?: boolean;
 
   /**
+   * 是否隐藏头部栏的年份
+   * @default false
+   */
+  hideHeaderYear?: boolean;
+
+  /**
+   * 是否隐藏头部栏的月份
+   * @default false
+   */
+  hideHeaderMonth?: boolean;
+
+  hideHeaderPreviousRange?: boolean;
+  hideHeaderPrevious?: boolean;
+  hideHeaderNextRange?: boolean;
+  hideHeaderNext?: boolean;
+
+  /**
    * 是否显示周号
    * @default false
    */
@@ -108,6 +125,16 @@ export interface CalendarProps
   onChange?: (date: Date, weekNumber?: number) => void;
 
   /**
+   * 当切换年份之后的回调函数
+   */
+  onYearChange?: (year: number) => void;
+
+  /**
+   * 当切换月份之后的回调函数
+   */
+  onMonthChange?: (month: number) => void;
+
+  /**
    * 头部栏点击事件的回调函数
    */
   onHeaderClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -121,8 +148,6 @@ export interface CalendarProps
 export interface CalendarHeaderProps extends CalendarProps {
   currentMonth: number;
   currentYear: number;
-  onYearChange?: (year: number) => void;
-  onMonthChange?: (month: number) => void;
 }
 
 export interface CalendarBodyProps extends CalendarProps {
