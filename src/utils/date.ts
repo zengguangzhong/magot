@@ -115,7 +115,7 @@ export function subtractMonths(months: number, date?: Date) {
  * @param  {Date | number} [date]
  * @return {string}
  */
-export function formatter(fmt = 'yyyy-MM-dd', date?: Date | number) {
+export function format(fmt = 'yyyy-MM-dd', date?: Date | number) {
   const realDate = date ? new Date(date) : new Date();
   const o: Record<string, number> = {
     'M+': realDate.getMonth() + 1,

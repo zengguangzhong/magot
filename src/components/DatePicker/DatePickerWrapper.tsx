@@ -56,7 +56,7 @@ function DatePickerWrapper(Calendar: ComponentType<CalendarProps>) {
       if (!currentDate || !dateUtil.equalDate(date, currentDate)) {
         internallyRef.current = true;
         setCurrentDate(date);
-        const dateString = (date && dateUtil.formatter(format, date)) || '';
+        const dateString = (date && dateUtil.format(format, date)) || '';
         onChange && onChange(date, dateString);
       }
     };
@@ -104,7 +104,7 @@ function DatePickerWrapper(Calendar: ComponentType<CalendarProps>) {
     const cls = component.getComponentClasses(type, { className });
 
     let displayValue = '';
-    if (currentDate) displayValue = dateUtil.formatter(format, currentDate);
+    if (currentDate) displayValue = dateUtil.format(format, currentDate);
     if (inputValue !== null) displayValue = inputValue;
 
     const trigger = (
