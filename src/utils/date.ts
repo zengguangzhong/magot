@@ -24,7 +24,7 @@ export function getWeekNumber(date: Date) {
   return Math.ceil((pastedDays + firstDayOfYear.getDay() + 1) / 7);
 }
 
-export function isEqualDate(date1: Date | null, date2: Date | null) {
+export function equalDate(date1: Date | null, date2: Date | null) {
   if (date1 === null || date2 === null) {
     return date1 === date2;
   }
@@ -45,6 +45,14 @@ export function greaterThanDate(date1: Date, date2: Date) {
   const d1 = getPureDate(date1);
   const d2 = getPureDate(date2);
   return d1.getTime() > d2.getTime();
+}
+
+export function lessThanOrEqualDate(date1: Date, date2: Date) {
+  return equalDate(date1, date2) || lessThanDate(date1, date2);
+}
+
+export function greaterThanOrEqualDate(date1: Date, date2: Date) {
+  return equalDate(date1, date2) || greaterThanDate(date1, date2);
 }
 
 export function isPreviousMonth(date: Date, month: number) {
@@ -89,6 +97,16 @@ export function addDays(days: number, date?: Date) {
 export function subtractDays(days: number, date?: Date) {
   if (!date) date = new Date();
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days);
+}
+
+export function addMonths(months: number, date?: Date) {
+  if (!date) date = new Date();
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+}
+
+export function subtractMonths(months: number, date?: Date) {
+  if (!date) date = new Date();
+  return new Date(date.getFullYear(), date.getMonth() - months, date.getDate());
 }
 
 /**

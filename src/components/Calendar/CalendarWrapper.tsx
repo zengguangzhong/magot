@@ -46,7 +46,7 @@ function CalendarWrapper(
     const [selectedDate, setSelectedDate] = useChanges<Date | null>(
       dateProp,
       internallyRef.current,
-      dateUtil.isEqualDate
+      dateUtil.equalDate
     );
     const [currentYear, setCurrentYear] = React.useState(yearProp);
     const [currentMonth, setCurrentMonth] = React.useState(monthProp);
@@ -76,7 +76,7 @@ function CalendarWrapper(
     };
 
     const handleSelectDate = (date: Date) => {
-      if (!dateUtil.isEqualDate(date, selectedDate)) {
+      if (!dateUtil.equalDate(date, selectedDate)) {
         internallyRef.current = true;
         setSelectedDate(date);
         if (!dateUtil.isCurrentMonth(date, currentMonth)) {

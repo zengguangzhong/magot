@@ -42,7 +42,7 @@ function DatePickerWrapper(Calendar: ComponentType<CalendarProps>) {
     const [currentDate, setCurrentDate] = useChanges<Date | null>(
       dateProp,
       internallyRef.current,
-      dateUtil.isEqualDate
+      dateUtil.equalDate
     );
     const [inputValue, setInputValue] = React.useState<string | null>(null);
 
@@ -53,7 +53,7 @@ function DatePickerWrapper(Calendar: ComponentType<CalendarProps>) {
       inputValue?: string | null
     ) => {
       setInputValue(inputValue || null);
-      if (!currentDate || !dateUtil.isEqualDate(date, currentDate)) {
+      if (!currentDate || !dateUtil.equalDate(date, currentDate)) {
         internallyRef.current = true;
         setCurrentDate(date);
         const dateString = (date && dateUtil.formatter(format, date)) || '';

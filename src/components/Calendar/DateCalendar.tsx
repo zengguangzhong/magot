@@ -76,9 +76,9 @@ function DateCalendarCell(
   props: CalendarBodyProps & { date: Date; today: Date }
 ) {
   const { date, dateFormatter = defaultDateFormatter } = props;
-  const isToday = dateUtil.isEqualDate(date, props.today);
-  let selected = dateUtil.isEqualDate(date, props.value);
   if (!props.value && props.highlightToday) selected = isToday;
+  const isToday = dateUtil.equalDate(date, props.today);
+  let selected = dateUtil.equalDate(date, props.value);
   const disabled = isDisabledDate(
     date,
     props.today,
