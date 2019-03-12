@@ -21,22 +21,26 @@ export interface CalendarProps
   value?: AcceptableDate | null;
 
   /**
+   * 当前展示的年份
+   */
+  currentYear?: number;
+
+  /**
+   * 当前展示的月份
+   */
+  currentMonth?: number;
+
+  /**
    * 是否禁用今天以前的日期
    * @default false
    */
   disableTodayAgo?: boolean;
 
   /**
-   * 是否高亮今天(当未选中日期时)
+   * 是否高亮激活今天(当未选中日期时)
    * @default true
    */
-  highlightToday?: boolean;
-
-  /**
-   * 是否高亮当前行
-   * @default false
-   */
-  highlightRow?: boolean;
+  activeToday?: boolean;
 
   /**
    * 今天的显示文案
@@ -85,9 +89,20 @@ export interface CalendarProps
   showWeekNumber?: boolean;
 
   /**
-   * 自定义禁用日期的函数，返回true则表示该天禁用
+   * 自定义禁用日期的函数，返回true则表示该天禁用(置灰)
    */
   disabledDate?: (date: Date) => boolean;
+
+  /**
+   * 自定义高亮激活日期的函数，返回true则表示高亮激活该天。
+   * 默认只有当前选中的日期才是高亮激活的显示状态。
+   */
+  activedDate?: (date: Date, selected: Date | null) => boolean;
+
+  /**
+   * 自定义背景高亮强调日期的函数，返回true则表示强调该天(背景染色)
+   */
+  dyedDate?: (date: Date, selected: Date | null) => boolean;
 
   /**
    * 自定义日期格式化函数

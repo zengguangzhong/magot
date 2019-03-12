@@ -2,30 +2,41 @@ import React from 'react';
 import cx from 'classnames';
 
 import { getPrefix } from './prefix';
-import { BaseComponent, NestedComponent } from '../component';
+import {
+  BaseComponent,
+  NestedComponent,
+  MouseEventComponent,
+} from '../component';
 
-interface CalendarCellProps extends BaseComponent, NestedComponent {
+interface CalendarCellProps
+  extends BaseComponent,
+    NestedComponent,
+    MouseEventComponent<HTMLTableDataCellElement> {
+  dyed?: boolean;
+  current?: boolean;
   selected?: boolean;
   disabled?: boolean;
   outside?: boolean;
 }
 
 const defaultProps: Partial<CalendarCellProps> = {
+  dyed: false,
   selected: false,
   disabled: false,
 };
 
 function CalendarCell(props: CalendarCellProps) {
-  const { children, className, selected, disabled, outside } = props;
+  const { dyed, current, selected, disabled, outside } = props;
   const prefix = getPrefix();
   return (
     <td
       className={cx(
         prefix + '-cell',
-        { selected, disabled, outside },
-        className
-      )}>
-      {children}
+        { dyed, current, selected, disabled, outside },
+        props.className
+      )}
+      onClick={props.onClick}>
+      {props.children}
     </td>
   );
 }

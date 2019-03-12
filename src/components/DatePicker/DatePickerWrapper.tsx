@@ -129,7 +129,7 @@ function DatePickerWrapper(Calendar: ComponentType<CalendarProps>) {
           calendarProps && calendarProps.className
         )}
         value={currentDate}
-        highlightToday={false}
+        activeToday={false}
         onChange={handleCalendarChange}
         onHeaderClick={handleHeaderClick}>
         {children}

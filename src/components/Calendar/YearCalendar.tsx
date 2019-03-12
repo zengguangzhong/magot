@@ -119,8 +119,11 @@ function YearCalendarCell(
   };
   const prefix = getPrefix();
   return (
-    <CalendarCell selected={selected} outside={props.isFirst || props.isLast}>
-      <CalendarCellNode className={prefix + '-year'} onClick={handleClick}>
+    <CalendarCell
+      selected={selected}
+      outside={props.isFirst || props.isLast}
+      onClick={handleClick}>
+      <CalendarCellNode className={prefix + '-year'}>
         {yearFormatter(props.year)}
       </CalendarCellNode>
     </CalendarCell>

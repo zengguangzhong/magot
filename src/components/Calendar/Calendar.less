@@ -74,19 +74,6 @@
   border-collapse: collapse;
 }
 
-.@{prefix}-calendar-row {
-  .transition();
-  &.hh-row {
-    &:hover {
-      background-color: @calendar-cell-background-color-hover;
-    }
-    &.actived {
-      background-color: @calendar-cell-background-color-hover;
-      font-weight: 700;
-    }
-  }
-}
-
 .@{prefix}-calendar-head-cell {
   padding: @calendar-week-padding;
   font-weight: 400;
@@ -98,6 +85,12 @@
 
 .@{prefix}-calendar-cell {
   text-align: center;
+  cursor: pointer;
+  .transition();
+
+  &.dyed {
+    background-color: @calendar-cell-background-color-hover;
+  }
 
   &.outside {
     .@{prefix}-calendar-date {
@@ -105,10 +98,10 @@
     }
   }
 
-  &.today {
+  &.current {
     .@{prefix}-calendar-date {
-      color: @calendar-today-color;
-      border-color: @calendar-today-border-color;
+      color: @calendar-cell-color-current;
+      border-color: @calendar-cell-border-color-current;
     }
   }
 
@@ -120,10 +113,10 @@
   }
 
   &.disabled {
+    background-color: @calendar-cell-background-color-disabled;
+    pointer-events: none;
     .@{prefix}-calendar-date {
       color: @calendar-cell-color-disabled;
-      background-color: @calendar-cell-background-color-disabled;
-      pointer-events: none;
     }
   }
 
@@ -144,7 +137,6 @@
   font-size: @calendar-cell-font-size;
   color: @calendar-cell-color;
   border: 1px solid transparent;
-  cursor: pointer;
   .transition();
   .box-sizing();
   .text-overflow();

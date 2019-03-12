@@ -15,8 +15,7 @@ import './Calendar.less';
 
 const defaultProps: Partial<CalendarProps> = {
   disableTodayAgo: false,
-  highlightToday: true,
-  highlightRow: false,
+  activeToday: true,
   hideWeekBox: false,
   hideHeader: false,
   hideHeaderYear: false,
@@ -39,8 +38,8 @@ function CalendarWrapper(
     const today = new Date();
     const valueProp = defaultValue || value;
     const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
-    const yearProp = (dateProp || today).getFullYear();
-    const monthProp = (dateProp || today).getMonth();
+    const yearProp = props.currentYear || (dateProp || today).getFullYear();
+    const monthProp = props.currentMonth || (dateProp || today).getMonth();
 
     const internallyRef = React.useRef(false);
     const [selectedDate, setSelectedDate] = useChanges<Date | null>(

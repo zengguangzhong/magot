@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 
 import { CalendarProps, CalendarBodyProps } from './Calendar';
 import CalendarWrapper from './CalendarWrapper';
@@ -49,17 +48,10 @@ function DateCalendarBody(props: CalendarBodyProps) {
 function DateCalendarRow(
   props: CalendarBodyProps & { dates: Date[]; today: Date }
 ) {
-  const { dates, highlightRow } = props;
-  let isActived = false;
-  if (highlightRow) {
-    isActived = !!dates.find(d => {
-      return dateUtil.isEqualDate(props.value, d);
-    });
-  }
+  const { dates } = props;
   const wednesday = dates.find(d => d.getDay() === 3);
   return (
-    <CalendarRow
-      className={cx(highlightRow && 'hh-row', isActived && 'actived')}>
+    <CalendarRow>
       {props.showWeekNumber && (
         <CalendarCell className="week-number">
           {dateUtil.getWeekNumber(wednesday || dates[0])}
@@ -76,28 +68,41 @@ function DateCalendarCell(
   props: CalendarBodyProps & { date: Date; today: Date }
 ) {
   const { date, dateFormatter = defaultDateFormatter } = props;
-  if (!props.value && props.highlightToday) selected = isToday;
   const isToday = dateUtil.equalDate(date, props.today);
+
   let selected = dateUtil.equalDate(date, props.value);
+  if (!props.value && props.activeToday) selected = isToday;
+  if (!selected && props.activedDate) {
+    selected = props.activedDate(date, props.value);
+  }
+
+  let dyed = false;
+  if (props.dyedDate) {
+    dyed = props.dyedDate(date, props.value);
+  }
+
   const disabled = isDisabledDate(
     date,
     props.today,
     props.disableTodayAgo,
     props.disabledDate
   );
+
   const handleClick = () => props.onSelect(date);
+
   return (
     <CalendarCell
-      className={isToday ? 'today' : undefined}
+      dyed={dyed}
+      current={isToday}
       selected={selected}
       disabled={disabled}
       outside={
         dateUtil.isPreviousMonth(date, props.currentMonth) ||
         dateUtil.isNextMonth(date, props.currentMonth)
-      }>
+      }
+      onClick={handleClick}>
       <CalendarCellNode
-        className={props.showWeekNumber ? 'week-date' : undefined}
-        onClick={handleClick}>
+        className={props.showWeekNumber ? 'week-date' : undefined}>
         {(isToday && props.todayText) || dateFormatter(date)}
       </CalendarCellNode>
     </CalendarCell>

@@ -9,11 +9,17 @@ function WeekCalendar(props: CalendarProps) {
     const weekNumber = dateUtil.getWeekNumber(date);
     props.onChange && props.onChange(date, weekNumber);
   };
+  const dyedDate = (date: Date, selectedDate: Date | null) => {
+    if (!selectedDate) return false;
+    const n1 = dateUtil.getWeekNumber(date);
+    const n2 = dateUtil.getWeekNumber(selectedDate);
+    return n1 === n2;
+  };
   return (
     <DateCalendar
       {...props}
-      highlightRow={true}
       showWeekNumber={true}
+      dyedDate={dyedDate}
       onChange={handleChange}>
       {props.children}
     </DateCalendar>

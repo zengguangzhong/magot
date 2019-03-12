@@ -2,23 +2,14 @@ import React from 'react';
 import cx from 'classnames';
 
 import { getPrefix } from './prefix';
-import {
-  BaseComponent,
-  NestedComponent,
-  MouseEventComponent,
-} from '../component';
+import { BaseComponent, NestedComponent } from '../component';
 
-interface CalendarCellNodeProps
-  extends BaseComponent,
-    NestedComponent,
-    MouseEventComponent<HTMLElement> {}
+interface CalendarCellNodeProps extends BaseComponent, NestedComponent {}
 
 function CalendarCellNode(props: CalendarCellNodeProps) {
   const prefix = getPrefix();
   return (
-    <span
-      className={cx(prefix + '-date', props.className)}
-      onClick={props.onClick}>
+    <span className={cx(prefix + '-date', props.className)}>
       {props.children}
     </span>
   );

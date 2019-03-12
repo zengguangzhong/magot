@@ -55,8 +55,8 @@ function MonthCalendarCell(props: CalendarBodyProps & { month: number }) {
   };
   const prefix = getPrefix();
   return (
-    <CalendarCell selected={selected}>
-      <CalendarCellNode className={prefix + '-month'} onClick={handleClick}>
+    <CalendarCell selected={selected} onClick={handleClick}>
+      <CalendarCellNode className={prefix + '-month'}>
         {monthFormatter(props.month)}
       </CalendarCellNode>
     </CalendarCell>

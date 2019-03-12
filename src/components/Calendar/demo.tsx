@@ -30,11 +30,7 @@ function CalendarDemo() {
         <Calendar onChange={console.log} />
         <Calendar defaultValue={dateUtil.addDays(3)} onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
-        <Calendar
-          todayText="今天"
-          highlightToday={false}
-          onChange={console.log}
-        />
+        <Calendar todayText="今天" activeToday={false} onChange={console.log} />
         <Calendar weekStart={1} onChange={console.log} />
         <Calendar hideWeekBox={true} hideHeader={true} onChange={console.log} />
         <Calendar
@@ -78,7 +74,7 @@ function ControlledCalendar() {
   return (
     <Calendar
       value={currentDate}
-      highlightToday={false}
+      activeToday={false}
       // tslint:disable-next-line
       onChange={date => {
         console.log(date);

@@ -96,8 +96,11 @@ function DecadeCalendarCell(
   };
   const prefix = getPrefix();
   return (
-    <CalendarCell selected={selected} outside={props.isFirst || props.isLast}>
-      <CalendarCellNode className={prefix + '-decade'} onClick={handleClick}>
+    <CalendarCell
+      selected={selected}
+      outside={props.isFirst || props.isLast}
+      onClick={handleClick}>
+      <CalendarCellNode className={prefix + '-decade'}>
         {props.decade.join('-')}
       </CalendarCellNode>
     </CalendarCell>
