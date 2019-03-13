@@ -63,6 +63,10 @@ function CalendarDemo() {
         <Calendar.Year onChange={console.log} />
         <Calendar.Decade onChange={console.log} />
         <Calendar.Week defaultValue={new Date()} onChange={console.log} />
+        <Calendar.Range
+          defaultValue={[new Date(), dateUtil.addDays(10)]}
+          onChange={console.log}
+        />
       </div>
     </>
   );

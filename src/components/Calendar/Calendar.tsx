@@ -6,6 +6,7 @@ import WeekCalendar from './WeekCalendar';
 import MonthCalendar from './MonthCalendar';
 import YearCalendar from './YearCalendar';
 import DecadeCalendar from './DecadeCalendar';
+import RangeCalendar from './RangeCalendar';
 import * as component from '../component';
 
 export interface CalendarProps
@@ -180,5 +181,6 @@ Calendar.Week = WeekCalendar;
 Calendar.Month = MonthCalendar;
 Calendar.Year = YearCalendar;
 Calendar.Decade = DecadeCalendar;
+Calendar.Range = RangeCalendar;
 
 export default Calendar;
