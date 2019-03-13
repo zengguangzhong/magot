@@ -1,3 +1,5 @@
+const oneDay = 24 * 3600 * 1000;
+
 export function getSafeDate(d: Date | string | number) {
   if (typeof d === 'number') return new Date(d);
   if (typeof d === 'string') return new Date(d.replace(/-/g, '/'));
@@ -8,19 +10,24 @@ export function getPureDate(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
-export function getFirstDayOfMonth(year: number, month: number) {
+export function getFirstDayOfMonth(year?: number, month?: number) {
+  const today = new Date();
+  if (year === void 0) year = today.getFullYear();
+  if (month === void 0) month = today.getMonth();
   return new Date(year, month, 1);
 }
 
-export function getLastDayOfMonth(year: number, month: number) {
+export function getLastDayOfMonth(year?: number, month?: number) {
+  const today = new Date();
+  if (year === void 0) year = today.getFullYear();
+  if (month === void 0) month = today.getMonth();
   return new Date(year, month + 1, 0);
 }
 
 export function getWeekNumber(date: Date) {
-  const one = 24 * 3600 * 1000;
   const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
   const pureDate = getPureDate(date);
-  const pastedDays = (pureDate.getTime() - firstDayOfYear.getTime()) / one;
+  const pastedDays = (pureDate.getTime() - firstDayOfYear.getTime()) / oneDay;
   return Math.ceil((pastedDays + firstDayOfYear.getDay() + 1) / 7);
 }
 
@@ -107,6 +114,22 @@ export function addMonths(months: number, date?: Date) {
 export function subtractMonths(months: number, date?: Date) {
   if (!date) date = new Date();
   return new Date(date.getFullYear(), date.getMonth() - months, date.getDate());
+}
+
+export function diffDays(date1: Date, date2: Date) {
+  const pd1 = getPureDate(date1);
+  const pd2 = getPureDate(date2);
+  return Math.ceil((pd2.getTime() - pd1.getTime()) / oneDay);
+}
+
+export function diffMonths(date1: Date, date2: Date) {
+  const y1 = date1.getFullYear();
+  const y2 = date2.getFullYear();
+  const m1 = date1.getMonth();
+  const m2 = date2.getMonth();
+  if (y1 === y2) return m2 - m1;
+  if (y1 < y2) return (y2 - y1) * 12 + m2 - m1;
+  return m2 - ((y1 - y2) * 12 + m1);
 }
 
 /**
