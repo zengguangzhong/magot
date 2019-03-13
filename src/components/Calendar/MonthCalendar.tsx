@@ -22,7 +22,11 @@ function MonthCalendar(props: CalendarProps) {
 
 function MonthCalendarHeader(props: CalendarHeaderProps) {
   return (
-    <DateCalendarHeader {...props} hideHeaderMonth={true}>
+    <DateCalendarHeader
+      {...props}
+      hideHeaderMonth={true}
+      hideHeaderPrevious={true}
+      hideHeaderNext={true}>
       {props.children}
     </DateCalendarHeader>
   );
