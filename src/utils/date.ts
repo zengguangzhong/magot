@@ -24,22 +24,38 @@ export function getLastDayOfMonth(year?: number, month?: number) {
   return new Date(year, month + 1, 0);
 }
 
+export function getFirstDayOfYear(year?: number) {
+  const today = new Date();
+  if (year === void 0) year = today.getFullYear();
+  return new Date(year, 0, 1);
+}
+
+export function getLastDayOfYear(year?: number) {
+  const today = new Date();
+  if (year === void 0) year = today.getFullYear();
+  return new Date(year, 12, 0);
+}
+
 export function getWeekNumber(date: Date) {
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
   const pureDate = getPureDate(date);
+  const firstDayOfYear = getFirstDayOfYear(date.getFullYear());
   const pastedDays = (pureDate.getTime() - firstDayOfYear.getTime()) / oneDay;
   return Math.ceil((pastedDays + firstDayOfYear.getDay() + 1) / 7);
 }
 
-export function equalDate(date1: Date | null, date2: Date | null) {
+export function equalDate(
+  date1: Date | null,
+  date2: Date | null,
+  ignoreDay?: boolean
+) {
   if (date1 === null || date2 === null) {
     return date1 === date2;
   }
-  return (
+  const ret =
     date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  );
+    date1.getMonth() === date2.getMonth();
+  if (!ret || ignoreDay) return ret;
+  return ret && date1.getDate() === date2.getDate();
 }
 
 export function lessThanDate(date1: Date, date2: Date) {
@@ -130,6 +146,11 @@ export function diffMonths(date1: Date, date2: Date) {
   if (y1 === y2) return m2 - m1;
   if (y1 < y2) return (y2 - y1) * 12 + m2 - m1;
   return m2 - ((y1 - y2) * 12 + m1);
+}
+
+export function sortDate(a: Date, b: Date) {
+  if (equalDate(a, b)) return 0;
+  return lessThanDate(a, b) ? -1 : 1;
 }
 
 /**

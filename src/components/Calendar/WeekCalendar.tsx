@@ -9,6 +9,10 @@ function WeekCalendar(props: CalendarProps) {
     const weekNumber = dateUtil.getWeekNumber(date);
     props.onChange && props.onChange(date, weekNumber);
   };
+  const handleSelect = (date: Date) => {
+    const weekNumber = dateUtil.getWeekNumber(date);
+    props.onSelect && props.onSelect(date, weekNumber);
+  };
   const dyedDate = (date: Date, selectedDate: Date | null) => {
     if (!selectedDate) return false;
     const n1 = dateUtil.getWeekNumber(date);
@@ -20,7 +24,8 @@ function WeekCalendar(props: CalendarProps) {
       {...props}
       showWeekNumber={true}
       dyedDate={dyedDate}
-      onChange={handleChange}>
+      onChange={handleChange}
+      onSelect={handleSelect}>
       {props.children}
     </DateCalendar>
   );

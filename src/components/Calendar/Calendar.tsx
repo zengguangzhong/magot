@@ -17,19 +17,14 @@ export interface CalendarProps
   defaultValue?: AcceptableDate | null;
 
   /**
-   * 当前展示日期
+   * 当前选中日期
    */
   value?: AcceptableDate | null;
 
   /**
-   * 当前展示的年份
+   * 当前展示的日期
    */
-  currentYear?: number;
-
-  /**
-   * 当前展示的月份
-   */
-  currentMonth?: number;
+  current?: AcceptableDate | null;
 
   /**
    * 是否禁用今天以前的日期
@@ -136,19 +131,20 @@ export interface CalendarProps
   headerMonthFormatter?: (month: number) => string;
 
   /**
-   * 选择日期之后的回调函数
+   * 选中日期发生变化之后的回调函数
    */
   onChange?: (date: Date, weekNumber?: number) => void;
 
   /**
-   * 当切换年份之后的回调函数
+   * 当前展示日期发生变化之后的回调函数
    */
-  onYearChange?: (year: number) => void;
+  onCurrentChange?: (current: Date) => void;
 
   /**
-   * 当切换月份之后的回调函数
+   * 选择日期后的回调函数。
+   * 不同于`onChange`，当在重复点击已选中日期时，也会触发该回调函数
    */
-  onMonthChange?: (month: number) => void;
+  onSelect?: (date: Date, weekNumber?: number) => void;
 
   /**
    * 头部栏点击事件的回调函数
@@ -164,6 +160,8 @@ export interface CalendarProps
 export interface CalendarHeaderProps extends CalendarProps {
   currentMonth: number;
   currentYear: number;
+  onYearChange?: (year: number) => void;
+  onMonthChange?: (month: number) => void;
 }
 
 export interface CalendarBodyProps extends CalendarProps {

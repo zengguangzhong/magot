@@ -13,6 +13,11 @@ import * as dateUtil from '../../utils/date';
 
 import './Calendar.less';
 
+interface InternallyRef {
+  selected?: Date;
+  current?: Date;
+}
+
 const defaultProps: Partial<CalendarProps> = {
   disableTodayAgo: false,
   activeToday: true,
@@ -33,59 +38,81 @@ function CalendarWrapper(
   CalendarBody: ComponentType<CalendarBodyProps>
 ) {
   function Calendar(props: CalendarProps) {
-    const { defaultValue, value } = props;
+    const { defaultValue, value, current } = props;
 
     const today = new Date();
     const valueProp = defaultValue || value;
     const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
-    const yearProp = props.currentYear || (dateProp || today).getFullYear();
-    const monthProp = props.currentMonth || (dateProp || today).getMonth();
+    const currentProp = current ? dateUtil.getSafeDate(current) : today;
 
-    const internallyRef = React.useRef(false);
-    const [selectedDate, setSelectedDate] = useChanges<Date | null>(
+    const internallyRef = React.useRef<InternallyRef | null>(null);
+
+    let isInternally = false;
+    if (internallyRef.current) {
+      isInternally =
+        !!internallyRef.current.selected || !!internallyRef.current.current;
+    }
+
+    const [selectedDate, setSelectedDate] = useChanges(
       dateProp,
-      internallyRef.current,
+      isInternally,
       dateUtil.equalDate
     );
-    const [currentYear, setCurrentYear] = React.useState(yearProp);
-    const [currentMonth, setCurrentMonth] = React.useState(monthProp);
 
-    internallyRef.current = false;
+    const [currentDate, setCurrentDate] = useChanges(
+      currentProp,
+      isInternally,
+      (a, b) => dateUtil.equalDate(a, b, true)
+    );
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+
+    if (internallyRef.current) {
+      const ref = internallyRef.current;
+      if (ref.selected !== void 0) {
+        props.onChange && props.onChange(ref.selected);
+      }
+      if (ref.current !== void 0) {
+        props.onCurrentChange && props.onCurrentChange(ref.current);
+      }
+      internallyRef.current = null;
+    }
 
     const handleYearChange = (year: number) => {
-      internallyRef.current = true;
-      setCurrentYear(year);
-      props.onYearChange && props.onYearChange(year);
+      const current = new Date(year, currentMonth);
+      internallyRef.current = { current };
+      setCurrentDate(current);
     };
 
     const handleMonthChange = (month: number) => {
-      internallyRef.current = true;
+      const current = new Date(currentYear, month);
       if (month < 0) {
-        const newYear = currentYear - 1;
-        setCurrentYear(newYear);
-        setCurrentMonth(11);
+        current.setFullYear(currentYear - 1);
+        current.setMonth(11);
+        setCurrentDate(current);
       } else if (month > 11) {
-        const newYear = currentYear + 1;
-        setCurrentYear(newYear);
-        setCurrentMonth(0);
+        current.setFullYear(currentYear + 1);
+        current.setMonth(0);
+        setCurrentDate(current);
       } else {
-        setCurrentMonth(month);
+        setCurrentDate(current);
       }
-      props.onMonthChange && props.onMonthChange(month);
+      internallyRef.current = { current };
     };
 
     const handleSelectDate = (date: Date) => {
       if (!dateUtil.equalDate(date, selectedDate)) {
-        internallyRef.current = true;
+        const ref: InternallyRef = { selected: date };
         setSelectedDate(date);
-        if (!dateUtil.isCurrentMonth(date, currentMonth)) {
-          setCurrentMonth(date.getMonth());
+        const y = dateUtil.isCurrentYear(date, currentYear);
+        const m = dateUtil.isCurrentMonth(date, currentMonth);
+        if (!y || !m) {
+          ref.current = date;
+          setCurrentDate(date);
         }
-        if (!dateUtil.isCurrentYear(date, currentYear)) {
-          setCurrentYear(date.getFullYear());
-        }
+        internallyRef.current = ref;
       }
-      props.onChange && props.onChange(date);
+      props.onSelect && props.onSelect(date);
     };
 
     const cls = getComponentClasses('calendar', props);
@@ -94,16 +121,16 @@ function CalendarWrapper(
       <div className={cls} style={props.style}>
         <CalendarHeader
           {...props}
-          currentMonth={currentMonth}
           currentYear={currentYear}
+          currentMonth={currentMonth}
           onYearChange={handleYearChange}
           onMonthChange={handleMonthChange}
         />
         <CalendarBody
           {...props}
           value={selectedDate}
-          currentMonth={currentMonth}
           currentYear={currentYear}
+          currentMonth={currentMonth}
           onSelect={handleSelectDate}
         />
         {props.children && (
