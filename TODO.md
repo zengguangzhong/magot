@@ -17,6 +17,7 @@
 - [x] ContextMenu
 - [x] DatePicker
 - [ ] DateTimePicker
+- [x] DecadeCalendar
 - [x] Dialog
 - [ ] Drawer
 - [x] Dropdown
@@ -41,6 +42,7 @@
 - [x] Loading
 - [x] Menu
 - [x] Modal
+- [x] MonthCalendar
 - [ ] MonthPicker
 - [x] Notification
 - [ ] Pagination
@@ -50,6 +52,7 @@
 - [ ] Qrcode
 - [x] Radio
 - [x] RadioGroup
+- [x] RangeCalendar
 - [ ] RangePicker
 - [ ] Rate
 - [ ] Search
@@ -64,6 +67,8 @@
 - [x] Toast
 - [x] Tooltip
 - [ ] Tree
+- [x] YearCalendar
 - [ ] Uploader
 - [ ] VideoPlayer
+- [x] WeekCalendar
 - [x] WeekPicker
