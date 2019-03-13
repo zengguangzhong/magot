@@ -8,7 +8,9 @@
   "files": [
     "es",
     "lib",
-    "release"
+    "release",
+    "lib.d.ts",
+    "tsconfig.json"
   ],
   "scripts": {
     "prepublish": "npm run lint && npm run build",

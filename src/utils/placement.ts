@@ -1,3 +1,5 @@
+/// <reference path="../../lib.d.ts" />
+
 export type Placement =
   | 'left'
   | 'top'

@@ -1,3 +1,4 @@
+/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';

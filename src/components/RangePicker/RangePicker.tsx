@@ -1,3 +1,4 @@
+/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 
 import * as component from '../component';
