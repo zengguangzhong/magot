@@ -28,7 +28,7 @@ function CalendarDemo() {
       </Link>
       <div className="demo-box demo-flex">
         <Calendar onChange={console.log} />
-        <Calendar defaultValue={dateUtil.addDays(3)} onChange={console.log} />
+        <Calendar value={dateUtil.addDays(3)} onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
         <Calendar todayText="今天" activeToday={false} onChange={console.log} />
         <Calendar weekStart={1} onChange={console.log} />
@@ -62,9 +62,9 @@ function CalendarDemo() {
         />
         <Calendar.Year onChange={console.log} />
         <Calendar.Decade onChange={console.log} />
-        <Calendar.Week defaultValue={new Date()} onChange={console.log} />
+        <Calendar.Week value={new Date()} onChange={console.log} />
         <Calendar.Range
-          defaultValue={[new Date(), dateUtil.addDays(10)]}
+          value={[new Date(), dateUtil.addDays(10)]}
           onChange={console.log}
         />
       </div>

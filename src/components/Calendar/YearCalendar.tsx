@@ -1,59 +1,191 @@
 import React from 'react';
-
-import {
-  CalendarProps,
-  CalendarHeaderProps,
-  CalendarBodyProps,
-} from './Calendar';
-import CalendarWrapper from './CalendarWrapper';
+import cx from 'classnames';
+import { CalendarBaseProps } from './Calendar';
 import DecadeCalendar from './DecadeCalendar';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
+import CalendarFooter from './CalendarFooter';
 import CalendarGrid from './CalendarGrid';
 import CalendarRow from './CalendarRow';
 import CalendarCell from './CalendarCell';
 import CalendarCellNode from './CalendarCellNode';
 import { getPrefix } from './prefix';
+import { useChanges } from '../../hooks/changes';
 import * as dateUtil from '../../utils/date';
+import * as component from '../component';
 
-const Calendar = CalendarWrapper(YearCalendarHeader, YearCalendarBody);
+export interface YearCalendarProps extends CalendarBaseProps {
+  /**
+   * 当前选中年份
+   */
+  value?: number | null;
 
-function YearCalendar(props: CalendarProps) {
-  return <Calendar {...props}>{props.children}</Calendar>;
+  /**
+   * 当前展示的年代
+   */
+  currentDecade?: number | null;
+
+  /**
+   * 自定义年份格式化函数
+   */
+  yearFormatter?: (year: number) => string;
+
+  /**
+   * 选中年份发生变化之后的回调函数
+   */
+  onChange?: (value: number) => void;
+
+  /**
+   * 当前展示年代发生变化之后的回调函数
+   */
+  onCurrentDecadeChange?: (decade: number) => void;
+
+  /**
+   * 选择年份后的回调函数。
+   * 不同于`onChange`，当在重复点击已选中年份时，也会触发该回调函数
+   */
+  onSelect?: (year: number) => void;
 }
 
-function YearCalendarHeader(props: CalendarHeaderProps) {
-  const { currentYear, currentMonth, onYearChange } = props;
-  const prefix = getPrefix();
-  const decade = dateUtil.getDecade(currentYear);
-  const date = new Date(currentYear, currentMonth);
+interface YearCalendarHeaderProps extends YearCalendarProps {
+  currentDecade: number;
+  onDecadeChange?: (decade: number) => void;
+}
+
+interface YearCalendarBodyProps extends YearCalendarProps {
+  value: number | null;
+  currentDecade: number;
+  onSelect: (year: number) => void;
+}
+
+interface InternallyRef {
+  selected?: number;
+  current?: number;
+}
+
+const defaultProps: Partial<YearCalendarProps> = {
+  hideHeader: false,
+  hideHeaderPreviousRange: false,
+  hideHeaderNextRange: false,
+};
+
+function getDefaultYear() {
+  const today = new Date();
+  return today.getFullYear();
+}
+
+function YearCalendar(props: YearCalendarProps) {
+  const yearProp = props.value || getDefaultYear();
+  const currentDecadeProp =
+    props.currentDecade || dateUtil.getDecade(yearProp)[0];
+
+  const internallyRef = React.useRef<InternallyRef | null>(null);
+
+  let isInternally = false;
+  if (internallyRef.current) {
+    isInternally =
+      !!internallyRef.current.selected || !!internallyRef.current.current;
+  }
+
+  const [selectedYear, setSelectedYear] = useChanges(yearProp, isInternally);
+
+  const [currentDecade, setCurrentDecade] = useChanges(
+    currentDecadeProp,
+    isInternally
+  );
+
+  if (internallyRef.current) {
+    const ref = internallyRef.current;
+    if (ref.selected !== void 0) {
+      props.onChange && props.onChange(ref.selected);
+    }
+    if (ref.current !== void 0) {
+      props.onCurrentDecadeChange && props.onCurrentDecadeChange(ref.current);
+    }
+    internallyRef.current = null;
+  }
+
+  const handleDecadeChange = (decade: number) => {
+    if (decade !== currentDecade) {
+      internallyRef.current = { current: decade };
+      setCurrentDecade(decade);
+    }
+  };
+
+  const handleSelectDate = (year: number) => {
+    if (year !== selectedYear) {
+      const ref: InternallyRef = { selected: year };
+      setSelectedYear(year);
+      if (year < currentDecade) {
+        const decade = currentDecade - 10;
+        ref.current = decade;
+        setCurrentDecade(decade);
+      }
+      if (year > currentDecade + 9) {
+        const decade = currentDecade + 10;
+        ref.current = decade;
+        setCurrentDecade(decade);
+      }
+      internallyRef.current = ref;
+    }
+    props.onSelect && props.onSelect(year);
+  };
+
+  const prefix = component.getComponentPrefix('calendar');
+  const cls = component.getComponentClasses('year-calendar', props);
+
+  return (
+    <div className={cx(prefix, cls)} style={props.style}>
+      <YearCalendarHeader
+        {...props}
+        currentDecade={currentDecade}
+        onDecadeChange={handleDecadeChange}
+      />
+      <YearCalendarBody
+        {...props}
+        value={selectedYear}
+        currentDecade={currentDecade}
+        onSelect={handleSelectDate}
+      />
+      {props.children && (
+        <CalendarFooter onClick={props.onFooterClick}>
+          {props.children}
+        </CalendarFooter>
+      )}
+    </div>
+  );
+}
+
+YearCalendar.defaultProps = defaultProps;
+
+function YearCalendarHeader(props: YearCalendarHeaderProps) {
+  const { currentDecade, onDecadeChange } = props;
+  const [decadeVisible, setDecadeVisible] = React.useState(false);
 
   const handlePreviousDecade = () => {
-    onYearChange && onYearChange(currentYear - 10);
+    onDecadeChange && onDecadeChange(currentDecade - 10);
   };
   const handleNextDecade = () => {
-    onYearChange && onYearChange(currentYear + 10);
+    onDecadeChange && onDecadeChange(currentDecade + 10);
   };
-
-  const [decadeVisible, setDecadeVisible] = React.useState(false);
 
   const handleDecadeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (!decadeVisible) setDecadeVisible(true);
   };
 
-  const handleDecadeChange = (date: Date) => {
-    const newYear = date.getFullYear();
-    if (newYear !== currentYear) onYearChange && onYearChange(newYear);
+  const handleDecadeSelect = (decade: number) => {
+    if (decade !== currentDecade) onDecadeChange && onDecadeChange(decade);
     setDecadeVisible(false);
   };
 
   const title = (
     <a href="javascript:;" onClick={handleDecadeClick}>
-      {decade[0]}-{decade[1]}
+      {currentDecade}-{currentDecade + 9}
     </a>
   );
 
+  const prefix = getPrefix();
   return (
     <CalendarHeader
       title={title}
@@ -68,16 +200,16 @@ function YearCalendarHeader(props: CalendarHeaderProps) {
       {decadeVisible && (
         <DecadeCalendar
           className={prefix + '-selector'}
-          value={date}
-          onChange={handleDecadeChange}
+          value={currentDecade}
+          onSelect={handleDecadeSelect}
         />
       )}
     </CalendarHeader>
   );
 }
 
-function YearCalendarBody(props: CalendarBodyProps) {
-  const years = getYearsByDecade(props.currentYear);
+function YearCalendarBody(props: YearCalendarBodyProps) {
+  const years = getYearsByDecade(props.currentDecade);
   return (
     <CalendarBody>
       <CalendarGrid>
@@ -105,18 +237,15 @@ function YearCalendarBody(props: CalendarBodyProps) {
 }
 
 function YearCalendarCell(
-  props: CalendarBodyProps & {
+  props: YearCalendarBodyProps & {
     year: number;
     isFirst: boolean;
     isLast: boolean;
   }
 ) {
   const { yearFormatter = defaultYearFormatter } = props;
-  const selected = props.year === props.currentYear;
-  const handleClick = () => {
-    const date = (props.value || new Date()).getDate();
-    props.onSelect(new Date(props.year, props.currentMonth, date));
-  };
+  const selected = props.year === props.value;
+  const handleClick = () => props.onSelect(props.year);
   const prefix = getPrefix();
   return (
     <CalendarCell

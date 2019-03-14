@@ -1,7 +1,7 @@
 import React from 'react';
-
-import { CalendarProps } from './Calendar';
-import DateCalendar from './DateCalendar';
+import cx from 'classnames';
+import Calendar, { CalendarProps } from './Calendar';
+import { getComponentClasses } from '../component';
 import * as dateUtil from '../../utils/date';
 
 function WeekCalendar(props: CalendarProps) {
@@ -15,19 +15,22 @@ function WeekCalendar(props: CalendarProps) {
   };
   const dyedDate = (date: Date, selectedDate: Date | null) => {
     if (!selectedDate) return false;
+    if (date.getFullYear() !== selectedDate.getFullYear()) return false;
     const n1 = dateUtil.getWeekNumber(date);
     const n2 = dateUtil.getWeekNumber(selectedDate);
     return n1 === n2;
   };
+  const cls = getComponentClasses('week-calendar');
   return (
-    <DateCalendar
+    <Calendar
       {...props}
+      className={cx(cls, props.className)}
       showWeekNumber={true}
       dyedDate={dyedDate}
       onChange={handleChange}
       onSelect={handleSelect}>
       {props.children}
-    </DateCalendar>
+    </Calendar>
   );
 }
 

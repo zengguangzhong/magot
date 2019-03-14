@@ -1,23 +1,17 @@
 /// <reference path="../../../lib.d.ts" />
 import React from 'react';
-
 import Calendar, { CalendarProps } from './Calendar';
 import { getComponentClasses } from '../component';
 import * as dateUtil from '../../utils/date';
 
 type PickCalendarProps = Pick<
   CalendarProps,
-  Exclude<keyof CalendarProps, 'defaultValue' | 'value' | 'onChange'>
+  Exclude<keyof CalendarProps, 'value' | 'onChange'>
 >;
 
 export interface RangeCalendarProps extends PickCalendarProps {
   /**
-   * 默认日期范围
-   */
-  defaultValue?: Array<AcceptableDate> | null;
-
-  /**
-   * 当前展示日期范围
+   * 当前选中的日期范围
    */
   value?: Array<AcceptableDate> | null;
 
@@ -32,14 +26,13 @@ function RangeCalendar(props: RangeCalendarProps) {
     className,
     style,
     children,
-    defaultValue,
     value,
     onChange,
     ...calendarProps
   } = props;
 
   const today = new Date();
-  const valueProp = (defaultValue || value || []).slice(0, 2);
+  const valueProp = (value || []).slice(0, 2);
   const datesProp = valueProp.map(dateUtil.getSafeDate).sort(dateUtil.sortDate);
   const [startDate, setStartDate] = React.useState<Date | null>(
     datesProp[0] || null
@@ -130,25 +123,25 @@ function RangeCalendar(props: RangeCalendarProps) {
         {...calendarProps}
         activeToday={false}
         value={startDate}
-        current={startCurrentDate}
+        currentDate={startCurrentDate}
         hideHeaderNextRange={diffOneMonth}
         hideHeaderNext={diffOneMonth}
         dyedDate={dyedDate}
         activedDate={activedDate}
         onSelect={handleStartSelect}
-        onCurrentChange={handleStartCurrentChange}
+        onCurrentDateChange={handleStartCurrentChange}
       />
       <Calendar
         {...calendarProps}
         activeToday={false}
         value={endDate}
-        current={endCurrentDate}
+        currentDate={endCurrentDate}
         hideHeaderPreviousRange={diffOneMonth}
         hideHeaderPrevious={diffOneMonth}
         dyedDate={dyedDate}
         activedDate={activedDate}
         onSelect={handleEndSelect}
-        onCurrentChange={handleEndCurrentChange}
+        onCurrentDateChange={handleEndCurrentChange}
       />
       {children}
     </div>

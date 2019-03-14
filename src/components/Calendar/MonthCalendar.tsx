@@ -1,38 +1,227 @@
 import React from 'react';
-
-import {
-  CalendarProps,
-  CalendarHeaderProps,
-  CalendarBodyProps,
-} from './Calendar';
-import CalendarWrapper from './CalendarWrapper';
-import DateCalendarHeader from './DateCalendarHeader';
+import cx from 'classnames';
+import { CalendarBaseProps } from './Calendar';
+import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
+import CalendarFooter from './CalendarFooter';
 import CalendarGrid from './CalendarGrid';
 import CalendarRow from './CalendarRow';
 import CalendarCell from './CalendarCell';
 import CalendarCellNode from './CalendarCellNode';
+import YearCalendar from './YearCalendar';
 import { getPrefix } from './prefix';
+import { useChanges } from '../../hooks/changes';
+import * as component from '../component';
 
-const Calendar = CalendarWrapper(MonthCalendarHeader, MonthCalendarBody);
+export interface MonthCalendarProps extends CalendarBaseProps {
+  /**
+   * 当前选中年月
+   */
+  value?: YearMonth | null;
 
-function MonthCalendar(props: CalendarProps) {
-  return <Calendar {...props}>{props.children}</Calendar>;
+  /**
+   * 当前展示的年份
+   */
+  currentYear?: number | null;
+
+  /**
+   * 自定义月份格式化函数
+   */
+  monthFormatter?: (month: number) => string;
+
+  /**
+   * 自定义年份格式化函数
+   */
+  yearFormatter?: (year: number) => string;
+
+  /**
+   * 自定义头部栏年份格式化函数
+   */
+  headerYearFormatter?: (year: number) => string;
+
+  /**
+   * 选中年月发生变化之后的回调函数
+   */
+  onChange?: (value: YearMonth) => void;
+
+  /**
+   * 当前展示年份发生变化之后的回调函数
+   */
+  onCurrentYearChange?: (year: number) => void;
+
+  /**
+   * 选择年月后的回调函数。
+   * 不同于`onChange`，当在重复点击已选中年月时，也会触发该回调函数
+   */
+  onSelect?: (data: YearMonth) => void;
 }
 
-function MonthCalendarHeader(props: CalendarHeaderProps) {
+interface MonthCalendarHeaderProps extends MonthCalendarProps {
+  currentYear: number;
+  onYearChange?: (year: number) => void;
+}
+
+interface MonthCalendarBodyProps extends MonthCalendarProps {
+  value: YearMonth | null;
+  currentYear: number;
+  onSelect: (data: YearMonth) => void;
+}
+
+interface InternallyRef {
+  selected?: YearMonth;
+  current?: number;
+}
+
+const defaultProps: Partial<MonthCalendarProps> = {
+  hideHeader: false,
+  hideHeaderPreviousRange: false,
+  hideHeaderNextRange: false,
+};
+
+function getDefaultDate() {
+  const today = new Date();
+  return { year: today.getFullYear(), month: today.getMonth() };
+}
+
+function MonthCalendar(props: MonthCalendarProps) {
+  const dateProp = props.value || getDefaultDate();
+  const currentYearProp = props.currentYear || dateProp.year;
+
+  const internallyRef = React.useRef<InternallyRef | null>(null);
+
+  let isInternally = false;
+  if (internallyRef.current) {
+    isInternally =
+      !!internallyRef.current.selected || !!internallyRef.current.current;
+  }
+
+  const [selectedValue, setSelectedValue] = useChanges(
+    dateProp,
+    isInternally,
+    equal
+  );
+
+  const [currentYear, setCurrentYear] = useChanges(
+    currentYearProp,
+    isInternally
+  );
+
+  if (internallyRef.current) {
+    const ref = internallyRef.current;
+    if (ref.selected !== void 0) {
+      props.onChange && props.onChange(ref.selected);
+    }
+    if (ref.current !== void 0) {
+      props.onCurrentYearChange && props.onCurrentYearChange(ref.current);
+    }
+    internallyRef.current = null;
+  }
+
+  const handleYearChange = (year: number) => {
+    if (year !== currentYear) {
+      internallyRef.current = { current: year };
+      setCurrentYear(year);
+    }
+  };
+
+  const handleSelectDate = (data: YearMonth) => {
+    if (!equal(data, selectedValue)) {
+      internallyRef.current = { selected: data };
+      setSelectedValue(data);
+    }
+    props.onSelect && props.onSelect(data);
+  };
+
+  const prefix = component.getComponentPrefix('calendar');
+  const cls = component.getComponentClasses('month-calendar', props);
+
   return (
-    <DateCalendarHeader
-      {...props}
-      hideHeaderMonth={true}
-      hideHeaderPrevious={true}
-      hideHeaderNext={true}>
-      {props.children}
-    </DateCalendarHeader>
+    <div className={cx(prefix, cls)} style={props.style}>
+      <MonthCalendarHeader
+        {...props}
+        currentYear={currentYear}
+        onYearChange={handleYearChange}
+      />
+      <MonthCalendarBody
+        {...props}
+        value={selectedValue}
+        currentYear={currentYear}
+        onSelect={handleSelectDate}
+      />
+      {props.children && (
+        <CalendarFooter onClick={props.onFooterClick}>
+          {props.children}
+        </CalendarFooter>
+      )}
+    </div>
   );
 }
 
-function MonthCalendarBody(props: CalendarBodyProps) {
+MonthCalendar.defaultProps = defaultProps;
+
+function MonthCalendarHeader(props: MonthCalendarHeaderProps) {
+  const {
+    currentYear,
+    headerYearFormatter = defaultHeaderYearFormatter,
+    onYearChange,
+  } = props;
+
+  const [yearSelectorVisible, setYearSelectorVisible] = React.useState(false);
+
+  const handlePreviousYear = () => {
+    onYearChange && onYearChange(currentYear - 1);
+  };
+  const handleNextYear = () => {
+    onYearChange && onYearChange(currentYear + 1);
+  };
+
+  const handleYearClick = () => {
+    if (!yearSelectorVisible) setYearSelectorVisible(true);
+  };
+
+  const handleYearSelect = (year: number) => {
+    if (year !== currentYear) {
+      props.onYearChange && props.onYearChange(year);
+    }
+    setYearSelectorVisible(false);
+  };
+
+  const prefix = getPrefix();
+
+  const title = (
+    <>
+      {!props.hideHeader && (
+        <a href="javascript:;" onClick={handleYearClick}>
+          {headerYearFormatter(currentYear)}
+        </a>
+      )}
+    </>
+  );
+
+  return (
+    <CalendarHeader
+      title={title}
+      visible={!props.hideHeader}
+      previousRangeVisible={!props.hideHeaderPreviousRange}
+      nextRangeVisible={!props.hideHeaderNextRange}
+      previousVisible={false}
+      nextVisible={false}
+      onPreviousRange={handlePreviousYear}
+      onNextRange={handleNextYear}
+      onClick={props.onHeaderClick}>
+      {yearSelectorVisible && (
+        <YearCalendar
+          className={prefix + '-selector'}
+          value={currentYear}
+          yearFormatter={props.yearFormatter}
+          onSelect={handleYearSelect}
+        />
+      )}
+    </CalendarHeader>
+  );
+}
+
+function MonthCalendarBody(props: MonthCalendarBodyProps) {
   const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <CalendarBody>
@@ -50,12 +239,11 @@ function MonthCalendarBody(props: CalendarBodyProps) {
   );
 }
 
-function MonthCalendarCell(props: CalendarBodyProps & { month: number }) {
+function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
   const { monthFormatter = defaultMonthFormatter } = props;
-  const selected = props.month === props.currentMonth;
+  const selected = props.value ? props.month === props.value.month : false;
   const handleClick = () => {
-    const date = (props.value || new Date()).getDate();
-    props.onSelect(new Date(props.currentYear, props.month, date));
+    props.onSelect({ year: props.currentYear, month: props.month });
   };
   const prefix = getPrefix();
   return (
@@ -67,9 +255,20 @@ function MonthCalendarCell(props: CalendarBodyProps & { month: number }) {
   );
 }
 
+function defaultHeaderYearFormatter(year: number) {
+  return year + '年';
+}
+
 function defaultMonthFormatter(month: number) {
   const localMonths = '一 二 三 四 五 六 七 八 九 十 十一 十二'.split(' ');
   return localMonths[month] + '月';
+}
+
+function equal(a: YearMonth | null, b: YearMonth | null) {
+  if (a === null || b === null) {
+    return a === b;
+  }
+  return a.year === b.year && a.month === b.month;
 }
 
 export default MonthCalendar;
