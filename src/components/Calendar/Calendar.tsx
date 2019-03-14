@@ -225,7 +225,7 @@ function Calendar(props: CalendarProps) {
   const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
   const currentProp = props.currentDate
     ? dateUtil.getSafeDate(props.currentDate)
-    : today;
+    : dateProp || today;
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
