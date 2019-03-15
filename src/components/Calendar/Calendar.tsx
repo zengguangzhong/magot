@@ -190,6 +190,11 @@ export interface CalendarProps extends CalendarBaseProps {
   onSelect?: (date: Date, weekNumber?: number) => void;
 }
 
+export type CalendarNormalProps = Pick<
+  CalendarProps,
+  Exclude<keyof CalendarProps, 'value' | 'onChange'>
+>;
+
 interface CalendarHeaderProps extends CalendarProps {
   currentYear: number;
   currentMonth: number;

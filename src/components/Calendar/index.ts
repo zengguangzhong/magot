@@ -1,1 +1,1 @@
-export { default, CalendarProps } from './Calendar';
+export { default, CalendarProps, CalendarNormalProps } from './Calendar';

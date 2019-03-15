@@ -1,15 +1,10 @@
 /// <reference path="../../../lib.d.ts" />
 import React from 'react';
-import Calendar, { CalendarProps } from './Calendar';
+import Calendar, { CalendarNormalProps } from './Calendar';
 import { getComponentClasses } from '../component';
 import * as dateUtil from '../../utils/date';
 
-type PickCalendarProps = Pick<
-  CalendarProps,
-  Exclude<keyof CalendarProps, 'value' | 'onChange'>
->;
-
-export interface RangeCalendarProps extends PickCalendarProps {
+export interface RangeCalendarProps extends CalendarNormalProps {
   /**
    * 当前选中的日期范围
    */
