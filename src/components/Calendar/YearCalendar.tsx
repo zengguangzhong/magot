@@ -245,7 +245,10 @@ function YearCalendarCell(
 ) {
   const { yearFormatter = defaultYearFormatter } = props;
   const selected = props.year === props.value;
-  const handleClick = () => props.onSelect(props.year);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    props.onSelect(props.year);
+    props.onCellClick && props.onCellClick(e);
+  };
   const prefix = getPrefix();
   return (
     <CalendarCell

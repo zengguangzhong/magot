@@ -223,7 +223,10 @@ function DecadeCalendarCell(
 ) {
   const { decade, value } = props;
   const selected = value >= decade[0] && value <= decade[1];
-  const handleClick = () => props.onSelect(decade[0]);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    props.onSelect(decade[0]);
+    props.onCellClick && props.onCellClick(e);
+  };
   const prefix = getPrefix();
   return (
     <CalendarCell

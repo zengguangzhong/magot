@@ -102,6 +102,13 @@ function RangeCalendar(props: RangeCalendarProps) {
     if (y || m) setEndCurrentDate(new Date(year, month));
   };
 
+  const handleCellClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (!(startDate && !endDate) && !(!startDate && endDate)) {
+      e.stopPropagation();
+    }
+    props.onCellClick && props.onCellClick(e);
+  };
+
   const dyedDate = (date: Date) => {
     if (!startDate || !endDate) return false;
     const gt = dateUtil.greaterThanOrEqualDate(date, startDate);
@@ -130,6 +137,7 @@ function RangeCalendar(props: RangeCalendarProps) {
         activedDate={activedDate}
         onSelect={handleStartSelect}
         onCurrentDateChange={handleStartCurrentChange}
+        onCellClick={handleCellClick}
       />
       <Calendar
         {...calendarProps}
@@ -142,6 +150,7 @@ function RangeCalendar(props: RangeCalendarProps) {
         activedDate={activedDate}
         onSelect={handleEndSelect}
         onCurrentDateChange={handleEndCurrentChange}
+        onCellClick={handleCellClick}
       />
       {children}
     </div>

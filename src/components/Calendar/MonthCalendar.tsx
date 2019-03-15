@@ -240,9 +240,10 @@ function MonthCalendarBody(props: MonthCalendarBodyProps) {
 function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
   const { value, monthFormatter = defaultMonthFormatter } = props;
   const selected = value ? props.month === value.getMonth() : false;
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const date = new Date(props.currentYear, props.month);
     props.onSelect(date);
+    props.onCellClick && props.onCellClick(e);
   };
   const prefix = getPrefix();
   return (

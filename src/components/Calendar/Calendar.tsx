@@ -62,6 +62,11 @@ export interface CalendarBaseProps
    * 页脚点击事件的回调函数
    */
   onFooterClick?: (e: React.MouseEvent<HTMLElement>) => void;
+
+  /**
+   * 单元格点击事件的回调函数
+   */
+  onCellClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export interface CalendarProps extends CalendarBaseProps {
@@ -508,7 +513,10 @@ function DateCalendarCell(
     props.disabledDate
   );
 
-  const handleClick = () => props.onSelect(date);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    props.onSelect(date);
+    props.onCellClick && props.onCellClick(e);
+  };
 
   return (
     <CalendarCell
