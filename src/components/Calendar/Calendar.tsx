@@ -16,13 +16,19 @@ import RangeCalendar from './RangeCalendar';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
 import * as component from '../component';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 import './Calendar.less';
 
 export interface CalendarBaseProps
   extends component.BaseComponent,
     component.NestedComponent {
+  /**
+   * 是否高亮激活今天(当未选中日期时)
+   * @default true
+   */
+  activeToday?: boolean;
+
   /**
    * 是否隐藏头部栏
    * @default false
@@ -85,12 +91,6 @@ export interface CalendarProps extends CalendarBaseProps {
    * @default false
    */
   disableTodayAgo?: boolean;
-
-  /**
-   * 是否高亮激活今天(当未选中日期时)
-   * @default true
-   */
-  activeToday?: boolean;
 
   /**
    * 今天的显示文案
@@ -214,28 +214,32 @@ interface InternallyRef {
   current?: Date;
 }
 
+export function getDefaultBaseProps() {
+  const defaultProps: Partial<CalendarBaseProps> = {
+    activeToday: true,
+    hideHeader: false,
+    hideHeaderPreviousRange: false,
+    hideHeaderPrevious: false,
+    hideHeaderNextRange: false,
+    hideHeaderNext: false,
+  };
+  return defaultProps;
+}
+
 const defaultProps: Partial<CalendarProps> = {
+  ...getDefaultBaseProps(),
   disableTodayAgo: false,
-  activeToday: true,
   hideWeekBox: false,
-  hideHeader: false,
   hideHeaderYear: false,
   hideHeaderMonth: false,
-  hideHeaderPreviousRange: false,
-  hideHeaderPrevious: false,
-  hideHeaderNextRange: false,
-  hideHeaderNext: false,
   showWeekNumber: false,
   weekStart: 0,
 };
 
 function Calendar(props: CalendarProps) {
-  const today = new Date();
   const valueProp = props.value;
-  const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
-  const currentProp = props.currentDate
-    ? dateUtil.getSafeDate(props.currentDate)
-    : dateProp || today;
+  const dateProp = valueProp ? DateUtil(valueProp).to() : null;
+  const currentProp = DateUtil(props.currentDate || dateProp).clone(true);
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
@@ -248,13 +252,13 @@ function Calendar(props: CalendarProps) {
   const [selectedDate, setSelectedDate] = useChanges(
     dateProp,
     isInternally,
-    dateUtil.equalDate
+    DateUtil.eq
   );
 
   const [currentDate, setCurrentDate] = useChanges(
     currentProp,
     isInternally,
-    (a, b) => dateUtil.equalDate(a, b, true)
+    DateUtil.eq
   );
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
@@ -293,14 +297,16 @@ function Calendar(props: CalendarProps) {
   };
 
   const handleSelectDate = (date: Date) => {
-    if (!dateUtil.equalDate(date, selectedDate)) {
+    const dateUtil = DateUtil(date);
+    if (!dateUtil.eq(selectedDate)) {
       const ref: InternallyRef = { selected: date };
       setSelectedDate(date);
-      const y = dateUtil.isCurrentYear(date, currentYear);
-      const m = dateUtil.isCurrentMonth(date, currentMonth);
+      const y = dateUtil.isCurrentYear(currentYear);
+      const m = dateUtil.isCurrentMonth(currentMonth);
       if (!y || !m) {
-        ref.current = date;
-        setCurrentDate(date);
+        const current = dateUtil.clone(true);
+        ref.current = current;
+        setCurrentDate(current);
       }
       internallyRef.current = ref;
     }
@@ -484,7 +490,7 @@ function DateCalendarRow(
     <CalendarRow>
       {props.showWeekNumber && (
         <CalendarCell className="week-number">
-          {dateUtil.getWeekNumber(wednesday || dates[0])}
+          {DateUtil(wednesday || dates[0]).getWeekNumber()}
         </CalendarCell>
       )}
       {dates.map(date => {
@@ -498,9 +504,10 @@ function DateCalendarCell(
   props: CalendarBodyProps & { date: Date; today: Date }
 ) {
   const { date, dateFormatter = defaultDateFormatter } = props;
-  const isToday = dateUtil.equalDate(date, props.today);
+  const dateUtil = DateUtil(date);
+  const isToday = dateUtil.eq(props.today);
 
-  let selected = dateUtil.equalDate(date, props.value);
+  let selected = dateUtil.eq(props.value);
   if (!props.value && props.activeToday) selected = isToday;
   if (!selected && props.activedDate) {
     selected = props.activedDate(date, props.value);
@@ -530,8 +537,8 @@ function DateCalendarCell(
       selected={selected}
       disabled={disabled}
       outside={
-        dateUtil.isPreviousMonth(date, props.currentMonth) ||
-        dateUtil.isNextMonth(date, props.currentMonth)
+        dateUtil.isPreviousMonth(props.currentMonth) ||
+        dateUtil.isNextMonth(props.currentMonth)
       }
       onClick={handleClick}>
       <CalendarCellNode
@@ -544,7 +551,8 @@ function DateCalendarCell(
 
 function getDatesByWeek(year: number, month: number, weekStart: number) {
   const datesByWeek: Date[][] = [];
-  const firstDayOfMonth = dateUtil.getFirstDayOfMonth(year, month);
+  const dateUtil = DateUtil(new Date(year, month));
+  const firstDayOfMonth = dateUtil.getFirstDayOfMonth();
   const firstDayOfWeek = firstDayOfMonth.getDay();
 
   let start = 0;
@@ -570,7 +578,7 @@ function isDisabledDate(
   disabledDate?: (date: Date) => boolean
 ) {
   if (disabledDate && disabledDate(date)) return true;
-  if (disableTodayAgo && dateUtil.lessThanDate(date, today)) return true;
+  if (disableTodayAgo && DateUtil(date).lt(today)) return true;
   return false;
 }
 

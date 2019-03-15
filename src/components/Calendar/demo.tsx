@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
 import Button from '../Button';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 function yearFormatter(year: number) {
   return '' + year;
@@ -21,6 +21,7 @@ function dateFormatter(date: Date) {
 }
 
 function CalendarDemo() {
+  const today = DateUtil();
   return (
     <>
       <Link to="/" className="demo-goback">
@@ -28,7 +29,7 @@ function CalendarDemo() {
       </Link>
       <div className="demo-box demo-flex">
         <Calendar onChange={console.log} />
-        <Calendar value={dateUtil.addDays(3)} onChange={console.log} />
+        <Calendar value={today.add(3)} onChange={console.log} />
         <Calendar disableTodayAgo={true} onChange={console.log} />
         <Calendar todayText="今天" activeToday={false} onChange={console.log} />
         <Calendar weekStart={1} onChange={console.log} />
@@ -62,9 +63,9 @@ function CalendarDemo() {
         />
         <Calendar.Year onChange={console.log} />
         <Calendar.Decade onChange={console.log} />
-        <Calendar.Week value={new Date()} onChange={console.log} />
+        <Calendar.Week value={today.to()} onChange={console.log} />
         <Calendar.Range
-          value={[new Date(), dateUtil.addDays(10)]}
+          value={[today.to(), today.add(10)]}
           onChange={console.log}
         />
       </div>
@@ -73,7 +74,7 @@ function CalendarDemo() {
 }
 
 function ControlledCalendar() {
-  const today = new Date();
+  const today = DateUtil();
   const [currentDate, setCurrentDate] = React.useState<Date | null>(null);
   return (
     <Calendar
@@ -87,19 +88,19 @@ function ControlledCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.subtractDays(1))}>
+        onClick={() => setCurrentDate(today.subtract(1))}>
         昨天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(today)}>
+        onClick={() => setCurrentDate(today.to())}>
         今天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.addDays(1))}>
+        onClick={() => setCurrentDate(today.add(1))}>
         明天
       </Button>
       <Button
@@ -113,7 +114,7 @@ function ControlledCalendar() {
 }
 
 function ControlledLocalizeCalendar() {
-  const today = new Date();
+  const today = DateUtil();
   const [currentDate, setCurrentDate] = React.useState<Date | null>(null);
   return (
     <Calendar
@@ -130,19 +131,19 @@ function ControlledLocalizeCalendar() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.subtractDays(1))}>
+        onClick={() => setCurrentDate(today.subtract(1))}>
         Yesterday
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(today)}>
+        onClick={() => setCurrentDate(today.to())}>
         Today
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.addDays(1))}>
+        onClick={() => setCurrentDate(today.add(1))}>
         Tomorrow
       </Button>
     </Calendar>

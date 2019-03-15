@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { CalendarBaseProps } from './Calendar';
+import { CalendarBaseProps, getDefaultBaseProps } from './Calendar';
 import DecadeCalendar from './DecadeCalendar';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
@@ -11,8 +11,8 @@ import CalendarCell from './CalendarCell';
 import CalendarCellNode from './CalendarCellNode';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
 import * as component from '../component';
+import DateUtil from '../../utils/date';
 
 export interface YearCalendarProps extends CalendarBaseProps {
   /**
@@ -64,9 +64,7 @@ interface InternallyRef {
 }
 
 const defaultProps: Partial<YearCalendarProps> = {
-  hideHeader: false,
-  hideHeaderPreviousRange: false,
-  hideHeaderNextRange: false,
+  ...getDefaultBaseProps(),
 };
 
 function getDefaultYear() {
@@ -75,9 +73,9 @@ function getDefaultYear() {
 }
 
 function YearCalendar(props: YearCalendarProps) {
-  const yearProp = props.value || getDefaultYear();
-  const currentDecadeProp =
-    props.currentDecade || dateUtil.getDecade(yearProp)[0];
+  const yearProp = props.value || null;
+  const decadeProp = DateUtil.getDecade(yearProp || getDefaultYear())[0];
+  const currentDecadeProp = props.currentDecade || decadeProp;
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
@@ -244,7 +242,9 @@ function YearCalendarCell(
   }
 ) {
   const { yearFormatter = defaultYearFormatter } = props;
-  const selected = props.year === props.value;
+  const isCurrent = props.year === new Date().getFullYear();
+  let selected = props.year === props.value;
+  if (props.value == null && props.activeToday) selected = isCurrent;
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     props.onSelect(props.year);
     props.onCellClick && props.onCellClick(e);
@@ -252,6 +252,7 @@ function YearCalendarCell(
   const prefix = getPrefix();
   return (
     <CalendarCell
+      current={isCurrent}
       selected={selected}
       outside={props.isFirst || props.isLast}
       onClick={handleClick}>
@@ -264,7 +265,7 @@ function YearCalendarCell(
 
 function getYearsByDecade(year: number) {
   const years: number[] = [];
-  const decade = dateUtil.getDecade(year);
+  const decade = DateUtil.getDecade(year);
   for (let i = decade[0] - 1; i <= decade[1] + 1; i++) {
     years.push(i);
   }

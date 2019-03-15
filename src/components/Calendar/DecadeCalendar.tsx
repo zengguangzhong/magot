@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { CalendarBaseProps } from './Calendar';
+import { CalendarBaseProps, getDefaultBaseProps } from './Calendar';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
 import CalendarFooter from './CalendarFooter';
@@ -10,8 +10,8 @@ import CalendarCell from './CalendarCell';
 import CalendarCellNode from './CalendarCellNode';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
 import * as component from '../component';
+import DateUtil from '../../utils/date';
 
 export interface DecadeCalendarProps extends CalendarBaseProps {
   /**
@@ -47,7 +47,7 @@ interface DecadeCalendarHeaderProps extends DecadeCalendarProps {
 }
 
 interface DecadeCalendarBodyProps extends DecadeCalendarProps {
-  value: number;
+  value: number | null;
   currentCentury: number;
   onSelect: (decade: number) => void;
 }
@@ -58,20 +58,14 @@ interface InternallyRef {
 }
 
 const defaultProps: Partial<DecadeCalendarProps> = {
-  hideHeader: false,
-  hideHeaderPreviousRange: false,
-  hideHeaderNextRange: false,
+  ...getDefaultBaseProps(),
 };
 
-function getDefaultDecade() {
-  const today = new Date();
-  return dateUtil.getDecade(today.getFullYear())[0];
-}
-
 function DecadeCalendar(props: DecadeCalendarProps) {
-  const decadeProp = props.value || getDefaultDecade();
-  const currentCenturyProp =
-    props.currentCentury || dateUtil.getCentury(decadeProp)[0];
+  const decadeProp = props.value || null;
+  const todayDecade = DateUtil().getDecade()[0];
+  const century = DateUtil.getCentury(decadeProp || todayDecade)[0];
+  const currentCenturyProp = props.currentCentury || century;
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
@@ -222,7 +216,9 @@ function DecadeCalendarCell(
   }
 ) {
   const { decade, value } = props;
-  const selected = value >= decade[0] && value <= decade[1];
+  const isCurrent = DateUtil().ofDecade(decade[0]);
+  let selected = value ? DateUtil.from(value).ofDecade(decade[0]) : false;
+  if (props.value == null && props.activeToday) selected = isCurrent;
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     props.onSelect(decade[0]);
     props.onCellClick && props.onCellClick(e);
@@ -230,6 +226,7 @@ function DecadeCalendarCell(
   const prefix = getPrefix();
   return (
     <CalendarCell
+      current={isCurrent}
       selected={selected}
       outside={props.isFirst || props.isLast}
       onClick={handleClick}>
@@ -242,9 +239,9 @@ function DecadeCalendarCell(
 
 function getDecadesByCentury(year: number) {
   const decades: number[][] = [];
-  const century = dateUtil.getCentury(year);
+  const century = DateUtil.getCentury(year);
   for (let i = century[0] - 10; i <= century[1] + 10; i += 10) {
-    const decade = dateUtil.getDecade(i);
+    const decade = DateUtil.getDecade(i);
     decades.push(decade);
   }
   return decades;

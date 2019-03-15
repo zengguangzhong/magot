@@ -2,7 +2,7 @@
 import React from 'react';
 import Calendar, { CalendarNormalProps } from './Calendar';
 import { getComponentClasses } from '../component';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 export interface RangeCalendarProps extends CalendarNormalProps {
   /**
@@ -26,9 +26,8 @@ function RangeCalendar(props: RangeCalendarProps) {
     ...calendarProps
   } = props;
 
-  const today = new Date();
   const valueProp = (value || []).slice(0, 2);
-  const datesProp = valueProp.map(dateUtil.getSafeDate).sort(dateUtil.sortDate);
+  const datesProp = valueProp.map(DateUtil.to).sort(DateUtil.sort);
   const [startDate, setStartDate] = React.useState<Date | null>(
     datesProp[0] || null
   );
@@ -36,10 +35,11 @@ function RangeCalendar(props: RangeCalendarProps) {
     datesProp[1] || null
   );
 
-  const _startCurrentDate = startDate || today;
-  let _endCurrentDate = endDate || dateUtil.addMonths(1, today);
-  if (dateUtil.diffMonths(_startCurrentDate, _endCurrentDate) === 0) {
-    _endCurrentDate = dateUtil.addMonths(1, _endCurrentDate);
+  const today = DateUtil();
+  const _startCurrentDate = DateUtil(startDate).clone(true);
+  let _endCurrentDate = DateUtil(endDate || today.addMonths(1)).clone(true);
+  if (DateUtil(_startCurrentDate).diffMonths(_endCurrentDate) === 0) {
+    _endCurrentDate = DateUtil(_endCurrentDate).addMonths(1);
   }
   const [startCurrentDate, setStartCurrentDate] = React.useState(
     _startCurrentDate
@@ -62,7 +62,7 @@ function RangeCalendar(props: RangeCalendarProps) {
     } else {
       !e ? (e = date) : (s = date);
     }
-    if (s && e && dateUtil.greaterThanDate(s, e)) [s, e] = [e, s];
+    if (s && e && DateUtil(s).gt(e)) [s, e] = [e, s];
     setStartDate(s), setEndDate(e);
     s && e && onChange && onChange([s, e]);
   };
@@ -78,7 +78,7 @@ function RangeCalendar(props: RangeCalendarProps) {
   const handleStartCurrentChange = (current: Date) => {
     const year = current.getFullYear();
     let month = current.getMonth();
-    if (dateUtil.equalDate(current, endCurrentDate, true)) {
+    if (DateUtil(current).eq(endCurrentDate)) {
       month += month > startCurrentMonth ? 1 : -1;
     }
     const y = year !== startCurrentYear;
@@ -89,7 +89,7 @@ function RangeCalendar(props: RangeCalendarProps) {
   const handleEndCurrentChange = (current: Date) => {
     const year = current.getFullYear();
     let month = current.getMonth();
-    if (dateUtil.equalDate(current, startCurrentDate, true)) {
+    if (DateUtil(current).eq(startCurrentDate)) {
       month += month > endCurrentMonth ? 1 : -1;
     }
     const y = year !== endCurrentYear;
@@ -106,16 +106,14 @@ function RangeCalendar(props: RangeCalendarProps) {
 
   const dyedDate = (date: Date) => {
     if (!startDate || !endDate) return false;
-    const gt = dateUtil.greaterThanOrEqualDate(date, startDate);
-    const lt = dateUtil.lessThanOrEqualDate(date, endDate);
-    return gt && lt;
+    const dateUtil = DateUtil(date);
+    return dateUtil.gte(startDate) && dateUtil.lte(endDate);
   };
 
   const activedDate = (date: Date) => {
     if (!startDate || !endDate) return false;
-    const es = dateUtil.equalDate(date, startDate);
-    const ee = dateUtil.equalDate(date, endDate);
-    return es || ee;
+    const dateUtil = DateUtil(date);
+    return dateUtil.eq(startDate) || dateUtil.eq(endDate);
   };
 
   const cls = getComponentClasses('range-calendar', props);

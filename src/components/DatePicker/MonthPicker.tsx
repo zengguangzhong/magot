@@ -6,7 +6,7 @@ import PickerTrigger from './PickerTrigger';
 import PickerCalendarWrapper from './PickerCalendar';
 import MonthCalendar, { MonthCalendarProps } from '../Calendar/MonthCalendar';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 export interface MonthPickerProps extends DatePickerNormalProps {
   /**
@@ -49,31 +49,31 @@ function MonthPicker(props: MonthPickerProps) {
     format,
     calendarProps,
     children,
-    inputValueFormatter = dateUtil.format,
+    inputValueFormatter = DateUtil.format,
     onChange,
     onClear,
     ...formProps
   } = props;
 
   const _value = defaultValue || value;
-  const valueProp = _value ? dateUtil.getSafeDate(_value) : null;
-  const dateProp = valueProp ? dateUtil.getPureDate(valueProp, true) : null;
+  const valueProp = _value ? DateUtil(_value).to() : null;
+  const dateProp = valueProp ? DateUtil(valueProp).toPure(true) : null;
 
   const internallyRef = React.useRef(false);
 
   const [currentValue, setCurrentValue] = useChanges(
     dateProp,
     internallyRef.current,
-    (a, b) => dateUtil.equalDate(a, b, true)
+    DateUtil.eq
   );
 
   internallyRef.current = false;
 
   const updateCurrentValue = (value: Date | null) => {
-    if (!dateUtil.equalDate(value, currentValue, true)) {
+    if (!DateUtil.eq(value, currentValue)) {
       internallyRef.current = true;
       setCurrentValue(value);
-      const dateString = (value && dateUtil.format(value, format)) || '';
+      const dateString = (value && DateUtil(value).format(format)) || '';
       onChange && onChange(value, dateString);
     }
   };

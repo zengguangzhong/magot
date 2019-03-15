@@ -9,7 +9,7 @@ import WeekPicker from './WeekPicker';
 import RangePicker from './RangePicker';
 import { InputFormComponent, NestedComponent } from '../component';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 import './DatePicker.less';
 
@@ -76,20 +76,20 @@ function DatePicker(props: DatePickerProps) {
     format,
     calendarProps,
     children,
-    inputValueFormatter = dateUtil.format,
+    inputValueFormatter = DateUtil.format,
     onChange,
     ...formProps
   } = props;
 
   const valueProp = defaultValue || value;
-  const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
+  const dateProp = valueProp ? DateUtil(valueProp).to() : null;
 
   const internallyRef = React.useRef(false);
 
   const [currentDate, setCurrentDate] = useChanges<Date | null>(
     dateProp,
     internallyRef.current,
-    dateUtil.equalDate
+    DateUtil.eq
   );
   const [inputValue, setInputValue] = React.useState<string | null>(null);
 
@@ -100,16 +100,16 @@ function DatePicker(props: DatePickerProps) {
       internallyRef.current = true;
       setInputValue(input || null);
     }
-    if (!dateUtil.equalDate(date, currentDate)) {
+    if (!DateUtil.eq(date, currentDate)) {
       internallyRef.current = true;
       setCurrentDate(date);
-      const dateString = (date && dateUtil.format(date, format)) || '';
+      const dateString = (date && DateUtil(date).format(format)) || '';
       onChange && onChange(date, dateString);
     }
   };
 
   const handleInputChange = (value: string | null, completed?: boolean) => {
-    let date: Date | null = value ? dateUtil.getSafeDate(value) : null;
+    let date = value ? DateUtil(value).to() : null;
     if (date && isNaN(date.getDate())) date = currentDate;
     updateCurrentDate(date, !completed ? value : null);
   };

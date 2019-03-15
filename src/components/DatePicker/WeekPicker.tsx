@@ -5,7 +5,7 @@ import PickerTrigger from './PickerTrigger';
 import PickerCalendarWrapper from './PickerCalendar';
 import WeekCalendar from '../Calendar/WeekCalendar';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 export interface WeekPickerProps extends DatePickerProps {}
 
@@ -23,30 +23,30 @@ function WeekPicker(props: WeekPickerProps) {
     format,
     calendarProps,
     children,
-    inputValueFormatter = dateUtil.format,
+    inputValueFormatter = DateUtil.format,
     onChange,
     onClear,
     ...formProps
   } = props;
 
   const valueProp = defaultValue || value;
-  const dateProp = valueProp ? dateUtil.getSafeDate(valueProp) : null;
+  const dateProp = valueProp ? DateUtil(valueProp).to() : null;
 
   const internallyRef = React.useRef(false);
 
   const [currentDate, setCurrentDate] = useChanges<Date | null>(
     dateProp,
     internallyRef.current,
-    dateUtil.equalDate
+    DateUtil.eq
   );
 
   internallyRef.current = false;
 
   const updateCurrentDate = (date: Date | null) => {
-    if (!dateUtil.equalDate(date, currentDate)) {
+    if (!DateUtil.eq(date, currentDate)) {
       internallyRef.current = true;
       setCurrentDate(date);
-      const dateString = (date && dateUtil.format(date, format)) || '';
+      const dateString = (date && DateUtil(date).format(format)) || '';
       onChange && onChange(date, dateString);
     }
   };

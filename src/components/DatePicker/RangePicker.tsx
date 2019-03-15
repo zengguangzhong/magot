@@ -6,7 +6,7 @@ import PickerTrigger from './PickerTrigger';
 import PickerCalendarWrapper from './PickerCalendar';
 import RangeCalendar, { RangeCalendarProps } from '../Calendar/RangeCalendar';
 import { useChanges } from '../../hooks/changes';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 export interface RangePickerProps extends DatePickerNormalProps {
   /**
@@ -69,7 +69,7 @@ function RangePicker(props: RangePickerProps) {
   } = props;
 
   const valueProp = (defaultValue || value || []).slice(0, 2);
-  const datesProp = valueProp.map(dateUtil.getSafeDate).sort(dateUtil.sortDate);
+  const datesProp = valueProp.map(DateUtil.to).sort(DateUtil.sort);
 
   const internallyRef = React.useRef(false);
 
@@ -132,12 +132,12 @@ function defaultInputValueFormatter(
 
 function formatDates(dates: Date[] | null, format?: string) {
   return (dates || []).map(date => {
-    return dateUtil.format(date, format);
+    return DateUtil(date).format(format);
   });
 }
 
 function equal(a: Date[], b: Date[]) {
-  return dateUtil.equalDate(a[0], b[0]) && dateUtil.equalDate(a[1], b[1]);
+  return DateUtil.eq(a[0], b[0]) && DateUtil.eq(a[1], b[1]);
 }
 
 export default RangePicker;

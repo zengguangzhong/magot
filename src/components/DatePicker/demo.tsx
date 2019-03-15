@@ -5,9 +5,10 @@ import MonthPicker from './MonthPicker';
 import WeekPicker from './WeekPicker';
 import RangePicker from './RangePicker';
 import Button from '../Button';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 function DatePickerDemo() {
+  const today = DateUtil();
   return (
     <>
       <Link to="/" className="demo-goback">
@@ -26,7 +27,7 @@ function DatePickerDemo() {
           format="MM/dd/yyyy"
           onChange={console.log}
         />
-        <DatePicker defaultValue={new Date()} disabled={true} />
+        <DatePicker defaultValue={today.to()} disabled={true} />
         <DatePicker
           placeholder="disabled dates"
           calendarProps={{ disableTodayAgo: true }}
@@ -63,7 +64,7 @@ function DatePickerDemo() {
           format="MM/yyyy"
           onChange={console.log}
         />
-        <MonthPicker defaultValue={new Date()} disabled={true} />
+        <MonthPicker defaultValue={today.to()} disabled={true} />
         <MonthPicker
           placeholder="select month"
           size="small"
@@ -84,7 +85,7 @@ function DatePickerDemo() {
           defaultValue="2019/01"
           onChange={console.log}
         />
-        <WeekPicker defaultValue={new Date()} disabled={true} />
+        <WeekPicker defaultValue={today.to()} disabled={true} />
         <WeekPicker
           placeholder="select week"
           size="small"
@@ -101,13 +102,13 @@ function DatePickerDemo() {
         <RangePicker placeholder="select range" onChange={console.log} />
         <RangePicker
           placeholder="select range"
-          defaultValue={[new Date(), dateUtil.addMonths(1)]}
+          defaultValue={[today.to(), today.addMonths(1)]}
           format="yyyy/MM/dd"
           separator="-"
           onChange={console.log}
         />
         <RangePicker
-          defaultValue={[new Date(), dateUtil.addMonths(1)]}
+          defaultValue={[today.to(), today.addMonths(1)]}
           disabled={true}
         />
         <RangePicker
@@ -127,8 +128,8 @@ function DatePickerDemo() {
 }
 
 function ControlledDatePicker() {
-  const today = new Date();
-  const [currentDate, setCurrentDate] = React.useState<Date | null>(new Date());
+  const today = DateUtil();
+  const [currentDate, setCurrentDate] = React.useState<Date | null>(today.to());
   return (
     <DatePicker
       placeholder="has children"
@@ -141,19 +142,19 @@ function ControlledDatePicker() {
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.subtractDays(1, today))}>
+        onClick={() => setCurrentDate(today.subtract(1))}>
         昨天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(today)}>
+        onClick={() => setCurrentDate(today.to())}>
         今天
       </Button>
       <Button
         type="link"
         // tslint:disable-next-line
-        onClick={() => setCurrentDate(dateUtil.addDays(1, today))}>
+        onClick={() => setCurrentDate(today.add(1))}>
         明天
       </Button>
       <Button

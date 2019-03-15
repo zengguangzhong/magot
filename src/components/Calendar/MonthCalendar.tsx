@@ -1,7 +1,7 @@
 /// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import cx from 'classnames';
-import { CalendarBaseProps } from './Calendar';
+import { CalendarBaseProps, getDefaultBaseProps } from './Calendar';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
 import CalendarFooter from './CalendarFooter';
@@ -13,7 +13,7 @@ import YearCalendar from './YearCalendar';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
 import * as component from '../component';
-import * as dateUtil from '../../utils/date';
+import DateUtil from '../../utils/date';
 
 export interface MonthCalendarProps extends CalendarBaseProps {
   /**
@@ -75,15 +75,13 @@ interface InternallyRef {
 }
 
 const defaultProps: Partial<MonthCalendarProps> = {
-  hideHeader: false,
-  hideHeaderPreviousRange: false,
-  hideHeaderNextRange: false,
+  ...getDefaultBaseProps(),
 };
 
 function MonthCalendar(props: MonthCalendarProps) {
-  const valueProp = dateUtil.getSafeDate(props.value || new Date());
-  const dateProp = dateUtil.getPureDate(valueProp, true);
-  const currentYearProp = props.currentYear || dateProp.getFullYear();
+  const dateProp = props.value ? DateUtil(props.value).toPure(true) : null;
+  const currentYearProp =
+    props.currentYear || (dateProp || new Date()).getFullYear();
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
@@ -96,7 +94,7 @@ function MonthCalendar(props: MonthCalendarProps) {
   const [selectedValue, setSelectedValue] = useChanges(
     dateProp,
     isInternally,
-    (a, b) => dateUtil.equalDate(a, b, true)
+    DateUtil.eq
   );
 
   const [currentYear, setCurrentYear] = useChanges(
@@ -123,7 +121,7 @@ function MonthCalendar(props: MonthCalendarProps) {
   };
 
   const handleSelectDate = (date: Date) => {
-    if (!dateUtil.equalDate(date, selectedValue, true)) {
+    if (!DateUtil(date).eq(selectedValue)) {
       internallyRef.current = { selected: date };
       setSelectedValue(date);
     }
@@ -239,15 +237,17 @@ function MonthCalendarBody(props: MonthCalendarBodyProps) {
 
 function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
   const { value, monthFormatter = defaultMonthFormatter } = props;
-  const selected = value ? props.month === value.getMonth() : false;
+  const date = new Date(props.currentYear, props.month);
+  const isCurrent = DateUtil.eq(date, DateUtil().toPure(true));
+  let selected = value ? props.month === value.getMonth() : false;
+  if (props.value == null && props.activeToday) selected = isCurrent;
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    const date = new Date(props.currentYear, props.month);
     props.onSelect(date);
     props.onCellClick && props.onCellClick(e);
   };
   const prefix = getPrefix();
   return (
-    <CalendarCell selected={selected} onClick={handleClick}>
+    <CalendarCell current={isCurrent} selected={selected} onClick={handleClick}>
       <CalendarCellNode className={prefix + '-month'}>
         {monthFormatter(props.month)}
       </CalendarCellNode>
