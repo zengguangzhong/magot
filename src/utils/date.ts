@@ -49,7 +49,7 @@ export function equalDate(
   date2: Date | null,
   ignoreDay?: boolean
 ) {
-  if (date1 === null || date2 === null) {
+  if (date1 == null || date2 == null) {
     return date1 === date2;
   }
   const ret =
@@ -156,11 +156,11 @@ export function sortDate(a: Date, b: Date) {
 
 /**
  *
- * @param  {string} [fmt=yyyy-MM-dd]  y-year, M-month, d-day, h-hour, m-minute, s-second, S-millisecond, q-quarter
  * @param  {Date | number} [date]
+ * @param  {string} [fmt=yyyy-MM-dd]  y-year, M-month, d-day, h-hour, m-minute, s-second, S-millisecond, q-quarter
  * @return {string}
  */
-export function format(fmt = 'yyyy-MM-dd', date?: Date | number) {
+export function format(date?: Date | number, fmt = 'yyyy-MM-dd') {
   const realDate = date ? new Date(date) : new Date();
   const o: Record<string, number> = {
     'M+': realDate.getMonth() + 1,

@@ -41,7 +41,6 @@
 - [x] Loading
 - [x] Menu
 - [x] Modal
-- [ ] MonthPicker
 - [x] Notification
 - [ ] Pagination
 - [x] Password
@@ -50,7 +49,6 @@
 - [ ] Qrcode
 - [x] Radio
 - [x] RadioGroup
-- [ ] RangePicker
 - [ ] Rate
 - [ ] Search
 - [x] Select
@@ -66,4 +64,3 @@
 - [ ] Tree
 - [ ] Uploader
 - [ ] VideoPlayer
-- [x] WeekPicker

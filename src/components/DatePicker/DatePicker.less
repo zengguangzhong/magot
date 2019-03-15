@@ -6,3 +6,17 @@
   border-radius: @date-picker-border-radius;
   box-shadow: @date-picker-box-shadow;
 }
+
+.@{prefix}-range-picker-calendar {
+  display: flex;
+  background-color: @calendar-background-color;
+  border: 1px solid @date-picker-border-color;
+  border-radius: @date-picker-border-radius;
+  box-shadow: @date-picker-box-shadow;
+
+  & > .@{prefix}-calendar {
+    &:first-child {
+      border-right: 1px solid @date-picker-border-color;
+    }
+  }
+}
