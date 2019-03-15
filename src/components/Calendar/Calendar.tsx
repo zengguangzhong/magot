@@ -373,12 +373,14 @@ function DateCalendarHeader(props: CalendarHeaderProps) {
     setYearSelectorVisible(false);
   };
 
-  const handleMonthSelect = (value: YearMonth) => {
-    if (value.year !== currentYear) {
-      props.onYearChange && props.onYearChange(value.year);
+  const handleMonthSelect = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    if (year !== currentYear) {
+      props.onYearChange && props.onYearChange(year);
     }
-    if (value.month !== currentMonth) {
-      props.onMonthChange && props.onMonthChange(value.month);
+    if (month !== currentMonth) {
+      props.onMonthChange && props.onMonthChange(month);
     }
     setMonthSelectorVisible(false);
   };
@@ -424,7 +426,7 @@ function DateCalendarHeader(props: CalendarHeaderProps) {
       {monthSelectorVisible && (
         <MonthCalendar
           className={prefix + '-selector'}
-          value={{ year: currentYear, month: currentMonth }}
+          value={new Date(currentYear, currentMonth)}
           yearFormatter={props.yearFormatter}
           monthFormatter={props.monthFormatter}
           headerYearFormatter={props.headerYearFormatter}

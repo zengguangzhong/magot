@@ -14,5 +14,3 @@ interface Offset {
 }
 
 type AcceptableDate = Date | number | string;
-
-type YearMonth = { year: number; month: number };

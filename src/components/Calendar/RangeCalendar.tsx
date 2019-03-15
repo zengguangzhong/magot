@@ -18,7 +18,7 @@ export interface RangeCalendarProps extends PickCalendarProps {
   /**
    * 当前选中值发生变化后的回调函数
    */
-  onChange?: (dates: Date[] | null) => void;
+  onChange?: (dates: Date[]) => void;
 }
 
 function RangeCalendar(props: RangeCalendarProps) {

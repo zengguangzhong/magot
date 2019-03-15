@@ -1,3 +1,4 @@
+/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import cx from 'classnames';
 import { CalendarBaseProps } from './Calendar';
@@ -12,12 +13,13 @@ import YearCalendar from './YearCalendar';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
 import * as component from '../component';
+import * as dateUtil from '../../utils/date';
 
 export interface MonthCalendarProps extends CalendarBaseProps {
   /**
    * 当前选中年月
    */
-  value?: YearMonth | null;
+  value?: AcceptableDate | null;
 
   /**
    * 当前展示的年份
@@ -42,7 +44,7 @@ export interface MonthCalendarProps extends CalendarBaseProps {
   /**
    * 选中年月发生变化之后的回调函数
    */
-  onChange?: (value: YearMonth) => void;
+  onChange?: (value: Date) => void;
 
   /**
    * 当前展示年份发生变化之后的回调函数
@@ -53,7 +55,7 @@ export interface MonthCalendarProps extends CalendarBaseProps {
    * 选择年月后的回调函数。
    * 不同于`onChange`，当在重复点击已选中年月时，也会触发该回调函数
    */
-  onSelect?: (data: YearMonth) => void;
+  onSelect?: (date: Date) => void;
 }
 
 interface MonthCalendarHeaderProps extends MonthCalendarProps {
@@ -62,13 +64,13 @@ interface MonthCalendarHeaderProps extends MonthCalendarProps {
 }
 
 interface MonthCalendarBodyProps extends MonthCalendarProps {
-  value: YearMonth | null;
+  value: Date | null;
   currentYear: number;
-  onSelect: (data: YearMonth) => void;
+  onSelect: (date: Date) => void;
 }
 
 interface InternallyRef {
-  selected?: YearMonth;
+  selected?: Date;
   current?: number;
 }
 
@@ -78,14 +80,10 @@ const defaultProps: Partial<MonthCalendarProps> = {
   hideHeaderNextRange: false,
 };
 
-function getDefaultDate() {
-  const today = new Date();
-  return { year: today.getFullYear(), month: today.getMonth() };
-}
-
 function MonthCalendar(props: MonthCalendarProps) {
-  const dateProp = props.value || getDefaultDate();
-  const currentYearProp = props.currentYear || dateProp.year;
+  const valueProp = dateUtil.getSafeDate(props.value || new Date());
+  const dateProp = dateUtil.getPureDate(valueProp, true);
+  const currentYearProp = props.currentYear || dateProp.getFullYear();
 
   const internallyRef = React.useRef<InternallyRef | null>(null);
 
@@ -98,7 +96,7 @@ function MonthCalendar(props: MonthCalendarProps) {
   const [selectedValue, setSelectedValue] = useChanges(
     dateProp,
     isInternally,
-    equal
+    (a, b) => dateUtil.equalDate(a, b, true)
   );
 
   const [currentYear, setCurrentYear] = useChanges(
@@ -124,12 +122,12 @@ function MonthCalendar(props: MonthCalendarProps) {
     }
   };
 
-  const handleSelectDate = (data: YearMonth) => {
-    if (!equal(data, selectedValue)) {
-      internallyRef.current = { selected: data };
-      setSelectedValue(data);
+  const handleSelectDate = (date: Date) => {
+    if (!dateUtil.equalDate(date, selectedValue, true)) {
+      internallyRef.current = { selected: date };
+      setSelectedValue(date);
     }
-    props.onSelect && props.onSelect(data);
+    props.onSelect && props.onSelect(date);
   };
 
   const prefix = component.getComponentPrefix('calendar');
@@ -240,10 +238,11 @@ function MonthCalendarBody(props: MonthCalendarBodyProps) {
 }
 
 function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
-  const { monthFormatter = defaultMonthFormatter } = props;
-  const selected = props.value ? props.month === props.value.month : false;
+  const { value, monthFormatter = defaultMonthFormatter } = props;
+  const selected = value ? props.month === value.getMonth() : false;
   const handleClick = () => {
-    props.onSelect({ year: props.currentYear, month: props.month });
+    const date = new Date(props.currentYear, props.month);
+    props.onSelect(date);
   };
   const prefix = getPrefix();
   return (
@@ -262,13 +261,6 @@ function defaultHeaderYearFormatter(year: number) {
 function defaultMonthFormatter(month: number) {
   const localMonths = '一 二 三 四 五 六 七 八 九 十 十一 十二'.split(' ');
   return localMonths[month] + '月';
-}
-
-function equal(a: YearMonth | null, b: YearMonth | null) {
-  if (a === null || b === null) {
-    return a === b;
-  }
-  return a.year === b.year && a.month === b.month;
 }
 
 export default MonthCalendar;

@@ -6,7 +6,8 @@ export function getSafeDate(d: Date | string | number) {
   return d;
 }
 
-export function getPureDate(d: Date) {
+export function getPureDate(d: Date, ignoreDay?: boolean) {
+  if (ignoreDay) return new Date(d.getFullYear(), d.getMonth());
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
