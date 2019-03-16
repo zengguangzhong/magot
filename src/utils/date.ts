@@ -1,10 +1,10 @@
 /// <reference path="../../lib.d.ts" />
+import { alias } from '../decorators/alias';
 
-type OPType = 'day' | 'month';
+const ONE_DAY_TIME = 24 * 3600 * 1000;
 
 class DateUtilClass {
   date: Date;
-  oneDayTime = 24 * 3600 * 1000;
 
   constructor(d?: AcceptableDate | null) {
     if (d == null) d = new Date();
@@ -46,10 +46,11 @@ class DateUtilClass {
   getWeekNumber() {
     const pureDate = this.toPure();
     const firstDay = this.getFirstDayOfYear();
-    const days = (pureDate.getTime() - firstDay.getTime()) / this.oneDayTime;
+    const days = (pureDate.getTime() - firstDay.getTime()) / ONE_DAY_TIME;
     return Math.ceil((days + firstDay.getDay() + 1) / 7);
   }
 
+  @alias('eq')
   equal(date: AcceptableDate | null) {
     if (date == null) return false;
     const _date = DateUtil(date).to();
@@ -60,31 +61,25 @@ class DateUtilClass {
     );
   }
 
-  eq = this.equal;
-
+  @alias('lt')
   lessThan(date: AcceptableDate) {
     return this.toPure().getTime() < DateUtil.toPure(date).getTime();
   }
 
-  lt = this.lessThan;
-
+  @alias('gt')
   greaterThan(date: AcceptableDate) {
     return this.toPure().getTime() > DateUtil.toPure(date).getTime();
   }
 
-  gt = this.greaterThan;
-
+  @alias('lte')
   lessThanOrEqual(date: AcceptableDate) {
     return this.equal(date) || this.lessThan(date);
   }
 
-  lte = this.lessThanOrEqual;
-
+  @alias('gte')
   greaterThanOrEqual(date: AcceptableDate) {
     return this.equal(date) || this.greaterThan(date);
   }
-
-  gte = this.greaterThanOrEqual;
 
   isPreviousMonth(month: number) {
     return this.date.getMonth() < month;
@@ -133,7 +128,7 @@ class DateUtilClass {
   diffDays(date: AcceptableDate) {
     const pd1 = this.toPure();
     const pd2 = DateUtil(date).toPure();
-    return Math.ceil((pd2.getTime() - pd1.getTime()) / this.oneDayTime);
+    return Math.ceil((pd2.getTime() - pd1.getTime()) / ONE_DAY_TIME);
   }
 
   diffMonths(date: AcceptableDate) {
@@ -147,17 +142,17 @@ class DateUtilClass {
     return m2 - ((y1 - y2) * 12 + m1);
   }
 
-  add(n: number, type: OPType = 'day') {
+  add(n: number, type: 'day' | 'month' = 'day') {
     if (type === 'day') return this.addDays(n);
     return this.addMonths(n);
   }
 
-  subtract(n: number, type: OPType = 'day') {
+  subtract(n: number, type: 'day' | 'month' = 'day') {
     if (type === 'day') return this.subtractDays(n);
     return this.subtractMonths(n);
   }
 
-  diff(date: AcceptableDate, type: OPType = 'day') {
+  diff(date: AcceptableDate, type: 'day' | 'month' = 'day') {
     if (type === 'day') return this.diffDays(date);
     return this.diffMonths(date);
   }
@@ -213,6 +208,14 @@ class DateUtilClass {
   }
 }
 
+declare interface DateUtilClass {
+  eq(date: AcceptableDate | null): boolean;
+  lt(date: AcceptableDate): boolean;
+  gt(date: AcceptableDate): boolean;
+  lte(date: AcceptableDate): boolean;
+  gte(date: AcceptableDate): boolean;
+}
+
 export default function DateUtil(d?: AcceptableDate | null) {
   return new DateUtilClass(d);
 }
@@ -223,35 +226,44 @@ DateUtil.sort = function sort(a: AcceptableDate, b: AcceptableDate) {
   return _a.lessThan(b) ? -1 : 1;
 };
 
-DateUtil.eq = function eq(a: AcceptableDate | null, b: AcceptableDate | null) {
+DateUtil.eq = function equal(
+  a: AcceptableDate | null,
+  b: AcceptableDate | null
+) {
   if (a == null || b == null) return a === b;
   return DateUtil(a).equal(b);
 };
 
-DateUtil.lt = function lt(a: AcceptableDate | null, b: AcceptableDate | null) {
-  if (a == null || b == null) return a === b;
-  return DateUtil(a).lt(b);
-};
-
-DateUtil.gt = function gt(a: AcceptableDate | null, b: AcceptableDate | null) {
-  if (a == null || b == null) return a === b;
-  return DateUtil(a).gt(b);
-};
-
-DateUtil.lte = function lte(
+DateUtil.lt = function lessThan(
   a: AcceptableDate | null,
   b: AcceptableDate | null
 ) {
   if (a == null || b == null) return a === b;
-  return DateUtil(a).lte(b);
+  return DateUtil(a).lessThan(b);
 };
 
-DateUtil.gte = function gte(
+DateUtil.gt = function greaterThan(
   a: AcceptableDate | null,
   b: AcceptableDate | null
 ) {
   if (a == null || b == null) return a === b;
-  return DateUtil(a).gte(b);
+  return DateUtil(a).greaterThan(b);
+};
+
+DateUtil.lte = function lessThanOrEqual(
+  a: AcceptableDate | null,
+  b: AcceptableDate | null
+) {
+  if (a == null || b == null) return a === b;
+  return DateUtil(a).lessThanOrEqual(b);
+};
+
+DateUtil.gte = function greaterThanOrEqual(
+  a: AcceptableDate | null,
+  b: AcceptableDate | null
+) {
+  if (a == null || b == null) return a === b;
+  return DateUtil(a).greaterThanOrEqual(b);
 };
 
 DateUtil.to = function to(date: AcceptableDate) {
