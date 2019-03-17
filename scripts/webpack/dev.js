@@ -46,7 +46,16 @@ function getIcons() {
 
 export default webpackMerge(baseConfig, {
   mode: 'development',
-  entry: './demo/index.jsx',
+  entry: {
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-dom',
+      'classnames',
+    ],
+    index: path.resolve(demo, './index.jsx'),
+  },
   output: {
     path: demo,
     publicPath: '',
@@ -68,7 +77,8 @@ export default webpackMerge(baseConfig, {
       __ICONS__: JSON.stringify(getIcons()),
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(cwd, 'demo/index.html'),
+      template: path.resolve(demo, './index.html'),
+      chunks: ['vendor', 'index'],
     }),
   ],
 });

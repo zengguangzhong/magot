@@ -10,7 +10,6 @@ const __DEV__ = process.env.NODE_ENV === 'development';
  * @type {webpack.Configuration}
  */
 const config = {
-  entry: './src/index.ts',
   output: {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
