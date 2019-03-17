@@ -10,7 +10,13 @@ const release = path.resolve(cwd, 'release');
 
 export default webpackMerge(baseConfig, {
   mode: 'production',
-  entry: './src/index.ts',
+  entry: {
+    index: './src/index.ts',
+  },
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom',
+  },
   output: {
     path: release,
     filename: '[name].[hash:10].js',
