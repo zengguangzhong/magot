@@ -6,4 +6,6 @@ const dest = path.resolve(cwd, 'release');
 
 shell.rm('-rf', dest);
 
-// shell.exec('webpack --config webpack.config.js --progress');
+shell.exec(
+  'cross-env NODE_ENV=production webpack -r @babel/register --config webpack.config.js --progress'
+);

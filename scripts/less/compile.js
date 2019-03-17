@@ -35,7 +35,6 @@ async function compileOne(file, dest, cwd) {
   try {
     const p = file.replace(cwd, '').replace(/\.less$/, '.css');
     const destFile = path.join(dest, p);
-    console.info('[less compile]: %s ==> %s', file, destFile);
     const input = await fs.readFile(file, 'utf8');
     const output = await less.render(input, {
       paths: [path.dirname(file)],
@@ -44,7 +43,6 @@ async function compileOne(file, dest, cwd) {
   } catch (err) {
     console.error('[less compile]: %s is ERROR', file);
     console.error('[less compile]: %s', err.message);
-    console.error(err);
     process.exit(1);
   }
 }

@@ -56,23 +56,10 @@ const config = {
       },
       {
         test: /\.less$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'postcss-loader',
-          },
-          {
-            loader: 'less-loader',
-          },
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
-        test: /\.(jpg|png|gif|svg)$/i,
+        test: /\.(jpg|jpeg|png|gif|svg)$/i,
         use: [
           {
             loader: 'file-loader',
