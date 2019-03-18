@@ -3,9 +3,9 @@ import cx from 'classnames';
 
 import { MenuProps } from '../Menu';
 import Popup, { PopupTrigger } from '../Popup';
+import Button, { ButtonProps } from '../Button';
 import * as component from '../component';
 import { Placement } from '../../utils/placement';
-import Button, { ButtonProps } from 'components/Button';
 
 import './Dropdown.less';
 
