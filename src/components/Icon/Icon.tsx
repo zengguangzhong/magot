@@ -8,7 +8,7 @@ export interface IconProps extends component.BaseComponent {
   /**
    * 图标名称，即iconfont中的图标名
    */
-  name: string;
+  name?: string;
 
   /**
    * 是否旋转图标
@@ -37,8 +37,8 @@ function Icon(props: IconProps) {
   const cls = component.getComponentClasses(
     type,
     { ...props, size: 'normal' },
-    `${prefix}-${props.name}`,
     {
+      [`${prefix}-${props.name}`]: props.name,
       spin: !!props.spin,
     }
   );
