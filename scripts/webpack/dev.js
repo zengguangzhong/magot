@@ -82,6 +82,6 @@ export default webpackMerge(baseConfig, {
     }),
   ],
   watchOptions: {
-    ignored: ['**/*.(spec|test).[tj]s?(x)'],
+    ignored: [/node_modules/, /__test__/],
   },
 });
