@@ -1,11 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "outDir": "es",
+    "outDir": "lib",
     "declaration": true,
-    "declarationDir": "es"
+    "declarationDir": "lib"
   },
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }

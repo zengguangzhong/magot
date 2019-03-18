@@ -13,7 +13,7 @@ const assetsPattern = '**/*.{eot,ttf,woff,woff2,svg,png,jpg,jpeg,gif}';
 
 shell.rm('-rf', dest);
 
-shell.exec('tsc');
+shell.exec('tsc -p ./tsconfig.lib.json');
 
 copy(find(src, assetsPattern), dest, src);
 compileLess(copy(find(src, lessPattern), dest, src), dest, src);
