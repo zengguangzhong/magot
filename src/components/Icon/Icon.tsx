@@ -42,13 +42,9 @@ function Icon(props: IconProps) {
       spin: !!props.spin,
     }
   );
-  return (
-    <i
-      className={cls}
-      style={{ ...props.style, fontSize: props.size }}
-      onClick={props.onClick}
-    />
-  );
+  const style: React.CSSProperties = { ...props.style };
+  if (props.size) style['fontSize'] = props.size;
+  return <i className={cls} style={style} onClick={props.onClick} />;
 }
 
 Icon.defaultProps = defaultProps;
