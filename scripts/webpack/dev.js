@@ -54,7 +54,7 @@ export default webpackMerge(baseConfig, {
       'react-router-dom',
       'classnames',
     ],
-    index: path.resolve(demo, './index.jsx'),
+    index: path.resolve(demo, './index.tsx'),
   },
   output: {
     path: demo,

@@ -5,7 +5,13 @@ import Loading from '../src/components/Loading';
 
 import './index.less';
 
-const demoComponents = {};
+type DEMO_Component = {
+  name: string;
+  done: boolean;
+  cmp: React.LazyExoticComponent<React.ComponentType<any>>;
+};
+
+const demoComponents: Record<string, DEMO_Component> = {};
 if (__DEMOS__ && Array.isArray(__DEMOS__)) {
   for (const demo of __DEMOS__) {
     const cmp = React.lazy(() => {
@@ -24,7 +30,7 @@ function Home() {
         <input
           type="checkbox"
           defaultChecked={item.done}
-          disabled
+          disabled={true}
           style={{ marginRight: 12 }}
         />
         <Link to={'/' + item.name}>{item.name}</Link>

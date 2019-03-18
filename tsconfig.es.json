@@ -7,5 +7,6 @@
     "declaration": true,
     "declarationDir": "es"
   },
+  "include": ["src", "lib.d.ts"],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }
