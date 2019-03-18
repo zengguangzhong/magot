@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon should renders \`size\` prop when passed in 1`] = `
+<i
+  className="mgt-icon"
+  style={
+    Object {
+      "fontSize": 28,
+    }
+  }
+/>
+`;
+
+exports[`Icon should renders custom styles 1`] = `
+<i
+  className="mgt-icon"
+  style={
+    Object {
+      "color": "#bfbfbf",
+    }
+  }
+/>
+`;
+
+exports[`Icon should renders dom correctly 1`] = `
+<i
+  class="mgt-icon"
+/>
+`;
