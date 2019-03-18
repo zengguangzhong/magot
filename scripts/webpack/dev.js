@@ -81,4 +81,7 @@ export default webpackMerge(baseConfig, {
       chunks: ['vendor', 'index'],
     }),
   ],
+  watchOptions: {
+    ignored: ['**/*.(spec|test).[tj]s?(x)'],
+  },
 });
