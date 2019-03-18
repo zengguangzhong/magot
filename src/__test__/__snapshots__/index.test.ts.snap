@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`magot component files should export components correctly 1`] = `
+exports[`component files should export components correctly 1`] = `
 Array [
   "Animation",
   "AutoComplete",
