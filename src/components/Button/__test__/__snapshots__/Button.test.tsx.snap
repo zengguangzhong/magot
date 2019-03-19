@@ -1,0 +1,401 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should renders \`block\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-block"
+  type="button"
+>
+  Block
+</button>
+`;
+
+exports[`Button should renders \`block\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-block"
+  href="#"
+>
+  Block
+</a>
+`;
+
+exports[`Button should renders \`circular\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-circular"
+  type="button"
+/>
+`;
+
+exports[`Button should renders \`circular\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-circular"
+  href="#"
+/>
+`;
+
+exports[`Button should renders \`disabled\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-disabled"
+  disabled=""
+  type="button"
+>
+  Disabled
+</button>
+`;
+
+exports[`Button should renders \`disabled\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-disabled"
+  disabled=""
+  href="#"
+>
+  Disabled
+</a>
+`;
+
+exports[`Button should renders \`htmlType\` prop when passed in 1`] = `
+<button
+  class="mgt-button"
+  type="submit"
+>
+  Button
+</button>
+`;
+
+exports[`Button should renders \`loading\` prop when passed in 1`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  <i
+    class="mgt-icon mgt-icon-loading spin"
+  />
+</button>
+`;
+
+exports[`Button should renders \`loading\` prop when passed in 2`] = `
+<a
+  class="mgt-button"
+  href="#"
+>
+  <i
+    class="mgt-icon mgt-icon-loading spin"
+  />
+</a>
+`;
+
+exports[`Button should renders \`size\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-sm"
+  type="button"
+>
+  Small
+</button>
+`;
+
+exports[`Button should renders \`size\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-sm"
+  href="#"
+>
+  Small
+</a>
+`;
+
+exports[`Button should renders \`size\` prop when passed in 3`] = `
+<button
+  class="mgt-button mgt-button-lg"
+  type="button"
+>
+  Large
+</button>
+`;
+
+exports[`Button should renders \`size\` prop when passed in 4`] = `
+<a
+  class="mgt-button mgt-button-lg"
+  href="#"
+>
+  Large
+</a>
+`;
+
+exports[`Button should renders \`square\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-square"
+  type="button"
+/>
+`;
+
+exports[`Button should renders \`square\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-square"
+  href="#"
+/>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 1`] = `
+<button
+  class="mgt-button mgt-button-primary"
+  type="button"
+>
+  Primary
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 2`] = `
+<a
+  class="mgt-button mgt-button-primary"
+  href="#"
+>
+  Primary
+</a>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 3`] = `
+<button
+  class="mgt-button mgt-button-success"
+  type="button"
+>
+  Success
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 4`] = `
+<a
+  class="mgt-button mgt-button-success"
+  href="#"
+>
+  Success
+</a>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 5`] = `
+<button
+  class="mgt-button mgt-button-warning"
+  type="button"
+>
+  Warning
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 6`] = `
+<a
+  class="mgt-button mgt-button-warning"
+  href="#"
+>
+  Warning
+</a>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 7`] = `
+<button
+  class="mgt-button mgt-button-danger"
+  type="button"
+>
+  Danger
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 8`] = `
+<a
+  class="mgt-button mgt-button-danger"
+  href="#"
+>
+  Danger
+</a>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 9`] = `
+<button
+  class="mgt-button mgt-button-text"
+  type="button"
+>
+  Text
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 10`] = `
+<a
+  class="mgt-button mgt-button-text"
+  href="#"
+>
+  Text
+</a>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 11`] = `
+<button
+  class="mgt-button mgt-button-link"
+  type="button"
+>
+  Link
+</button>
+`;
+
+exports[`Button should renders \`type\` prop when passed in 12`] = `
+<a
+  class="mgt-button mgt-button-link"
+  href="#"
+>
+  Link
+</a>
+`;
+
+exports[`Button should renders a \`button\` Button 1`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  Button
+</button>
+`;
+
+exports[`Button should renders a \`link\` Button 1`] = `
+<a
+  class="mgt-button"
+  href="https://github.com/billjs/magot"
+  target="_blank"
+>
+  Link
+</a>
+`;
+
+exports[`Button should renders children when passed in 1`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  This is a Button
+</button>
+`;
+
+exports[`Button should renders children when passed in 2`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  <span>
+    Button
+  </span>
+</button>
+`;
+
+exports[`Button should renders children when passed in 3`] = `
+<a
+  class="mgt-button"
+  href="#/home"
+>
+  Link
+</a>
+`;
+
+exports[`Button should renders children when passed in 4`] = `
+<a
+  class="mgt-button"
+  href="#/home"
+>
+  <span>
+    Home
+  </span>
+</a>
+`;
+
+exports[`Button should renders custom className 1`] = `
+<button
+  class="mgt-button jest-test-class"
+  type="button"
+>
+  Button
+</button>
+`;
+
+exports[`Button should renders custom styles 1`] = `
+<button
+  class="mgt-button"
+  style="color:#52c41a;background-color:#343a40;border-color:#343a40"
+  type="button"
+>
+  My Component
+</button>
+`;
+
+exports[`Button should renders dom correctly 1`] = `
+<button
+  class="mgt-button"
+  type="button"
+/>
+`;
+
+exports[`Button should renders with icon 1`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  <i
+    class="mgt-icon mgt-icon-download left"
+  />
+  Icon Button
+</button>
+`;
+
+exports[`Button should renders with icon 2`] = `
+<a
+  class="mgt-button"
+  href="#"
+>
+  <i
+    class="mgt-icon mgt-icon-download left"
+  />
+  Icon Button
+</a>
+`;
+
+exports[`Button should renders with icon 3`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  Icon Button
+  <i
+    class="mgt-icon mgt-icon-download right"
+  />
+</button>
+`;
+
+exports[`Button should renders with icon 4`] = `
+<a
+  class="mgt-button"
+  href="#"
+>
+  Icon Button
+  <i
+    class="mgt-icon mgt-icon-download right"
+  />
+</a>
+`;
+
+exports[`Button should renders with icon 5`] = `
+<button
+  class="mgt-button"
+  type="button"
+>
+  <i
+    class="mgt-icon mgt-icon-download left"
+    style="font-size:20px"
+  />
+  Icon Button
+</button>
+`;
+
+exports[`Button should renders with icon 6`] = `
+<a
+  class="mgt-button"
+  href="#"
+>
+  <i
+    class="mgt-icon mgt-icon-download left"
+    style="font-size:20px"
+  />
+  Icon Button
+</a>
+`;
