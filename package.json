@@ -34,6 +34,7 @@
     "docz:dev": "cross-env DEBUG=true docz dev",
     "docz:build": "docz build",
     "create:component": "node -r @babel/register scripts/creator/component/index.js",
+    "create:test": "node -r @babel/register scripts/creator/test/index.js",
     "test": "jest --no-cache"
   },
   "repository": {
