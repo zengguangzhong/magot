@@ -2,23 +2,21 @@
 
 exports[`Icon should renders \`size\` prop when passed in 1`] = `
 <i
-  className="mgt-icon"
-  style={
-    Object {
-      "fontSize": 28,
-    }
-  }
+  class="mgt-icon"
+  style="font-size:28px"
+/>
+`;
+
+exports[`Icon should renders custom className 1`] = `
+<i
+  class="mgt-icon jest-test-class"
 />
 `;
 
 exports[`Icon should renders custom styles 1`] = `
 <i
-  className="mgt-icon"
-  style={
-    Object {
-      "color": "#bfbfbf",
-    }
-  }
+  class="mgt-icon"
+  style="color:#bfbfbf"
 />
 `;
 
