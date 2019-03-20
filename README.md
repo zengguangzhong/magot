@@ -1,4 +1,4 @@
-# Magot
+# Magot [![Travis-ci Status](https://api.travis-ci.org/billjs/magot.svg?branch=master)](https://travis-ci.org/billjs/magot) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/billjs/magot/blob/master/LICENSE) [![Npm Version](https://img.shields.io/npm/v/@billjs/magot.svg)](https://www.npmjs.com/package/@billjs/magot)
 
 A cool and easy UI framework of customizable themes and React-based.
 
