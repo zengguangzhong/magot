@@ -304,9 +304,7 @@ exports[`Button should renders custom className 1`] = `
 <button
   class="mgt-button jest-test-class"
   type="button"
->
-  Button
-</button>
+/>
 `;
 
 exports[`Button should renders custom styles 1`] = `
@@ -314,9 +312,7 @@ exports[`Button should renders custom styles 1`] = `
   class="mgt-button"
   style="color:#52c41a;background-color:#343a40;border-color:#343a40"
   type="button"
->
-  My Component
-</button>
+/>
 `;
 
 exports[`Button should renders dom correctly 1`] = `
