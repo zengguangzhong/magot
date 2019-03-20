@@ -27,7 +27,7 @@ const defaultProps: Partial<BreadcrumbProps> = {
 function Breadcrumb(props: BreadcrumbProps) {
   const cls = component.getComponentClasses('breadcrumb', props);
   return (
-    <ul className={cls}>
+    <ul className={cls} style={props.style}>
       {props.children.map((item, index) => {
         return React.cloneElement(item, {
           key: index,

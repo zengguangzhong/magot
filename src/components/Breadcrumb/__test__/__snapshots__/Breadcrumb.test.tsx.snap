@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb should renders \`separator\` prop when passed in 1`] = `
+<ul
+  class="mgt-breadcrumb"
+>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    Home
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      &gt;
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      User
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      &gt;
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      Template
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      &gt;
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      Editor
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      &gt;
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    Workbench
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      &gt;
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`Breadcrumb should renders a breadcrumb item 1`] = `
+<li
+  class="mgt-breadcrumb-item"
+>
+  Home
+  <span
+    class="mgt-breadcrumb-separator"
+  />
+</li>
+`;
+
+exports[`Breadcrumb should renders a breadcrumb item 2`] = `
+<li
+  class="mgt-breadcrumb-item"
+>
+  <a
+    href=""
+  >
+    User
+  </a>
+  <span
+    class="mgt-breadcrumb-separator"
+  />
+</li>
+`;
+
+exports[`Breadcrumb should renders custom className 1`] = `
+<ul
+  class="mgt-breadcrumb jest-test-class"
+/>
+`;
+
+exports[`Breadcrumb should renders custom styles 1`] = `
+<ul
+  class="mgt-breadcrumb"
+  style="background-color:#f0f0f0"
+/>
+`;
+
+exports[`Breadcrumb should renders dom correctly 1`] = `
+<ul
+  class="mgt-breadcrumb"
+>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    Home
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      /
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      User
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      /
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      Template
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      /
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    <a
+      href=""
+    >
+      Editor
+    </a>
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      /
+    </span>
+  </li>
+  <li
+    class="mgt-breadcrumb-item"
+  >
+    Workbench
+    <span
+      class="mgt-breadcrumb-separator"
+    >
+      /
+    </span>
+  </li>
+</ul>
+`;
