@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonGroup should renders \`disabled\` prop when passed in 1`] = `
+<div
+  class="mgt-button-group mgt-button-group-disabled"
+>
+  <button
+    class="mgt-button mgt-button-disabled"
+    disabled=""
+    type="button"
+  >
+    L
+  </button>
+  <button
+    class="mgt-button mgt-button-disabled"
+    disabled=""
+    type="button"
+  >
+    M
+  </button>
+  <button
+    class="mgt-button mgt-button-disabled"
+    disabled=""
+    type="button"
+  >
+    R
+  </button>
+</div>
+`;
+
+exports[`ButtonGroup should renders \`size\` prop when passed in 1`] = `
+<div
+  class="mgt-button-group mgt-button-group-sm"
+>
+  <button
+    class="mgt-button mgt-button-sm"
+    type="button"
+  >
+    L
+  </button>
+  <button
+    class="mgt-button mgt-button-sm"
+    type="button"
+  >
+    M
+  </button>
+  <button
+    class="mgt-button mgt-button-sm"
+    type="button"
+  >
+    R
+  </button>
+</div>
+`;
+
+exports[`ButtonGroup should renders custom className 1`] = `
+<div
+  class="mgt-button-group jest-test-class"
+/>
+`;
+
+exports[`ButtonGroup should renders custom styles 1`] = `
+<div
+  class="mgt-button-group"
+/>
+`;
+
+exports[`ButtonGroup should renders dom correctly 1`] = `
+<div
+  class="mgt-button-group"
+>
+  <button
+    class="mgt-button"
+    type="button"
+  >
+    L
+  </button>
+  <button
+    class="mgt-button"
+    type="button"
+  >
+    M
+  </button>
+  <button
+    class="mgt-button"
+    type="button"
+  >
+    R
+  </button>
+</div>
+`;

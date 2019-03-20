@@ -16,6 +16,7 @@ export interface ButtonGroupProps
 const defaultProps: Partial<ButtonGroupProps> = {
   ...component.getDefaultDisabledProps(),
   ...component.getDefaultSizedProps(),
+  children: [],
 };
 
 function ButtonGroup(props: ButtonGroupProps) {
