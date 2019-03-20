@@ -1,6 +1,6 @@
 {
   "name": "@billjs/magot",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.1",
   "description": "A cool and easy UI framework of customizable themes and React-based.",
   "main": "lib/index.js",
   "module": "es/index.js",
