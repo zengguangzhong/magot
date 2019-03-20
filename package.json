@@ -35,7 +35,8 @@
     "docz:build": "docz build",
     "create:component": "node -r @babel/register scripts/creator/component/index.js",
     "create:test": "node -r @babel/register scripts/creator/test/index.js",
-    "test": "jest --no-cache"
+    "test": "jest --no-cache",
+    "test:dev": "jest --no-cache --watch"
   },
   "repository": {
     "type": "git",
