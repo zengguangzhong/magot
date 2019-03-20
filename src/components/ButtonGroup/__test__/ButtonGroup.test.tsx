@@ -45,5 +45,5 @@ describe('ButtonGroup', () => {
     expect(wrapper.find('.mgt-button-disabled')).toHaveLength(3);
   });
 
-  injectTestSuites(Button.Group, null, true);
+  injectTestSuites(Button.Group, { backgroundColor: '#f0f0f0' }, true);
 });

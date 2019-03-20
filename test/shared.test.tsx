@@ -4,7 +4,7 @@ import { render, shallow } from 'enzyme';
 
 export function injectTestSuites(
   Component: React.ComponentType<any>,
-  style?: React.CSSProperties | null,
+  style: React.CSSProperties,
   skipClickEvent?: boolean
 ) {
   it('should renders custom className', () => {
@@ -16,6 +16,7 @@ export function injectTestSuites(
   it('should renders custom styles', () => {
     const wrapper = render(<Component style={style} />);
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.attr('style')).toBeDefined();
   });
 
   if (!skipClickEvent) {
