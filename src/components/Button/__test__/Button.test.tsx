@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, shallow } from 'enzyme';
 import Button from '../Button';
-import { injectTestSuites } from '../../../../test/shared.test';
+import {
+  injectStyleTestSuites,
+  injectClickEventTestSuite,
+} from '../../../../test/shared.test';
 
 describe('Button', () => {
   it('should renders dom correctly', () => {
@@ -253,9 +256,6 @@ describe('Button', () => {
     expect(wrapper.attr('type')).toEqual('submit');
   });
 
-  injectTestSuites(Button, {
-    color: '#52c41a',
-    backgroundColor: '#343a40',
-    borderColor: '#343a40',
-  });
+  injectStyleTestSuites(Button);
+  injectClickEventTestSuite(Button);
 });

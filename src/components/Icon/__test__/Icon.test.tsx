@@ -1,7 +1,10 @@
 import React from 'react';
 import { render } from 'enzyme';
 import Icon from '../Icon';
-import { injectTestSuites } from '../../../../test/shared.test';
+import {
+  injectStyleTestSuites,
+  injectClickEventTestSuite,
+} from '../../../../test/shared.test';
 
 describe('Icon', () => {
   it('should renders dom correctly', () => {
@@ -29,5 +32,6 @@ describe('Icon', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  injectTestSuites(Icon, { color: '#bfbfbf' });
+  injectStyleTestSuites(Icon);
+  injectClickEventTestSuite(Icon);
 });

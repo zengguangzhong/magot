@@ -104,7 +104,7 @@ exports[`Breadcrumb should renders custom className 1`] = `
 exports[`Breadcrumb should renders custom styles 1`] = `
 <ul
   class="mgt-breadcrumb"
-  style="background-color:#f0f0f0"
+  style="color:#333;background-color:#f0f0f0"
 />
 `;
 

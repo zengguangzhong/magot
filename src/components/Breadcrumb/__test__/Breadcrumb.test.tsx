@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 import Breadcrumb from '../Breadcrumb';
-import { injectTestSuites } from '../../../../test/shared.test';
+import { injectStyleTestSuites } from '../../../../test/shared.test';
 
 describe('Breadcrumb', () => {
   it('should renders dom correctly', () => {
@@ -83,5 +83,5 @@ describe('Breadcrumb', () => {
     expect(wrapper.find('.mgt-breadcrumb-separator').text()).toEqual('>>>>>');
   });
 
-  injectTestSuites(Breadcrumb, { backgroundColor: '#f0f0f0' }, true);
+  injectStyleTestSuites(Breadcrumb);
 });

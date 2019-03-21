@@ -62,7 +62,7 @@ exports[`ButtonGroup should renders custom className 1`] = `
 exports[`ButtonGroup should renders custom styles 1`] = `
 <div
   class="mgt-button-group"
-  style="background-color:#f0f0f0"
+  style="color:#333;background-color:#f0f0f0"
 />
 `;
 

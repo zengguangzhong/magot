@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'enzyme';
 import Button from '../../Button';
 import ButtonGroup from '../ButtonGroup';
-import { injectTestSuites } from '../../../../test/shared.test';
+import { injectStyleTestSuites } from '../../../../test/shared.test';
 
 describe('ButtonGroup', () => {
   it('should renders dom correctly', () => {
@@ -45,5 +45,5 @@ describe('ButtonGroup', () => {
     expect(wrapper.find('.mgt-button-disabled')).toHaveLength(3);
   });
 
-  injectTestSuites(Button.Group, { backgroundColor: '#f0f0f0' }, true);
+  injectStyleTestSuites(Button.Group);
 });

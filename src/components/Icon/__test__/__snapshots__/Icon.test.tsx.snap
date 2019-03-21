@@ -16,7 +16,7 @@ exports[`Icon should renders custom className 1`] = `
 exports[`Icon should renders custom styles 1`] = `
 <i
   class="mgt-icon"
-  style="color:#bfbfbf"
+  style="color:#333;background-color:#f0f0f0"
 />
 `;
 
