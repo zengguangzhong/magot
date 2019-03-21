@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox should checked controlled 1`] = `
+<Checkbox
+  checked={false}
+  defaultChecked={false}
+  disabled={false}
+  onChange={[Function]}
+>
+  <label
+    className="mgt-checkbox"
+  >
+    <input
+      checked={false}
+      className="mgt-checkbox-native-control"
+      disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should checked controlled 2`] = `
+<Checkbox
+  checked={true}
+  defaultChecked={false}
+  disabled={false}
+  onChange={[Function]}
+>
+  <label
+    className="mgt-checkbox"
+  >
+    <input
+      checked={true}
+      className="mgt-checkbox-native-control"
+      disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should checked controlled by Button click events 1`] = `
+<Checkbox
+  checked={false}
+  defaultChecked={false}
+  disabled={false}
+>
+  <label
+    className="mgt-checkbox"
+  >
+    <input
+      checked={false}
+      className="mgt-checkbox-native-control"
+      disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should checked controlled by Button click events 2`] = `
+<Checkbox
+  checked={true}
+  defaultChecked={false}
+  disabled={false}
+>
+  <label
+    className="mgt-checkbox"
+  >
+    <input
+      checked={true}
+      className="mgt-checkbox-native-control"
+      disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should disabled controlled by Button click events 1`] = `
+<Checkbox
+  defaultChecked={false}
+  disabled={false}
+>
+  <label
+    className="mgt-checkbox"
+  >
+    <input
+      className="mgt-checkbox-native-control"
+      defaultChecked={false}
+      disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should disabled controlled by Button click events 2`] = `
+<Checkbox
+  defaultChecked={false}
+  disabled={true}
+>
+  <label
+    className="mgt-checkbox mgt-checkbox-disabled"
+  >
+    <input
+      className="mgt-checkbox-native-control"
+      defaultChecked={false}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="mgt-checkbox-control"
+    />
+    <span
+      className="mgt-checkbox-text"
+    >
+      Controlled Checkbox
+    </span>
+  </label>
+</Checkbox>
+`;
+
+exports[`Checkbox should renders checked 1`] = `
+<label
+  class="mgt-checkbox"
+>
+  <input
+    checked=""
+    class="mgt-checkbox-native-control"
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+  <span
+    class="mgt-checkbox-text"
+  >
+    Checkbox
+  </span>
+</label>
+`;
+
+exports[`Checkbox should renders custom className 1`] = `
+<label
+  class="mgt-checkbox jest-test-class"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+</label>
+`;
+
+exports[`Checkbox should renders custom styles 1`] = `
+<label
+  class="mgt-checkbox"
+  style="color:#333;background-color:#f0f0f0"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+</label>
+`;
+
+exports[`Checkbox should renders disabled 1`] = `
+<label
+  class="mgt-checkbox mgt-checkbox-disabled"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    disabled=""
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+  <span
+    class="mgt-checkbox-text"
+  >
+    Checkbox
+  </span>
+</label>
+`;
+
+exports[`Checkbox should renders dom correctly 1`] = `
+<label
+  class="mgt-checkbox"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+  <span
+    class="mgt-checkbox-text"
+  >
+    Checkbox
+  </span>
+</label>
+`;
+
+exports[`Checkbox should renders form props when passed in 1`] = `
+<label
+  class="mgt-checkbox"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    id="demoCheckbox"
+    name="demo-checkbox"
+    type="checkbox"
+    value="a"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+  <span
+    class="mgt-checkbox-text"
+  >
+    Checkbox
+  </span>
+</label>
+`;
+
+exports[`Checkbox should renders not label 1`] = `
+<label
+  class="mgt-checkbox"
+>
+  <input
+    class="mgt-checkbox-native-control"
+    type="checkbox"
+  />
+  <span
+    class="mgt-checkbox-control"
+  />
+</label>
+`;
