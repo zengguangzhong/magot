@@ -18,10 +18,30 @@ export function injectStyleTestSuites(Component: React.ComponentType<any>) {
 }
 
 export function injectClickEventTestSuite(Component: React.ComponentType<any>) {
-  it('should simulates click events', () => {
+  it('should simulates click event', () => {
     const handleClick = jest.fn();
     const wrapper = shallow(<Component onClick={handleClick} />);
     wrapper.simulate('click');
     expect(handleClick).toBeCalled();
+  });
+}
+
+export function injectFocusEventsTestSuites(
+  Component: React.ComponentType<any>,
+  selector = 'input'
+) {
+  it('should simulates focus event', () => {
+    const handleFocus = jest.fn();
+    const wrapper = shallow(<Component onFocus={handleFocus} />);
+    wrapper.find(selector).simulate('focus');
+    expect(handleFocus).toBeCalled();
+  });
+
+  it('should simulates blur event', () => {
+    const handleBlur = jest.fn();
+    const wrapper = shallow(<Component onBlur={handleBlur} />);
+    wrapper.find(selector).simulate('focus');
+    wrapper.find(selector).simulate('blur');
+    expect(handleBlur).toBeCalled();
   });
 }
