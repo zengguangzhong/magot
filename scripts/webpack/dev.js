@@ -12,10 +12,11 @@ const demo = path.resolve(cwd, 'demo');
 
 function getDemos() {
   const todos = getTodos();
+  const testeds = getTesteds();
   const demoFiles = glob.sync('**/demo.tsx', { cwd: src });
   return demoFiles.map(file => {
     const name = file.replace(/(components\/|\/demo.tsx)/g, '');
-    return { name, done: !!todos[name] };
+    return { name, done: !!todos[name], tested: !!testeds[name] };
   });
 }
 
@@ -42,6 +43,18 @@ function getIcons() {
     icons.push(match[1]);
   }
   return icons;
+}
+
+function getTesteds() {
+  const testeds = {};
+  const testFiles = glob.sync('**/__test__/*.test.tsx', { cwd: src });
+  testFiles.forEach(file => {
+    const name = file
+      .replace(/components\/\w+\/__test__\//, '')
+      .replace('.test.tsx', '');
+    testeds[name] = true;
+  });
+  return testeds;
 }
 
 export default webpackMerge(baseConfig, {

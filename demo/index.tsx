@@ -8,6 +8,7 @@ import './index.less';
 type DEMO_Component = {
   name: string;
   done: boolean;
+  tested: boolean;
   cmp: React.LazyExoticComponent<React.ComponentType<any>>;
 };
 
@@ -26,7 +27,7 @@ function Home() {
   for (const key in demoComponents) {
     const item = demoComponents[key];
     links.push(
-      <li key={item.name}>
+      <li key={item.name} className="demo-component-item">
         <input
           type="checkbox"
           defaultChecked={item.done}
@@ -34,10 +35,11 @@ function Home() {
           style={{ marginRight: 12 }}
         />
         <Link to={'/' + item.name}>{item.name}</Link>
+        {item.tested && <i>test!</i>}
       </li>
     );
   }
-  return <ul style={{ listStyle: 'none' }}>{links}</ul>;
+  return <ul className="demo-component-list">{links}</ul>;
 }
 
 function DemoApp() {
