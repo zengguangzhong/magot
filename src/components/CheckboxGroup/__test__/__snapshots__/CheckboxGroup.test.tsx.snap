@@ -1,0 +1,317 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckboxGroup should renders \`disabled\` prop when passed in 1`] = `
+<div
+  class="mgt-checkbox-group mgt-checkbox-group-disabled"
+>
+  <label
+    class="mgt-checkbox mgt-checkbox-disabled"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      disabled=""
+      type="checkbox"
+      value="option1"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option1
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox mgt-checkbox-disabled"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      disabled=""
+      type="checkbox"
+      value="option2"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option2
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox mgt-checkbox-disabled"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      disabled=""
+      type="checkbox"
+      value="option3"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup should renders \`name\` prop when passed in 1`] = `
+<div
+  class="mgt-checkbox-group"
+>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      name="group"
+      type="checkbox"
+      value="option1"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Native Group1
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      name="group"
+      type="checkbox"
+      value="option2"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Native Group2
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      name="group"
+      type="checkbox"
+      value="option3"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Native Group3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup should renders \`value\` prop when passed in 1`] = `
+<div
+  class="mgt-checkbox-group"
+>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      checked=""
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option1"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option1
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option2"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option2
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option3"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup should renders by options 1`] = `
+<div
+  class="mgt-checkbox-group"
+>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option1"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option1
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option2"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option2
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option3"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup should renders custom className 1`] = `
+<div
+  class="mgt-checkbox-group jest-test-class"
+/>
+`;
+
+exports[`CheckboxGroup should renders custom styles 1`] = `
+<div
+  class="mgt-checkbox-group"
+  style="color:#333;background-color:#f0f0f0"
+/>
+`;
+
+exports[`CheckboxGroup should renders dom correctly 1`] = `
+<div
+  class="mgt-checkbox-group"
+>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option1"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option1
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option2"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option2
+    </span>
+  </label>
+  <label
+    class="mgt-checkbox"
+  >
+    <input
+      class="mgt-checkbox-native-control"
+      type="checkbox"
+      value="option3"
+    />
+    <span
+      class="mgt-checkbox-control"
+    />
+    <span
+      class="mgt-checkbox-text"
+    >
+      Option3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup should renders empty children 1`] = `
+<div
+  class="mgt-checkbox-group"
+/>
+`;
