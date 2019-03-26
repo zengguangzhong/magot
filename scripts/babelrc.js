@@ -11,24 +11,12 @@ export default {
     ['@babel/preset-react'],
   ],
   plugins: [
-    [
-      '@babel/plugin-transform-runtime',
-      {
-        corejs: 2,
-      },
-    ],
+    ['@babel/plugin-transform-runtime', { corejs: 3 }],
     ['@babel/plugin-syntax-dynamic-import'],
   ],
   env: {
     production: {
-      plugins: [
-        [
-          'transform-react-remove-prop-types',
-          {
-            removeImport: true,
-          },
-        ],
-      ],
+      plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
     },
   },
 };
