@@ -16,11 +16,11 @@
     "prepublish": "npm run lint && npm run build",
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server -r @babel/register --config webpack.config.dev.js --progress --colors",
-    "build:es": "node -r @babel/register scripts/build/es.js",
-    "build:lib": "node -r @babel/register scripts/build/lib.js",
-    "build:release": "node -r @babel/register scripts/build/release.js",
-    "compile": "npm run build:es && npm run build:lib || exit 1",
-    "build": "npm run build:es && npm run build:lib && npm run build:release || exit 1",
+    "release": "cross-env NODE_ENV=production webpack -r @babel/register --config webpack.config.js --progress",
+    "compile:es": "node -r @babel/register scripts/build/es.js",
+    "compile:lib": "node -r @babel/register scripts/build/lib.js",
+    "compile": "npm run compile:es && npm run compile:lib || exit 1",
+    "build": "node -r @babel/register scripts/build/release.js || exit 1",
     "fix:prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,less,json,yml,yaml,md,mdx}\"",
     "fix:ts": "tslint -p ./tsconfig.json --type-check --fix",
     "fix:js": "eslint --ext .js,.jsx ./ --cache --quiet --fix",
@@ -62,7 +62,6 @@
     "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
@@ -108,7 +107,9 @@
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "lint-staged": "^8.1.5",
+    "mini-css-extract-plugin": "^0.5.0",
     "mkdirp": "^0.5.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-cssnext": "^3.1.0",
     "postcss-each": "^0.10.0",
     "postcss-import": "^12.0.1",
@@ -139,8 +140,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.4.2",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "core-js": "^3.0.0"
   },
   "peerDependencies": {
     "react": ">=16.8.0",

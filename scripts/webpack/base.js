@@ -1,10 +1,10 @@
 import path from 'path';
 import webpack from 'webpack';
-import babelrc from '../babelrc';
 
 const cwd = process.cwd();
 const source = path.resolve(cwd, 'src');
 const __DEV__ = process.env.NODE_ENV === 'development';
+const babelrc = path.resolve(__dirname, '../babelrc.js');
 
 /**
  * @type {webpack.Configuration}
@@ -33,7 +33,8 @@ const config = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: __DEV__,
-              ...babelrc,
+              configFile: babelrc,
+              babelrc: false,
             },
           },
         ],
@@ -42,6 +43,14 @@ const config = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: __DEV__,
+              configFile: babelrc,
+              babelrc: false,
+            },
+          },
           {
             loader: 'ts-loader',
             options: {
@@ -86,6 +95,10 @@ const config = {
       __DEV__: JSON.stringify(__DEV__),
     }),
   ],
+  stats: {
+    children: false,
+    timings: true,
+  },
 };
 
 export default config;

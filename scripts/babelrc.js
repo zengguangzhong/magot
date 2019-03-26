@@ -5,15 +5,13 @@ export default {
       {
         modules: false,
         useBuiltIns: 'usage',
+        corejs: 3,
         debug: process.env.NODE_ENV === 'development',
       },
     ],
     ['@babel/preset-react'],
   ],
-  plugins: [
-    ['@babel/plugin-transform-runtime', { corejs: 3 }],
-    ['@babel/plugin-syntax-dynamic-import'],
-  ],
+  plugins: [['@babel/plugin-syntax-dynamic-import']],
   env: {
     production: {
       plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
