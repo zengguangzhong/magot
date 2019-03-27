@@ -1,10 +1,10 @@
 import path from 'path';
 import webpack from 'webpack';
+import babelConfig from '../babel/webpack';
 
 const cwd = process.cwd();
 const source = path.resolve(cwd, 'src');
 const __DEV__ = process.env.NODE_ENV === 'development';
-const babelrc = path.resolve(__dirname, '../babelrc.js');
 
 /**
  * @type {webpack.Configuration}
@@ -33,8 +33,8 @@ const config = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: __DEV__,
-              configFile: babelrc,
               babelrc: false,
+              ...babelConfig,
             },
           },
         ],
@@ -47,8 +47,8 @@ const config = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: __DEV__,
-              configFile: babelrc,
               babelrc: false,
+              ...babelConfig,
             },
           },
           {
