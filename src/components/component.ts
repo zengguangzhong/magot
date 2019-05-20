@@ -215,3 +215,13 @@ export function getDefaultInputFormProps<
     clearable: false,
   };
 }
+
+export interface Size {
+  width: number;
+  height: number;
+}
+
+export interface Offset {
+  left: number;
+  top: number;
+}

@@ -1,4 +1,4 @@
-/// <reference path="../../lib.d.ts" />
+import { Size, Offset } from '../components/component';
 
 export type Placement =
   | 'left'

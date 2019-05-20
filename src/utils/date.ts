@@ -1,8 +1,8 @@
-/// <reference path="../../lib.d.ts" />
 import { alias } from '../decorators/alias';
 
 const ONE_DAY_TIME = 24 * 3600 * 1000;
 
+export type AcceptableDate = Date | number | string;
 class DateUtilClass {
   date: Date;
 

@@ -1,8 +1,7 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import Calendar, { CalendarNormalProps } from './Calendar';
 import { getComponentClasses } from '../component';
-import DateUtil from '../../utils/date';
+import DateUtil, { AcceptableDate } from '../../utils/date';
 
 export interface RangeCalendarProps extends CalendarNormalProps {
   /**

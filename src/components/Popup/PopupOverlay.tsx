@@ -1,4 +1,3 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
@@ -18,7 +17,7 @@ export interface OverlayProps
   /**
    * 目标组件的显示大小和绝对位置(相对于popup的容器来计算)
    */
-  target: { size: Size; offset: Offset };
+  target: { size: component.Size; offset: component.Offset };
 }
 
 function PopupOverlay(props: OverlayProps) {

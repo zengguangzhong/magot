@@ -8,14 +8,3 @@ interface DEMOItem {
   done: boolean;
   tested: boolean;
 }
-interface Size {
-  width: number;
-  height: number;
-}
-
-interface Offset {
-  left: number;
-  top: number;
-}
-
-type AcceptableDate = Date | number | string;

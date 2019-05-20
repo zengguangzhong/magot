@@ -1,4 +1,3 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import { getDefaultProps, DatePickerNormalProps } from './DatePicker';
 import PickerPopup from './PickerPopup';
@@ -6,7 +5,7 @@ import PickerTrigger from './PickerTrigger';
 import PickerCalendarWrapper from './PickerCalendar';
 import MonthCalendar, { MonthCalendarProps } from '../Calendar/MonthCalendar';
 import { useChanges } from '../../hooks/changes';
-import DateUtil from '../../utils/date';
+import DateUtil, { AcceptableDate } from '../../utils/date';
 
 export interface MonthPickerProps extends DatePickerNormalProps {
   /**

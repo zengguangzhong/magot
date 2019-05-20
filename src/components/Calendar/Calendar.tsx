@@ -1,4 +1,3 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
@@ -16,7 +15,7 @@ import RangeCalendar from './RangeCalendar';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
 import * as component from '../component';
-import DateUtil from '../../utils/date';
+import DateUtil, { AcceptableDate } from '../../utils/date';
 
 import './Calendar.less';
 

@@ -1,4 +1,3 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import cx from 'classnames';
 import { CalendarBaseProps, getDefaultBaseProps } from './Calendar';
@@ -13,7 +12,7 @@ import YearCalendar from './YearCalendar';
 import { getPrefix } from './prefix';
 import { useChanges } from '../../hooks/changes';
 import * as component from '../component';
-import DateUtil from '../../utils/date';
+import DateUtil, { AcceptableDate } from '../../utils/date';
 
 export interface MonthCalendarProps extends CalendarBaseProps {
   /**

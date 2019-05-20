@@ -1,4 +1,3 @@
-/// <reference path="../../../lib.d.ts" />
 import React from 'react';
 import Calendar, { CalendarProps } from '../Calendar';
 import PickerPopup from './PickerPopup';
@@ -9,7 +8,7 @@ import WeekPicker from './WeekPicker';
 import RangePicker from './RangePicker';
 import { InputFormComponent, NestedComponent } from '../component';
 import { useChanges } from '../../hooks/changes';
-import DateUtil from '../../utils/date';
+import DateUtil, { AcceptableDate } from '../../utils/date';
 
 import './DatePicker.less';
 
