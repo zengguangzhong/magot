@@ -11,12 +11,12 @@ export interface RangePickerProps extends DatePickerNormalProps {
   /**
    * 默认日期范围
    */
-  defaultValue?: Array<AcceptableDate> | null;
+  defaultValue?: AcceptableDate[] | null;
 
   /**
    * 当前选中的日期范围
    */
-  value?: Array<AcceptableDate> | null;
+  value?: AcceptableDate[] | null;
 
   /**
    * 自定义分隔符，默认是`~`
@@ -52,6 +52,24 @@ const defaultProps: Partial<RangePickerProps> = {
 };
 
 const PickerCalendar = PickerCalendarWrapper(RangeCalendar);
+
+function formatDates(dates: Date[] | null, format?: string) {
+  return (dates || []).map(date => {
+    return DateUtil(date).format(format);
+  });
+}
+
+function defaultInputValueFormatter(
+  dates: Date[],
+  format?: string,
+  separator?: string
+) {
+  return formatDates(dates, format).join(separator);
+}
+
+function equal(a: Date[], b: Date[]) {
+  return DateUtil.eq(a[0], b[0]) && DateUtil.eq(a[1], b[1]);
+}
 
 function RangePicker(props: RangePickerProps) {
   const {
@@ -120,23 +138,5 @@ function RangePicker(props: RangePickerProps) {
 }
 
 RangePicker.defaultProps = defaultProps;
-
-function defaultInputValueFormatter(
-  dates: Date[],
-  format?: string,
-  separator?: string
-) {
-  return formatDates(dates, format).join(separator);
-}
-
-function formatDates(dates: Date[] | null, format?: string) {
-  return (dates || []).map(date => {
-    return DateUtil(date).format(format);
-  });
-}
-
-function equal(a: Date[], b: Date[]) {
-  return DateUtil.eq(a[0], b[0]) && DateUtil.eq(a[1], b[1]);
-}
 
 export default RangePicker;

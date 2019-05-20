@@ -10,16 +10,6 @@ const cwd = process.cwd();
 const src = path.resolve(cwd, 'src');
 const demo = path.resolve(cwd, 'demo');
 
-function getDemos() {
-  const todos = getTodos();
-  const testeds = getTesteds();
-  const demoFiles = glob.sync('**/demo.tsx', { cwd: src });
-  return demoFiles.map(file => {
-    const name = file.replace(/(components\/|\/demo.tsx)/g, '');
-    return { name, done: !!todos[name], tested: !!testeds[name] };
-  });
-}
-
 function getTodos() {
   const todos = {};
   const todoFile = path.join(cwd, 'TODO.md');
@@ -55,6 +45,16 @@ function getTesteds() {
     testeds[name] = true;
   });
   return testeds;
+}
+
+function getDemos() {
+  const todos = getTodos();
+  const testeds = getTesteds();
+  const demoFiles = glob.sync('**/demo.tsx', { cwd: src });
+  return demoFiles.map(file => {
+    const name = file.replace(/(components\/|\/demo.tsx)/g, '');
+    return { name, done: !!todos[name], tested: !!testeds[name] };
+  });
 }
 
 export default webpackMerge(baseConfig, {

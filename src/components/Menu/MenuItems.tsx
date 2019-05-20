@@ -9,6 +9,13 @@ interface MenuItemsProps {
   items: MenuItemArray;
 }
 
+function disableItems(items: MenuItemArray) {
+  return items.map(item => {
+    if ('divider' in item) return item;
+    return { ...item, disabled: true };
+  });
+}
+
 export default function MenuItems(props: MenuItemsProps) {
   return (
     <>
@@ -43,11 +50,4 @@ export default function MenuItems(props: MenuItemsProps) {
       })}
     </>
   );
-}
-
-function disableItems(items: MenuItemArray) {
-  return items.map(item => {
-    if ('divider' in item) return item;
-    return { ...item, disabled: true };
-  });
 }

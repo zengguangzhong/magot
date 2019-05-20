@@ -12,25 +12,21 @@ function ToastDemo() {
       <div className="demo-box">
         <Button
           type="primary"
-          // tslint:disable
           onClick={() => Toast.info('This is a message of info')}>
           Info
         </Button>
         <Button
           type="success"
-          // tslint:disable
           onClick={() => Toast.success('This is a message of success')}>
           Success
         </Button>
         <Button
           type="warning"
-          // tslint:disable
           onClick={() => Toast.warning('This is a message of warning')}>
           Warning
         </Button>
         <Button
           type="danger"
-          // tslint:disable
           onClick={() => Toast.error('This is a message of error')}>
           Error
         </Button>
@@ -38,7 +34,6 @@ function ToastDemo() {
       <div className="demo-box">
         <Button
           type="primary"
-          // tslint:disable
           onClick={() =>
             Toast.info('This is a message of info', undefined, true)
           }>
@@ -46,7 +41,6 @@ function ToastDemo() {
         </Button>
         <Button
           type="success"
-          // tslint:disable
           onClick={() =>
             Toast.success('This is a message of success', undefined, true)
           }>
@@ -54,7 +48,6 @@ function ToastDemo() {
         </Button>
         <Button
           type="warning"
-          // tslint:disable
           onClick={() =>
             Toast.warning('This is a message of warning', undefined, true)
           }>
@@ -62,7 +55,6 @@ function ToastDemo() {
         </Button>
         <Button
           type="danger"
-          // tslint:disable
           onClick={() =>
             Toast.error('This is a message of error', undefined, true)
           }>
@@ -72,13 +64,11 @@ function ToastDemo() {
       <div className="demo-box">
         <Button
           type="primary"
-          // tslint:disable
           onClick={() => Toast.info('This is a message of info', 10 * 1000)}>
           Info(10s)
         </Button>
         <Button
           type="primary"
-          // tslint:disable
           onClick={() =>
             Toast.info(
               <>
@@ -93,7 +83,6 @@ function ToastDemo() {
         </Button>
         <Button
           type="primary"
-          // tslint:disable
           onClick={() =>
             Toast.info('This is a message of info', undefined, true, () => {
               Toast.info('Closed');

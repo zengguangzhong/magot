@@ -4,23 +4,6 @@ import Dialog from './Dialog';
 import Button from '../Button';
 import Toast from '../Toast';
 
-function DialogDemo() {
-  return (
-    <>
-      <Link to="/" className="demo-goback">
-        返回
-      </Link>
-      <div className="demo-box">
-        <Button onClick={handleInfoBtnClick}>Info</Button>
-        <Button onClick={handleSuccessBtnClick}>Success</Button>
-        <Button onClick={handleErrorBtnClick}>Error</Button>
-        <Button onClick={handleWarningBtnClick}>Warning</Button>
-        <Button onClick={handleConfirmBtnClick}>Confirm</Button>
-      </div>
-    </>
-  );
-}
-
 const content =
   'This is a content, This is a content, This is a content, This is a content, This is a content.';
 
@@ -63,6 +46,23 @@ function handleConfirmBtnClick() {
       Toast.info('Cancel delete.');
     },
   });
+}
+
+function DialogDemo() {
+  return (
+    <>
+      <Link to="/" className="demo-goback">
+        返回
+      </Link>
+      <div className="demo-box">
+        <Button onClick={handleInfoBtnClick}>Info</Button>
+        <Button onClick={handleSuccessBtnClick}>Success</Button>
+        <Button onClick={handleErrorBtnClick}>Error</Button>
+        <Button onClick={handleWarningBtnClick}>Warning</Button>
+        <Button onClick={handleConfirmBtnClick}>Confirm</Button>
+      </div>
+    </>
+  );
 }
 
 export default DialogDemo;

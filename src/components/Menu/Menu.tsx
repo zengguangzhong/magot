@@ -52,21 +52,22 @@ export interface SubMenuData extends MenuItemData {
   items: MenuItemArray;
 }
 
-export type MenuItemArray = Array<
-  MenuItemData | MenuDividerData | MenuItemGroupData | SubMenuData
->;
+export type MenuItemArray = (
+  | MenuItemData
+  | MenuDividerData
+  | MenuItemGroupData
+  | SubMenuData)[];
 
 export type MenuChildren =
   | React.FunctionComponentElement<MenuItemProps>
   | React.FunctionComponentElement<MenuDividerProps>
   | React.FunctionComponentElement<MenuItemGroupProps>
   | React.FunctionComponentElement<SubMenuProps>
-  | Array<
+  | (
       | React.FunctionComponentElement<MenuItemProps>
       | React.FunctionComponentElement<MenuDividerProps>
       | React.FunctionComponentElement<MenuItemGroupProps>
-      | React.FunctionComponentElement<SubMenuProps>
-    >;
+      | React.FunctionComponentElement<SubMenuProps>)[];
 
 export interface MenuProps
   extends component.BaseComponent,
@@ -142,12 +143,12 @@ const defaultProps: Partial<MenuProps> = {
 };
 
 function Menu(props: MenuProps) {
-  if (!props.children && !props.items) return null;
-
   let values = props.selectedValues || [];
   if (!props.multiple) values = [values[0]];
 
   const [selectedValues, setSelectedValues] = React.useState(values);
+
+  if (!props.children && !props.items) return null;
 
   const updateSelectedValues = (item: MenuItemProps) => {
     if (props.selectable && item.value) {

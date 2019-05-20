@@ -3,6 +3,10 @@ import FileButton from './FileButton';
 import Toast from '../Toast';
 import { Link } from 'react-router-dom';
 
+function alertError(err: Error) {
+  Toast.error(err.message);
+}
+
 function FileButtonDemo() {
   const [selectedFile, setSelectedFile] = useState('');
   const selectFile = function(file: File) {
@@ -64,10 +68,6 @@ function FileButtonDemo() {
       </div>
     </>
   );
-}
-
-function alertError(err: Error) {
-  Toast.error(err.message);
 }
 
 export default FileButtonDemo;

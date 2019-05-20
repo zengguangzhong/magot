@@ -19,7 +19,6 @@ function CheckboxDemo() {
           Checkbox
         </Checkbox>
         <Checkbox
-          // tslint:disable-next-line
           onChange={checked => Toast.info(checked ? 'checked' : 'unchecked')}>
           Change Event
         </Checkbox>
@@ -29,19 +28,16 @@ function CheckboxDemo() {
         <Checkbox
           checked={controlledChecked}
           disabled={controlledDisabled}
-          // tslint:disable-next-line
           onChange={checked => setControlledChecked(checked)}>
           Controlled Checkbox
         </Checkbox>
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => setControlledChecked(!controlledChecked)}>
           Toggle Checked
         </Button>
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => setControlledDisabled(!controlledDisabled)}>
           Toggle Disabled
         </Button>

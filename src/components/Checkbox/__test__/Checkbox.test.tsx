@@ -61,10 +61,7 @@ describe('Checkbox', () => {
     const Controlled = () => {
       const [checked, setChecked] = React.useState(false);
       return (
-        <Checkbox
-          checked={checked}
-          // tslint:disable-next-line
-          onChange={checked => setChecked(checked)}>
+        <Checkbox checked={checked} onChange={checked => setChecked(checked)}>
           Controlled Checkbox
         </Checkbox>
       );
@@ -89,11 +86,7 @@ describe('Checkbox', () => {
       return (
         <div>
           <Checkbox checked={checked}>Controlled Checkbox</Checkbox>
-          <Button
-            // tslint:disable-next-line
-            onClick={() => setChecked(!checked)}>
-            Toggle Checked
-          </Button>
+          <Button onClick={() => setChecked(!checked)}>Toggle Checked</Button>
         </div>
       );
     };
@@ -116,9 +109,7 @@ describe('Checkbox', () => {
       return (
         <div>
           <Checkbox disabled={disabled}>Controlled Checkbox</Checkbox>
-          <Button
-            // tslint:disable-next-line
-            onClick={() => setDisabled(!disabled)}>
+          <Button onClick={() => setDisabled(!disabled)}>
             Toggle Disabled
           </Button>
         </div>

@@ -23,19 +23,16 @@ function RadioDemo() {
         <Radio
           checked={controlledChecked}
           disabled={controlledDisabled}
-          // tslint:disable-next-line
           onChange={() => setControlledChecked(true)}>
           Controlled Radio
         </Radio>
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => setControlledChecked(!controlledChecked)}>
           Toggle Checked
         </Button>
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => setControlledDisabled(!controlledDisabled)}>
           Toggle Disabled
         </Button>

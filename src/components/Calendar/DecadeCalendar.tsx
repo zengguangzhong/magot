@@ -180,6 +180,16 @@ function DecadeCalendarHeader(props: DecadeCalendarHeaderProps) {
   );
 }
 
+function getDecadesByCentury(year: number) {
+  const decades: number[][] = [];
+  const century = DateUtil.getCentury(year);
+  for (let i = century[0] - 10; i <= century[1] + 10; i += 10) {
+    const decade = DateUtil.getDecade(i);
+    decades.push(decade);
+  }
+  return decades;
+}
+
 function DecadeCalendarBody(props: DecadeCalendarBodyProps) {
   const decades = getDecadesByCentury(props.currentCentury);
   return (
@@ -235,16 +245,6 @@ function DecadeCalendarCell(
       </CalendarCellNode>
     </CalendarCell>
   );
-}
-
-function getDecadesByCentury(year: number) {
-  const decades: number[][] = [];
-  const century = DateUtil.getCentury(year);
-  for (let i = century[0] - 10; i <= century[1] + 10; i += 10) {
-    const decade = DateUtil.getDecade(i);
-    decades.push(decade);
-  }
-  return decades;
 }
 
 export default DecadeCalendar;

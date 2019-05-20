@@ -134,33 +134,20 @@ function ControlledDatePicker() {
     <DatePicker
       placeholder="has children"
       value={currentDate}
-      // tslint:disable-next-line
       onChange={(date, dateString) => {
         console.log(date, dateString);
         setCurrentDate(date);
       }}>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.subtract(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.subtract(1))}>
         昨天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.to())}>
+      <Button type="link" onClick={() => setCurrentDate(today.to())}>
         今天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.add(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.add(1))}>
         明天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(null)}>
+      <Button type="link" onClick={() => setCurrentDate(null)}>
         清除
       </Button>
     </DatePicker>

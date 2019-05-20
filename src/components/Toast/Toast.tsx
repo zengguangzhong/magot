@@ -108,6 +108,7 @@ function createToastRoot() {
 function create(props: ToastProps) {
   const root = createToastRoot();
   const div = document.createElement('div');
+  // eslint-disable-next-line
   return ReactDOM.render(<Toast {...props} container={root} />, div);
 }
 

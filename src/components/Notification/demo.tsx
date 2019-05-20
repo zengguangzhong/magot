@@ -16,34 +16,24 @@ function NotificationDemo() {
       <div className="demo-box">
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => Notification.open({ title, message })}>
           Open notification
         </Button>
         <Button
           type="primary"
-          // tslint:disable-next-line
           onClick={() => Notification.open({ title, message, duration: 0 })}>
           Open notification(no autoclose)
         </Button>
-        <Button
-          // tslint:disable-next-line
-          onClick={() => Notification.info({ title, message })}>
+        <Button onClick={() => Notification.info({ title, message })}>
           Info
         </Button>
-        <Button
-          // tslint:disable-next-line
-          onClick={() => Notification.success({ title, message })}>
+        <Button onClick={() => Notification.success({ title, message })}>
           Success
         </Button>
-        <Button
-          // tslint:disable-next-line
-          onClick={() => Notification.error({ title, message })}>
+        <Button onClick={() => Notification.error({ title, message })}>
           Error
         </Button>
-        <Button
-          // tslint:disable-next-line
-          onClick={() => Notification.warning({ title, message })}>
+        <Button onClick={() => Notification.warning({ title, message })}>
           Warning
         </Button>
       </div>

@@ -16,7 +16,7 @@ export interface BreadcrumbProps extends component.BaseComponent {
    * 面包屑选项列表
    * @default []
    */
-  children: Array<React.ReactElement<BreadcrumbItemProps>>;
+  children: React.ReactElement<BreadcrumbItemProps>[];
 }
 
 const defaultProps: Partial<BreadcrumbProps> = {

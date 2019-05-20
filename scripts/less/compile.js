@@ -6,25 +6,6 @@ import globToRegExp from 'glob-to-regexp';
 const ignoreLesses = ['variable.less', 'mixins/*.less', 'themes/*.less'];
 
 /**
- * compile less files
- *
- * @export
- * @param {string[]} files
- * @param {string} dest dest dir
- * @param {string} cwd
- * @returns {string[]}
- */
-export default function compile(files, dest, cwd) {
-  if (!/\/$/.test(cwd)) cwd += '/';
-  const _files = files.filter(file => {
-    const p = file.replace(cwd, '');
-    return ignoreLesses.every(ignore => !globToRegExp(ignore).test(p));
-  });
-  _files.forEach(file => compileOne(file, dest, cwd));
-  return _files;
-}
-
-/**
  * compile file
  *
  * @param {string} file
@@ -45,4 +26,23 @@ async function compileOne(file, dest, cwd) {
     console.error('[less compile]: %s', err.message);
     process.exit(1);
   }
+}
+
+/**
+ * compile less files
+ *
+ * @export
+ * @param {string[]} files
+ * @param {string} dest dest dir
+ * @param {string} cwd
+ * @returns {string[]}
+ */
+export default function compile(files, dest, cwd) {
+  if (!/\/$/.test(cwd)) cwd += '/';
+  const _files = files.filter(file => {
+    const p = file.replace(cwd, '');
+    return ignoreLesses.every(ignore => !globToRegExp(ignore).test(p));
+  });
+  _files.forEach(file => compileOne(file, dest, cwd));
+  return _files;
 }

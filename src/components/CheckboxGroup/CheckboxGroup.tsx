@@ -34,7 +34,7 @@ export interface CheckboxGroupProps
   /**
    * 复选按钮组件列表，与`options`互斥，只能二选一，优先使用`children`
    */
-  children?: Array<React.ReactElement<CheckboxProps>>;
+  children?: React.ReactElement<CheckboxProps>[];
 
   /**
    * 选中值发生变化时的回调函数

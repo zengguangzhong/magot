@@ -40,7 +40,6 @@ function CalendarDemo() {
           onChange={console.log}
         />
         <Calendar
-          // tslint:disable-next-line
           disabledDate={date => date.getDate() % 2 !== 0}
           onChange={console.log}
         />
@@ -80,33 +79,20 @@ function ControlledCalendar() {
     <Calendar
       value={currentDate}
       activeToday={false}
-      // tslint:disable-next-line
       onChange={date => {
         console.log(date);
         setCurrentDate(date);
       }}>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.subtract(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.subtract(1))}>
         昨天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.to())}>
+      <Button type="link" onClick={() => setCurrentDate(today.to())}>
         今天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.add(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.add(1))}>
         明天
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(null)}>
+      <Button type="link" onClick={() => setCurrentDate(null)}>
         清除
       </Button>
     </Calendar>
@@ -123,27 +109,17 @@ function ControlledLocalizeCalendar() {
       monthFormatter={monthFormatter}
       headerYearFormatter={yearFormatter}
       headerMonthFormatter={monthFormatter}
-      // tslint:disable-next-line
       onChange={date => {
         console.log(date);
         setCurrentDate(date);
       }}>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.subtract(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.subtract(1))}>
         Yesterday
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.to())}>
+      <Button type="link" onClick={() => setCurrentDate(today.to())}>
         Today
       </Button>
-      <Button
-        type="link"
-        // tslint:disable-next-line
-        onClick={() => setCurrentDate(today.add(1))}>
+      <Button type="link" onClick={() => setCurrentDate(today.add(1))}>
         Tomorrow
       </Button>
     </Calendar>

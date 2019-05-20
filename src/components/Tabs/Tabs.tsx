@@ -16,7 +16,7 @@ export interface TabsProps extends component.BaseComponent {
   /**
    * TabPane列表
    */
-  children: Array<React.ReactElement<TabPaneProps>>;
+  children: React.ReactElement<TabPaneProps>[];
 
   /**
    * 显示模式，可选值：`column`-纵向排列, `row`-横向排列，默认值`column`
@@ -87,6 +87,17 @@ function TabPaneItem(props: TabPaneItemProps) {
 const defaultProps: Partial<TabsProps> = {
   mode: 'column',
 };
+
+function parseChildren(children: React.ReactElement<TabPaneProps>[]) {
+  const navs: TabNavItemProps[] = [];
+  const panes: TabPaneItemProps[] = [];
+  React.Children.forEach(children, child => {
+    const { children, ...navProps } = child.props;
+    panes.push({ name: navProps.name, children });
+    navs.push(navProps);
+  });
+  return { navs, panes };
+}
 
 function Tabs(props: TabsProps) {
   const { navs, panes } = parseChildren(props.children);
@@ -178,16 +189,5 @@ function Tabs(props: TabsProps) {
 
 Tabs.defaultProps = defaultProps;
 Tabs.Panel = TabPane;
-
-function parseChildren(children: Array<React.ReactElement<TabPaneProps>>) {
-  const navs: TabNavItemProps[] = [];
-  const panes: TabPaneItemProps[] = [];
-  React.Children.forEach(children, child => {
-    const { children, ...navProps } = child.props;
-    panes.push({ name: navProps.name, children });
-    navs.push(navProps);
-  });
-  return { navs, panes };
-}
 
 export default Tabs;

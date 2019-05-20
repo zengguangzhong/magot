@@ -163,6 +163,7 @@ function DialogIcon(props: Pick<DialogProps, 'icon'>) {
 
 function createDialog(props: FullDialogProps) {
   const div = document.createElement('div');
+  // eslint-disable-next-line
   return ReactDOM.render(<Dialog {...props} />, div);
 }
 

@@ -35,18 +35,17 @@ export interface AnimationProps extends component.NestedComponent {
 }
 
 function Animation(props: AnimationProps, ref?: React.Ref<HTMLElement>) {
-  if (!React.isValidElement(props.children)) return null;
-
   const { visible, removeWhenHidden, onEnter, onLeave } = props;
 
-  const childRef = (ref || React.useRef<HTMLElement>(null)) as React.RefObject<
-    HTMLElement
-  >;
+  const newChildRef = React.useRef<HTMLElement>(null);
+  const childRef = (ref || newChildRef) as React.RefObject<HTMLElement>;
   const created = useCreated(childRef);
   const animation = useAnimation(!!visible, childRef, () => {
     visible ? onEnter && onEnter() : onLeave && onLeave();
   });
   const hidden = animation === null && !visible;
+
+  if (!React.isValidElement(props.children)) return null;
 
   if ((!visible && !created) || (hidden && removeWhenHidden)) return null;
 

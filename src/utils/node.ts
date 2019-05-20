@@ -9,8 +9,8 @@
 export function offset(node: Element | null, container?: Element | null) {
   if (!node) return null;
 
-  let top: number = 0;
-  let left: number = 0;
+  let top = 0;
+  let left = 0;
 
   do {
     top += (node as HTMLElement).offsetTop;

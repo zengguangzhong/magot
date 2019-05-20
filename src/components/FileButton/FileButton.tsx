@@ -94,6 +94,54 @@ const defaultProps: Partial<FileButtonProps> = {
   sizeError: '文件大小不符合',
 };
 
+function checkFileType(file: File, props: FileButtonProps) {
+  const { filters = [], filterError } = props;
+  const result = fileChecker.checkFileType(file, filters);
+  return result ? result : filterError || '';
+}
+
+function checkFileSize(file: File, props: FileButtonProps) {
+  const { minSize = 0, maxSize = 0, sizeError } = props;
+  const result = fileChecker.checkFileSize(file, maxSize, minSize);
+  return result ? result : sizeError || '';
+}
+
+function checkFile(file: File, props: FileButtonProps) {
+  const msg = checkFileType(file, props);
+  if (msg !== true) return msg;
+  return checkFileSize(file, props);
+}
+
+function onNativeChange(
+  evt: React.ChangeEvent<HTMLInputElement>,
+  props: FileButtonProps
+) {
+  const { multiple, maxCount = 0, countError = '', onChange, onError } = props;
+  const fileInput = evt.target;
+  const files = fileInput.files;
+  if (!files || !files.length) return;
+
+  if (files.length > maxCount) {
+    fileInput.value = '';
+    const msg = countError.replace(/\${maxCount}/g, '' + maxCount);
+    onError && onError(new Error(msg));
+    return;
+  }
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files.item(i);
+    if (!file) continue;
+    const msg = checkFile(file, props);
+    if (msg !== true) {
+      fileInput.value = '';
+      onError && onError(new Error(msg));
+      return;
+    }
+  }
+
+  onChange && onChange(multiple ? files : files[0]);
+}
+
 function FileButton(props: FileButtonProps) {
   const {
     className,
@@ -128,54 +176,6 @@ function FileButton(props: FileButtonProps) {
       {children}
     </Button>
   );
-}
-
-function onNativeChange(
-  evt: React.ChangeEvent<HTMLInputElement>,
-  props: FileButtonProps
-) {
-  const { multiple, maxCount = 0, countError = '', onChange, onError } = props;
-  const fileInput = evt.target;
-  const files = fileInput.files;
-  if (!files || !files.length) return;
-
-  if (files.length > maxCount) {
-    fileInput.value = '';
-    const msg = countError.replace(/\${maxCount}/g, '' + maxCount);
-    onError && onError(new Error(msg));
-    return;
-  }
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files.item(i);
-    if (!file) continue;
-    const msg = checkFile(file, props);
-    if (msg !== true) {
-      fileInput.value = '';
-      onError && onError(new Error(msg));
-      return;
-    }
-  }
-
-  onChange && onChange(multiple ? files : files[0]);
-}
-
-function checkFile(file: File, props: FileButtonProps) {
-  const msg = checkFileType(file, props);
-  if (msg !== true) return msg;
-  return checkFileSize(file, props);
-}
-
-function checkFileType(file: File, props: FileButtonProps) {
-  const { filters = [], filterError } = props;
-  const result = fileChecker.checkFileType(file, filters);
-  return result ? result : filterError || '';
-}
-
-function checkFileSize(file: File, props: FileButtonProps) {
-  const { minSize = 0, maxSize = 0, sizeError } = props;
-  const result = fileChecker.checkFileSize(file, maxSize, minSize);
-  return result ? result : sizeError || '';
 }
 
 FileButton.defaultProps = defaultProps;

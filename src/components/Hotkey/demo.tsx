@@ -23,7 +23,6 @@ function HotkeyDemo() {
         <Hotkey
           active={true}
           hotkeys={hotkeys}
-          // tslint:disable-next-line
           onTrigger={data => Toast.info(data.name)}>
           <div>Press: enter, backspace</div>
         </Hotkey>

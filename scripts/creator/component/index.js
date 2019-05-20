@@ -1,21 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { createFile } from '../create';
-import tpl_component from './templates/component';
-import tpl_demo from './templates/demo';
-import tpl_doc from './templates/doc';
-import tpl_index from './templates/index';
-import tpl_less from './templates/less';
-import tpl_test from './templates/test';
+import componentTpl from './templates/component';
+import demoTpl from './templates/demo';
+import docTpl from './templates/doc';
+import indexTpl from './templates/index';
+import lessTpl from './templates/less';
+import testTpl from './templates/test';
 
-const templates = [
-  tpl_index,
-  tpl_component,
-  tpl_less,
-  tpl_demo,
-  tpl_doc,
-  tpl_test,
-];
+const templates = [indexTpl, componentTpl, lessTpl, demoTpl, docTpl, testTpl];
 
 const name = process.argv[2];
 

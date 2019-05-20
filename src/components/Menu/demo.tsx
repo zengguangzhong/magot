@@ -12,6 +12,19 @@ function range(count: number) {
 const itemIcons = ['home', 'image', 'chat', 'setting', 'qrcode'];
 const groupIcons = ['folder', 'store'];
 
+function getMenuItemsData(withIcon?: boolean, prefix?: number) {
+  return range(5).map((v, i) => {
+    if (v === 4) return { divider: true };
+    const key = prefix !== void 0 ? prefix + '.' + v : v;
+    return {
+      label: 'Menu Item ' + key,
+      value: 'menu_item_' + key,
+      icon: withIcon ? itemIcons[i] : undefined,
+      disabled: v === 5,
+    };
+  });
+}
+
 const items1: MenuItemArray = getMenuItemsData();
 const items2: MenuItemArray = getMenuItemsData(true);
 
@@ -53,19 +66,6 @@ const items4: MenuItemArray = [
   },
 ];
 
-function getMenuItemsData(withIcon?: boolean, prefix?: number) {
-  return range(5).map((v, i) => {
-    if (v === 4) return { divider: true };
-    const key = prefix !== void 0 ? prefix + '.' + v : v;
-    return {
-      label: 'Menu Item ' + key,
-      value: 'menu_item_' + key,
-      icon: withIcon ? itemIcons[i] : undefined,
-      disabled: v === 5,
-    };
-  });
-}
-
 function getMenuItems(withIcon?: boolean, prefix?: number) {
   return range(5).map((v, i) => {
     const key = prefix !== void 0 ? prefix + '.' + v : v;
@@ -102,9 +102,7 @@ function MenuDemo() {
           multiple={true}
           selectable={true}
           selectedValues={['menu_item_1', 'menu_item_3']}
-          // tslint:disable-next-line
           onSelect={item => console.log('selected: ', item)}
-          // tslint:disable-next-line
           onDeselect={item => console.log('deselected: ', item)}
           onItemClick={console.log}>
           {getMenuItems(true)}
@@ -112,9 +110,8 @@ function MenuDemo() {
         {/* ItemGroup */}
         <Menu
           multiple={true}
-          selectable={true} // tslint:disable-next-line
+          selectable={true}
           onSelect={item => console.log('selected: ', item)}
-          // tslint:disable-next-line
           onDeselect={item => console.log('deselected: ', item)}
           onItemClick={console.log}>
           {range(2).map((g, i) => {
@@ -132,9 +129,8 @@ function MenuDemo() {
         {/* nested SubMenu */}
         <Menu
           multiple={true}
-          selectable={true} // tslint:disable-next-line
+          selectable={true}
           onSelect={(item, values) => console.log('selected: ', item, values)}
-          // tslint:disable-next-line
           onDeselect={(item, values) =>
             console.log('deselected: ', item, values)
           }

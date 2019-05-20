@@ -5,6 +5,15 @@ export function checkFileSize(file: File, maxSize: number, minSize = 0) {
   return size >= minSize && size <= maxSize;
 }
 
+export function getFileExt(file: File) {
+  const ts = file.name.split('.');
+  return (ts[ts.length - 1] || '').toLowerCase();
+}
+
+export function getFileTypeByExt(file: File) {
+  return MIMETYPE[getFileExt(file)] || '';
+}
+
 export function checkFileType(file: File, types: string[]) {
   if (types.indexOf('*') > -1) return true;
 
@@ -18,13 +27,4 @@ export function checkFileType(file: File, types: string[]) {
     if (ts[1] === '*' && type.split('/')[0] === ts[0]) return true;
   }
   return false;
-}
-
-export function getFileTypeByExt(file: File) {
-  return MIMETYPE[getFileExt(file)] || '';
-}
-
-export function getFileExt(file: File) {
-  const ts = file.name.split('.');
-  return (ts[ts.length - 1] || '').toLowerCase();
 }

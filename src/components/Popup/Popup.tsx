@@ -90,9 +90,17 @@ const defaultProps: Partial<PopupProps> = {
   removeWhenClose: false,
 };
 
-function Popup(props: PopupProps) {
-  if (!props.children || !props.overlay) return null;
+function activeGlobalClick(trigger?: PopupTrigger) {
+  return !!trigger && ['click', 'contextMenu'].includes(trigger);
+}
 
+function WrappedComponent(props: WrappedComponentProps) {
+  const { children, ...otherProps } = props;
+  if (!React.isValidElement(children)) return null;
+  return React.cloneElement(children, otherProps);
+}
+
+function Popup(props: PopupProps) {
   const [visible, setVisible] = React.useState(false);
   const [targetOffset, setTargetOffset] = React.useState({ left: 0, top: 0 });
   const [targetSize, setTargetSize] = React.useState({ width: 0, height: 0 });
@@ -122,6 +130,15 @@ function Popup(props: PopupProps) {
       props.onClose && props.onClose();
     }, props.leaveDelay);
   };
+
+  useEffect(() => {
+    if (activeGlobalClick(props.trigger) && visible) {
+      window.addEventListener('click', handleTriggerLeave);
+    }
+    return () => window.removeEventListener('click', handleTriggerLeave);
+  });
+
+  if (!props.children || !props.overlay) return null;
 
   const wrappedProps: WrappedComponentProps = {};
   const overlayProps: OverlayProps = {
@@ -162,29 +179,12 @@ function Popup(props: PopupProps) {
     }
   }
 
-  useEffect(() => {
-    if (activeGlobalClick(props.trigger) && visible) {
-      window.addEventListener('click', handleTriggerLeave);
-    }
-    return () => window.removeEventListener('click', handleTriggerLeave);
-  });
-
   return (
     <>
       <WrappedComponent {...wrappedProps}>{props.children}</WrappedComponent>
       <PopupOverlay {...overlayProps} />
     </>
   );
-}
-
-function WrappedComponent(props: WrappedComponentProps) {
-  const { children, ...otherProps } = props;
-  if (!React.isValidElement(children)) return null;
-  return React.cloneElement(children, otherProps);
-}
-
-function activeGlobalClick(trigger?: PopupTrigger) {
-  return !!trigger && ['click', 'contextMenu'].includes(trigger);
 }
 
 Popup.defaultProps = defaultProps;

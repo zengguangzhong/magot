@@ -277,7 +277,6 @@ function ButtonDemo() {
             type="primary"
             loading={loading}
             disabled={loading}
-            // tslint:disable
             onClick={() => setLoading(true)}>
             {loading ? 'Submitting' : 'Submit'}
           </Button>

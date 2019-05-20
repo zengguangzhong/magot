@@ -7,7 +7,7 @@ export interface RangeCalendarProps extends CalendarNormalProps {
   /**
    * 当前选中的日期范围
    */
-  value?: Array<AcceptableDate> | null;
+  value?: AcceptableDate[] | null;
 
   /**
    * 当前选中值发生变化后的回调函数

@@ -56,8 +56,6 @@ function Input<T extends InputBaseElement>(
     ...formProps
   } = props;
 
-  if (!React.isValidElement(children)) return null;
-
   const inputRef = React.useRef<T>(null);
   const [clearableState, setClearableState] = React.useState(false);
 
@@ -73,6 +71,8 @@ function Input<T extends InputBaseElement>(
       updateClearableState(value);
     }
   });
+
+  if (!React.isValidElement(children)) return null;
 
   const type = 'input';
   const prefix = component.getComponentPrefix(type);

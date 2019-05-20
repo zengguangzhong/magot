@@ -74,10 +74,9 @@ export interface ModalProps
 
   children?:
     | React.FunctionComponentElement<ModalBodyProps>
-    | Array<
+    | (
         | React.FunctionComponentElement<ModalBodyProps>
-        | React.FunctionComponentElement<ModalFooterProps>
-      >;
+        | React.FunctionComponentElement<ModalFooterProps>)[];
 
   /**
    * 打开模态框时的回调函数

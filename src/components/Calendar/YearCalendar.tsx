@@ -206,6 +206,15 @@ function YearCalendarHeader(props: YearCalendarHeaderProps) {
   );
 }
 
+function getYearsByDecade(year: number) {
+  const years: number[] = [];
+  const decade = DateUtil.getDecade(year);
+  for (let i = decade[0] - 1; i <= decade[1] + 1; i++) {
+    years.push(i);
+  }
+  return years;
+}
+
 function YearCalendarBody(props: YearCalendarBodyProps) {
   const years = getYearsByDecade(props.currentDecade);
   return (
@@ -232,6 +241,10 @@ function YearCalendarBody(props: YearCalendarBodyProps) {
       </CalendarGrid>
     </CalendarBody>
   );
+}
+
+function defaultYearFormatter(year: number) {
+  return '' + year;
 }
 
 function YearCalendarCell(
@@ -261,19 +274,6 @@ function YearCalendarCell(
       </CalendarCellNode>
     </CalendarCell>
   );
-}
-
-function getYearsByDecade(year: number) {
-  const years: number[] = [];
-  const decade = DateUtil.getDecade(year);
-  for (let i = decade[0] - 1; i <= decade[1] + 1; i++) {
-    years.push(i);
-  }
-  return years;
-}
-
-function defaultYearFormatter(year: number) {
-  return '' + year;
 }
 
 export default YearCalendar;

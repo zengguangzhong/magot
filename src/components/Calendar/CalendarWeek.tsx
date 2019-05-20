@@ -11,6 +11,11 @@ export interface CalendarWeekProps {
   formatter?: (value: number) => string;
 }
 
+function defaultWeekFormatter(value: number) {
+  const localWeek = '日一二三四五六'.split('');
+  return localWeek[value];
+}
+
 const defaultProps: Partial<CalendarWeekProps> = {
   visible: true,
   showWeekNumber: false,
@@ -41,10 +46,5 @@ function CalendarWeek(props: CalendarWeekProps) {
 }
 
 CalendarWeek.defaultProps = defaultProps;
-
-function defaultWeekFormatter(value: number) {
-  const localWeek = '日一二三四五六'.split('');
-  return localWeek[value];
-}
 
 export default CalendarWeek;

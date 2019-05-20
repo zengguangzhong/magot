@@ -3,21 +3,6 @@ import mkdirp from 'mkdirp';
 import { promises as fs } from 'fs';
 
 /**
- * copy files
- *
- * @export
- * @param {string[]} files
- * @param {string} dest dest dir
- * @param {string} cwd
- * @returns {string[]}
- */
-export default function copy(files, dest, cwd) {
-  if (!/\/$/.test(cwd)) cwd += '/';
-  files.forEach(file => copyOne(file, dest, cwd));
-  return files;
-}
-
-/**
  * copy file
  *
  * @param {string} file
@@ -34,4 +19,19 @@ async function copyOne(file, dest, cwd) {
     console.error('[copy]: %s', err.message);
     process.exit(1);
   }
+}
+
+/**
+ * copy files
+ *
+ * @export
+ * @param {string[]} files
+ * @param {string} dest dest dir
+ * @param {string} cwd
+ * @returns {string[]}
+ */
+export default function copy(files, dest, cwd) {
+  if (!/\/$/.test(cwd)) cwd += '/';
+  files.forEach(file => copyOne(file, dest, cwd));
+  return files;
 }

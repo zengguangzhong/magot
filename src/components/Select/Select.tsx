@@ -10,10 +10,9 @@ import './Select.less';
 export type SelectChildren =
   | React.FunctionComponentElement<MenuItemProps>
   | React.FunctionComponentElement<MenuItemGroupProps>
-  | Array<
+  | (
       | React.FunctionComponentElement<MenuItemProps>
-      | React.FunctionComponentElement<MenuItemGroupProps>
-    >;
+      | React.FunctionComponentElement<MenuItemGroupProps>)[];
 
 export interface SelectProps
   extends component.InputFormComponent<HTMLInputElement, React.ReactText>,
@@ -54,6 +53,43 @@ const defaultProps: Partial<SelectProps> = {
   multiple: false,
   showCaret: true,
 };
+
+function isReactTextChild(children?: React.ReactNode) {
+  if (children === void 0) return false;
+  return typeof children === 'string' || typeof children === 'number';
+}
+
+function getOptionByValue(
+  children?: SelectChildren,
+  value?: React.ReactText
+): React.FunctionComponentElement<MenuItemProps> | null {
+  if (!children || value === void 0) return null;
+
+  for (const option of React.Children.toArray(children)) {
+    if ('items' in option.props) {
+      const children = option.props.children as SelectChildren;
+      const childOption = getOptionByValue(children, value);
+      if (childOption) return childOption;
+    } else {
+      const item = option as React.FunctionComponentElement<MenuItemProps>;
+      if (item.props.value === value) return item;
+    }
+  }
+
+  return null;
+}
+
+function getLabelByValue(children?: SelectChildren, value?: React.ReactText) {
+  const option = getOptionByValue(children, value);
+  if (!option) return '';
+
+  const optionProps = option.props;
+  if (optionProps.label !== void 0) return optionProps.label;
+  if (isReactTextChild(optionProps.children)) {
+    return optionProps.children as React.ReactText;
+  }
+  return optionProps.value;
+}
 
 function Select(props: SelectProps) {
   const {
@@ -130,43 +166,6 @@ function Select(props: SelectProps) {
       {trigger}
     </Popup>
   );
-}
-
-function isReactTextChild(children?: React.ReactNode) {
-  if (children === void 0) return false;
-  return typeof children === 'string' || typeof children === 'number';
-}
-
-function getLabelByValue(children?: SelectChildren, value?: React.ReactText) {
-  const option = getOptionByValue(children, value);
-  if (!option) return '';
-
-  const optionProps = option.props;
-  if (optionProps.label !== void 0) return optionProps.label;
-  if (isReactTextChild(optionProps.children)) {
-    return optionProps.children as React.ReactText;
-  }
-  return optionProps.value;
-}
-
-function getOptionByValue(
-  children?: SelectChildren,
-  value?: React.ReactText
-): React.FunctionComponentElement<MenuItemProps> | null {
-  if (!children || value === void 0) return null;
-
-  for (const option of React.Children.toArray(children)) {
-    if ('items' in option.props) {
-      const children = option.props.children as SelectChildren;
-      const childOption = getOptionByValue(children, value);
-      if (childOption) return childOption;
-    } else {
-      const item = option as React.FunctionComponentElement<MenuItemProps>;
-      if (item.props.value === value) return item;
-    }
-  }
-
-  return null;
 }
 
 Select.defaultProps = defaultProps;

@@ -33,7 +33,9 @@ export default webpackMerge(baseConfig, {
         terserOptions: {
           compress: {
             warnings: false,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             drop_console: true,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             drop_debugger: true,
           },
           output: {

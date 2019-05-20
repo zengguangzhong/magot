@@ -347,6 +347,14 @@ Calendar.Year = YearCalendar;
 Calendar.Decade = DecadeCalendar;
 Calendar.Range = RangeCalendar;
 
+function defaultHeaderYearFormatter(year: number) {
+  return year + '年';
+}
+
+function defaultHeaderMonthFormatter(month: number) {
+  return month + 1 + '月';
+}
+
 function DateCalendarHeader(props: CalendarHeaderProps) {
   const {
     currentYear,
@@ -452,6 +460,28 @@ function DateCalendarHeader(props: CalendarHeaderProps) {
   );
 }
 
+function getDatesByWeek(year: number, month: number, weekStart: number) {
+  const datesByWeek: Date[][] = [];
+  const dateUtil = DateUtil(new Date(year, month));
+  const firstDayOfMonth = dateUtil.getFirstDayOfMonth();
+  const firstDayOfWeek = firstDayOfMonth.getDay();
+
+  let start = 0;
+  const startDelta = firstDayOfWeek - weekStart;
+  if (startDelta > 0) start -= startDelta;
+
+  // grid: 6 * 7
+  for (let i = start; i < 42 + start; i++) {
+    const week = Math.floor((i + startDelta) / 7);
+    let dates = datesByWeek[week];
+    if (!dates) dates = datesByWeek[week] = [];
+    const date = new Date(year, month, i + 1);
+    dates.push(date);
+  }
+
+  return datesByWeek;
+}
+
 function DateCalendarBody(props: CalendarBodyProps) {
   const { currentYear, currentMonth, weekStart = 0 } = props;
   const datesByWeek = getDatesByWeek(currentYear, currentMonth, weekStart);
@@ -497,6 +527,21 @@ function DateCalendarRow(
       })}
     </CalendarRow>
   );
+}
+
+function isDisabledDate(
+  date: Date,
+  today: Date,
+  disableTodayAgo?: boolean,
+  disabledDate?: (date: Date) => boolean
+) {
+  if (disabledDate && disabledDate(date)) return true;
+  if (disableTodayAgo && DateUtil(date).lt(today)) return true;
+  return false;
+}
+
+function defaultDateFormatter(date: Date) {
+  return '' + date.getDate();
 }
 
 function DateCalendarCell(
@@ -546,51 +591,6 @@ function DateCalendarCell(
       </CalendarCellNode>
     </CalendarCell>
   );
-}
-
-function getDatesByWeek(year: number, month: number, weekStart: number) {
-  const datesByWeek: Date[][] = [];
-  const dateUtil = DateUtil(new Date(year, month));
-  const firstDayOfMonth = dateUtil.getFirstDayOfMonth();
-  const firstDayOfWeek = firstDayOfMonth.getDay();
-
-  let start = 0;
-  const startDelta = firstDayOfWeek - weekStart;
-  if (startDelta > 0) start -= startDelta;
-
-  // grid: 6 * 7
-  for (let i = start; i < 42 + start; i++) {
-    const week = Math.floor((i + startDelta) / 7);
-    let dates = datesByWeek[week];
-    if (!dates) dates = datesByWeek[week] = [];
-    const date = new Date(year, month, i + 1);
-    dates.push(date);
-  }
-
-  return datesByWeek;
-}
-
-function isDisabledDate(
-  date: Date,
-  today: Date,
-  disableTodayAgo?: boolean,
-  disabledDate?: (date: Date) => boolean
-) {
-  if (disabledDate && disabledDate(date)) return true;
-  if (disableTodayAgo && DateUtil(date).lt(today)) return true;
-  return false;
-}
-
-function defaultDateFormatter(date: Date) {
-  return '' + date.getDate();
-}
-
-function defaultHeaderYearFormatter(year: number) {
-  return year + '年';
-}
-
-function defaultHeaderMonthFormatter(month: number) {
-  return month + 1 + '月';
 }
 
 export default Calendar;

@@ -17,9 +17,7 @@ function InputNumberDemo() {
           min={0}
           max={100}
           defaultValue={100}
-          // tslint:disable-next-line
           formatter={value => value + '%'}
-          // tslint:disable-next-line
           parser={value => parseFloat(value)}
           onChange={console.log}
         />

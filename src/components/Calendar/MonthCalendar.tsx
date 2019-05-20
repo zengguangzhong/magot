@@ -154,6 +154,10 @@ function MonthCalendar(props: MonthCalendarProps) {
 
 MonthCalendar.defaultProps = defaultProps;
 
+function defaultHeaderYearFormatter(year: number) {
+  return year + '年';
+}
+
 function MonthCalendarHeader(props: MonthCalendarHeaderProps) {
   const {
     currentYear,
@@ -234,6 +238,11 @@ function MonthCalendarBody(props: MonthCalendarBodyProps) {
   );
 }
 
+function defaultMonthFormatter(month: number) {
+  const localMonths = '一 二 三 四 五 六 七 八 九 十 十一 十二'.split(' ');
+  return localMonths[month] + '月';
+}
+
 function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
   const { value, monthFormatter = defaultMonthFormatter } = props;
   const date = new Date(props.currentYear, props.month);
@@ -252,15 +261,6 @@ function MonthCalendarCell(props: MonthCalendarBodyProps & { month: number }) {
       </CalendarCellNode>
     </CalendarCell>
   );
-}
-
-function defaultHeaderYearFormatter(year: number) {
-  return year + '年';
-}
-
-function defaultMonthFormatter(month: number) {
-  const localMonths = '一 二 三 四 五 六 七 八 九 十 十一 十二'.split(' ');
-  return localMonths[month] + '月';
 }
 
 export default MonthCalendar;

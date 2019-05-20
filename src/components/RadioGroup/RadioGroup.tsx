@@ -36,7 +36,7 @@ export interface RadioGroupProps
   /**
    * 单选按钮组件列表，与`options`互斥，只能二选一，优先使用`children`
    */
-  children?: Array<React.ReactElement<RadioProps | RadioButtonProps>>;
+  children?: React.ReactElement<RadioProps | RadioButtonProps>[];
 
   /**
    * 是否渲染为按钮模式，

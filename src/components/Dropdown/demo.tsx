@@ -9,18 +9,24 @@ function DropdownDemo() {
   const menus1 = (
     <Menu>
       <Menu.Item>
-        <a href="https://github.com/" target="_blank">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
           github.com
         </a>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
-        <a href="https://reactjs.org/" target="_blank">
+        <a
+          href="https://reactjs.org/"
+          target="_blank"
+          rel="noopener noreferrer">
           reactjs.org
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a href="https://www.facebook.com/" target="_blank">
+        <a
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer">
           facebook.com
         </a>
       </Menu.Item>

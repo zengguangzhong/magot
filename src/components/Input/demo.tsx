@@ -14,9 +14,7 @@ function InputDemo() {
         <Input
           icon="search"
           placeholder="This is a Input"
-          // tslint:disable-next-line
           onChange={e => console.log(e.target.value)}
-          // tslint:disable-next-line
           onIconClick={() => Toast.info('Clicked the Icon')}
         />
         <Input
@@ -29,9 +27,7 @@ function InputDemo() {
         <Input
           placeholder="Input with clear icon"
           clearable={true}
-          // tslint:disable-next-line
           onClear={() => Toast.info('Cleared')}
-          // tslint:disable-next-line
           onChange={e => console.log(e.target.value)}
         />
         <Input placeholder="This is a readonly Input" readOnly={true} />
@@ -45,7 +41,6 @@ function InputDemo() {
         <Input
           placeholder="controlled input"
           value={controlledValue}
-          // tslint:disable-next-line
           onChange={e => setControlledValue(e.target.value)}
         />
       </div>

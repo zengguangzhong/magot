@@ -19,16 +19,12 @@ function SwitchDemo() {
           checked={true}
           onText="开"
           offText="关"
-          // tslint:disable-next-line
           onChange={checked => Toast.info(checked ? '开' : '关')}
         />
       </div>
       <div className="demo-box">
         <Switch disabled={disabled} checked={true} />
-        <Button
-          type="primary"
-          // tslint:disable-next-line
-          onClick={() => setDisabled(!disabled)}>
+        <Button type="primary" onClick={() => setDisabled(!disabled)}>
           Toggle Disabled
         </Button>
       </div>

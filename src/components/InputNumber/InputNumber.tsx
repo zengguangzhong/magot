@@ -67,6 +67,20 @@ const BOTTOM_KEY = 40;
   hotkeys.push({ key, metaKey: true });
 });
 
+function getDecimalLength(n: number) {
+  const s = n.toString().split('.');
+  return s.length > 1 ? s[1].length : 0;
+}
+
+function toPrecision(a: number, b: number, o: string) {
+  if (Number.isInteger(a) && Number.isInteger(b)) {
+    return o === '+' ? a + b : a - b;
+  }
+  const len = 10 ** Math.max(getDecimalLength(a), getDecimalLength(b));
+  const val = o === '+' ? a * len + b * len : a * len - b * len;
+  return val / len;
+}
+
 function InputNumber(props: InputNumberProps) {
   const {
     min = -Infinity,
@@ -178,20 +192,6 @@ function InputNumber(props: InputNumberProps) {
       </div>
     </Hotkey>
   );
-}
-
-function toPrecision(a: number, b: number, o: string) {
-  if (Number.isInteger(a) && Number.isInteger(b)) {
-    return o === '+' ? a + b : a - b;
-  }
-  const len = 10 ** Math.max(getDecimalLength(a), getDecimalLength(b));
-  const val = o === '+' ? a * len + b * len : a * len - b * len;
-  return val / len;
-}
-
-function getDecimalLength(n: number) {
-  const s = n.toString().split('.');
-  return s.length > 1 ? s[1].length : 0;
 }
 
 InputNumber.defaultProps = defaultProps;

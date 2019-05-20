@@ -114,6 +114,7 @@ function createNotificationRoot() {
 function createNotification(props: FullNotificationProps) {
   const root = createNotificationRoot();
   const div = document.createElement('div');
+  // eslint-disable-next-line
   return ReactDOM.render(<Notification {...props} container={root} />, div);
 }
 
