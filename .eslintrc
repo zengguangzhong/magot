@@ -10,14 +10,16 @@
     "__DEMOS__": true,
     "__ICONS__": true
   },
-  "plugins": ["prettier", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "prettier",
+    "prettier/@typescript-eslint",
     "prettier/react"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -25,12 +27,16 @@
       "experimentalObjectRestSpread": true,
       "modules": true,
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "rules": {
-    "no-console": 0,
+    "no-console": "off",
     "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error"
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "@typescript-eslint/no-empty-interface": "warn"
   },
   "settings": {
     "react": {

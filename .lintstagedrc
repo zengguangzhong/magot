@@ -1,8 +1,15 @@
 {
   "linters": {
-    "*.{ts,tsx}": ["npm run lint:ts -- --fix", "prettier --write", "git add"],
-    "*.{js,jsx}": ["eslint --fix", "prettier --write", "git add"],
-    "*.less": ["stylelint --syntax less --fix", "prettier --write", "git add"],
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --cache --quiet --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{css,less}": [
+      "stylelint --syntax less --fix",
+      "prettier --write",
+      "git add"
+    ],
     "*.{json,yml,yaml,md,mdx}": ["prettier --write", "git add"]
   },
   "ignore": []
