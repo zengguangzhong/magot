@@ -6,9 +6,9 @@
     "jest": true
   },
   "globals": {
-    "__DEV__": true,
-    "__DEMOS__": true,
-    "__ICONS__": true
+    "__DEV__": "readonly",
+    "__DEMOS__": "readonly",
+    "__ICONS__": "readonly"
   },
   "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "extends": [

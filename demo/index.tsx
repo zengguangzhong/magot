@@ -5,14 +5,11 @@ import Loading from '../src/components/Loading';
 
 import './index.less';
 
-type DEMO_Component = {
-  name: string;
-  done: boolean;
-  tested: boolean;
+interface DEMOComponent extends DEMOItem {
   cmp: React.LazyExoticComponent<React.ComponentType<any>>;
-};
+}
 
-const demoComponents: Record<string, DEMO_Component> = {};
+const demoComponents: Record<string, DEMOComponent> = {};
 if (__DEMOS__ && Array.isArray(__DEMOS__)) {
   for (const demo of __DEMOS__) {
     const cmp = React.lazy(() => {
