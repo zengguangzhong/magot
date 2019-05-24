@@ -127,6 +127,12 @@ export interface CalendarProps extends CalendarBaseProps {
   showWeekNumber?: boolean;
 
   /**
+   * 当hover时，是否染色该行
+   * @default false
+   */
+  dyeingRow?: boolean;
+
+  /**
    * 自定义禁用日期的函数，返回true则表示该天禁用(置灰)
    */
   disabledDate?: (date: Date) => boolean;
@@ -513,10 +519,10 @@ function DateCalendarBody(props: CalendarBodyProps) {
 function DateCalendarRow(
   props: CalendarBodyProps & { dates: Date[]; today: Date }
 ) {
-  const { dates } = props;
+  const { dates, dyeingRow } = props;
   const wednesday = dates.find(d => d.getDay() === 3);
   return (
-    <CalendarRow>
+    <CalendarRow className={dyeingRow ? 'dyeing' : undefined}>
       {props.showWeekNumber && (
         <CalendarCell className="week-number">
           {DateUtil(wednesday || dates[0]).getWeekNumber()}

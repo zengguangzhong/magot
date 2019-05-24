@@ -83,6 +83,14 @@
   }
 }
 
+.@{prefix}-calendar-row {
+  &.dyeing:hover {
+    .@{prefix}-calendar-cell:not(.week-number) {
+      background-color: @calendar-cell-background-color-hover;
+    }
+  }
+}
+
 .@{prefix}-calendar-cell {
   text-align: center;
   cursor: pointer;

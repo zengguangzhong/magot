@@ -26,17 +26,25 @@ const defaultProps: Partial<CalendarCellProps> = {
 };
 
 function CalendarCell(props: CalendarCellProps) {
-  const { dyed, current, selected, disabled, outside } = props;
+  const {
+    dyed,
+    current,
+    selected,
+    disabled,
+    outside,
+    children,
+    ...otherProps
+  } = props;
   const prefix = getPrefix();
   return (
     <td
+      {...otherProps}
       className={cx(
         prefix + '-cell',
         { dyed, current, selected, disabled, outside },
         props.className
-      )}
-      onClick={props.onClick}>
-      {props.children}
+      )}>
+      {children}
     </td>
   );
 }
