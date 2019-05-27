@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar should renders \`alt\` prop when passed in 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-image"
+  style="border-radius:50%"
+>
+  <img
+    alt="AVATAR"
+    class="image"
+    src="../avatar.png"
+  />
+</div>
+`;
+
+exports[`Avatar should renders \`radius\` prop when passed in 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon"
+  style="border-radius:4px"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders \`radius\` prop when passed in 2`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon"
+  style="border-radius:10px"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders \`size\` prop when passed in 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-sm mgt-avatar-icon"
+  style="border-radius:50%"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders \`size\` prop when passed in 2`] = `
+<div
+  class="mgt-avatar mgt-avatar-lg mgt-avatar-icon"
+  style="border-radius:50%"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders \`srcset\` prop when passed in 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-image"
+  style="border-radius:50%"
+>
+  <img
+    class="image"
+    src="../avatar.png"
+    srcset="../avatar2.png"
+  />
+</div>
+`;
+
+exports[`Avatar should renders a icon Avatar 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon"
+  style="border-radius:50%"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders a image Avatar 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-image"
+  style="border-radius:50%"
+>
+  <img
+    class="image"
+    src="../avatar.png"
+  />
+</div>
+`;
+
+exports[`Avatar should renders a text Avatar 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-text"
+  style="border-radius:50%"
+>
+  <span
+    class="text"
+    style="transform:scale(1) translateX(-50%)"
+  >
+    USER
+  </span>
+</div>
+`;
+
+exports[`Avatar should renders custom className 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon jest-test-class"
+  style="border-radius:50%"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders custom styles 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon"
+  style="border-radius:50%;color:#333;background-color:#f0f0f0"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
+
+exports[`Avatar should renders dom correctly 1`] = `
+<div
+  class="mgt-avatar mgt-avatar-icon"
+  style="border-radius:50%"
+>
+  <i
+    class="mgt-icon mgt-icon-user icon"
+  />
+</div>
+`;
