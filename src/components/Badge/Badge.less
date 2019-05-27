@@ -1,5 +1,54 @@
 @import '../../variable.less';
 
 .@{prefix}-badge {
+  .box-sizing();
+  .box();
+
   position: relative;
+  display: inline-block;
+}
+
+.@{prefix}-badge-count {
+  padding: @badge-padding;
+  min-width: @badge-min-width;
+  height: @badge-height;
+  line-height: @badge-height;
+  color: @badge-color;
+  font-size: @badge-font-size;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: @badge-border-radius;
+  vertical-align: baseline;
+}
+
+.@{prefix}-badge-dot {
+  width: @badge-dot-size;
+  height: @badge-dot-size;
+  border-radius: 50%;
+}
+
+.@{prefix}-badge-count,
+.@{prefix}-badge-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  transform-origin: right 0;
+  background-color: @badge-background-color;
+  box-shadow: @badge-box-shadow;
+  z-index: @badge-zindex;
+  .box-sizing();
+}
+
+.@{prefix}-badge-empty {
+  vertical-align: middle;
+  .@{prefix}-badge-count,
+  .@{prefix}-badge-dot {
+    position: relative;
+    display: block;
+    transform: none;
+  }
 }

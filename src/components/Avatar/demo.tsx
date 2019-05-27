@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from './Avatar';
+import Badge from '../Badge';
 import { Link } from 'react-router-dom';
 
 function AvatarDemo() {
@@ -32,6 +33,14 @@ function AvatarDemo() {
         <Avatar src={require('./avatar.png')} size="small" />
         <Avatar src={require('./avatar.png')} size="normal" />
         <Avatar src={require('./avatar.png')} size="large" />
+      </div>
+      <div className="demo-box">
+        <Badge count={8}>
+          <Avatar />
+        </Badge>
+        <Badge count={8} dot={true}>
+          <Avatar radius={4} />
+        </Badge>
       </div>
     </>
   );

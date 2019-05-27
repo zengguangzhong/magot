@@ -3,7 +3,7 @@
 - [x] Animation
 - [ ] AutoComplete
 - [x] Avatar
-- [ ] Badge
+- [x] Badge
 - [x] Breadcrumb
 - [x] Button
 - [x] ButtonGroup

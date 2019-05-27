@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge should renders \`count\` and \`max\` when pass in 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-count"
+    title="100"
+  >
+    100
+  </sup>
+</div>
+`;
+
+exports[`Badge should renders \`count\` when pass in 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-count"
+    title="10"
+  >
+    10
+  </sup>
+</div>
+`;
+
+exports[`Badge should renders \`dot\` when pass in 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-dot"
+    title="5"
+  />
+</div>
+`;
+
+exports[`Badge should renders custom className 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty jest-test-class"
+/>
+`;
+
+exports[`Badge should renders custom styles 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-count"
+    style="color:#333;background-color:#f0f0f0"
+    title="5"
+  >
+    5
+  </sup>
+</div>
+`;
+
+exports[`Badge should renders dom correctly 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-count"
+    title="10"
+  >
+    10
+  </sup>
+</div>
+`;
+
+exports[`Badge should renders large \`count\` when pass in 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+>
+  <sup
+    class="mgt-badge-count"
+    title="100"
+  >
+    99+
+  </sup>
+</div>
+`;
+
+exports[`Badge should renders when count is 0 1`] = `
+<div
+  class="mgt-badge mgt-badge-empty"
+/>
+`;
+
+exports[`Badge should renders when wraps other dom 1`] = `
+<div
+  class="mgt-badge"
+>
+  <a
+    href="#"
+  />
+  <sup
+    class="mgt-badge-count"
+    title="5"
+  >
+    5
+  </sup>
+</div>
+`;
