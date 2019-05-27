@@ -495,7 +495,7 @@ function DateCalendarBody(props: CalendarBodyProps) {
   return (
     <CalendarBody>
       <CalendarWeek
-        start={props.weekStart || 0}
+        start={props.weekStart}
         visible={!props.hideWeekBox}
         showWeekNumber={!!props.showWeekNumber}
         formatter={props.weekFormatter}

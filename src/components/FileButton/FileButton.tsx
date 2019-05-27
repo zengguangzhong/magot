@@ -97,13 +97,13 @@ const defaultProps: Partial<FileButtonProps> = {
 function checkFileType(file: File, props: FileButtonProps) {
   const { filters = [], filterError } = props;
   const result = fileChecker.checkFileType(file, filters);
-  return result ? result : filterError || '';
+  return result ? result : filterError!;
 }
 
 function checkFileSize(file: File, props: FileButtonProps) {
   const { minSize = 0, maxSize = 0, sizeError } = props;
   const result = fileChecker.checkFileSize(file, maxSize, minSize);
-  return result ? result : sizeError || '';
+  return result ? result : sizeError!;
 }
 
 function checkFile(file: File, props: FileButtonProps) {

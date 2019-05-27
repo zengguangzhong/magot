@@ -99,7 +99,7 @@ function AvatarImage(props: AvatarProps) {
 
 function AvatarText(props: AvatarProps & { text: string }) {
   const avatarSizes = { small: 24, normal: 32, large: 40 };
-  const avatarWidth = avatarSizes[props.size || 'normal'];
+  const avatarWidth = avatarSizes[props.size!];
   const { width: textWidth } = getShallowTextSize(props.text);
   const textScale = Math.min(1, (avatarWidth - 6) / textWidth);
   return (

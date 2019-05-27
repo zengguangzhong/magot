@@ -79,7 +79,7 @@ function Toast(props: ToastProps) {
       onLeave={handleLeave}>
       <div className={cls} style={props.style}>
         <span className="icon">
-          <Icon name={icons[props.type || 'info']} />
+          <Icon name={icons[props.type!]} />
         </span>
         <div className="msg">{props.message}</div>
         {props.closable && (
