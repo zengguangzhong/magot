@@ -9,8 +9,7 @@
   width: 100%;
 
   .inputSize(
-    @input-padding-base; @input-height-base; @input-font-size-base;
-      @input-border-radius-base;
+    @input-padding-base; @size-base; @font-size-base; @border-radius-base;
   );
   .inputColor(@input-color; @input-background-color; @input-border-color);
 }
@@ -87,17 +86,11 @@
 }
 
 .@{prefix}-input-sm {
-  .inputSize(
-    @input-padding-sm; @input-height-sm; @input-font-size-sm;
-      @input-border-radius-sm;
-  );
+  .inputSize(@input-padding-sm; @size-sm; @font-size-sm; @border-radius-sm;);
 }
 
 .@{prefix}-input-lg {
-  .inputSize(
-    @input-padding-lg; @input-height-lg; @input-font-size-lg;
-      @input-border-radius-lg;
-  );
+  .inputSize(@input-padding-lg; @size-lg; @font-size-lg; @border-radius-lg;);
 }
 
 .@{prefix}-input-disabled {

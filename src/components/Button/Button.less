@@ -13,12 +13,12 @@
 
 .btn-square() {
   padding: 0;
-  width: @btn-height-base;
+  width: @size-base;
   &.@{prefix}-button-sm {
-    width: @btn-height-sm;
+    width: @size-sm;
   }
   &.@{prefix}-button-lg {
-    width: @btn-height-lg;
+    width: @size-lg;
   }
 }
 
@@ -64,8 +64,7 @@
   .transition();
 
   .btn-size(
-    @btn-padding-base; @btn-height-base; @btn-font-size-base;
-      @btn-border-radius-base
+    @btn-padding-base; @size-base; @font-size-base; @border-radius-base
   );
   .btn-color(
     @btn-default-color; @btn-default-background-color;
@@ -142,15 +141,11 @@
 }
 
 .@{prefix}-button-sm {
-  .btn-size(
-    @btn-padding-sm; @btn-height-sm; @btn-font-size-sm; @btn-border-radius-sm
-  );
+  .btn-size(@btn-padding-sm; @size-sm; @font-size-sm; @border-radius-sm);
 }
 
 .@{prefix}-button-lg {
-  .btn-size(
-    @btn-padding-lg; @btn-height-lg; @btn-font-size-lg; @btn-border-radius-lg
-  );
+  .btn-size(@btn-padding-lg; @size-lg; @font-size-lg; @border-radius-lg);
 }
 
 .@{prefix}-button-block {
