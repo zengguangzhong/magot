@@ -20,7 +20,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es5",
-    "types": ["@types/jest"]
+    "types": ["@types/jest", "@types/node"]
   },
   "include": ["src", "test", "demo", "lib.d.ts"]
 }
