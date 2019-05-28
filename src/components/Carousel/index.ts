@@ -1,1 +1,1 @@
-export { default, CarouselProps } from './Carousel';
+export { default, CarouselProps, CarouselCardProps } from './Carousel';

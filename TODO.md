@@ -9,7 +9,7 @@
 - [x] ButtonGroup
 - [x] Calendar
 - [ ] Card
-- [ ] Carousel
+- [x] Carousel
 - [x] Checkbox
 - [x] CheckboxGroup
 - [ ] Collapse
