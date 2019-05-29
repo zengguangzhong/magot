@@ -156,7 +156,7 @@ function Carousel(props: CarouselProps) {
   const cls = component.getComponentClasses(type, props);
 
   return (
-    <div ref={carouselRef} className={cls}>
+    <div ref={carouselRef} className={cls} style={props.style}>
       <div className={prefix + '-cardbox'}>
         <CarouselCards
           prefix={prefix}

@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel should renders \`autoPlay\` when pass in 1`] = `
+<div
+  class="mgt-carousel"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    >
+      <li
+        class="mgt-carousel-card active"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          1
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          2
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          3
+        </h3>
+      </li>
+    </ul>
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  >
+    <li
+      class="mgt-carousel-dot active"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Carousel should renders \`effect\` when pass in 1`] = `
+<div
+  class="mgt-carousel"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards fade"
+      style="width:0"
+    >
+      <li
+        class="mgt-carousel-card active"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          1
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          2
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          3
+        </h3>
+      </li>
+    </ul>
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  >
+    <li
+      class="mgt-carousel-dot active"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Carousel should renders \`showDots\` is false 1`] = `
+<div
+  class="mgt-carousel"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    >
+      <li
+        class="mgt-carousel-card active"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          1
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          2
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          3
+        </h3>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Carousel should renders custom className 1`] = `
+<div
+  class="mgt-carousel jest-test-class"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    />
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  />
+</div>
+`;
+
+exports[`Carousel should renders custom styles 1`] = `
+<div
+  class="mgt-carousel"
+  style="color:#333;background-color:#f0f0f0"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    />
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  />
+</div>
+`;
+
+exports[`Carousel should renders dom correctly 1`] = `
+<div
+  class="mgt-carousel"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    />
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  />
+</div>
+`;
+
+exports[`Carousel should renders have children 1`] = `
+<div
+  class="mgt-carousel"
+>
+  <div
+    class="mgt-carousel-cardbox"
+  >
+    <ul
+      class="mgt-carousel-cards slide"
+      style="width:0;transform:translate3d(0px, 0, 0)"
+    >
+      <li
+        class="mgt-carousel-card active"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          1
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          2
+        </h3>
+      </li>
+      <li
+        class="mgt-carousel-card"
+        style="width:0;display:none;left:0"
+      >
+        <h3>
+          3
+        </h3>
+      </li>
+    </ul>
+  </div>
+  <ul
+    class="mgt-carousel-dots"
+  >
+    <li
+      class="mgt-carousel-dot active"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+    <li
+      class="mgt-carousel-dot"
+    >
+      <button
+        type="button"
+      />
+    </li>
+  </ul>
+</div>
+`;
