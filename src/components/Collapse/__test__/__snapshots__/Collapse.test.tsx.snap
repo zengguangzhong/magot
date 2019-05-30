@@ -1,0 +1,561 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapse should renders \`accordion\` is true 1`] = `
+<Collapse
+  accordion={true}
+  active={0}
+  bordered={true}
+>
+  <div
+    className="mgt-collapse"
+  >
+    <CollapsePanel
+      disabled={false}
+      key=".0"
+      onClose={[Function]}
+      onOpen={[Function]}
+      open={true}
+      showArrow={true}
+      title="Panel Title1"
+    >
+      <details
+        className="mgt-collapse-panel"
+        open={true}
+      >
+        <summary
+          className="mgt-collapse-panel-header"
+          onClick={[Function]}
+        >
+          <Icon
+            name="caret"
+            spin={false}
+          >
+            <i
+              className="mgt-icon mgt-icon-caret"
+              style={Object {}}
+            />
+          </Icon>
+          <h4
+            className="title"
+          >
+            Panel Title1
+          </h4>
+        </summary>
+        <section
+          className="mgt-collapse-panel-content"
+        >
+          <p>
+            This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+          </p>
+        </section>
+      </details>
+    </CollapsePanel>
+    <CollapsePanel
+      disabled={false}
+      key=".1"
+      onClose={[Function]}
+      onOpen={[Function]}
+      open={false}
+      showArrow={true}
+      title="Panel Title2"
+    >
+      <details
+        className="mgt-collapse-panel"
+        open={false}
+      >
+        <summary
+          className="mgt-collapse-panel-header"
+          onClick={[Function]}
+        >
+          <Icon
+            name="caret"
+            spin={false}
+          >
+            <i
+              className="mgt-icon mgt-icon-caret"
+              style={Object {}}
+            />
+          </Icon>
+          <h4
+            className="title"
+          >
+            Panel Title2
+          </h4>
+        </summary>
+        <section
+          className="mgt-collapse-panel-content"
+        >
+          <p>
+            This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+          </p>
+        </section>
+      </details>
+    </CollapsePanel>
+    <CollapsePanel
+      disabled={false}
+      key=".2"
+      onClose={[Function]}
+      onOpen={[Function]}
+      open={false}
+      showArrow={true}
+      title="Panel Title3"
+    >
+      <details
+        className="mgt-collapse-panel"
+        open={false}
+      >
+        <summary
+          className="mgt-collapse-panel-header"
+          onClick={[Function]}
+        >
+          <Icon
+            name="caret"
+            spin={false}
+          >
+            <i
+              className="mgt-icon mgt-icon-caret"
+              style={Object {}}
+            />
+          </Icon>
+          <h4
+            className="title"
+          >
+            Panel Title3
+          </h4>
+        </summary>
+        <section
+          className="mgt-collapse-panel-content"
+        >
+          <p>
+            This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+          </p>
+        </section>
+      </details>
+    </CollapsePanel>
+  </div>
+</Collapse>
+`;
+
+exports[`Collapse should renders \`active\` when pass in 1`] = `
+<div
+  class="mgt-collapse"
+>
+  <details
+    class="mgt-collapse-panel"
+    open=""
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title1
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+    open=""
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title2
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title3
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+</div>
+`;
+
+exports[`Collapse should renders \`bordered\` is false 1`] = `
+<div
+  class="mgt-collapse mgt-collapse-borderless"
+>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title1
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title2
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title3
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+</div>
+`;
+
+exports[`Collapse should renders \`showArrow\` is false 1`] = `
+<div
+  class="mgt-collapse"
+>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title1
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <h4
+        class="title"
+      >
+        Panel Title2
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+</div>
+`;
+
+exports[`Collapse should renders custom className 1`] = `
+<div
+  class="mgt-collapse jest-test-class"
+/>
+`;
+
+exports[`Collapse should renders custom styles 1`] = `
+<div
+  class="mgt-collapse"
+  style="color:#333;background-color:#f0f0f0"
+/>
+`;
+
+exports[`Collapse should renders dom correctly 1`] = `
+<div
+  class="mgt-collapse"
+/>
+`;
+
+exports[`Collapse should renders have children 1`] = `
+<div
+  class="mgt-collapse"
+>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title1
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title2
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel mgt-collapse-panel-disabled"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title3
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+</div>
+`;
+
+exports[`Collapse should renders nested Collapses 1`] = `
+<div
+  class="mgt-collapse"
+>
+  <details
+    class="mgt-collapse-panel"
+    open=""
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title1
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <div
+        class="mgt-collapse"
+      >
+        <details
+          class="mgt-collapse-panel"
+          open=""
+        >
+          <summary
+            class="mgt-collapse-panel-header"
+          >
+            <i
+              class="mgt-icon mgt-icon-caret"
+            />
+            <h4
+              class="title"
+            >
+              SubPanel Title1
+            </h4>
+          </summary>
+          <section
+            class="mgt-collapse-panel-content"
+          >
+            <p>
+              This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+            </p>
+          </section>
+        </details>
+        <details
+          class="mgt-collapse-panel"
+        >
+          <summary
+            class="mgt-collapse-panel-header"
+          >
+            <i
+              class="mgt-icon mgt-icon-caret"
+            />
+            <h4
+              class="title"
+            >
+              SubPanel Title2
+            </h4>
+          </summary>
+          <section
+            class="mgt-collapse-panel-content"
+          >
+            <p>
+              This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+            </p>
+          </section>
+        </details>
+      </div>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title2
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+  <details
+    class="mgt-collapse-panel"
+  >
+    <summary
+      class="mgt-collapse-panel-header"
+    >
+      <i
+        class="mgt-icon mgt-icon-caret"
+      />
+      <h4
+        class="title"
+      >
+        Panel Title3
+      </h4>
+    </summary>
+    <section
+      class="mgt-collapse-panel-content"
+    >
+      <p>
+        This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content, This is panel content.
+      </p>
+    </section>
+  </details>
+</div>
+`;

@@ -12,7 +12,7 @@
 - [x] Carousel
 - [x] Checkbox
 - [x] CheckboxGroup
-- [ ] Collapse
+- [x] Collapse
 - [ ] ColorPicker
 - [x] ContextMenu
 - [x] DatePicker
