@@ -1,1 +1,6 @@
-export { default, CollapseProps, CollapsePanelProps } from './Collapse';
+export {
+  default,
+  CollapsePanel,
+  CollapseProps,
+  CollapsePanelProps,
+} from './Collapse';

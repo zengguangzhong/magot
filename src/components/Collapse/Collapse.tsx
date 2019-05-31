@@ -76,7 +76,7 @@ const defaultPanelProps: Partial<CollapsePanelProps> = {
   showArrow: true,
 };
 
-function CollapsePanel(props: CollapsePanelProps) {
+export function CollapsePanel(props: CollapsePanelProps) {
   const handleToggle = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     const detailsNode = e.currentTarget.parentNode;
