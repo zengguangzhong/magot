@@ -2,4 +2,25 @@
 
 .@{prefix}-empty {
   position: relative;
+  text-align: center;
+  line-height: @empty-line-height;
+  .box();
+  .box-sizing();
+}
+
+.@{prefix}-empty-image {
+  height: @empty-image-height;
+  margin-bottom: @empty-image-margin-bottom;
+  &.only-empty {
+    margin-bottom: 0;
+  }
+  & > img {
+    height: 100%;
+  }
+}
+
+.@{prefix}-empty-tips {
+  font-size: @empty-tips-font-size;
+  color: @empty-tips-color;
+  .box();
 }

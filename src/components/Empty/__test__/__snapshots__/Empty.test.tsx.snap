@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty should renders \`image\` and \`imageStyle\` props when pass in 1`] = `
+<div
+  class="mgt-empty"
+>
+  <div
+    class="mgt-empty-image"
+    style="height:250px"
+  >
+    <img
+      alt="NO-DATA"
+      src="https://oss3.rabbitpre.com/spa/img/6237031221cdb5b0eab70443c546cb79.png"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+</div>
+`;
+
+exports[`Empty should renders \`tips\` and \`tipsStyle\` props when pass in 1`] = `
+<div
+  class="mgt-empty"
+>
+  <div
+    class="mgt-empty-image"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+    style="color:#999"
+  >
+    您目前没有创建任何游戏
+  </p>
+</div>
+`;
+
+exports[`Empty should renders custom className 1`] = `
+<div
+  class="mgt-empty jest-test-class"
+>
+  <div
+    class="mgt-empty-image"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+</div>
+`;
+
+exports[`Empty should renders custom styles 1`] = `
+<div
+  class="mgt-empty"
+  style="color:#333;background-color:#f0f0f0"
+>
+  <div
+    class="mgt-empty-image"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+</div>
+`;
+
+exports[`Empty should renders dom correctly 1`] = `
+<div
+  class="mgt-empty"
+>
+  <div
+    class="mgt-empty-image"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+</div>
+`;
+
+exports[`Empty should renders have children 1`] = `
+<div
+  class="mgt-empty"
+>
+  <div
+    class="mgt-empty-image"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+  <button
+    class="mgt-button mgt-button-primary"
+    type="button"
+  >
+    <i
+      class="mgt-icon mgt-icon-plus left"
+    />
+    新建游戏
+  </button>
+</div>
+`;
+
+exports[`Empty should renders image hidden 1`] = `
+<div
+  class="mgt-empty"
+>
+  <p
+    class="mgt-empty-tips"
+  >
+    暂无数据
+  </p>
+</div>
+`;
+
+exports[`Empty should renders non-tips 1`] = `
+<div
+  class="mgt-empty"
+>
+  <div
+    class="mgt-empty-image only-empty"
+  >
+    <img
+      alt="NO-DATA"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
